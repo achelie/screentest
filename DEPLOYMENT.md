@@ -76,7 +76,7 @@ opennextjs-cloudflare deploy
 
 Do not replace the adapter deploy command with a Pages deploy command. OpenNext wraps Wrangler and prepares the Worker output, static assets, and local or remote cache steps it needs.
 
-The current configuration publishes a temporary public `workers.dev` URL so the site can be tested before the formal domain is registered. Wrangler prints that URL after a successful deploy. The application metadata still uses `https://screentesthub.com` as its intended canonical URL.
+The fixed `screentesthub.<account>.workers.dev` route is disabled because it attracted automated request floods. The current configuration explicitly keeps versioned Preview URLs enabled instead. Each deployment is available at an unguessable URL in the form `<version-prefix>-screentesthub.<account>.workers.dev`; find the exact link in the Worker Deployments view. The application metadata still uses `https://screentesthub.com` as its intended canonical URL.
 
 ## Wrangler configuration
 
@@ -87,8 +87,9 @@ The committed `wrangler.jsonc` uses these production settings:
 - Static assets: `.open-next/assets`, exposed through the `ASSETS` binding
 - Runtime compatibility: `nodejs_compat`
 - Compatibility date: `2026-08-08`, the newest date supported by the current workerd release at project verification time
-- Workers Logs: enabled through `observability`
-- Public `workers.dev` URL: enabled temporarily for preview access
+- Workers Logs: enabled with a 1% request sample to protect the Free-plan event quota
+- Fixed public `workers.dev` URL: disabled to stop automated traffic from invoking the Worker
+- Versioned Preview URLs: enabled temporarily for private-link-style preview access
 - Custom Domain: disabled until the `screentesthub.com` zone is Active
 
 When intentionally updating the compatibility date later, set it to the update date, review the intervening Cloudflare compatibility changes, run `npm run preview`, and only then deploy.
@@ -97,7 +98,7 @@ When intentionally updating the compatibility date later, set it to the update d
 
 The Worker is the origin for the site, so it uses a Cloudflare Workers Custom Domain rather than a traditional route in front of another origin.
 
-When the zone is ready, change `workers_dev` to `false` and restore this route in `wrangler.jsonc`:
+When the zone is ready, keep `workers_dev` set to `false`, set `preview_urls` to `false`, and restore this route in `wrangler.jsonc`:
 
 ```jsonc
 {
