@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/site/no-prefetch-link";
 import { SiteLogo } from "@/components/site/site-logo";
 
 export function SiteFooter() {

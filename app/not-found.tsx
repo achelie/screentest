@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/site/no-prefetch-link";
 import { ArrowRight } from "lucide-react";
 
 export default function NotFound() {

@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/site/no-prefetch-link";
 import { ScanLine } from "lucide-react";
 
 export function SiteLogo({ inverted = false }: { inverted?: boolean }) {

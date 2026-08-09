@@ -19,9 +19,8 @@
       "enabled": false
     }
   },
-  // The fixed workers.dev hostname was targeted by automated traffic. Keep it
-  // disabled and use the unguessable versioned Preview URL until the custom
-  // domain is protected by zone-level security rules.
-  "workers_dev": false,
-  "preview_urls": true
+  // Publish only the current deployment. Keeping versioned Preview URLs off
+  // prevents older builds with the prefetch retry bug from remaining public.
+  "workers_dev": true,
+  "preview_urls": false
 }

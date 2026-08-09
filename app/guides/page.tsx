@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/site/no-prefetch-link";
 import { ArrowUpRight, Clock3 } from "lucide-react";
 import { getAllGuides } from "@/lib/guides";
 
