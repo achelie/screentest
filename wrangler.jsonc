@@ -12,11 +12,6 @@
     "enabled": true,
     "head_sampling_rate": 1
   },
-  "workers_dev": false,
-  "routes": [
-    {
-      "pattern": "screentesthub.com",
-      "custom_domain": true
-    }
-  ]
+  // Temporary public preview until screentesthub.com has an active Cloudflare zone.
+  "workers_dev": true
 }

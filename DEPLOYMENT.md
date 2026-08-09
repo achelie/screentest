@@ -5,8 +5,8 @@ ScreenTestHub deploys as a Next.js application on Cloudflare Workers through `@o
 ## Prerequisites
 
 - Node.js and npm installed
-- A Cloudflare account with the `screentesthub.com` zone active
-- Permission to deploy Workers and manage the zone
+- A Cloudflare account with permission to deploy Workers
+- An active `screentesthub.com` zone is only required for the later Custom Domain step
 - Wrangler authenticated with the same Cloudflare account
 
 Install the locked dependencies, generate Cloudflare types, and check the account:
@@ -76,6 +76,8 @@ opennextjs-cloudflare deploy
 
 Do not replace the adapter deploy command with a Pages deploy command. OpenNext wraps Wrangler and prepares the Worker output, static assets, and local or remote cache steps it needs.
 
+The current configuration publishes a temporary public `workers.dev` URL so the site can be tested before the formal domain is registered. Wrangler prints that URL after a successful deploy. The application metadata still uses `https://screentesthub.com` as its intended canonical URL.
+
 ## Wrangler configuration
 
 The committed `wrangler.jsonc` uses these production settings:
@@ -86,16 +88,16 @@ The committed `wrangler.jsonc` uses these production settings:
 - Runtime compatibility: `nodejs_compat`
 - Compatibility date: `2026-08-08`, the newest date supported by the current workerd release at project verification time
 - Workers Logs: enabled through `observability`
-- Public `workers.dev` URL: disabled
-- Custom Domain: `screentesthub.com`
+- Public `workers.dev` URL: enabled temporarily for preview access
+- Custom Domain: disabled until the `screentesthub.com` zone is Active
 
 When intentionally updating the compatibility date later, set it to the update date, review the intervening Cloudflare compatibility changes, run `npm run preview`, and only then deploy.
 
-## Bind the apex Custom Domain
+## Bind the apex Custom Domain later
 
 The Worker is the origin for the site, so it uses a Cloudflare Workers Custom Domain rather than a traditional route in front of another origin.
 
-The committed Wrangler route is:
+When the zone is ready, change `workers_dev` to `false` and restore this route in `wrangler.jsonc`:
 
 ```jsonc
 {
