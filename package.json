@@ -1,0 +1,35 @@
+{
+  "name": "screentesthub",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "generate:guides": "node scripts/generate-guides.mjs",
+    "predev": "npm run generate:guides",
+    "dev": "next dev",
+    "prebuild": "npm run generate:guides",
+    "build": "next build",
+    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
+    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
+    "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@opennextjs/cloudflare": "1.20.2",
+    "lucide-react": "1.30.0",
+    "next": "16.3.0",
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "4.3.3",
+    "@types/node": "26.2.0",
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.4",
+    "gray-matter": "4.0.3",
+    "remark": "15.0.1",
+    "remark-html": "16.0.1",
+    "tailwindcss": "4.3.3",
+    "typescript": "5.9.3",
+    "wrangler": "4.120.0"
+  }
+}

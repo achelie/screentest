@@ -1,0 +1,5 @@
+NEXTJS_ENV=development
+
+# Keep analytics and verification unset until real values exist.
+NEXT_PUBLIC_GA_MEASUREMENT_ID=
+NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION=
