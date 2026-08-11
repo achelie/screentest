@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import {
   ArrowRight,
-  CircleDot,
-  Palette,
-  ScanSearch,
+  Hand,
+  ScanLine,
+  Smartphone,
 } from "lucide-react";
 
 import { JsonLd } from "@/components/seo/json-ld";
@@ -37,7 +37,7 @@ const FAQS = [
   {
     question: "How can I find a touchscreen dead zone?",
     answer:
-      "Run the grid twice and swipe slowly through every edge and corner. A dead zone is more likely when the same connected group of cells stays blank on both passes. Restart the device and repeat the test before assuming the touch hardware is faulty.",
+      "Run the grid twice and swipe slowly through every edge and corner. A dead zone is more likely when the same connected group of cells stays blank on both passes. Restart the device and repeat the test before assuming the digitizer is faulty.",
   },
   {
     question: "Can this test confirm ghost touch?",
@@ -67,7 +67,7 @@ const FAQS = [
   {
     question: "How many simultaneous touch points does my screen support?",
     answer:
-      "Place several fingers on the grid and watch Peak touches. The displayed number is what the browser and operating system report during this session, which may be lower than the screen's advertised hardware maximum.",
+      "Place several fingers on the grid and watch Peak touches. The displayed number is what the browser and operating system report during this session, which may be lower than the digitizer's advertised hardware maximum.",
   },
 ] as const;
 
@@ -83,7 +83,7 @@ const structuredData = {
       applicationCategory: "UtilitiesApplication",
       operatingSystem: "Any",
       browserRequirements:
-        "A modern browser with Pointer Events. Fullscreen support is optional.",
+        "A modern browser with Pointer Events. Fullscreen is optional.",
       isAccessibleForFree: true,
       offers: {
         "@type": "Offer",
@@ -127,28 +127,24 @@ const structuredData = {
 const observations = [
   {
     signal: "Continuous blank area",
-    meaning:
-      "A connected patch that stays empty on repeated passes is more suspicious than one isolated missed cell.",
+    meaning: "The same cluster of cells stays untouched after repeated passes.",
   },
   {
     signal: "Broken swipe path",
-    meaning:
-      "A clean swipe should leave a continuous trail. Repeated gaps in the same place can point to missed input.",
+    meaning: "A line repeatedly stops or skips in one location.",
   },
   {
     signal: "Unexpected points",
-    meaning:
-      "Marks that appear without a finger on the screen may be ghost input. Clean, dry, unplug, and test again.",
+    meaning: "The tool receives input while your hands are off the screen.",
   },
   {
     signal: "Edge or corner misses",
-    meaning:
-      "Slow down at the bezel. A case, protector, or grip can make the outermost cells harder to reach.",
+    meaning: "Taps near the bezel fail while the center works.",
   },
   {
     signal: "Multi-touch dropout",
     meaning:
-      "Keep several fingers down and move them. A falling live count can reveal a touch that stopped reporting.",
+      "Live touches falls below the number of fingers placed on the screen.",
   },
 ] as const;
 
@@ -156,20 +152,20 @@ const relatedTools = [
   {
     href: "/tests/guided",
     title: "Guided Screen Test",
-    description: "Run the full display check in one short sequence.",
-    icon: ScanSearch,
+    description: "Run six display checks in one pass.",
+    icon: ScanLine,
   },
   {
     href: "/tests/dead-pixel",
     title: "Dead Pixel Test",
-    description: "Use solid colors to spot pixels that stay stuck or dark.",
-    icon: CircleDot,
+    description: "Check for pixels that stay dark or stuck.",
+    icon: Hand,
   },
   {
     href: "/tests/color",
     title: "Monitor Color Test",
-    description: "Check color channels, white, and black across the panel.",
-    icon: Palette,
+    description: "Inspect solid RGB and CMY fields.",
+    icon: Smartphone,
   },
 ] as const;
 
@@ -193,21 +189,15 @@ export default function TouchScreenTestPage() {
           This phone touch test takes one careful pass, then a second pass if anything looks suspicious.
         </p>
         <ul className={styles.instructionList}>
+          <li>Open the test and enter fullscreen when available.</li>
           <li>
-            <strong>Open the test</strong>
-            <span>Press Start Touch Test, then enter fullscreen if you want more room.</span>
+            Slide one finger across the entire grid, including every edge and corner.
           </li>
           <li>
-            <strong>Cover the whole grid</strong>
-            <span>Slide one finger through every grid cell, including all edges and corners.</span>
+            Place several fingers on the screen to check simultaneous touch reporting.
           </li>
           <li>
-            <strong>Check simultaneous touches</strong>
-            <span>Place several fingers on the grid and move them while watching the live and peak counts.</span>
-          </li>
-          <li>
-            <strong>Read the result</strong>
-            <span>Press Finish and inspect continuous blank areas or a broken touch path.</span>
+            Finish the test and inspect any continuous blank area or broken path.
           </li>
         </ul>
       </section>
@@ -223,7 +213,7 @@ export default function TouchScreenTestPage() {
           ))}
         </dl>
         <p className={styles.limitation}>
-          This touchscreen checker observes input reported to the browser. It cannot identify which physical component failed or certify that the hardware is fault-free.
+          This touchscreen checker observes browser input. It cannot identify the failed physical component or certify hardware.
         </p>
       </section>
 
