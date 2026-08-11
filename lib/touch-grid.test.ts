@@ -8,7 +8,7 @@ import {
   interpolateCellIndexes,
   largestMissedRegion,
   nextPeakTouchCount,
-} from './touch-grid.ts';
+} from './touch-grid';
 
 test('cellIndexAt maps coordinates and clamps the far edge', () => {
   const surface = { width: 100, height: 80 };

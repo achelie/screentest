@@ -16,6 +16,12 @@ import {
 } from "react";
 
 import {
+  createDelayedObjectUrlReleaser,
+  createLeadingTrailingThrottle,
+  type DelayedObjectUrlReleaser,
+  type LeadingTrailingThrottle,
+} from "@/lib/touch-screen-schedulers";
+import {
   TouchGridCanvas,
   type TouchGridCanvasHandle,
   type TouchGridSummary,
@@ -36,6 +42,7 @@ const EMPTY_SUMMARY: TouchGridSummary = {
 };
 
 const LIVE_SUMMARY_DELAY_MS = 600;
+const DOWNLOAD_URL_REVOKE_DELAY_MS = 1_000;
 
 function resultInterpretation(summary: TouchGridSummary): string {
   if (summary.paintedCells === 0) {
@@ -68,8 +75,8 @@ export function TouchScreenTest() {
   const canvasRef = useRef<TouchGridCanvasHandle>(null);
   const liveRegionRef = useRef<HTMLParagraphElement>(null);
   const liveSummaryTimerRef = useRef<number | null>(null);
-  const pendingSummaryRef = useRef<TouchGridSummary>(EMPTY_SUMMARY);
-  const lastLiveSummaryAtRef = useRef(0);
+  const liveSummaryThrottleRef = useRef<LeadingTrailingThrottle<TouchGridSummary> | null>(null);
+  const downloadUrlReleaserRef = useRef<DelayedObjectUrlReleaser | null>(null);
   const focusFrameRef = useRef<number | null>(null);
   const finishFocusPendingRef = useRef(false);
   const fullscreenOperationRef = useRef(0);
@@ -188,28 +195,58 @@ export function TouchScreenTest() {
   }, [focusResultHeading, isFullscreen, phase]);
 
   useEffect(() => {
-    pendingSummaryRef.current = summary;
-    const elapsed = Date.now() - lastLiveSummaryAtRef.current;
-    const delay = Math.max(0, LIVE_SUMMARY_DELAY_MS - elapsed);
-
-    liveSummaryTimerRef.current = window.setTimeout(() => {
-      liveSummaryTimerRef.current = null;
-      lastLiveSummaryAtRef.current = Date.now();
-      const latest = pendingSummaryRef.current;
-      if (liveRegionRef.current) {
-        liveRegionRef.current.textContent =
-          `Coverage ${latest.coveragePercent} percent. ` +
-          `${latest.liveTouches} live touches. Peak ${latest.peakTouches}.`;
-      }
-    }, delay);
+    const throttle = createLeadingTrailingThrottle<TouchGridSummary, number>(
+      (latest) => {
+        if (liveRegionRef.current) {
+          liveRegionRef.current.textContent =
+            `Coverage ${latest.coveragePercent} percent. ` +
+            `${latest.liveTouches} live touches. Peak ${latest.peakTouches}.`;
+        }
+      },
+      {
+        intervalMs: LIVE_SUMMARY_DELAY_MS,
+        now: Date.now,
+        setTimer: (callback, delay) => window.setTimeout(callback, delay),
+        clearTimer: (timer) => window.clearTimeout(timer),
+        timerRef: liveSummaryTimerRef,
+      },
+    );
+    liveSummaryThrottleRef.current = throttle;
 
     return () => {
-      if (liveSummaryTimerRef.current !== null) {
-        window.clearTimeout(liveSummaryTimerRef.current);
-        liveSummaryTimerRef.current = null;
+      throttle.cancel();
+      if (liveSummaryThrottleRef.current === throttle) {
+        liveSummaryThrottleRef.current = null;
       }
     };
-  }, [summary]);
+  }, []);
+
+  useEffect(() => {
+    const releaser = createDelayedObjectUrlReleaser<number>({
+      delayMs: DOWNLOAD_URL_REVOKE_DELAY_MS,
+      setTimer: (callback, delay) => window.setTimeout(callback, delay),
+      clearTimer: (timer) => window.clearTimeout(timer),
+      revoke: (url) => URL.revokeObjectURL(url),
+    });
+    downloadUrlReleaserRef.current = releaser;
+
+    return () => {
+      releaser.dispose();
+      if (downloadUrlReleaserRef.current === releaser) {
+        downloadUrlReleaserRef.current = null;
+      }
+    };
+  }, []);
+
+  const handleSummary = useCallback((nextSummary: TouchGridSummary) => {
+    setSummary(nextSummary);
+    if (
+      phaseRef.current === "active" &&
+      (nextSummary.paintedCells > 0 || nextSummary.liveTouches > 0)
+    ) {
+      liveSummaryThrottleRef.current?.push(nextSummary);
+    }
+  }, []);
 
   const prepareSession = useCallback((requestFullscreen: boolean) => {
     fullscreenOperationRef.current += 1;
@@ -217,6 +254,7 @@ export function TouchScreenTest() {
       requestFullscreen || document.fullscreenElement === hostRef.current;
     finishFocusPendingRef.current = false;
     cancelFocusFrame();
+    liveSummaryThrottleRef.current?.cancel();
     setSessionKey((current) => current + 1);
     setSummary(EMPTY_SUMMARY);
     setDownloadError(null);
@@ -265,6 +303,7 @@ export function TouchScreenTest() {
     const operationToken = fullscreenOperationRef.current;
     fullscreenAllowedRef.current = false;
     finishFocusPendingRef.current = true;
+    liveSummaryThrottleRef.current?.cancel();
     setDownloadError(null);
     setSummary(finalSummary);
     phaseRef.current = "result";
@@ -294,6 +333,7 @@ export function TouchScreenTest() {
     if (phaseRef.current !== "active") return;
 
     phaseRef.current = "paused";
+    liveSummaryThrottleRef.current?.cancel();
     setPhase("paused");
     setNotice("The test area changed size. Restart so every cell uses the same grid.");
   }, []);
@@ -345,6 +385,11 @@ export function TouchScreenTest() {
       anchor.download = `screentesthub-touch-result-${localDateStamp(new Date())}.png`;
       document.body.appendChild(anchor);
       anchor.click();
+      const releaser = downloadUrlReleaserRef.current;
+      if (releaser) {
+        releaser.releaseLater(objectUrl);
+        objectUrl = null;
+      }
     } catch {
       setDownloadError("The image could not be downloaded. Please try again.");
     } finally {
@@ -418,7 +463,7 @@ export function TouchScreenTest() {
             active={phase === "active"}
             frozen={phase === "paused" || phase === "result"}
             onGeometryInvalidated={pauseForResize}
-            onSummary={setSummary}
+            onSummary={handleSummary}
             ref={canvasRef}
             sessionKey={sessionKey}
           />
