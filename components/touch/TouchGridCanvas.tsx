@@ -47,11 +47,16 @@ type TouchGridCanvasProps = Readonly<{
 const GRID: GridSize = { columns: 24, rows: 16 };
 const MAX_DEVICE_PIXEL_RATIO = 2;
 
-function cappedDevicePixelRatio(): number {
+function currentDevicePixelRatio(): number {
   const ratio = window.devicePixelRatio;
-  return Number.isFinite(ratio)
-    ? Math.min(MAX_DEVICE_PIXEL_RATIO, Math.max(1, ratio))
-    : 1;
+  return Number.isFinite(ratio) && ratio > 0 ? ratio : 1;
+}
+
+function cappedDevicePixelRatio(): number {
+  return Math.min(
+    MAX_DEVICE_PIXEL_RATIO,
+    Math.max(1, currentDevicePixelRatio()),
+  );
 }
 
 function inputModeFromPointerType(pointerType: string): TouchInputMode {
@@ -59,7 +64,7 @@ function inputModeFromPointerType(pointerType: string): TouchInputMode {
     return pointerType;
   }
 
-  return "mouse";
+  return "none";
 }
 
 function isFinitePoint(point: GridPoint): boolean {
@@ -93,6 +98,7 @@ export const TouchGridCanvas = forwardRef<
   const inputModeRef = useRef<TouchInputMode>("none");
   const frameRef = useRef<number | null>(null);
   const resizeInitializedRef = useRef(false);
+  const appliedDevicePixelRatioRef = useRef(1);
   const activeRef = useRef(active);
   const onGeometryInvalidatedRef = useRef(onGeometryInvalidated);
   const onSummaryRef = useRef(onSummary);
@@ -120,6 +126,34 @@ export const TouchGridCanvas = forwardRef<
     previousPointsRef.current.clear();
   }, []);
 
+  const applyDevicePixelRatio = useCallback(() => {
+    const ratio = cappedDevicePixelRatio();
+    const ratioChanged = appliedDevicePixelRatioRef.current !== ratio;
+    appliedDevicePixelRatioRef.current = ratio;
+
+    const canvas = canvasRef.current;
+    const { width, height } = cssSizeRef.current;
+    if (
+      !canvas ||
+      !Number.isFinite(width) ||
+      !Number.isFinite(height) ||
+      width <= 0 ||
+      height <= 0
+    ) {
+      return ratioChanged;
+    }
+
+    const backingWidth = Math.max(1, Math.round(width * ratio));
+    const backingHeight = Math.max(1, Math.round(height * ratio));
+    const backingSizeChanged =
+      canvas.width !== backingWidth || canvas.height !== backingHeight;
+
+    if (canvas.width !== backingWidth) canvas.width = backingWidth;
+    if (canvas.height !== backingHeight) canvas.height = backingHeight;
+
+    return ratioChanged || backingSizeChanged;
+  }, []);
+
   const render = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -132,7 +166,7 @@ export const TouchGridCanvas = forwardRef<
       return;
     }
 
-    const ratio = cappedDevicePixelRatio();
+    const ratio = appliedDevicePixelRatioRef.current;
     const { empty, filled, line, point } = canvasColors(canvas);
     const cellWidth = width / GRID.columns;
     const cellHeight = height / GRID.rows;
@@ -397,11 +431,7 @@ export const TouchGridCanvas = forwardRef<
       clearPointerResources();
       cssSizeRef.current = { width, height };
 
-      const ratio = cappedDevicePixelRatio();
-      const backingWidth = Math.max(1, Math.round(width * ratio));
-      const backingHeight = Math.max(1, Math.round(height * ratio));
-      if (canvas.width !== backingWidth) canvas.width = backingWidth;
-      if (canvas.height !== backingHeight) canvas.height = backingHeight;
+      applyDevicePixelRatio();
 
       if (
         resizeInitializedRef.current &&
@@ -420,7 +450,52 @@ export const TouchGridCanvas = forwardRef<
     return () => {
       observer.disconnect();
     };
-  }, [clearPointerResources, scheduleFrame]);
+  }, [applyDevicePixelRatio, clearPointerResources, scheduleFrame]);
+
+  useEffect(() => {
+    let resolutionQuery: MediaQueryList | null = null;
+    let observedRatio: number | null = null;
+
+    function syncDevicePixelRatio() {
+      if (applyDevicePixelRatio()) scheduleFrame();
+    }
+
+    function handleResolutionChange() {
+      syncDevicePixelRatio();
+      registerResolutionListener(true);
+    }
+
+    function registerResolutionListener(force = false) {
+      if (typeof window.matchMedia !== "function") return;
+
+      const ratio = currentDevicePixelRatio();
+      if (!force && resolutionQuery && observedRatio === ratio) return;
+
+      if (resolutionQuery) {
+        resolutionQuery.removeEventListener("change", handleResolutionChange);
+      }
+
+      observedRatio = ratio;
+      resolutionQuery = window.matchMedia(`(resolution: ${ratio}dppx)`);
+      resolutionQuery.addEventListener("change", handleResolutionChange);
+    }
+
+    function handleWindowResize() {
+      syncDevicePixelRatio();
+      registerResolutionListener();
+    }
+
+    syncDevicePixelRatio();
+    registerResolutionListener();
+    window.addEventListener("resize", handleWindowResize);
+
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+      if (resolutionQuery) {
+        resolutionQuery.removeEventListener("change", handleResolutionChange);
+      }
+    };
+  }, [applyDevicePixelRatio, scheduleFrame]);
 
   useEffect(() => {
     if (active && !frozen) return;
@@ -473,9 +548,16 @@ export const TouchGridCanvas = forwardRef<
     [clearPointerResources],
   );
 
+  const canvasLabel = frozen
+    ? "Touchscreen coverage result. Input is frozen."
+    : active
+      ? "Interactive touchscreen coverage grid"
+      : "Touchscreen coverage grid. Input is disabled.";
+
   return (
     <canvas
-      aria-label="Interactive touchscreen coverage grid"
+      aria-disabled={!active || frozen}
+      aria-label={canvasLabel}
       className={styles.touchCanvas}
       data-active={active}
       onLostPointerCapture={releasePointer}

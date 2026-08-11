@@ -16,10 +16,10 @@
   --touch-cell-filled: var(--accent);
   --touch-grid-line: #666b64;
   --touch-point: var(--on-accent);
-  cursor: crosshair;
 }
 
 .touchCanvas[data-active="true"] {
+  cursor: crosshair;
   touch-action: none;
 }
 
