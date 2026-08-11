@@ -17,7 +17,7 @@ export const TEST_ROUTES = [
   {
     href: "/touch-screen-test",
     label: "Touch Screen Test",
-    lastModified: "2026-08-11",
+    lastModified: "2026-08-12",
   },
   { href: "/tests/guided", label: "Guided Screen Test" },
   { href: "/tests/dead-pixel", label: "Dead Pixel Test" },
