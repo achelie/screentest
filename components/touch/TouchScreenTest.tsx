@@ -119,7 +119,13 @@ export function TouchScreenTest() {
       wasFullscreenRef.current = active;
       setIsFullscreen(active);
 
-      if (!exitedOwnFullscreen || finishFocusPendingRef.current) return;
+      if (!exitedOwnFullscreen) return;
+      if (phaseRef.current === "result") {
+        finishFocusPendingRef.current = false;
+        focusResultHeading();
+        return;
+      }
+      if (finishFocusPendingRef.current) return;
       if (phaseRef.current === "active") focusStartButton();
     };
 
@@ -130,7 +136,7 @@ export function TouchScreenTest() {
       document.removeEventListener("fullscreenchange", handleFullscreenChange);
       cancelFocusFrame();
     };
-  }, [cancelFocusFrame, focusStartButton]);
+  }, [cancelFocusFrame, focusResultHeading, focusStartButton]);
 
   useEffect(() => {
     if (
