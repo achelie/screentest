@@ -30,6 +30,20 @@ export const metadata: Metadata = {
     type: "website",
     url: canonicalUrl,
     siteName: SITE_NAME,
+    images: [
+      {
+        url: "/opengraph-image.png",
+        width: 1536,
+        height: 1024,
+        alt: "ScreenTestHub display test pattern",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: openGraphTitle,
+    description,
+    images: ["/opengraph-image.png"],
   },
 };
 
@@ -176,7 +190,7 @@ export default function TouchScreenTestPage() {
 
       <header className={styles.pageHeader}>
         <h1>Touch Screen Test Online</h1>
-        <p className={styles.lead}>
+        <p>
           Check every part of your phone, tablet, or touchscreen laptop for missed taps and broken touch paths.
         </p>
       </header>
@@ -206,7 +220,7 @@ export default function TouchScreenTestPage() {
         <h2 id="touch-signals-title">What to look for</h2>
         <dl className={styles.observationList}>
           {observations.map(({ signal, meaning }) => (
-            <div className={styles.observationRow} key={signal}>
+            <div key={signal}>
               <dt>{signal}</dt>
               <dd>{meaning}</dd>
             </div>
