@@ -63,13 +63,17 @@ function localDateStamp(date: Date): string {
 export function TouchScreenTest() {
   const hostRef = useRef<HTMLDivElement>(null);
   const startButtonRef = useRef<HTMLButtonElement>(null);
+  const resetButtonRef = useRef<HTMLButtonElement>(null);
   const resultHeadingRef = useRef<HTMLHeadingElement>(null);
   const canvasRef = useRef<TouchGridCanvasHandle>(null);
   const liveRegionRef = useRef<HTMLParagraphElement>(null);
   const liveSummaryTimerRef = useRef<number | null>(null);
   const pendingSummaryRef = useRef<TouchGridSummary>(EMPTY_SUMMARY);
+  const lastLiveSummaryAtRef = useRef(0);
   const focusFrameRef = useRef<number | null>(null);
   const finishFocusPendingRef = useRef(false);
+  const fullscreenOperationRef = useRef(0);
+  const fullscreenAllowedRef = useRef(false);
   const wasFullscreenRef = useRef(false);
   const phaseRef = useRef<Phase>("idle");
 
@@ -110,16 +114,47 @@ export function TouchScreenTest() {
     });
   }, [cancelFocusFrame]);
 
+  const focusBenchControl = useCallback(() => {
+    cancelFocusFrame();
+    focusFrameRef.current = requestAnimationFrame(() => {
+      focusFrameRef.current = null;
+      (resetButtonRef.current ?? hostRef.current)?.focus({ preventScroll: true });
+    });
+  }, [cancelFocusFrame]);
+
+  const exitFullscreenIfStale = useCallback(
+    async (host: HTMLDivElement) => {
+      if (
+        document.fullscreenElement === host &&
+        !fullscreenAllowedRef.current
+      ) {
+        try {
+          await document.exitFullscreen();
+        } catch {
+          // Stale fullscreen work must not replace the current session notice.
+        }
+      }
+    },
+    [],
+  );
+
   useEffect(() => {
     setTouchCapable(navigator.maxTouchPoints > 0);
 
     const handleFullscreenChange = () => {
       const active = document.fullscreenElement === hostRef.current;
+      const enteredOwnFullscreen = !wasFullscreenRef.current && active;
       const exitedOwnFullscreen = wasFullscreenRef.current && !active;
       wasFullscreenRef.current = active;
       setIsFullscreen(active);
 
+      if (enteredOwnFullscreen) {
+        focusBenchControl();
+        return;
+      }
       if (!exitedOwnFullscreen) return;
+      fullscreenOperationRef.current += 1;
+      fullscreenAllowedRef.current = false;
       if (phaseRef.current === "result") {
         finishFocusPendingRef.current = false;
         focusResultHeading();
@@ -133,10 +168,12 @@ export function TouchScreenTest() {
     document.addEventListener("fullscreenchange", handleFullscreenChange);
 
     return () => {
+      fullscreenOperationRef.current += 1;
+      fullscreenAllowedRef.current = false;
       document.removeEventListener("fullscreenchange", handleFullscreenChange);
       cancelFocusFrame();
     };
-  }, [cancelFocusFrame, focusResultHeading, focusStartButton]);
+  }, [cancelFocusFrame, focusBenchControl, focusResultHeading, focusStartButton]);
 
   useEffect(() => {
     if (
@@ -152,44 +189,51 @@ export function TouchScreenTest() {
 
   useEffect(() => {
     pendingSummaryRef.current = summary;
-    if (liveSummaryTimerRef.current !== null) return;
+    const elapsed = Date.now() - lastLiveSummaryAtRef.current;
+    const delay = Math.max(0, LIVE_SUMMARY_DELAY_MS - elapsed);
 
     liveSummaryTimerRef.current = window.setTimeout(() => {
       liveSummaryTimerRef.current = null;
+      lastLiveSummaryAtRef.current = Date.now();
       const latest = pendingSummaryRef.current;
       if (liveRegionRef.current) {
         liveRegionRef.current.textContent =
           `Coverage ${latest.coveragePercent} percent. ` +
           `${latest.liveTouches} live touches. Peak ${latest.peakTouches}.`;
       }
-    }, LIVE_SUMMARY_DELAY_MS);
-  }, [summary]);
+    }, delay);
 
-  useEffect(
-    () => () => {
+    return () => {
       if (liveSummaryTimerRef.current !== null) {
         window.clearTimeout(liveSummaryTimerRef.current);
+        liveSummaryTimerRef.current = null;
       }
-    },
-    [],
-  );
+    };
+  }, [summary]);
 
-  const prepareSession = useCallback(() => {
+  const prepareSession = useCallback((requestFullscreen: boolean) => {
+    fullscreenOperationRef.current += 1;
+    fullscreenAllowedRef.current =
+      requestFullscreen || document.fullscreenElement === hostRef.current;
     finishFocusPendingRef.current = false;
     cancelFocusFrame();
     setSessionKey((current) => current + 1);
     setSummary(EMPTY_SUMMARY);
     setDownloadError(null);
+    phaseRef.current = "active";
     setPhase("active");
+    return fullscreenOperationRef.current;
   }, [cancelFocusFrame]);
 
   const startTest = useCallback(async () => {
-    prepareSession();
+    const operationToken = prepareSession(true);
     setNotice(null);
 
     const host = hostRef.current;
     if (!host || !document.fullscreenEnabled || !host.requestFullscreen) {
-      setNotice("Fullscreen is not available. The test still works here.");
+      if (operationToken === fullscreenOperationRef.current) {
+        setNotice("Fullscreen is not available. The test still works here.");
+      }
       return;
     }
 
@@ -197,22 +241,36 @@ export function TouchScreenTest() {
 
     try {
       await host.requestFullscreen();
+      if (operationToken !== fullscreenOperationRef.current) {
+        await exitFullscreenIfStale(host);
+      }
     } catch {
-      setNotice("Fullscreen was refused. The test still works here.");
+      if (
+        operationToken === fullscreenOperationRef.current &&
+        document.fullscreenElement !== host
+      ) {
+        setNotice("Fullscreen was refused. The test still works here.");
+      }
     }
-  }, [prepareSession]);
+  }, [exitFullscreenIfStale, prepareSession]);
 
   const resetTest = useCallback(() => {
-    prepareSession();
+    prepareSession(false);
     setNotice("Grid cleared. Start another pass from the corners.");
   }, [prepareSession]);
 
   const finishTest = useCallback(async () => {
+    const finalSummary = canvasRef.current?.getSummary() ?? summary;
+    fullscreenOperationRef.current += 1;
+    const operationToken = fullscreenOperationRef.current;
+    fullscreenAllowedRef.current = false;
     finishFocusPendingRef.current = true;
     setDownloadError(null);
+    setSummary(finalSummary);
+    phaseRef.current = "result";
     setPhase("result");
     setNotice(
-      summary.paintedCells === 0
+      finalSummary.paintedCells === 0
         ? "No touch data recorded. Run the test again and drag across the grid."
         : null,
     );
@@ -223,7 +281,10 @@ export function TouchScreenTest() {
     try {
       await document.exitFullscreen();
     } catch {
-      if (summary.paintedCells > 0) {
+      if (
+        operationToken === fullscreenOperationRef.current &&
+        finalSummary.paintedCells > 0
+      ) {
         setNotice("Fullscreen could not close. Use Exit fullscreen to view your result.");
       }
     }
@@ -232,6 +293,7 @@ export function TouchScreenTest() {
   const pauseForResize = useCallback(() => {
     if (phaseRef.current !== "active") return;
 
+    phaseRef.current = "paused";
     setPhase("paused");
     setNotice("The test area changed size. Restart so every cell uses the same grid.");
   }, []);
@@ -243,18 +305,27 @@ export function TouchScreenTest() {
       return;
     }
 
+    fullscreenOperationRef.current += 1;
+    const operationToken = fullscreenOperationRef.current;
+    const enteringFullscreen = document.fullscreenElement !== host;
+    fullscreenAllowedRef.current = enteringFullscreen;
     setNotice(null);
 
     try {
-      if (document.fullscreenElement === host) {
-        await document.exitFullscreen();
-      } else {
+      if (enteringFullscreen) {
         await host.requestFullscreen();
+        if (operationToken !== fullscreenOperationRef.current) {
+          await exitFullscreenIfStale(host);
+        }
+      } else {
+        await document.exitFullscreen();
       }
     } catch {
-      setNotice("Fullscreen was refused. The test still works here.");
+      if (operationToken === fullscreenOperationRef.current) {
+        setNotice("Fullscreen was refused. The test still works here.");
+      }
     }
-  }, []);
+  }, [exitFullscreenIfStale]);
 
   const downloadResult = useCallback(async () => {
     setDownloadError(null);
@@ -318,6 +389,8 @@ export function TouchScreenTest() {
         aria-label="Touchscreen checker"
         className={styles.bench}
         ref={hostRef}
+        role="region"
+        tabIndex={-1}
       >
         <div className={styles.metricRail}>
           <div className={styles.metricCell}>
@@ -355,6 +428,7 @@ export function TouchScreenTest() {
           <button
             className={styles.quietButton}
             onClick={resetTest}
+            ref={resetButtonRef}
             type="button"
           >
             <RotateCcw aria-hidden="true" size={18} strokeWidth={1.8} />

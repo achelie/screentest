@@ -34,6 +34,7 @@ export type TouchGridSummary = Readonly<{
 
 export type TouchGridCanvasHandle = Readonly<{
   exportResult: (summary: TouchGridSummary) => Promise<Blob | null>;
+  getSummary: () => TouchGridSummary;
 }>;
 
 type TouchGridCanvasProps = Readonly<{
@@ -206,10 +207,10 @@ export const TouchGridCanvas = forwardRef<
     }
   }, []);
 
-  const emitSummary = useCallback(() => {
+  const getSummary = useCallback((): TouchGridSummary => {
     const coverage = coverageResult(paintedRef.current, GRID);
 
-    onSummaryRef.current({
+    return {
       paintedCells: coverage.painted,
       missedCells: coverage.missed,
       totalCells: coverage.total,
@@ -218,8 +219,12 @@ export const TouchGridCanvas = forwardRef<
       liveTouches: pointersRef.current.size,
       peakTouches: peakRef.current,
       inputMode: inputModeRef.current,
-    });
+    };
   }, []);
+
+  const emitSummary = useCallback(() => {
+    onSummaryRef.current(getSummary());
+  }, [getSummary]);
 
   const scheduleFrame = useCallback(() => {
     if (frameRef.current !== null) return;
@@ -403,8 +408,8 @@ export const TouchGridCanvas = forwardRef<
 
   useImperativeHandle(
     forwardedRef,
-    () => ({ exportResult }),
-    [exportResult],
+    () => ({ exportResult, getSummary }),
+    [exportResult, getSummary],
   );
 
   useEffect(() => {

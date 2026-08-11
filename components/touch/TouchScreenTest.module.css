@@ -194,6 +194,11 @@
   touch-action: none;
 }
 
+.bench:fullscreen .canvasFrame,
+.bench:fullscreen .touchCanvas {
+  min-height: 0;
+}
+
 .controlStack {
   display: grid;
   grid-column: 2;
@@ -355,11 +360,6 @@
     order: 0;
     width: 100%;
     flex: 1 1 auto;
-  }
-
-  .bench:fullscreen .canvasFrame,
-  .bench:fullscreen .touchCanvas {
-    min-height: 0;
   }
 
   .controlStack {
