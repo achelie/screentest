@@ -142,6 +142,8 @@
 }
 
 .relatedList {
+  display: flex;
+  flex-direction: column;
   border-top: 1px solid var(--line);
 }
 
@@ -482,7 +484,7 @@
 
 @media (max-width: 36rem) {
   .pageHeader h1 {
-    font-size: clamp(2rem, 10vw, 2.25rem);
+    font-size: clamp(2.1rem, 10vw, 2.25rem);
   }
 
   .observationList > div {
