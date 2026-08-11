@@ -4,7 +4,7 @@ export const SITE_DESCRIPTION =
   "Free browser screen tests for dead pixels, backlight bleed, grayscale, gradients, color, and motion.";
 export const SITE_LANGUAGE = "en";
 export const SITE_LOCALE = "en_US";
-export const SITE_LAST_MODIFIED = "2026-08-09";
+export const SITE_LAST_MODIFIED = "2026-08-11";
 
 export type SiteRoute = {
   readonly href: `/${string}`;
@@ -13,6 +13,7 @@ export type SiteRoute = {
 
 export const TEST_ROUTES = [
   { href: "/tests", label: "All screen tests" },
+  { href: "/touch-screen-test/", label: "Touch Screen Test" },
   { href: "/tests/guided", label: "Guided Screen Test" },
   { href: "/tests/dead-pixel", label: "Dead Pixel Test" },
   { href: "/tests/backlight-bleed", label: "Backlight Bleed Test" },
