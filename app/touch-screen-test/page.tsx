@@ -14,7 +14,7 @@ import { absoluteUrl, SITE_NAME } from "@/lib/site";
 
 export const dynamic = "force-static";
 
-const canonicalUrl = absoluteUrl("/touch-screen-test/");
+const canonicalUrl = absoluteUrl("/touch-screen-test");
 const pageTitle = `Touch Screen Test Online - Phone Touchscreen Checker | ${SITE_NAME}`;
 const openGraphTitle = "Touch Screen Test Online - Phone Touchscreen Checker";
 const description =

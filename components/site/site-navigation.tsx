@@ -27,10 +27,11 @@ export function SiteNavigation({ tools }: SiteNavigationProps) {
   const mobileMenuId = useId();
   const mobileToolsId = useId();
   const [allTestsRoute, ...testTools] = tools;
-  const toolsActive = tools.some((tool) => {
-    const href = tool.href === "/" ? "/" : tool.href.replace(/\/$/u, "");
-    return pathname === href || pathname.startsWith(`${href}/`);
-  });
+  const isRouteActive = (href: ToolRoute["href"]) => {
+    const normalizedHref = href === "/" ? "/" : href.replace(/\/$/u, "");
+    return pathname === normalizedHref || pathname.startsWith(`${normalizedHref}/`);
+  };
+  const toolsActive = tools.some((tool) => isRouteActive(tool.href));
 
   const closeAllMenus = useCallback(() => {
     setDesktopToolsOpen(false);
@@ -81,7 +82,7 @@ export function SiteNavigation({ tools }: SiteNavigationProps) {
       <div className={mobile ? "mobile-tools-grid" : "nav-tools-grid"}>
         {testTools.map((tool) => (
           <Link
-            aria-current={pathname === tool.href ? "page" : undefined}
+            aria-current={isRouteActive(tool.href) ? "page" : undefined}
             className="nav-tool-link"
             href={tool.href}
             key={tool.href}
