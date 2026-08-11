@@ -69,6 +69,7 @@ export function ColorCycle({ mode = "color" }: ColorCycleProps) {
 
   return (
     <FullscreenTest
+      advanceOnSurfaceClick
       name={name}
       onNext={showNext}
       onPrevious={showPrevious}
