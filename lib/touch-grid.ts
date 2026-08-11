@@ -57,9 +57,13 @@ export function interpolateCellIndexes(
   surface: SurfaceSize,
   grid: GridSize,
 ): number[] {
-  if (!isValidSurface(surface) || !isValidGrid(grid)) return [];
+  if (!isValidSurface(surface) || !isValidGrid(grid)
+    || !Number.isFinite(from.x) || !Number.isFinite(from.y)
+    || !Number.isFinite(to.x) || !Number.isFinite(to.y)) return [];
 
   const maximumSpacing = Math.min(surface.width / grid.columns, surface.height / grid.rows) / 2;
+  if (!Number.isFinite(maximumSpacing) || maximumSpacing <= 0) return [];
+
   const distance = Math.hypot(to.x - from.x, to.y - from.y);
   const steps = Math.max(1, Math.ceil(distance / maximumSpacing));
   const indexes: number[] = [];
