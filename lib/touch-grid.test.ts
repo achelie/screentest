@@ -52,7 +52,9 @@ test('interpolateCellIndexes rejects non-finite endpoint coordinates immediately
 
   const moduleUrl = new URL('./touch-grid.ts', import.meta.url).href;
   const probe = `
-    import { interpolateCellIndexes } from ${JSON.stringify(moduleUrl)};
+    import * as touchGridModule from ${JSON.stringify(moduleUrl)};
+    const interpolateCellIndexes =
+      touchGridModule.interpolateCellIndexes ?? touchGridModule.default?.interpolateCellIndexes;
     const result = interpolateCellIndexes(
       { x: 5, y: 5 },
       { x: Infinity, y: 5 },
@@ -61,7 +63,7 @@ test('interpolateCellIndexes rejects non-finite endpoint coordinates immediately
     );
     if (JSON.stringify(result) !== '[]') process.exit(1);
   `;
-  const child = spawnSync(process.execPath, ['--input-type=module', '--eval', probe], {
+  const child = spawnSync(process.execPath, ['--import=tsx', '--input-type=module', '--eval', probe], {
     encoding: 'utf8',
     timeout: 1_000,
   });
