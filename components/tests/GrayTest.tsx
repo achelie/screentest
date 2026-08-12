@@ -3,6 +3,7 @@
 import { useCallback, useState } from "react";
 
 import { FullscreenTest } from "./FullscreenTest";
+import { testStartEventName } from "@/lib/test-events";
 import styles from "./ScreenTests.module.css";
 
 const GRAY_LEVELS = [5, 10, 25, 50, 75, 100] as const;
@@ -29,6 +30,7 @@ export function GrayTest() {
       onPrevious={showPrevious}
       status={`${level}% gray. Look for tint, cloudy patches, and darker edges.`}
       surfaceLabel={`Full-screen ${level}% gray uniformity pattern`}
+      startEventName={testStartEventName("grayscale")}
       controls={
         <div aria-label="Gray level" className={styles.toolGroup} role="group">
           {GRAY_LEVELS.map((grayLevel, index) => (

@@ -19,17 +19,41 @@ export const TEST_ROUTES = [
     label: "Touch Screen Test",
     lastModified: "2026-08-12",
   },
-  { href: "/tests/guided", label: "Guided Screen Test" },
+  {
+    href: "/tests/guided",
+    label: "Monitor Test Online",
+    lastModified: "2026-08-12",
+  },
   {
     href: "/tests/dead-pixel",
     label: "Dead Pixel Test",
     lastModified: "2026-08-12",
   },
-  { href: "/tests/backlight-bleed", label: "Backlight Bleed Test" },
-  { href: "/tests/grayscale", label: "Grayscale and Uniformity Test" },
-  { href: "/tests/gradient", label: "Gradient Banding Test" },
-  { href: "/tests/motion", label: "Motion and Ghosting Test" },
-  { href: "/tests/color", label: "Monitor Color Test" },
+  {
+    href: "/tests/backlight-bleed",
+    label: "Backlight Bleed Test",
+    lastModified: "2026-08-12",
+  },
+  {
+    href: "/tests/grayscale",
+    label: "Screen Uniformity Test",
+    lastModified: "2026-08-12",
+  },
+  {
+    href: "/tests/gradient",
+    label: "Gradient Banding Test",
+    lastModified: "2026-08-12",
+  },
+  {
+    href: "/tests/motion",
+    label: "Monitor Ghosting Test",
+    lastModified: "2026-08-12",
+  },
+  {
+    href: "/tests/color",
+    label: "Monitor Color Test",
+    lastModified: "2026-08-12",
+  },
 ] as const satisfies readonly SiteRoute[];
 
 export const GUIDE_ROUTES = [

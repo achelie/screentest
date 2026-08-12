@@ -38,15 +38,7 @@ export async function generateMetadata({ params }: TestPageProps): Promise<Metad
   return {
     title: { absolute: title },
     description: test.description,
-    keywords:
-      test.slug === "dead-pixel"
-        ? [
-            "dead pixel test online",
-            "dead pixel test website",
-            "dead pixel test android",
-            "oled dead pixel test",
-          ]
-        : undefined,
+    keywords: [...test.keywords],
     alternates: { canonical: canonicalUrl },
     openGraph: {
       title,
@@ -136,7 +128,7 @@ export default async function TestPage({ params }: TestPageProps) {
     .map((relatedSlug) => getTestBySlug(relatedSlug))
     .filter((related): related is TestDefinition => Boolean(related));
   const structuredData = createStructuredData(test);
-  const isDeadPixelTest = test.slug === "dead-pixel";
+  const startLabel = `Start ${test.name.replace(/ Online$/, "")}`;
 
   return (
     <div className={styles.page}>
@@ -147,9 +139,7 @@ export default async function TestPage({ params }: TestPageProps) {
         type="application/ld+json"
       />
 
-      <header
-        className={`${styles.pageHeader} ${isDeadPixelTest ? styles.deadPixelHeader : ""}`}
-      >
+      <header className={`${styles.pageHeader} ${styles.toolPageHeader}`}>
         <nav aria-label="Breadcrumb" className={styles.breadcrumb}>
           <Link href="/">Home</Link>
           <span aria-hidden="true">/</span>
@@ -174,19 +164,15 @@ export default async function TestPage({ params }: TestPageProps) {
         </div>
 
         <h1 className={`${styles.title} ${styles.testTitle}`}>{test.name}</h1>
-        {isDeadPixelTest ? (
-          <div className={styles.headerStartAction}>
-            <StartFullscreenButton />
-          </div>
-        ) : (
-          <p className={styles.lead}>{test.intro}</p>
-        )}
+        <div className={styles.headerStartAction}>
+          <StartFullscreenButton label={startLabel} slug={test.slug} />
+        </div>
       </header>
 
       <section
         aria-label={`${test.name} tool`}
-        className={`${styles.testMount} ${isDeadPixelTest ? styles.deadPixelTestMount : ""}`}
-        id={isDeadPixelTest ? "dead-pixel-tool" : undefined}
+        className={`${styles.testMount} ${styles.toolTestMount}`}
+        id={`${test.slug}-tool`}
       >
         <TestExperience test={test} />
       </section>
@@ -194,7 +180,7 @@ export default async function TestPage({ params }: TestPageProps) {
       <div className={styles.contentStack}>
         <section aria-labelledby="before-title" className={styles.contentSection}>
           <h2 className={styles.sectionTitle} id="before-title">
-            {isDeadPixelTest ? "How to use this dead pixel test" : "Before you start"}
+            How to use this {test.name.toLowerCase()}
           </h2>
           <ul className={styles.preparationList}>
             {test.preparation.map((item) => (
@@ -225,7 +211,7 @@ export default async function TestPage({ params }: TestPageProps) {
         {test.faq?.length ? (
           <section aria-labelledby="faq-title" className={styles.contentSection}>
             <h2 className={styles.sectionTitle} id="faq-title">
-              Dead pixel test FAQ
+              {test.name} FAQ
             </h2>
             <div className={styles.testFaqList}>
               {test.faq.map((item) => (
@@ -245,7 +231,7 @@ export default async function TestPage({ params }: TestPageProps) {
 
         <section aria-labelledby="related-title" className={styles.contentSection}>
           <h2 className={styles.sectionTitle} id="related-title">
-            {isDeadPixelTest ? "Related tools" : "Keep checking"}
+            Related tools
           </h2>
           <div className={styles.relatedList}>
             {relatedTests.map((related) => (

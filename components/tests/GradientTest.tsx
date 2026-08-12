@@ -3,6 +3,7 @@
 import { useCallback, useState } from "react";
 
 import { FullscreenTest } from "./FullscreenTest";
+import { testStartEventName } from "@/lib/test-events";
 import styles from "./ScreenTests.module.css";
 
 const CHANNELS = [
@@ -37,6 +38,7 @@ export function GradientTest() {
       onPrevious={showPrevious}
       status={`${channel.name}, ${orientation}. Look for hard bands or sudden color jumps.`}
       surfaceLabel={`Full-screen ${orientation} ${channel.name.toLowerCase()} gradient from black`}
+      startEventName={testStartEventName("gradient")}
       controls={
         <>
           <div aria-label="Gradient channel" className={styles.toolGroup} role="group">

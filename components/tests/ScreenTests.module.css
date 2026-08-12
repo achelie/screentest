@@ -69,7 +69,7 @@
   line-height: 1.65;
 }
 
-.deadPixelHeader {
+.toolPageHeader {
   margin-bottom: 0;
 }
 
@@ -240,7 +240,7 @@
   margin: clamp(1.75rem, 4vw, 3rem) 0 clamp(3.5rem, 7vw, 5.5rem);
 }
 
-.deadPixelTestMount {
+.toolTestMount {
   margin-top: 1.5rem;
 }
 

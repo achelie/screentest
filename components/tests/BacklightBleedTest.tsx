@@ -1,6 +1,7 @@
 "use client";
 
 import { FullscreenTest } from "./FullscreenTest";
+import { testStartEventName } from "@/lib/test-events";
 import styles from "./ScreenTests.module.css";
 
 export function BacklightBleedTest() {
@@ -9,6 +10,7 @@ export function BacklightBleedTest() {
       name="Backlight bleed test"
       status="Black pattern. Hide the controls for a clean edge check."
       surfaceLabel="Full-screen pure black backlight bleed pattern"
+      startEventName={testStartEventName("backlight-bleed")}
       controls={
         <div className={styles.guidedPrompt}>
           <strong>Look straight at the panel</strong>
