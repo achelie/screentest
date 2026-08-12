@@ -20,7 +20,11 @@ export const TEST_ROUTES = [
     lastModified: "2026-08-12",
   },
   { href: "/tests/guided", label: "Guided Screen Test" },
-  { href: "/tests/dead-pixel", label: "Dead Pixel Test" },
+  {
+    href: "/tests/dead-pixel",
+    label: "Dead Pixel Test",
+    lastModified: "2026-08-12",
+  },
   { href: "/tests/backlight-bleed", label: "Backlight Bleed Test" },
   { href: "/tests/grayscale", label: "Grayscale and Uniformity Test" },
   { href: "/tests/gradient", label: "Gradient Banding Test" },

@@ -29,6 +29,7 @@ type FullscreenTestProps = {
   onNext?: () => void;
   canHideControls?: boolean;
   advanceOnSurfaceClick?: boolean;
+  startEventName?: string;
 };
 
 const CONTROLS_IDLE_DELAY_MS = 1000;
@@ -50,6 +51,7 @@ export function FullscreenTest({
   onNext,
   canHideControls = true,
   advanceOnSurfaceClick = false,
+  startEventName,
 }: FullscreenTestProps) {
   const hostRef = useRef<HTMLDivElement>(null);
   const toolbarRef = useRef<HTMLDivElement>(null);
@@ -167,6 +169,14 @@ export function FullscreenTest({
       );
     }
   }, []);
+
+  useEffect(() => {
+    if (!startEventName) return;
+
+    const handleStartRequest = () => void toggleFullscreen();
+    window.addEventListener(startEventName, handleStartRequest);
+    return () => window.removeEventListener(startEventName, handleStartRequest);
+  }, [startEventName, toggleFullscreen]);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {

@@ -6,6 +6,7 @@ import { ArrowRight, Monitor, Timer } from "lucide-react";
 import styles from "@/components/tests/ScreenTests.module.css";
 import { TestExperience } from "@/components/tests/TestExperience";
 import { TestIcon } from "@/components/tests/TestIcon";
+import { StartFullscreenButton } from "@/components/tests/StartFullscreenButton";
 import { absoluteUrl, SITE_NAME } from "@/lib/site";
 import {
   getTestBySlug,
@@ -37,6 +38,15 @@ export async function generateMetadata({ params }: TestPageProps): Promise<Metad
   return {
     title: { absolute: title },
     description: test.description,
+    keywords:
+      test.slug === "dead-pixel"
+        ? [
+            "dead pixel test online",
+            "dead pixel test website",
+            "dead pixel test android",
+            "oled dead pixel test",
+          ]
+        : undefined,
     alternates: { canonical: canonicalUrl },
     openGraph: {
       title,
@@ -49,52 +59,68 @@ export async function generateMetadata({ params }: TestPageProps): Promise<Metad
 
 function createStructuredData(test: TestDefinition) {
   const canonicalUrl = absoluteUrl(`/tests/${test.slug}`);
+  const graph: Array<Record<string, unknown>> = [
+    {
+      "@type": "WebApplication",
+      "@id": `${canonicalUrl}#application`,
+      name: test.name,
+      description: test.description,
+      url: canonicalUrl,
+      applicationCategory: "UtilitiesApplication",
+      operatingSystem: "Any",
+      browserRequirements:
+        "A modern browser with JavaScript. Fullscreen support is optional.",
+      isAccessibleForFree: true,
+      offers: {
+        "@type": "Offer",
+        price: "0",
+        priceCurrency: "USD",
+      },
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${canonicalUrl}#breadcrumb`,
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: absoluteUrl("/"),
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Screen tests",
+          item: absoluteUrl("/tests"),
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: test.name,
+          item: canonicalUrl,
+        },
+      ],
+    },
+  ];
+
+  if (test.faq?.length) {
+    graph.push({
+      "@type": "FAQPage",
+      "@id": `${canonicalUrl}#faq`,
+      mainEntity: test.faq.map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: item.answer,
+        },
+      })),
+    });
+  }
 
   return {
     "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "WebApplication",
-        "@id": `${canonicalUrl}#application`,
-        name: test.name,
-        description: test.description,
-        url: canonicalUrl,
-        applicationCategory: "UtilitiesApplication",
-        operatingSystem: "Any",
-        browserRequirements:
-          "A modern browser with JavaScript. Fullscreen support is optional.",
-        isAccessibleForFree: true,
-        offers: {
-          "@type": "Offer",
-          price: "0",
-          priceCurrency: "USD",
-        },
-      },
-      {
-        "@type": "BreadcrumbList",
-        "@id": `${canonicalUrl}#breadcrumb`,
-        itemListElement: [
-          {
-            "@type": "ListItem",
-            position: 1,
-            name: "Home",
-            item: absoluteUrl("/"),
-          },
-          {
-            "@type": "ListItem",
-            position: 2,
-            name: "Screen tests",
-            item: absoluteUrl("/tests"),
-          },
-          {
-            "@type": "ListItem",
-            position: 3,
-            name: test.name,
-            item: canonicalUrl,
-          },
-        ],
-      },
-    ],
+    "@graph": graph,
   };
 }
 
@@ -110,6 +136,7 @@ export default async function TestPage({ params }: TestPageProps) {
     .map((relatedSlug) => getTestBySlug(relatedSlug))
     .filter((related): related is TestDefinition => Boolean(related));
   const structuredData = createStructuredData(test);
+  const isDeadPixelTest = test.slug === "dead-pixel";
 
   return (
     <div className={styles.page}>
@@ -120,7 +147,9 @@ export default async function TestPage({ params }: TestPageProps) {
         type="application/ld+json"
       />
 
-      <header className={styles.pageHeader}>
+      <header
+        className={`${styles.pageHeader} ${isDeadPixelTest ? styles.deadPixelHeader : ""}`}
+      >
         <nav aria-label="Breadcrumb" className={styles.breadcrumb}>
           <Link href="/">Home</Link>
           <span aria-hidden="true">/</span>
@@ -145,17 +174,27 @@ export default async function TestPage({ params }: TestPageProps) {
         </div>
 
         <h1 className={`${styles.title} ${styles.testTitle}`}>{test.name}</h1>
-        <p className={styles.lead}>{test.intro}</p>
+        {isDeadPixelTest ? (
+          <div className={styles.headerStartAction}>
+            <StartFullscreenButton />
+          </div>
+        ) : (
+          <p className={styles.lead}>{test.intro}</p>
+        )}
       </header>
 
-      <section aria-label={`${test.name} tool`} className={styles.testMount}>
+      <section
+        aria-label={`${test.name} tool`}
+        className={`${styles.testMount} ${isDeadPixelTest ? styles.deadPixelTestMount : ""}`}
+        id={isDeadPixelTest ? "dead-pixel-tool" : undefined}
+      >
         <TestExperience test={test} />
       </section>
 
       <div className={styles.contentStack}>
         <section aria-labelledby="before-title" className={styles.contentSection}>
           <h2 className={styles.sectionTitle} id="before-title">
-            Before you start
+            {isDeadPixelTest ? "How to use this dead pixel test" : "Before you start"}
           </h2>
           <ul className={styles.preparationList}>
             {test.preparation.map((item) => (
@@ -183,9 +222,30 @@ export default async function TestPage({ params }: TestPageProps) {
           </Link>
         </section>
 
+        {test.faq?.length ? (
+          <section aria-labelledby="faq-title" className={styles.contentSection}>
+            <h2 className={styles.sectionTitle} id="faq-title">
+              Dead pixel test FAQ
+            </h2>
+            <div className={styles.testFaqList}>
+              {test.faq.map((item) => (
+                <details key={item.question}>
+                  <summary>{item.question}</summary>
+                  <p>{item.answer}</p>
+                  {item.sourceHref ? (
+                    <a href={item.sourceHref} rel="noreferrer" target="_blank">
+                      See the Reddit discussion that inspired this question
+                    </a>
+                  ) : null}
+                </details>
+              ))}
+            </div>
+          </section>
+        ) : null}
+
         <section aria-labelledby="related-title" className={styles.contentSection}>
           <h2 className={styles.sectionTitle} id="related-title">
-            Keep checking
+            {isDeadPixelTest ? "Related tools" : "Keep checking"}
           </h2>
           <div className={styles.relatedList}>
             {relatedTests.map((related) => (

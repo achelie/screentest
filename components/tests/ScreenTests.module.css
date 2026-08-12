@@ -69,6 +69,49 @@
   line-height: 1.65;
 }
 
+.deadPixelHeader {
+  margin-bottom: 0;
+}
+
+.headerStartAction {
+  margin-top: 1.25rem;
+}
+
+.startTestButton {
+  display: inline-flex;
+  min-height: 3rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1rem;
+  border: 1px solid var(--ink, #171b19);
+  border-radius: 8px;
+  background: var(--ink, #171b19);
+  box-shadow: 4px 4px 0 var(--accent, #b74625);
+  color: var(--paper, #f2f1ec);
+  font: inherit;
+  font-weight: 720;
+  cursor: pointer;
+  transition:
+    transform 170ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 170ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.startTestButton:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 5px 5px 0 var(--accent, #b74625);
+}
+
+.startTestButton:active {
+  transform: translate(1px, 1px) scale(0.98);
+  box-shadow: 1px 1px 0 var(--accent, #b74625);
+}
+
+.startTestButton:focus-visible {
+  outline: 3px solid var(--accent, #b74625);
+  outline-offset: 3px;
+}
+
 .catalogLayout {
   display: grid;
   grid-template-columns: minmax(0, 1.18fr) minmax(18rem, 0.82fr);
@@ -195,6 +238,10 @@
 
 .testMount {
   margin: clamp(1.75rem, 4vw, 3rem) 0 clamp(3.5rem, 7vw, 5.5rem);
+}
+
+.deadPixelTestMount {
+  margin-top: 1.5rem;
 }
 
 .fullscreenHost {
@@ -632,6 +679,60 @@
 
 .relatedList {
   max-width: 44rem;
+}
+
+.testFaqList {
+  max-width: 52rem;
+  border-top: 1px solid var(--line, #bcc4bf);
+}
+
+.testFaqList details {
+  padding: 0;
+  border-bottom: 1px solid var(--line, #bcc4bf);
+}
+
+.testFaqList summary {
+  position: relative;
+  padding: 1rem 2.5rem 1rem 0;
+  color: var(--ink, #171b19);
+  font-weight: 680;
+  cursor: pointer;
+  list-style: none;
+}
+
+.testFaqList summary::-webkit-details-marker {
+  display: none;
+}
+
+.testFaqList summary::after {
+  position: absolute;
+  top: 0.95rem;
+  right: 0.25rem;
+  color: var(--accent, #b74625);
+  content: "+";
+  font-family: var(--font-mono);
+  font-size: 1.2rem;
+}
+
+.testFaqList details[open] summary::after {
+  content: "-";
+}
+
+.testFaqList p {
+  max-width: 68ch;
+  margin: 0;
+  padding: 0 0 0.7rem;
+  color: var(--muted, #5e6762);
+  line-height: 1.6;
+}
+
+.testFaqList a {
+  display: inline-block;
+  margin-bottom: 1rem;
+  color: var(--ink, #171b19);
+  font-size: 0.82rem;
+  text-decoration-color: var(--accent, #b74625);
+  text-underline-offset: 0.22em;
 }
 
 .relatedLink {

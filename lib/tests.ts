@@ -33,6 +33,12 @@ export type TestObservation = {
   readonly meaning: string;
 };
 
+export type TestFaq = {
+  readonly question: string;
+  readonly answer: string;
+  readonly sourceHref?: string;
+};
+
 export type TestDefinition = {
   readonly slug: TestSlug;
   readonly name: string;
@@ -49,6 +55,7 @@ export type TestDefinition = {
   readonly guideHref: `/guides${string}`;
   readonly guideLabel: string;
   readonly relatedTests: readonly TestSlug[];
+  readonly faq?: readonly TestFaq[];
 };
 
 export const SCREEN_TESTS = [
@@ -95,11 +102,11 @@ export const SCREEN_TESTS = [
   },
   {
     slug: "dead-pixel",
-    name: "Dead Pixel Test",
+    name: "Dead Pixel Test Online",
     shortName: "Dead pixels",
-    seoTitle: "Dead Pixel Test: Check Your Screen Online",
+    seoTitle: "Dead Pixel Test Online for Monitor, OLED and Android",
     description:
-      "Use full-screen white, black, red, green, and blue colors to find dead pixels and stuck subpixels without downloading an app.",
+      "Use this free dead pixel test website with fullscreen colors to check monitors, OLED screens, laptops, and Android phones without installing an app.",
     intro:
       "Fill the screen with solid colors and look for a dot that refuses to change.",
     duration: "1-2 minutes",
@@ -129,6 +136,46 @@ export const SCREEN_TESTS = [
     guideHref: "/guides/check-dead-pixels",
     guideLabel: "Read how to check dead pixels",
     relatedTests: ["color", "grayscale", "guided"],
+    faq: [
+      {
+        question: "How can I tell a dead pixel from a stuck pixel?",
+        answer:
+          "A dead pixel usually stays black on white, red, green, and blue screens. A stuck pixel keeps showing one color because one or more subpixels remain active. Check all five patterns before deciding. Dust can look identical, so clean the screen first.",
+        sourceHref:
+          "https://www.reddit.com/r/SteamDeck/comments/1psct7a/is_this_a_dead_pixel_1tb_oled/",
+      },
+      {
+        question: "What should I do if an OLED dead pixel test finds one bad pixel?",
+        answer:
+          "That depends on where the pixel sits, whether you notice it in normal use, the seller's return window, and the manufacturer's pixel policy. Test the whole OLED panel, save a photo, and check the written policy before the easy return period ends. One failed pixel does not automatically qualify every display for warranty replacement.",
+        sourceHref:
+          "https://www.reddit.com/r/OLED_Gaming/comments/1po9qsl/would_you_return_an_oled_with_1_dead_pixel_if_it/",
+      },
+      {
+        question: "Can dead pixels spread across an OLED display?",
+        answer:
+          "One isolated failed pixel does not necessarily spread. A growing row, cluster, or dark edge can indicate a wider panel or connection fault. Photograph the same fullscreen color at intervals. If the affected area grows, stop treating it as a single-pixel problem and contact the manufacturer.",
+        sourceHref:
+          "https://www.reddit.com/r/LGOLED/comments/1up9ntv/how_to_prevent_dead_pixels_from_spreading/",
+      },
+      {
+        question: "Can a pixel refresh or flashing video fix a dead pixel?",
+        answer:
+          "A true dead pixel usually cannot be revived by software. A stuck subpixel may change after normal use or a manufacturer-provided panel refresh, but rapid flashing tools are not guaranteed and can add unnecessary wear. Use the display maker's documented maintenance feature and avoid pressing or rubbing an OLED panel.",
+        sourceHref:
+          "https://www.reddit.com/r/SteamDeck/comments/182pj4l/i_shouldnt_have_checked_for_dead_pixels/",
+      },
+      {
+        question: "How do I run a dead pixel test on Android?",
+        answer:
+          "Open this page in Chrome on the Android phone, raise brightness to a comfortable level, tap Start Dead Pixel Test, and rotate through white, black, red, green, and blue. Inspect the camera cutout, rounded corners, and navigation-bar area. Browser fullscreen support varies, so hide browser controls if they remain visible.",
+      },
+      {
+        question: "Why does the suspicious dot disappear in a screenshot?",
+        answer:
+          "A screenshot records the image sent to the display, not the physical panel. If the dot is absent when that screenshot is viewed on another working screen, the panel is the likely source. If the dot appears in the screenshot elsewhere, investigate the app, image, graphics driver, or operating system instead.",
+      },
+    ],
   },
   {
     slug: "backlight-bleed",
