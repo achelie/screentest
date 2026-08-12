@@ -202,10 +202,6 @@ export default async function TestPage({ params }: TestPageProps) {
             ))}
           </dl>
           <p className={styles.limitation}>{test.limitation}</p>
-          <Link className={styles.guideLink} href={test.guideHref}>
-            {test.guideLabel}
-            <ArrowRight aria-hidden="true" size={18} strokeWidth={1.8} />
-          </Link>
         </section>
 
         {test.faq?.length ? (

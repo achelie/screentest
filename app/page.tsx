@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 import { ScreenSampler } from "@/components/home/screen-sampler";
 import { JsonLd } from "@/components/seo/json-ld";
-import { getAllGuides } from "@/lib/guides";
+import { getAllBlogPosts } from "@/lib/blog";
 import { SITE_URL, absoluteUrl } from "@/lib/site";
 
 export const dynamic = "force-static";
@@ -86,7 +86,7 @@ const faqs = [
 ] as const;
 
 export default async function HomePage() {
-  const guides = await getAllGuides();
+  const posts = await getAllBlogPosts();
   const jsonLd = [
     {
       "@context": "https://schema.org",
@@ -221,30 +221,30 @@ export default async function HomePage() {
 
         <hr className="section-rule" />
 
-        <section aria-labelledby="guides-heading">
+        <section aria-labelledby="blog-heading">
           <div className="editorial-heading">
-            <h2 id="guides-heading">Know what the pattern means.</h2>
+            <h2 id="blog-heading">Fix the symptom, not the guess.</h2>
             <p>
-              Short guides for the awkward part: deciding whether you found a
-              real fault or a normal display quirk.
+              Practical troubleshooting for screen faults, repair mistakes, and
+              the point where a device needs professional help.
             </p>
           </div>
-          <div className="guide-stack">
-            {guides.map((guide) => (
+          <div className="blog-stack">
+            {posts.map((post) => (
               <Link
-                className="guide-row"
-                href={`/guides/${guide.slug}`}
-                key={guide.slug}
+                className="blog-row"
+                href={`/blog/${post.slug}`}
+                key={post.slug}
               >
                 <ArrowRight aria-hidden="true" size={17} strokeWidth={1.7} />
-                <h3>{guide.title}</h3>
-                <span>{guide.readingMinutes} min</span>
+                <h3>{post.title}</h3>
+                <span>{post.readingMinutes} min</span>
               </Link>
             ))}
           </div>
           <div className="button-row">
-            <Link className="button-secondary" href="/guides">
-              Read all guides <ArrowRight size={17} />
+            <Link className="button-secondary" href="/blog">
+              Read the blog <ArrowRight size={17} />
             </Link>
           </div>
         </section>

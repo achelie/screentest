@@ -41,7 +41,7 @@ Run the normal Next.js production build:
 npm run build
 ```
 
-The `prebuild` hook first converts the trusted Markdown files in `content/guides` into `lib/generated-guides.json`. The `build` script itself remains `next build`. This keeps filesystem reads in the Node.js build step and out of the Cloudflare Worker runtime.
+The `prebuild` hook first converts trusted Markdown files in `content/blog` into `lib/generated-blog.json`. It also creates the article HTML, reading time, table-of-contents anchors, and FAQ data used by the static blog pages. The `build` script itself remains `next build`, which keeps filesystem reads in the Node.js build step and out of the Cloudflare Worker runtime.
 
 `open-next.config.ts` uses the read-only Workers Static Assets incremental cache with cache interception. This is the OpenNext configuration intended for a static SSG site and ensures build-time routes are available in `workerd` without R2, D1, or a queue.
 

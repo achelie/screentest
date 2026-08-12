@@ -61,30 +61,19 @@ export const TEST_ROUTES = [
   },
 ] as const satisfies readonly SiteRoute[];
 
-export const GUIDE_ROUTES = [
-  { href: "/guides", label: "Screen testing guides" },
+export const BLOG_ROUTES = [
+  { href: "/blog", label: "Screen troubleshooting blog", lastModified: "2026-08-12" },
   {
-    href: "/guides/check-dead-pixels",
-    label: "How to Check for Dead Pixels",
-  },
-  {
-    href: "/guides/check-backlight-bleed",
-    label: "How to Check for Backlight Bleed",
-  },
-  {
-    href: "/guides/test-screen-uniformity",
-    label: "How to Test Screen Uniformity",
-  },
-  {
-    href: "/guides/test-motion-blur",
-    label: "How to Test Motion Blur",
+    href: "/blog/touch-screen-not-working-after-screen-replacement",
+    label: "Touch Screen Not Working After Screen Replacement",
+    lastModified: "2026-08-12",
   },
 ] as const satisfies readonly SiteRoute[];
 
 export const SITE_ROUTES = [
   { href: "/", label: "Home" },
   ...TEST_ROUTES,
-  ...GUIDE_ROUTES,
+  ...BLOG_ROUTES,
 ] as const satisfies readonly SiteRoute[];
 
 export const siteConfig = {

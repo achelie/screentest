@@ -215,7 +215,7 @@ export default function HdrTestPage() {
             current output environment report.
           </p>
           <a
-            className={styles.guideLink}
+            className={styles.referenceLink}
             href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/%40media/dynamic-range"
             rel="noreferrer"
             target="_blank"

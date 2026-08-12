@@ -53,8 +53,6 @@ export type TestDefinition = {
   readonly preparation: readonly string[];
   readonly observations: readonly TestObservation[];
   readonly limitation: string;
-  readonly guideHref: `/guides${string}`;
-  readonly guideLabel: string;
   readonly relatedTests: readonly TestSlug[];
   readonly faq?: readonly TestFaq[];
 };
@@ -103,8 +101,6 @@ export const SCREEN_TESTS = [
     ],
     limitation:
       "This is a visual browser check, not a colorimeter or laboratory measurement.",
-    guideHref: "/guides",
-    guideLabel: "Browse the screen testing guides",
     relatedTests: ["dead-pixel", "backlight-bleed", "motion"],
     faq: [
       {
@@ -168,8 +164,6 @@ export const SCREEN_TESTS = [
     ],
     limitation:
       "A browser can reveal suspicious pixels, but it cannot confirm warranty eligibility or safely repair panel hardware.",
-    guideHref: "/guides/check-dead-pixels",
-    guideLabel: "Read how to check dead pixels",
     relatedTests: ["color", "grayscale", "guided"],
     faq: [
       {
@@ -251,8 +245,6 @@ export const SCREEN_TESTS = [
     ],
     limitation:
       "This test helps you compare visible patches. Panel type, viewing angle, room light, and camera exposure can change the result.",
-    guideHref: "/guides/check-backlight-bleed",
-    guideLabel: "Read the backlight bleed guide",
     relatedTests: ["grayscale", "dead-pixel", "guided"],
     faq: [
       {
@@ -321,8 +313,6 @@ export const SCREEN_TESTS = [
     ],
     limitation:
       "Uniformity varies with viewing angle and panel technology. Compare what you see with your real use, not a camera alone.",
-    guideHref: "/guides/test-screen-uniformity",
-    guideLabel: "Read the screen uniformity guide",
     relatedTests: ["backlight-bleed", "gradient", "color"],
     faq: [
       {
@@ -391,8 +381,6 @@ export const SCREEN_TESTS = [
     ],
     limitation:
       "Browser color management, operating-system settings, bit depth, and panel processing can all affect a gradient.",
-    guideHref: "/guides",
-    guideLabel: "Browse the screen testing guides",
     relatedTests: ["grayscale", "color", "motion"],
     faq: [
       {
@@ -461,8 +449,6 @@ export const SCREEN_TESTS = [
     ],
     limitation:
       "This browser test helps you see motion behavior. It is not a laboratory response-time measurement.",
-    guideHref: "/guides/test-motion-blur",
-    guideLabel: "Read the motion blur guide",
     relatedTests: ["gradient", "grayscale", "guided"],
     faq: [
       {
@@ -531,8 +517,6 @@ export const SCREEN_TESTS = [
     ],
     limitation:
       "Solid colors reveal visual differences, but they do not calibrate a display or measure color accuracy.",
-    guideHref: "/guides",
-    guideLabel: "Browse the screen testing guides",
     relatedTests: ["dead-pixel", "grayscale", "gradient"],
     faq: [
       {

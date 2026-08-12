@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "generate:guides": "node scripts/generate-guides.mjs",
-    "predev": "npm run generate:guides",
+    "generate:blog": "node scripts/generate-blog.mjs",
+    "predev": "npm run generate:blog",
     "dev": "next dev",
-    "prebuild": "npm run generate:guides",
+    "prebuild": "npm run generate:blog",
     "build": "next build",
     "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
     "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",

@@ -16,7 +16,7 @@ export function SiteFooter() {
           <Link href="/tests">All tests</Link>
           <Link href="/tests/dead-pixel">Dead pixels</Link>
           <Link href="/tests/motion">Motion</Link>
-          <Link href="/guides">Guides</Link>
+          <Link href="/blog">Blog</Link>
           <Link href="/sitemap.xml">Sitemap</Link>
         </nav>
         <div className="footer-meta">

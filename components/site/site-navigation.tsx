@@ -132,11 +132,11 @@ export function SiteNavigation({ tools }: SiteNavigationProps) {
           ) : null}
         </div>
         <Link
-          aria-current={pathname === "/guides" ? "page" : undefined}
-          data-active={pathname.startsWith("/guides")}
-          href="/guides"
+          aria-current={pathname === "/blog" ? "page" : undefined}
+          data-active={pathname.startsWith("/blog")}
+          href="/blog"
         >
-          Guides
+          Blog
         </Link>
         <Link className="nav-start" href="/tests/guided">
           Start check
@@ -181,13 +181,13 @@ export function SiteNavigation({ tools }: SiteNavigationProps) {
             </div>
           ) : null}
           <Link
-            aria-current={pathname === "/guides" ? "page" : undefined}
+            aria-current={pathname === "/blog" ? "page" : undefined}
             className="mobile-nav-row"
-            data-active={pathname.startsWith("/guides")}
-            href="/guides"
+            data-active={pathname.startsWith("/blog")}
+            href="/blog"
             onClick={closeAllMenus}
           >
-            Guides
+            Blog
           </Link>
           <Link
             className="mobile-nav-row mobile-nav-start"

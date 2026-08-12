@@ -875,7 +875,7 @@
   line-height: 1.6;
 }
 
-.guideLink {
+.referenceLink {
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
@@ -891,16 +891,16 @@
     transform 180ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.guideLink:hover {
+.referenceLink:hover {
   color: var(--accent, #b74625);
   transform: translateX(3px);
 }
 
-.guideLink:active {
+.referenceLink:active {
   transform: translateX(1px) scale(0.98);
 }
 
-.guideLink:focus-visible {
+.referenceLink:focus-visible {
   outline: 3px solid var(--accent, #b74625);
   outline-offset: 3px;
 }
@@ -1122,7 +1122,7 @@
   .toolbar,
   .toolButton,
   .answerButton,
-  .guideLink,
+  .referenceLink,
   .relatedLink {
     transition-duration: 1ms;
   }

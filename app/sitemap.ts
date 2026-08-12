@@ -3,7 +3,7 @@ import type { SiteRoute } from "@/lib/site";
 
 import {
   absoluteUrl,
-  GUIDE_ROUTES,
+  BLOG_ROUTES,
   SITE_LAST_MODIFIED,
   TEST_ROUTES,
 } from "@/lib/site";
@@ -35,8 +35,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...TEST_ROUTES.map((route) =>
       toSitemapEntry(route, route.href === "/tests" ? 0.9 : 0.8),
     ),
-    ...GUIDE_ROUTES.map((route) =>
-      toSitemapEntry(route, route.href === "/guides" ? 0.8 : 0.7),
+    ...BLOG_ROUTES.map((route) =>
+      toSitemapEntry(route, route.href === "/blog" ? 0.8 : 0.7),
     ),
   ];
 }
