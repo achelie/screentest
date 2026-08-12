@@ -3,7 +3,6 @@
 import {
   Download,
   Maximize2,
-  Minimize2,
   Play,
   RotateCcw,
   SquareCheckBig,
@@ -458,26 +457,29 @@ export function TouchScreenTest() {
         role="region"
         tabIndex={-1}
       >
-        <div className={styles.metricRail}>
-          <div className={styles.metricCell}>
-            <span>Coverage</span>
-            <strong>{summary.coveragePercent}%</strong>
+        {!isFullscreen ? (
+          <div className={styles.metricRail}>
+            <div className={styles.metricCell}>
+              <span>Coverage</span>
+              <strong>{summary.coveragePercent}%</strong>
+            </div>
+            <div className={styles.metricCell}>
+              <span>Live touches</span>
+              <strong>{summary.liveTouches}</strong>
+            </div>
+            <div className={styles.metricCell}>
+              <span>Peak touches</span>
+              <strong>{summary.peakTouches}</strong>
+            </div>
           </div>
-          <div className={styles.metricCell}>
-            <span>Live touches</span>
-            <strong>{summary.liveTouches}</strong>
-          </div>
-          <div className={styles.metricCell}>
-            <span>Peak touches</span>
-            <strong>{summary.peakTouches}</strong>
-          </div>
-          <p
-            aria-atomic="true"
-            aria-live="polite"
-            className={styles.srOnly}
-            ref={liveRegionRef}
-          />
-        </div>
+        ) : null}
+
+        <p
+          aria-atomic="true"
+          aria-live="polite"
+          className={styles.srOnly}
+          ref={liveRegionRef}
+        />
 
         <div className={styles.canvasFrame}>
           <TouchGridCanvas
@@ -492,43 +494,36 @@ export function TouchScreenTest() {
           />
         </div>
 
-        <div aria-hidden="true" className={styles.fullscreenExitHint}>
-          <Minimize2 size={18} strokeWidth={1.8} />
-          Hold here to exit
-        </div>
-
-        <div className={styles.controlStack}>
-          <button
-            className={styles.quietButton}
-            onClick={resetTest}
-            ref={resetButtonRef}
-            type="button"
-          >
-            <RotateCcw aria-hidden="true" size={18} strokeWidth={1.8} />
-            Reset
-          </button>
-          <button
-            className={styles.quietButton}
-            onClick={() => void toggleFullscreen()}
-            type="button"
-          >
-            {isFullscreen ? (
-              <Minimize2 aria-hidden="true" size={18} strokeWidth={1.8} />
-            ) : (
+        {!isFullscreen ? (
+          <div className={styles.controlStack}>
+            <button
+              className={styles.quietButton}
+              onClick={resetTest}
+              ref={resetButtonRef}
+              type="button"
+            >
+              <RotateCcw aria-hidden="true" size={18} strokeWidth={1.8} />
+              Reset
+            </button>
+            <button
+              className={styles.quietButton}
+              onClick={() => void toggleFullscreen()}
+              type="button"
+            >
               <Maximize2 aria-hidden="true" size={18} strokeWidth={1.8} />
-            )}
-            {isFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
-          </button>
-          <button
-            className={styles.quietButton}
-            disabled={phase === "idle" || phase === "result"}
-            onClick={() => void finishTest(false)}
-            type="button"
-          >
-            <SquareCheckBig aria-hidden="true" size={18} strokeWidth={1.8} />
-            Finish
-          </button>
-        </div>
+              Enter fullscreen
+            </button>
+            <button
+              className={styles.quietButton}
+              disabled={phase === "idle" || phase === "result"}
+              onClick={() => void finishTest(false)}
+              type="button"
+            >
+              <SquareCheckBig aria-hidden="true" size={18} strokeWidth={1.8} />
+              Finish
+            </button>
+          </div>
+        ) : null}
       </div>
 
       {notice ? (
