@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "@/components/site/no-prefetch-link";
-import { ArrowRight, Monitor, Timer } from "lucide-react";
+import { ArrowRight, Monitor, Timer, Zap } from "lucide-react";
 
 import { TestIcon } from "@/components/tests/TestIcon";
 import styles from "@/components/tests/ScreenTests.module.css";
@@ -12,7 +12,7 @@ const canonicalUrl = absoluteUrl("/tests");
 export const metadata: Metadata = {
   title: { absolute: `Free Online Screen Tests | ${SITE_NAME}` },
   description:
-    "Run free browser screen tests for dead pixels, backlight bleed, grayscale uniformity, gradient banding, color, and motion.",
+    "Run free browser screen tests for dead pixels, backlight bleed, HDR, grayscale uniformity, gradient banding, color, and motion.",
   alternates: { canonical: canonicalUrl },
   openGraph: {
     title: `Free Online Screen Tests | ${SITE_NAME}`,
@@ -42,12 +42,20 @@ const structuredData = {
       "@type": "ItemList",
       "@id": `${canonicalUrl}#tests`,
       name: "ScreenTestHub test library",
-      itemListElement: SCREEN_TESTS.map((test, index) => ({
-        "@type": "ListItem",
-        position: index + 1,
-        name: test.name,
-        url: absoluteUrl(`/tests/${test.slug}`),
-      })),
+      itemListElement: [
+        ...SCREEN_TESTS.map((test, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          name: test.name,
+          url: absoluteUrl(`/tests/${test.slug}`),
+        })),
+        {
+          "@type": "ListItem",
+          position: SCREEN_TESTS.length + 1,
+          name: "HDR Test Online",
+          url: absoluteUrl("/hdr-test"),
+        },
+      ],
     },
   ],
 };
@@ -83,7 +91,7 @@ export default function TestsPage() {
         <div className={styles.metaLine}>
           <span className={styles.metaItem}>
             <Monitor aria-hidden="true" size={17} strokeWidth={1.8} />
-            Seven browser tests
+            Eight browser tests
           </span>
           <span className={styles.metaItem}>
             <Timer aria-hidden="true" size={17} strokeWidth={1.8} />
@@ -125,6 +133,16 @@ export default function TestsPage() {
         </Link>
 
         <div className={styles.testList}>
+          <Link className={styles.testListLink} href="/hdr-test">
+            <span className={styles.testListIcon}>
+              <Zap aria-hidden="true" size={20} strokeWidth={1.8} />
+            </span>
+            <span className={styles.testListCopy}>
+              <strong>HDR Test Online</strong>
+              <span>Check HDR reporting, shadow detail, highlights, and wide gamut.</span>
+            </span>
+            <ArrowRight aria-hidden="true" size={18} strokeWidth={1.8} />
+          </Link>
           {focusedTests.map((test) => (
             <Link
               className={styles.testListLink}

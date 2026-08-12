@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     template: "%s | ScreenTestHub",
   },
   description:
-    "Test your monitor or phone for dead pixels, backlight bleed, banding, color shifts, and motion blur in your browser.",
+    "Test your monitor or phone for dead pixels, backlight bleed, HDR, banding, color shifts, and motion blur in your browser.",
   applicationName: "ScreenTestHub",
   alternates: { canonical: "/" },
   icons: { icon: "/icon.svg" },
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     siteName: "ScreenTestHub",
     title: "ScreenTestHub: Test your screen. Trust what you see.",
     description:
-      "Seven focused browser tests for dead pixels, backlight bleed, color, gradients, uniformity, and motion.",
+      "Eight focused browser tests for dead pixels, backlight bleed, HDR, color, gradients, uniformity, and motion.",
     images: [
       {
         url: "/opengraph-image.png",

@@ -2,13 +2,15 @@
 
 import { Play } from "lucide-react";
 
-import { testStartEventName } from "@/lib/test-events";
-import type { TestSlug } from "@/lib/tests";
+import {
+  testStartEventName,
+  type FullscreenTestId,
+} from "@/lib/test-events";
 import styles from "./ScreenTests.module.css";
 
 type StartFullscreenButtonProps = {
   label: string;
-  slug: TestSlug;
+  slug: FullscreenTestId;
 };
 
 export function StartFullscreenButton({ label, slug }: StartFullscreenButtonProps) {
