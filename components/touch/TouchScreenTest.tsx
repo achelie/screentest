@@ -82,6 +82,7 @@ export function TouchScreenTest() {
   const fullscreenOperationRef = useRef(0);
   const fullscreenAllowedRef = useRef(false);
   const wasFullscreenRef = useRef(false);
+  const autoCompletionHandledRef = useRef(false);
   const phaseRef = useRef<Phase>("idle");
 
   const [phase, setPhase] = useState<Phase>("idle");
@@ -256,6 +257,7 @@ export function TouchScreenTest() {
     cancelFocusFrame();
     liveSummaryThrottleRef.current?.cancel();
     setSessionKey((current) => current + 1);
+    autoCompletionHandledRef.current = false;
     setSummary(EMPTY_SUMMARY);
     setDownloadError(null);
     phaseRef.current = "active";
@@ -297,7 +299,7 @@ export function TouchScreenTest() {
     setNotice("Grid cleared. Start another pass from the corners.");
   }, [prepareSession]);
 
-  const finishTest = useCallback(async () => {
+  const finishTest = useCallback(async (completedEveryCell = false) => {
     const finalSummary = canvasRef.current?.getSummary() ?? summary;
     fullscreenOperationRef.current += 1;
     const operationToken = fullscreenOperationRef.current;
@@ -309,7 +311,9 @@ export function TouchScreenTest() {
     phaseRef.current = "result";
     setPhase("result");
     setNotice(
-      finalSummary.paintedCells === 0
+      completedEveryCell
+        ? "Screen test passed. Every grid cell responded in this pass."
+        : finalSummary.paintedCells === 0
         ? "No touch data recorded. Run the test again and drag across the grid."
         : null,
     );
@@ -328,6 +332,23 @@ export function TouchScreenTest() {
       }
     }
   }, [summary]);
+
+  useEffect(() => {
+    if (
+      phase !== "active" ||
+      autoCompletionHandledRef.current ||
+      summary.totalCells <= 0 ||
+      summary.paintedCells < summary.totalCells
+    ) {
+      return;
+    }
+
+    autoCompletionHandledRef.current = true;
+    window.alert(
+      "Screen test passed. Every part of the screen responded, and no touch dead zone was found in this pass.",
+    );
+    void finishTest(true);
+  }, [finishTest, phase, summary.paintedCells, summary.totalCells]);
 
   const pauseForResize = useCallback(() => {
     if (phaseRef.current !== "active") return;
@@ -462,11 +483,18 @@ export function TouchScreenTest() {
           <TouchGridCanvas
             active={phase === "active"}
             frozen={phase === "paused" || phase === "result"}
+            fullscreenExitEnabled={isFullscreen}
             onGeometryInvalidated={pauseForResize}
+            onFullscreenExitRequest={() => void toggleFullscreen()}
             onSummary={handleSummary}
             ref={canvasRef}
             sessionKey={sessionKey}
           />
+        </div>
+
+        <div aria-hidden="true" className={styles.fullscreenExitHint}>
+          <Minimize2 size={18} strokeWidth={1.8} />
+          Hold here to exit
         </div>
 
         <div className={styles.controlStack}>
@@ -494,7 +522,7 @@ export function TouchScreenTest() {
           <button
             className={styles.quietButton}
             disabled={phase === "idle" || phase === "result"}
-            onClick={() => void finishTest()}
+            onClick={() => void finishTest(false)}
             type="button"
           >
             <SquareCheckBig aria-hidden="true" size={18} strokeWidth={1.8} />

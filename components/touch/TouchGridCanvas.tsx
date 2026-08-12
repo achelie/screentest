@@ -40,13 +40,19 @@ export type TouchGridCanvasHandle = Readonly<{
 type TouchGridCanvasProps = Readonly<{
   active: boolean;
   frozen: boolean;
+  fullscreenExitEnabled: boolean;
   sessionKey: number;
   onGeometryInvalidated: () => void;
+  onFullscreenExitRequest: () => void;
   onSummary: (summary: TouchGridSummary) => void;
 }>;
 
 const GRID: GridSize = { columns: 24, rows: 16 };
 const MAX_DEVICE_PIXEL_RATIO = 2;
+const FULLSCREEN_EXIT_HOLD_MS = 900;
+const FULLSCREEN_EXIT_ZONE_WIDTH = 200;
+const FULLSCREEN_EXIT_ZONE_HEIGHT = 88;
+const FULLSCREEN_EXIT_MOVE_TOLERANCE = 12;
 
 function currentDevicePixelRatio(): number {
   const ratio = window.devicePixelRatio;
@@ -87,7 +93,15 @@ export const TouchGridCanvas = forwardRef<
   TouchGridCanvasHandle,
   TouchGridCanvasProps
 >(function TouchGridCanvas(
-  { active, frozen, sessionKey, onGeometryInvalidated, onSummary },
+  {
+    active,
+    frozen,
+    fullscreenExitEnabled,
+    sessionKey,
+    onGeometryInvalidated,
+    onFullscreenExitRequest,
+    onSummary,
+  },
   forwardedRef,
 ) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -98,17 +112,34 @@ export const TouchGridCanvas = forwardRef<
   const peakRef = useRef(0);
   const inputModeRef = useRef<TouchInputMode>("none");
   const frameRef = useRef<number | null>(null);
+  const fullscreenExitTimerRef = useRef<number | null>(null);
+  const fullscreenExitPointerRef = useRef<number | null>(null);
+  const fullscreenExitStartPointRef = useRef<GridPoint | null>(null);
   const resizeInitializedRef = useRef(false);
   const appliedDevicePixelRatioRef = useRef(1);
   const activeRef = useRef(active);
+  const fullscreenExitEnabledRef = useRef(fullscreenExitEnabled);
   const onGeometryInvalidatedRef = useRef(onGeometryInvalidated);
+  const onFullscreenExitRequestRef = useRef(onFullscreenExitRequest);
   const onSummaryRef = useRef(onSummary);
 
   activeRef.current = active;
+  fullscreenExitEnabledRef.current = fullscreenExitEnabled;
   onGeometryInvalidatedRef.current = onGeometryInvalidated;
+  onFullscreenExitRequestRef.current = onFullscreenExitRequest;
   onSummaryRef.current = onSummary;
 
+  const cancelFullscreenExitHold = useCallback(() => {
+    if (fullscreenExitTimerRef.current !== null) {
+      window.clearTimeout(fullscreenExitTimerRef.current);
+      fullscreenExitTimerRef.current = null;
+    }
+    fullscreenExitPointerRef.current = null;
+    fullscreenExitStartPointRef.current = null;
+  }, []);
+
   const clearPointerResources = useCallback(() => {
+    cancelFullscreenExitHold();
     const canvas = canvasRef.current;
 
     if (canvas) {
@@ -125,7 +156,7 @@ export const TouchGridCanvas = forwardRef<
 
     pointersRef.current.clear();
     previousPointsRef.current.clear();
-  }, []);
+  }, [cancelFullscreenExitHold]);
 
   const applyDevicePixelRatio = useCallback(() => {
     const ratio = cappedDevicePixelRatio();
@@ -255,6 +286,38 @@ export const TouchGridCanvas = forwardRef<
     }
   }, []);
 
+  const isInFullscreenExitZone = useCallback((point: GridPoint) => {
+    const { width } = cssSizeRef.current;
+    return (
+      fullscreenExitEnabledRef.current &&
+      point.x >= Math.max(0, width - FULLSCREEN_EXIT_ZONE_WIDTH) &&
+      point.y <= FULLSCREEN_EXIT_ZONE_HEIGHT
+    );
+  }, []);
+
+  const startFullscreenExitHold = useCallback(
+    (pointerId: number, point: GridPoint) => {
+      cancelFullscreenExitHold();
+      if (!isInFullscreenExitZone(point)) return;
+
+      fullscreenExitPointerRef.current = pointerId;
+      fullscreenExitStartPointRef.current = point;
+      fullscreenExitTimerRef.current = window.setTimeout(() => {
+        fullscreenExitTimerRef.current = null;
+        if (
+          fullscreenExitPointerRef.current === pointerId &&
+          pointersRef.current.has(pointerId) &&
+          fullscreenExitEnabledRef.current
+        ) {
+          fullscreenExitPointerRef.current = null;
+          fullscreenExitStartPointRef.current = null;
+          onFullscreenExitRequestRef.current();
+        }
+      }, FULLSCREEN_EXIT_HOLD_MS);
+    },
+    [cancelFullscreenExitHold, isInFullscreenExitZone],
+  );
+
   const handlePointerDown = useCallback(
     (event: ReactPointerEvent<HTMLCanvasElement>) => {
       if (!active || frozen) return;
@@ -280,9 +343,10 @@ export const TouchGridCanvas = forwardRef<
         pointersRef.current.size,
       );
       paintedRef.current.add(index);
+      startFullscreenExitHold(event.pointerId, point);
       scheduleFrame();
     },
-    [active, frozen, pointFromEvent, scheduleFrame],
+    [active, frozen, pointFromEvent, scheduleFrame, startFullscreenExitHold],
   );
 
   const handlePointerMove = useCallback(
@@ -294,18 +358,42 @@ export const TouchGridCanvas = forwardRef<
       const previousPoint = previousPointsRef.current.get(event.pointerId);
       if (!previousPoint || !isFinitePoint(point)) return;
 
+      if (fullscreenExitPointerRef.current === event.pointerId) {
+        const startPoint = fullscreenExitStartPointRef.current;
+        if (
+          !startPoint ||
+          !isInFullscreenExitZone(point) ||
+          Math.hypot(point.x - startPoint.x, point.y - startPoint.y) >
+            FULLSCREEN_EXIT_MOVE_TOLERANCE
+        ) {
+          cancelFullscreenExitHold();
+        }
+      }
+
       paintBetween(previousPoint, point);
       pointersRef.current.set(event.pointerId, point);
       previousPointsRef.current.set(event.pointerId, point);
       scheduleFrame();
     },
-    [active, frozen, paintBetween, pointFromEvent, scheduleFrame],
+    [
+      active,
+      cancelFullscreenExitHold,
+      frozen,
+      isInFullscreenExitZone,
+      paintBetween,
+      pointFromEvent,
+      scheduleFrame,
+    ],
   );
 
   const releasePointer = useCallback(
     (event: ReactPointerEvent<HTMLCanvasElement>) => {
       if (!active || frozen) return;
       if (!pointersRef.current.has(event.pointerId)) return;
+
+      if (fullscreenExitPointerRef.current === event.pointerId) {
+        cancelFullscreenExitHold();
+      }
 
       pointersRef.current.delete(event.pointerId);
       previousPointsRef.current.delete(event.pointerId);
@@ -320,7 +408,7 @@ export const TouchGridCanvas = forwardRef<
 
       scheduleFrame();
     },
-    [active, frozen, scheduleFrame],
+    [active, cancelFullscreenExitHold, frozen, scheduleFrame],
   );
 
   const exportResult = useCallback(
