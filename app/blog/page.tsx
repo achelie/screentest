@@ -61,13 +61,7 @@ export default async function BlogPage() {
   return (
     <div className={styles.blogPage}>
       <JsonLd data={structuredData} />
-      <header className={styles.indexHeader}>
-        <p className={styles.eyebrow}>ScreenTestHub Blog</p>
-        <h1>Screen problems, explained plainly.</h1>
-        <p>
-          Practical checks for suspicious pixels, failed touch input, replacement screens, and the point where a repair needs a professional.
-        </p>
-      </header>
+      <h1 className={styles.visuallyHidden}>ScreenTestHub Blog</h1>
 
       {featured ? (
         <article>

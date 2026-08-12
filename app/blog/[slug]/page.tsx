@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 import { JsonLd } from "@/components/seo/json-ld";
 import Link from "@/components/site/no-prefetch-link";
@@ -114,11 +114,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       <JsonLd data={{ "@context": "https://schema.org", "@graph": graph }} />
 
       <nav aria-label="Breadcrumb" className={styles.breadcrumb}>
-        <Link href="/">Home</Link>
-        <span aria-hidden="true">/</span>
-        <Link href="/blog">Blog</Link>
-        <span aria-hidden="true">/</span>
-        <span aria-current="page">{post.title}</span>
+        <Link href="/blog">
+          <ArrowLeft aria-hidden="true" size={17} strokeWidth={1.9} />
+          Back to blog
+        </Link>
       </nav>
 
       <article>
@@ -126,7 +125,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           <div>
             <p className={styles.postCategory}>{post.category}</p>
             <h1>{post.title}</h1>
-            <p className={styles.articleDescription}>{post.description}</p>
           </div>
           <dl className={styles.byline}>
             <div><dt>Written by</dt><dd>{post.author}</dd></div>

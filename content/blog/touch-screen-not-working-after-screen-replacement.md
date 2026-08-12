@@ -139,11 +139,3 @@ The new assembly, its connection, frame pressure, trapped contamination, or a pr
 ### When should I stop troubleshooting and return to the shop?
 
 Stop when the display is lifting, the battery looks swollen, the phone overheats, touch is completely absent after the basic checks, or the repair was performed under a shop warranty. Do not sacrifice a valid repair warranty by reopening the device without agreement from the installer.
-
-## Sources
-
-- [Apple Self Service Repair](https://support.apple.com/self-service-repair)
-- [Apple Repair Assistant for iPhone and iPad](https://support.apple.com/en-la/120579)
-- [Apple Parts and Service History](https://support.apple.com/en-la/102658)
-- [Google Pixel touch and response troubleshooting](https://support.google.com/pixelphone/answer/6010316)
-- [iFixit community example: touch failure after screen replacement](https://www.ifixit.com/Answers/View/437539/Touch%2BScreen%2Bnot%2Bworking%2Bafter%2Bscreen%2Breplacement%21)
