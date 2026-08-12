@@ -12,6 +12,7 @@ import {
 import { ScreenSampler } from "@/components/home/screen-sampler";
 import { JsonLd } from "@/components/seo/json-ld";
 import { getAllGuides } from "@/lib/guides";
+import { SITE_URL, absoluteUrl } from "@/lib/site";
 
 export const dynamic = "force-static";
 
@@ -19,7 +20,7 @@ export const metadata: Metadata = {
   title: "Free Online Screen Tests for Monitors and Phones",
   description:
     "Run seven focused screen tests for dead pixels, backlight bleed, uniformity, gradients, color, and motion. Free, private, and browser based.",
-  alternates: { canonical: "https://screentesthub.com" },
+  alternates: { canonical: SITE_URL },
 };
 
 const symptoms = [
@@ -91,7 +92,7 @@ export default async function HomePage() {
       "@context": "https://schema.org",
       "@type": "WebSite",
       name: "ScreenTestHub",
-      url: "https://screentesthub.com",
+      url: SITE_URL,
       description:
         "Free browser screen tests for monitors, laptops, tablets, and phones.",
     },
@@ -101,7 +102,7 @@ export default async function HomePage() {
       name: "ScreenTestHub",
       applicationCategory: "UtilitiesApplication",
       operatingSystem: "Any device with a modern browser",
-      url: "https://screentesthub.com/tests/guided",
+      url: absoluteUrl("/tests/guided"),
       offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
       description:
         "A guided visual screen check for common pixel, lighting, color, gradient, and motion problems.",

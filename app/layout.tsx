@@ -5,7 +5,7 @@ import { SiteFooter } from "@/components/site/site-footer";
 import { SiteHeader } from "@/components/site/site-header";
 import { siteConfig } from "@/lib/site";
 
-const siteUrl = "https://screentesthub.com";
+const siteUrl = siteConfig.url;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

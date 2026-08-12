@@ -3,8 +3,7 @@ import Link from "@/components/site/no-prefetch-link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowUpRight, Clock3 } from "lucide-react";
 import { getAllGuides, getGuide, getGuideSlugs } from "@/lib/guides";
-
-const siteUrl = "https://screentesthub.com";
+import { absoluteUrl } from "@/lib/site";
 
 type GuidePageProps = {
   params: Promise<{ slug: string }>;
@@ -31,7 +30,7 @@ export async function generateMetadata({
     };
   }
 
-  const canonicalUrl = `${siteUrl}/guides/${guide.slug}`;
+  const canonicalUrl = absoluteUrl(`/guides/${guide.slug}`);
 
   return {
     title: guide.title,
@@ -73,7 +72,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
   const relatedGuides = allGuides
     .filter((candidate) => candidate.slug !== guide.slug)
     .slice(0, 2);
-  const canonicalUrl = `${siteUrl}/guides/${guide.slug}`;
+  const canonicalUrl = absoluteUrl(`/guides/${guide.slug}`);
   const articleJsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -86,12 +85,12 @@ export default async function GuidePage({ params }: GuidePageProps) {
     author: {
       "@type": "Organization",
       name: "ScreenTestHub",
-      url: siteUrl,
+      url: absoluteUrl(),
     },
     publisher: {
       "@type": "Organization",
       name: "ScreenTestHub",
-      url: siteUrl,
+      url: absoluteUrl(),
     },
   };
 

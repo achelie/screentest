@@ -1,5 +1,5 @@
 export const SITE_NAME = "ScreenTestHub";
-export const SITE_URL = "https://screentesthub.com";
+export const SITE_URL = "https://www.screentesthub.com";
 export const SITE_DESCRIPTION =
   "Free browser screen tests for dead pixels, backlight bleed, grayscale, gradients, color, and motion.";
 export const SITE_LANGUAGE = "en";

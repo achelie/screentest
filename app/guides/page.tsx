@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import Link from "@/components/site/no-prefetch-link";
 import { ArrowUpRight, Clock3 } from "lucide-react";
 import { getAllGuides } from "@/lib/guides";
+import { absoluteUrl } from "@/lib/site";
 
-const canonicalUrl = "https://screentesthub.com/guides";
+const canonicalUrl = absoluteUrl("/guides");
 
 export const dynamic = "force-static";
 
