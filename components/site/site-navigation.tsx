@@ -27,6 +27,11 @@ export function SiteNavigation({ tools }: SiteNavigationProps) {
   const mobileMenuId = useId();
   const mobileToolsId = useId();
   const [allTestsRoute, ...testTools] = tools;
+  const isRouteActive = (href: ToolRoute["href"]) => {
+    const normalizedHref = href === "/" ? "/" : href.replace(/\/$/u, "");
+    return pathname === normalizedHref || pathname.startsWith(`${normalizedHref}/`);
+  };
+  const toolsActive = tools.some((tool) => isRouteActive(tool.href));
 
   const closeAllMenus = useCallback(() => {
     setDesktopToolsOpen(false);
@@ -77,7 +82,7 @@ export function SiteNavigation({ tools }: SiteNavigationProps) {
       <div className={mobile ? "mobile-tools-grid" : "nav-tools-grid"}>
         {testTools.map((tool) => (
           <Link
-            aria-current={pathname === tool.href ? "page" : undefined}
+            aria-current={isRouteActive(tool.href) ? "page" : undefined}
             className="nav-tool-link"
             href={tool.href}
             key={tool.href}
@@ -108,7 +113,7 @@ export function SiteNavigation({ tools }: SiteNavigationProps) {
             aria-controls={desktopToolsId}
             aria-expanded={desktopToolsOpen}
             className="nav-link-button"
-            data-active={pathname.startsWith("/tests")}
+            data-active={toolsActive}
             onClick={() => setDesktopToolsOpen((open) => !open)}
             ref={desktopToolsButtonRef}
             type="button"
@@ -163,7 +168,7 @@ export function SiteNavigation({ tools }: SiteNavigationProps) {
             aria-controls={mobileToolsId}
             aria-expanded={mobileToolsOpen}
             className="mobile-nav-row mobile-tools-toggle"
-            data-active={pathname.startsWith("/tests")}
+            data-active={toolsActive}
             onClick={() => setMobileToolsOpen((open) => !open)}
             type="button"
           >
