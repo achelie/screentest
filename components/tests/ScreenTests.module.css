@@ -294,6 +294,27 @@
   background: #0000ff;
 }
 
+.fullscreenHost[data-toolbar-layout="docked"]:not(:fullscreen) {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+}
+
+.fullscreenHost[data-toolbar-layout="docked"]:not(:fullscreen) .testSurface {
+  position: relative;
+  inset: auto;
+  min-height: 0;
+}
+
+.fullscreenHost[data-toolbar-layout="docked"]:not(:fullscreen) .toolbar {
+  position: relative;
+  inset: auto;
+  max-height: none;
+  border-right: 0;
+  border-bottom: 0;
+  border-left: 0;
+  border-radius: 0;
+}
+
 .hdrDetectionPattern,
 .hdrGamutPattern {
   position: absolute;

@@ -179,6 +179,7 @@ export function HdrTest() {
       startEventName={testStartEventName("hdr-test")}
       status={`${mode}, ${activeIndex + 1} of ${MODES.length}.`}
       surfaceLabel={`Full-screen HDR test: ${mode.toLowerCase()}`}
+      toolbarLayout="docked"
       controls={
         <div aria-label="HDR test mode" className={styles.toolGroup} role="group">
           {MODES.map((item, index) => (

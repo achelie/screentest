@@ -30,6 +30,7 @@ type FullscreenTestProps = {
   canHideControls?: boolean;
   advanceOnSurfaceClick?: boolean;
   startEventName?: string;
+  toolbarLayout?: "overlay" | "docked";
 };
 
 const CONTROLS_IDLE_DELAY_MS = 1000;
@@ -52,6 +53,7 @@ export function FullscreenTest({
   canHideControls = true,
   advanceOnSurfaceClick = false,
   startEventName,
+  toolbarLayout = "overlay",
 }: FullscreenTestProps) {
   const hostRef = useRef<HTMLDivElement>(null);
   const toolbarRef = useRef<HTMLDivElement>(null);
@@ -268,6 +270,7 @@ export function FullscreenTest({
         aria-keyshortcuts="F H ArrowLeft ArrowRight"
         className={styles.fullscreenHost}
         data-controls-hidden={controlsHidden}
+        data-toolbar-layout={toolbarLayout}
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
         ref={hostRef}
