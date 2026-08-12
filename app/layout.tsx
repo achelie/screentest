@@ -60,6 +60,13 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
+      <head>
+        <script
+          async
+          data-key="BIpugYY//fqlVBKk5l1Erg"
+          src="https://analytics.ahrefs.com/analytics.js"
+        />
+      </head>
       <body>
         <a className="skip-link" href="#main-content">
           Skip to content
