@@ -5,5 +5,6 @@ export { GradientTest } from "./GradientTest";
 export { GrayTest } from "./GrayTest";
 export { GuidedScreenTest } from "./GuidedScreenTest";
 export { MotionTest } from "./MotionTest";
+export { ScreenTearingTest } from "./ScreenTearingTest";
 export { TestExperience } from "./TestExperience";
 export { TestIcon } from "./TestIcon";

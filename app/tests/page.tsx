@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "@/components/site/no-prefetch-link";
-import { ArrowRight, Monitor, Timer, Zap } from "lucide-react";
+import { Activity, ArrowRight, Monitor, Timer, Zap } from "lucide-react";
 
 import { TestIcon } from "@/components/tests/TestIcon";
 import styles from "@/components/tests/ScreenTests.module.css";
@@ -12,7 +12,7 @@ const canonicalUrl = absoluteUrl("/tests");
 export const metadata: Metadata = {
   title: { absolute: `Free Online Screen Tests | ${SITE_NAME}` },
   description:
-    "Run free browser screen tests for dead pixels, backlight bleed, HDR, grayscale uniformity, gradient banding, color, and motion.",
+    "Run free browser screen tests for dead pixels, backlight bleed, HDR, screen tearing, grayscale uniformity, gradient banding, color, and motion.",
   alternates: { canonical: canonicalUrl },
   openGraph: {
     title: `Free Online Screen Tests | ${SITE_NAME}`,
@@ -55,6 +55,12 @@ const structuredData = {
           name: "HDR Test Online",
           url: absoluteUrl("/hdr-test"),
         },
+        {
+          "@type": "ListItem",
+          position: SCREEN_TESTS.length + 2,
+          name: "Screen Tearing Test Online",
+          url: absoluteUrl("/screen-tearing-test"),
+        },
       ],
     },
   ],
@@ -91,7 +97,7 @@ export default function TestsPage() {
         <div className={styles.metaLine}>
           <span className={styles.metaItem}>
             <Monitor aria-hidden="true" size={17} strokeWidth={1.8} />
-            Eight browser tests
+            Nine browser tests
           </span>
           <span className={styles.metaItem}>
             <Timer aria-hidden="true" size={17} strokeWidth={1.8} />
@@ -140,6 +146,16 @@ export default function TestsPage() {
             <span className={styles.testListCopy}>
               <strong>HDR Test Online</strong>
               <span>Check HDR reporting, shadow detail, highlights, and wide gamut.</span>
+            </span>
+            <ArrowRight aria-hidden="true" size={18} strokeWidth={1.8} />
+          </Link>
+          <Link className={styles.testListLink} href="/screen-tearing-test">
+            <span className={styles.testListIcon}>
+              <Activity aria-hidden="true" size={20} strokeWidth={1.8} />
+            </span>
+            <span className={styles.testListCopy}>
+              <strong>Screen Tearing Test Online</strong>
+              <span>Track moving seams, frame stutter, and sync-setting changes.</span>
             </span>
             <ArrowRight aria-hidden="true" size={18} strokeWidth={1.8} />
           </Link>

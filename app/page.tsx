@@ -19,7 +19,7 @@ export const dynamic = "force-static";
 export const metadata: Metadata = {
   title: "Free Online Screen Tests for Monitors and Phones",
   description:
-    "Run eight focused screen tests for dead pixels, backlight bleed, HDR, uniformity, gradients, color, and motion. Free, private, and browser based.",
+    "Run nine focused screen tests for dead pixels, backlight bleed, HDR, screen tearing, uniformity, gradients, color, and motion. Free, private, and browser based.",
   alternates: { canonical: SITE_URL },
 };
 
