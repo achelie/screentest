@@ -83,6 +83,11 @@ export const BLOG_ROUTES = [
     label: "Screen Tearing With VSync On",
     lastModified: "2026-08-13",
   },
+  {
+    href: "/blog/monitor-calibration-without-colorimeter",
+    label: "Monitor Calibration Without a Colorimeter",
+    lastModified: "2026-08-13",
+  },
 ] as const satisfies readonly SiteRoute[];
 
 export const SITE_ROUTES = [
