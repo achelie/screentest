@@ -21,6 +21,10 @@ export type BlogFrontmatter = {
   readonly updated: string;
   readonly cover: string;
   readonly coverAlt: string;
+  readonly ctaTitle: string;
+  readonly ctaDescription: string;
+  readonly ctaLabel: string;
+  readonly ctaHref: string;
 };
 
 export type BlogSummary = BlogFrontmatter & {

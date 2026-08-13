@@ -67,11 +67,16 @@ export const TEST_ROUTES = [
 ] as const satisfies readonly SiteRoute[];
 
 export const BLOG_ROUTES = [
-  { href: "/blog", label: "Screen troubleshooting blog", lastModified: "2026-08-12" },
+  { href: "/blog", label: "Screen troubleshooting blog", lastModified: "2026-08-13" },
   {
     href: "/blog/touch-screen-not-working-after-screen-replacement",
     label: "Touch Screen Not Working After Screen Replacement",
     lastModified: "2026-08-12",
+  },
+  {
+    href: "/blog/screen-tearing-with-vsync-on",
+    label: "Screen Tearing With VSync On",
+    lastModified: "2026-08-13",
   },
 ] as const satisfies readonly SiteRoute[];
 

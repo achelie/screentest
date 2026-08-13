@@ -7,6 +7,10 @@ published: "2026-08-12"
 updated: "2026-08-12"
 cover: "/blog/touch-screen-replacement-repair-bench.webp"
 coverAlt: "Opened smartphone beside a replacement display and repair tools on a dark workbench"
+ctaTitle: "Map the exact area that is failing."
+ctaDescription: "Use the free grid twice and compare whether the same strip, corner, or cluster stays blank."
+ctaLabel: "Open touch screen test"
+ctaHref: "/touch-screen-test"
 ---
 
 If touch stopped as soon as the screen was replaced, the new part or the repair itself is the first thing to check. An app can freeze, of course, but bad timing this precise is rarely a useful coincidence.

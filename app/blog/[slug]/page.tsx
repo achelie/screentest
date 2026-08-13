@@ -72,7 +72,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   if (!post) notFound();
 
   const canonicalUrl = absoluteUrl(`/blog/${post.slug}`);
-  const relatedPosts = allPosts.filter((candidate) => candidate.slug !== post.slug).slice(0, 3);
+  const relatedPosts = allPosts
+    .filter(
+      (candidate) =>
+        candidate.slug !== post.slug && candidate.category === post.category,
+    )
+    .slice(0, 3);
   const graph: Array<Record<string, unknown>> = [
     {
       "@type": "Article",
@@ -154,10 +159,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         <div className={styles.articleGrid}>
           <div>
             <aside className={styles.toolCta}>
-              <strong>Map the exact area that is failing.</strong>
-              <p>Use the free grid twice and compare whether the same strip, corner, or cluster stays blank.</p>
-              <Link href="/touch-screen-test">
-                Open touch screen test <ArrowRight aria-hidden="true" size={18} strokeWidth={1.8} />
+              <strong>{post.ctaTitle}</strong>
+              <p>{post.ctaDescription}</p>
+              <Link href={post.ctaHref}>
+                {post.ctaLabel} <ArrowRight aria-hidden="true" size={18} strokeWidth={1.8} />
               </Link>
             </aside>
             <div className={styles.articleBody} dangerouslySetInnerHTML={{ __html: post.html }} />
