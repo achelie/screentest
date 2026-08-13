@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "@/components/site/no-prefetch-link";
-import { Activity, ArrowRight, Monitor, Timer, Zap } from "lucide-react";
+import { Activity, ArrowRight, Monitor, Palette, Timer, Zap } from "lucide-react";
 
 import { TestIcon } from "@/components/tests/TestIcon";
 import styles from "@/components/tests/ScreenTests.module.css";
@@ -12,7 +12,7 @@ const canonicalUrl = absoluteUrl("/tests");
 export const metadata: Metadata = {
   title: { absolute: `Free Online Screen Tests | ${SITE_NAME}` },
   description:
-    "Run free browser screen tests for dead pixels, backlight bleed, HDR, screen tearing, grayscale uniformity, gradient banding, color, and motion.",
+    "Run free browser screen tests for dead pixels, backlight bleed, HDR, screen tearing, monitor color calibration, grayscale uniformity, gradient banding, color, and motion.",
   alternates: { canonical: canonicalUrl },
   openGraph: {
     title: `Free Online Screen Tests | ${SITE_NAME}`,
@@ -61,6 +61,12 @@ const structuredData = {
           name: "Screen Tearing Test Online",
           url: absoluteUrl("/screen-tearing-test"),
         },
+        {
+          "@type": "ListItem",
+          position: SCREEN_TESTS.length + 3,
+          name: "Monitor Color Calibration Online",
+          url: absoluteUrl("/monitor-color-calibration"),
+        },
       ],
     },
   ],
@@ -97,7 +103,7 @@ export default function TestsPage() {
         <div className={styles.metaLine}>
           <span className={styles.metaItem}>
             <Monitor aria-hidden="true" size={17} strokeWidth={1.8} />
-            Nine browser tests
+            Ten browser tests
           </span>
           <span className={styles.metaItem}>
             <Timer aria-hidden="true" size={17} strokeWidth={1.8} />
@@ -156,6 +162,16 @@ export default function TestsPage() {
             <span className={styles.testListCopy}>
               <strong>Screen Tearing Test Online</strong>
               <span>Track moving seams, frame stutter, and sync-setting changes.</span>
+            </span>
+            <ArrowRight aria-hidden="true" size={18} strokeWidth={1.8} />
+          </Link>
+          <Link className={styles.testListLink} href="/monitor-color-calibration">
+            <span className={styles.testListIcon}>
+              <Palette aria-hidden="true" size={20} strokeWidth={1.8} />
+            </span>
+            <span className={styles.testListCopy}>
+              <strong>Monitor Color Calibration Online</strong>
+              <span>Adjust SDR black and white levels, neutral gray, gamma, and color separation.</span>
             </span>
             <ArrowRight aria-hidden="true" size={18} strokeWidth={1.8} />
           </Link>

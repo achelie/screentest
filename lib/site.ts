@@ -1,10 +1,10 @@
 export const SITE_NAME = "ScreenTestHub";
 export const SITE_URL = "https://www.screentesthub.com";
 export const SITE_DESCRIPTION =
-  "Free browser screen tests for dead pixels, backlight bleed, HDR, screen tearing, grayscale, gradients, color, and motion.";
+  "Free browser screen tests for dead pixels, backlight bleed, HDR, screen tearing, color calibration, grayscale, gradients, color, and motion.";
 export const SITE_LANGUAGE = "en";
 export const SITE_LOCALE = "en_US";
-export const SITE_LAST_MODIFIED = "2026-08-09";
+export const SITE_LAST_MODIFIED = "2026-08-13";
 
 export type SiteRoute = {
   readonly href: `/${string}`;
@@ -27,6 +27,11 @@ export const TEST_ROUTES = [
   {
     href: "/screen-tearing-test",
     label: "Screen Tearing Test",
+    lastModified: "2026-08-13",
+  },
+  {
+    href: "/monitor-color-calibration",
+    label: "Monitor Color Calibration",
     lastModified: "2026-08-13",
   },
   {
