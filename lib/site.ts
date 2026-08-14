@@ -77,7 +77,12 @@ export const TEST_ROUTES = [
 ] as const satisfies readonly SiteRoute[];
 
 export const BLOG_ROUTES = [
-  { href: "/blog", label: "Screen troubleshooting blog", lastModified: "2026-08-13" },
+  { href: "/blog", label: "Screen troubleshooting blog", lastModified: "2026-08-14" },
+  {
+    href: "/blog/oled-monitor-burn-in",
+    label: "OLED Monitor Burn-In",
+    lastModified: "2026-08-14",
+  },
   {
     href: "/blog/touch-screen-not-working-after-screen-replacement",
     label: "Touch Screen Not Working After Screen Replacement",
