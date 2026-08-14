@@ -6,6 +6,7 @@ import {
   Contrast,
   Gauge,
   Grid2X2,
+  Flame,
   Moon,
   Palette,
 } from "lucide-react";
@@ -19,11 +20,17 @@ export const dynamic = "force-static";
 export const metadata: Metadata = {
   title: "Free Online Screen Tests for Monitors and Phones",
   description:
-    "Run ten focused screen tests for dead pixels, backlight bleed, HDR, screen tearing, color calibration, uniformity, gradients, color, and motion. Free, private, and browser based.",
+    "Run eleven focused screen tests for dead pixels, OLED burn-in, backlight bleed, HDR, screen tearing, color calibration, uniformity, gradients, and motion.",
   alternates: { canonical: SITE_URL },
 };
 
 const symptoms = [
+  {
+    title: "A faint toolbar or logo will not leave",
+    detail: "Compare the same outline on low gray and primary colors.",
+    href: "/oled-burn-in-test",
+    icon: Flame,
+  },
   {
     title: "One bright dot will not leave",
     detail: "Check black, white, red, green, and blue.",
@@ -127,9 +134,9 @@ export default async function HomePage() {
             <p className="eyebrow">Browser screen test bench</p>
             <h1 id="home-heading">Test your screen. Spot problems fast.</h1>
             <p className="hero-lede">
-              Check dead pixels, backlight bleed, banding, color shifts, and
-              motion blur in about two minutes. No download. No account. No
-              mystery score.
+              Check dead pixels, OLED burn-in, backlight bleed, banding, color
+              shifts, and motion blur. No download. No account. No mystery
+              score.
             </p>
             <div className="button-row">
               <Link className="button-primary" href="/tests/guided">

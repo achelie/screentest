@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "@/components/site/no-prefetch-link";
-import { Activity, ArrowRight, Monitor, Palette, Timer, Zap } from "lucide-react";
+import { Activity, ArrowRight, Flame, Monitor, Palette, Timer, Zap } from "lucide-react";
 
 import { TestIcon } from "@/components/tests/TestIcon";
 import styles from "@/components/tests/ScreenTests.module.css";
@@ -12,7 +12,7 @@ const canonicalUrl = absoluteUrl("/tests");
 export const metadata: Metadata = {
   title: { absolute: `Free Online Screen Tests | ${SITE_NAME}` },
   description:
-    "Run free browser screen tests for dead pixels, backlight bleed, HDR, screen tearing, monitor color calibration, grayscale uniformity, gradient banding, color, and motion.",
+    "Run free browser screen tests for dead pixels, OLED burn-in, backlight bleed, HDR, screen tearing, color calibration, grayscale, gradients, and motion.",
   alternates: { canonical: canonicalUrl },
   openGraph: {
     title: `Free Online Screen Tests | ${SITE_NAME}`,
@@ -67,6 +67,12 @@ const structuredData = {
           name: "Monitor Color Calibration Online",
           url: absoluteUrl("/monitor-color-calibration"),
         },
+        {
+          "@type": "ListItem",
+          position: SCREEN_TESTS.length + 4,
+          name: "OLED Burn-In Test Online",
+          url: absoluteUrl("/oled-burn-in-test"),
+        },
       ],
     },
   ],
@@ -103,7 +109,7 @@ export default function TestsPage() {
         <div className={styles.metaLine}>
           <span className={styles.metaItem}>
             <Monitor aria-hidden="true" size={17} strokeWidth={1.8} />
-            Ten browser tests
+            Eleven browser tests
           </span>
           <span className={styles.metaItem}>
             <Timer aria-hidden="true" size={17} strokeWidth={1.8} />
@@ -172,6 +178,16 @@ export default function TestsPage() {
             <span className={styles.testListCopy}>
               <strong>Monitor Color Calibration Online</strong>
               <span>Adjust SDR black and white levels, neutral gray, gamma, and color separation.</span>
+            </span>
+            <ArrowRight aria-hidden="true" size={18} strokeWidth={1.8} />
+          </Link>
+          <Link className={styles.testListLink} href="/oled-burn-in-test">
+            <span className={styles.testListIcon}>
+              <Flame aria-hidden="true" size={20} strokeWidth={1.8} />
+            </span>
+            <span className={styles.testListCopy}>
+              <strong>OLED Burn-In Test Online</strong>
+              <span>Check fixed afterimages, temporary retention, and low-gray uniformity.</span>
             </span>
             <ArrowRight aria-hidden="true" size={18} strokeWidth={1.8} />
           </Link>
