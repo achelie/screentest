@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "@/components/site/no-prefetch-link";
-import { Activity, ArrowRight, Flame, Monitor, Palette, Timer, Zap } from "lucide-react";
+import { Activity, ArrowRight, Flame, Monitor, Palette, Ruler, Timer, Zap } from "lucide-react";
 
 import { TestIcon } from "@/components/tests/TestIcon";
 import styles from "@/components/tests/ScreenTests.module.css";
@@ -12,7 +12,7 @@ const canonicalUrl = absoluteUrl("/tests");
 export const metadata: Metadata = {
   title: { absolute: `Free Online Screen Tests | ${SITE_NAME}` },
   description:
-    "Run free browser screen tests for dead pixels, OLED burn-in, backlight bleed, HDR, screen tearing, color calibration, grayscale, gradients, and motion.",
+    "Run free browser screen tests for resolution, dead pixels, OLED burn-in, backlight bleed, HDR, screen tearing, color calibration, grayscale, gradients, and motion.",
   alternates: { canonical: canonicalUrl },
   openGraph: {
     title: `Free Online Screen Tests | ${SITE_NAME}`,
@@ -73,6 +73,12 @@ const structuredData = {
           name: "OLED Burn-In Test Online",
           url: absoluteUrl("/oled-burn-in-test"),
         },
+        {
+          "@type": "ListItem",
+          position: SCREEN_TESTS.length + 5,
+          name: "Screen Resolution Checker",
+          url: absoluteUrl("/screen-resolution-checker"),
+        },
       ],
     },
   ],
@@ -109,7 +115,7 @@ export default function TestsPage() {
         <div className={styles.metaLine}>
           <span className={styles.metaItem}>
             <Monitor aria-hidden="true" size={17} strokeWidth={1.8} />
-            Eleven browser tests
+            Twelve browser tests
           </span>
           <span className={styles.metaItem}>
             <Timer aria-hidden="true" size={17} strokeWidth={1.8} />
@@ -188,6 +194,16 @@ export default function TestsPage() {
             <span className={styles.testListCopy}>
               <strong>OLED Burn-In Test Online</strong>
               <span>Check fixed afterimages, temporary retention, and low-gray uniformity.</span>
+            </span>
+            <ArrowRight aria-hidden="true" size={18} strokeWidth={1.8} />
+          </Link>
+          <Link className={styles.testListLink} href="/screen-resolution-checker">
+            <span className={styles.testListIcon}>
+              <Ruler aria-hidden="true" size={20} strokeWidth={1.8} />
+            </span>
+            <span className={styles.testListCopy}>
+              <strong>Screen Resolution Checker</strong>
+              <span>Compare estimated output pixels, CSS size, viewport, DPR, and browser frame cadence.</span>
             </span>
             <ArrowRight aria-hidden="true" size={18} strokeWidth={1.8} />
           </Link>

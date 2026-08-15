@@ -35,6 +35,8 @@ type FullscreenTestProps = {
   shortcutHint?: string;
   additionalAriaKeyShortcuts?: string;
   additionalShortcutHelp?: string;
+  hostClassName?: string;
+  surfaceRole?: "group" | "img";
 };
 
 const CONTROLS_IDLE_DELAY_MS = 1000;
@@ -62,6 +64,8 @@ export function FullscreenTest({
   shortcutHint = "F fullscreen, H hide controls",
   additionalAriaKeyShortcuts,
   additionalShortcutHelp,
+  hostClassName,
+  surfaceRole = "img",
 }: FullscreenTestProps) {
   const hostRef = useRef<HTMLDivElement>(null);
   const toolbarRef = useRef<HTMLDivElement>(null);
@@ -294,7 +298,7 @@ export function FullscreenTest({
       <div
         aria-describedby={noticeId}
         aria-keyshortcuts={`F H ArrowLeft ArrowRight${additionalAriaKeyShortcuts ? ` ${additionalAriaKeyShortcuts}` : ""}`}
-        className={styles.fullscreenHost}
+        className={`${styles.fullscreenHost}${hostClassName ? ` ${hostClassName}` : ""}`}
         data-controls-hidden={controlsHidden}
         data-toolbar-layout={toolbarLayout}
         onPointerDown={handlePointerDown}
@@ -306,7 +310,7 @@ export function FullscreenTest({
           aria-label={surfaceLabel}
           className={styles.testSurface}
           onClick={handleSurfaceClick}
-          role="img"
+          role={surfaceRole}
         >
           {children}
         </div>

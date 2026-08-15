@@ -9,6 +9,7 @@ import {
   Flame,
   Moon,
   Palette,
+  Ruler,
 } from "lucide-react";
 import { ScreenSampler } from "@/components/home/screen-sampler";
 import { JsonLd } from "@/components/seo/json-ld";
@@ -20,11 +21,17 @@ export const dynamic = "force-static";
 export const metadata: Metadata = {
   title: "Free Online Screen Tests for Monitors and Phones",
   description:
-    "Run eleven focused screen tests for dead pixels, OLED burn-in, backlight bleed, HDR, screen tearing, color calibration, uniformity, gradients, and motion.",
+    "Run twelve focused screen tests for resolution, dead pixels, OLED burn-in, backlight bleed, HDR, screen tearing, color calibration, uniformity, gradients, and motion.",
   alternates: { canonical: SITE_URL },
 };
 
 const symptoms = [
+  {
+    title: "Windows says 4K, but the browser says 1536 × 864",
+    detail: "Compare CSS size, estimated output pixels, viewport, and DPR.",
+    href: "/screen-resolution-checker",
+    icon: Ruler,
+  },
   {
     title: "A faint toolbar or logo will not leave",
     detail: "Compare the same outline on low gray and primary colors.",
@@ -134,9 +141,9 @@ export default async function HomePage() {
             <p className="eyebrow">Browser screen test bench</p>
             <h1 id="home-heading">Test your screen. Spot problems fast.</h1>
             <p className="hero-lede">
-              Check dead pixels, OLED burn-in, backlight bleed, banding, color
-              shifts, and motion blur. No download. No account. No mystery
-              score.
+              Check resolution, dead pixels, OLED burn-in, backlight bleed,
+              banding, color shifts, and motion blur. No download. No account.
+              No mystery score.
             </p>
             <div className="button-row">
               <Link className="button-primary" href="/tests/guided">
