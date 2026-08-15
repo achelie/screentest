@@ -82,7 +82,12 @@ export const TEST_ROUTES = [
 ] as const satisfies readonly SiteRoute[];
 
 export const BLOG_ROUTES = [
-  { href: "/blog", label: "Screen troubleshooting blog", lastModified: "2026-08-14" },
+  { href: "/blog", label: "Screen troubleshooting blog", lastModified: "2026-08-15" },
+  {
+    href: "/blog/1080p-vs-1440p-vs-4k",
+    label: "1080p vs 1440p vs 4K",
+    lastModified: "2026-08-15",
+  },
   {
     href: "/blog/oled-monitor-burn-in",
     label: "OLED Monitor Burn-In",
