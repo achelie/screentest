@@ -9,6 +9,10 @@ import {
 } from "@/lib/site";
 import { absoluteLocalizedUrl, localizedAlternates } from "@/lib/i18n";
 
+function routeLastModified(route: SiteRoute) {
+  return "lastModified" in route ? route.lastModified : undefined;
+}
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const pairedEntry = (
     path: string,
@@ -47,14 +51,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       "en",
       route.href === "/tests" ? 0.9 : 0.8,
       "monthly",
-      route.lastModified,
+      routeLastModified(route),
     ),
     pairedEntry(
       route.href,
       "zh",
       route.href === "/tests" ? 0.9 : 0.8,
       "monthly",
-      route.lastModified,
+      routeLastModified(route),
     ),
   ]);
 
@@ -71,7 +75,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...GUIDE_ROUTES.filter((route) => route.href !== "/guides").map((route) => ({
       url: absoluteUrl(route.href),
       lastModified: new Date(
-        `${route.lastModified ?? SITE_LAST_MODIFIED}T00:00:00.000Z`,
+        `${routeLastModified(route) ?? SITE_LAST_MODIFIED}T00:00:00.000Z`,
       ),
       changeFrequency: "monthly" as const,
       priority: 0.7,
