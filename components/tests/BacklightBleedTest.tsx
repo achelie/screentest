@@ -2,20 +2,19 @@
 
 import { FullscreenTest } from "./FullscreenTest";
 import styles from "./ScreenTests.module.css";
+import type { TestMessages } from "@/lib/test-messages";
 
-export function BacklightBleedTest() {
+export function BacklightBleedTest({ messages }: { messages: Pick<TestMessages, "fullscreen" | "backlight"> }) {
   return (
     <FullscreenTest
-      name="Backlight bleed test"
-      status="Black pattern. Hide the controls for a clean edge check."
-      surfaceLabel="Full-screen pure black backlight bleed pattern"
+      messages={messages.fullscreen}
+      name={messages.backlight.name}
+      status={messages.backlight.status}
+      surfaceLabel={messages.backlight.surface}
       controls={
         <div className={styles.guidedPrompt}>
-          <strong>Look straight at the panel</strong>
-          <span>
-            Brightness at your normal level is more useful than forcing it to
-            100%.
-          </span>
+          <strong>{messages.backlight.title}</strong>
+          <span>{messages.backlight.detail}</span>
         </div>
       }
     >

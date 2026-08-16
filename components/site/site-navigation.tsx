@@ -5,6 +5,8 @@ import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 
 import Link from "@/components/site/no-prefetch-link";
+import { LanguageSwitcher } from "@/components/site/language-switcher";
+import type { Locale, NavigationMessages } from "@/lib/i18n";
 
 type ToolRoute = {
   readonly href: `/${string}`;
@@ -13,9 +15,11 @@ type ToolRoute = {
 
 type SiteNavigationProps = {
   tools: readonly ToolRoute[];
+  locale: Locale;
+  messages: NavigationMessages;
 };
 
-export function SiteNavigation({ tools }: SiteNavigationProps) {
+export function SiteNavigation({ tools, locale, messages }: SiteNavigationProps) {
   const pathname = usePathname();
   const navigationRef = useRef<HTMLElement>(null);
   const desktopToolsButtonRef = useRef<HTMLButtonElement>(null);
@@ -99,14 +103,14 @@ export function SiteNavigation({ tools }: SiteNavigationProps) {
           href={allTestsRoute.href}
           onClick={closeAllMenus}
         >
-          View all screen tests
+          {messages.allTests}
         </Link>
       ) : null}
     </>
   );
 
   return (
-    <nav aria-label="Main navigation" className="site-nav" ref={navigationRef}>
+    <nav aria-label={messages.mainLabel} className="site-nav" ref={navigationRef}>
       <div className="desktop-nav">
         <div className="nav-tools">
           <button
@@ -118,12 +122,12 @@ export function SiteNavigation({ tools }: SiteNavigationProps) {
             ref={desktopToolsButtonRef}
             type="button"
           >
-            Tools
+            {messages.tools}
             <ChevronDown aria-hidden="true" size={16} strokeWidth={1.8} />
           </button>
           {desktopToolsOpen ? (
             <div
-              aria-label="Screen test tools"
+              aria-label={messages.toolsMenuLabel}
               className="nav-tools-menu"
               id={desktopToolsId}
             >
@@ -132,21 +136,22 @@ export function SiteNavigation({ tools }: SiteNavigationProps) {
           ) : null}
         </div>
         <Link
-          aria-current={pathname === "/guides" ? "page" : undefined}
-          data-active={pathname.startsWith("/guides")}
-          href="/guides"
+          aria-current={pathname === (locale === "zh" ? "/zh/guides" : "/guides") ? "page" : undefined}
+          data-active={pathname.startsWith(locale === "zh" ? "/zh/guides" : "/guides")}
+          href={locale === "zh" ? "/zh/guides" : "/guides"}
         >
-          Guides
+          {messages.guides}
         </Link>
-        <Link className="nav-start" href="/tests/guided">
-          Start check
+        <LanguageSwitcher locale={locale} messages={messages} />
+        <Link className="nav-start" href={locale === "zh" ? "/zh/tests/guided" : "/tests/guided"}>
+          {messages.startCheck}
         </Link>
       </div>
 
       <button
         aria-controls={mobileMenuId}
         aria-expanded={mobileMenuOpen}
-        aria-label={mobileMenuOpen ? "Close navigation" : "Open navigation"}
+        aria-label={mobileMenuOpen ? messages.close : messages.open}
         className="mobile-menu-toggle"
         onClick={() => {
           setMobileMenuOpen((open) => !open);
@@ -172,7 +177,7 @@ export function SiteNavigation({ tools }: SiteNavigationProps) {
             onClick={() => setMobileToolsOpen((open) => !open)}
             type="button"
           >
-            Tools
+            {messages.tools}
             <ChevronDown aria-hidden="true" size={18} strokeWidth={1.8} />
           </button>
           {mobileToolsOpen ? (
@@ -181,20 +186,21 @@ export function SiteNavigation({ tools }: SiteNavigationProps) {
             </div>
           ) : null}
           <Link
-            aria-current={pathname === "/guides" ? "page" : undefined}
+            aria-current={pathname === (locale === "zh" ? "/zh/guides" : "/guides") ? "page" : undefined}
             className="mobile-nav-row"
-            data-active={pathname.startsWith("/guides")}
-            href="/guides"
+            data-active={pathname.startsWith(locale === "zh" ? "/zh/guides" : "/guides")}
+            href={locale === "zh" ? "/zh/guides" : "/guides"}
             onClick={closeAllMenus}
           >
-            Guides
+            {messages.guides}
           </Link>
+          <LanguageSwitcher locale={locale} messages={messages} mobile />
           <Link
             className="mobile-nav-row mobile-nav-start"
-            href="/tests/guided"
+            href={locale === "zh" ? "/zh/tests/guided" : "/tests/guided"}
             onClick={closeAllMenus}
           >
-            Start check
+            {messages.startCheck}
           </Link>
         </div>
       ) : null}

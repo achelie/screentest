@@ -18,8 +18,10 @@ import {
 } from "react";
 
 import styles from "./ScreenTests.module.css";
+import type { FullscreenMessages } from "@/lib/test-messages";
 
 type FullscreenTestProps = {
+  messages: FullscreenMessages;
   name: string;
   surfaceLabel: string;
   status: string;
@@ -41,6 +43,7 @@ function isInteractiveTarget(target: EventTarget | null) {
 }
 
 export function FullscreenTest({
+  messages,
   name,
   surfaceLabel,
   status,
@@ -144,7 +147,7 @@ export function FullscreenTest({
     if (!host || !document.fullscreenEnabled || !host.requestFullscreen) {
       setFullscreenSupported(false);
       setError(
-        "Fullscreen is not available here. The test still works inside this page.",
+        messages.unavailableHere,
       );
       return;
     }
@@ -163,10 +166,10 @@ export function FullscreenTest({
       }
     } catch {
       setError(
-        "The browser refused fullscreen. Try the button again or use the browser's fullscreen command.",
+        messages.refused,
       );
     }
-  }, []);
+  }, [messages.refused, messages.unavailableHere]);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -273,7 +276,7 @@ export function FullscreenTest({
         </div>
 
         <div
-          aria-label={`${name} controls`}
+          aria-label={messages.controlsLabel.replace("{name}", name)}
           aria-hidden={controlsHidden}
           className={styles.toolbar}
           inert={controlsHidden}
@@ -287,7 +290,7 @@ export function FullscreenTest({
                 {status}
               </p>
             </div>
-            <span className={styles.toolbarStatus}>F fullscreen, H hide controls</span>
+            <span className={styles.toolbarStatus}>{messages.shortcutSummary}</span>
           </div>
 
           <div className={styles.toolbarBody}>
@@ -295,23 +298,23 @@ export function FullscreenTest({
             <div className={styles.toolbarActions}>
               {onPrevious ? (
                 <button
-                  aria-label="Previous pattern"
+                  aria-label={messages.previousLabel}
                   className={styles.toolButton}
                   onClick={onPrevious}
                   type="button"
                 >
                   <ChevronLeft aria-hidden="true" size={18} strokeWidth={1.8} />
-                  Previous
+                  {messages.previous}
                 </button>
               ) : null}
               {onNext ? (
                 <button
-                  aria-label="Next pattern"
+                  aria-label={messages.nextLabel}
                   className={styles.toolButton}
                   onClick={onNext}
                   type="button"
                 >
-                  Next
+                  {messages.next}
                   <ChevronRight aria-hidden="true" size={18} strokeWidth={1.8} />
                 </button>
               ) : null}
@@ -322,7 +325,7 @@ export function FullscreenTest({
                   type="button"
                 >
                   <EyeOff aria-hidden="true" size={18} strokeWidth={1.8} />
-                  Hide controls
+                  {messages.hideControls}
                 </button>
               ) : null}
               <button
@@ -336,7 +339,7 @@ export function FullscreenTest({
                 ) : (
                   <Maximize2 aria-hidden="true" size={18} strokeWidth={1.8} />
                 )}
-                {isFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
+                {isFullscreen ? messages.exitFullscreen : messages.enterFullscreen}
               </button>
             </div>
           </div>
@@ -344,18 +347,16 @@ export function FullscreenTest({
       </div>
 
       <p className={styles.srOnly} id={noticeId}>
-        Use F for fullscreen, H to hide controls, and the arrow keys to change
-        patterns when available. Moving the pointer restores hidden controls.
+        {messages.keyboardHelp}
         {advanceOnSurfaceClick
-          ? " Click the full-screen test surface to show the next pattern."
+          ? ` ${messages.clickHelp}`
           : null}
       </p>
 
       {fullscreenSupported === false && !error ? (
         <p className={styles.inlineNotice}>
           <TriangleAlert aria-hidden="true" size={18} strokeWidth={1.8} />
-          Fullscreen is not available in this browser. The test still works in
-          the panel above.
+          {messages.unavailable}
         </p>
       ) : null}
 

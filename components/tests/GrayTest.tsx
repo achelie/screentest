@@ -4,10 +4,11 @@ import { useCallback, useState } from "react";
 
 import { FullscreenTest } from "./FullscreenTest";
 import styles from "./ScreenTests.module.css";
+import type { TestMessages } from "@/lib/test-messages";
 
 const GRAY_LEVELS = [5, 10, 25, 50, 75, 100] as const;
 
-export function GrayTest() {
+export function GrayTest({ messages }: { messages: Pick<TestMessages, "fullscreen" | "gray"> }) {
   const [activeIndex, setActiveIndex] = useState(3);
   const level = GRAY_LEVELS[activeIndex];
   const channelValue = Math.round((level / 100) * 255);
@@ -24,13 +25,14 @@ export function GrayTest() {
 
   return (
     <FullscreenTest
-      name="Grayscale and uniformity test"
+      messages={messages.fullscreen}
+      name={messages.gray.name}
       onNext={showNext}
       onPrevious={showPrevious}
-      status={`${level}% gray. Look for tint, cloudy patches, and darker edges.`}
-      surfaceLabel={`Full-screen ${level}% gray uniformity pattern`}
+      status={messages.gray.status.replace("{level}", String(level))}
+      surfaceLabel={messages.gray.surface.replace("{level}", String(level))}
       controls={
-        <div aria-label="Gray level" className={styles.toolGroup} role="group">
+        <div aria-label={messages.gray.levelLabel} className={styles.toolGroup} role="group">
           {GRAY_LEVELS.map((grayLevel, index) => (
             <button
               aria-pressed={index === activeIndex}

@@ -1,42 +1,81 @@
 import type { MetadataRoute } from "next";
-import type { SiteRoute } from "@/lib/site";
 
 import {
   absoluteUrl,
   GUIDE_ROUTES,
   SITE_LAST_MODIFIED,
   TEST_ROUTES,
+  type SiteRoute,
 } from "@/lib/site";
+import { absoluteLocalizedUrl, localizedAlternates } from "@/lib/i18n";
 
-const lastModified = new Date(`${SITE_LAST_MODIFIED}T00:00:00.000Z`);
+export default function sitemap(): MetadataRoute.Sitemap {
+  const pairedEntry = (
+    path: string,
+    locale: "en" | "zh",
+    priority: number,
+    changeFrequency: "weekly" | "monthly",
+    modified = SITE_LAST_MODIFIED,
+  ) => ({
+    url: absoluteLocalizedUrl(locale, path),
+    lastModified: new Date(`${modified}T00:00:00.000Z`),
+    changeFrequency,
+    priority,
+    alternates: { languages: localizedAlternates(path) },
+  });
 
-function toSitemapEntry(
-  route: SiteRoute,
-  priority: number,
-): MetadataRoute.Sitemap[number] {
-  return {
+  const englishOnlyEntry = (route: SiteRoute, priority: number) => ({
     url: absoluteUrl(route.href),
     lastModified: new Date(
       `${route.lastModified ?? SITE_LAST_MODIFIED}T00:00:00.000Z`,
     ),
-    changeFrequency: "monthly",
+    changeFrequency: "monthly" as const,
     priority,
-  };
-}
-
-export default function sitemap(): MetadataRoute.Sitemap {
-  return [
-    {
-      url: absoluteUrl(),
-      lastModified,
-      changeFrequency: "weekly",
-      priority: 1,
+    alternates: {
+      languages: {
+        "en-US": absoluteUrl(route.href),
+        "x-default": absoluteUrl(route.href),
+      },
     },
-    ...TEST_ROUTES.map((route) =>
-      toSitemapEntry(route, route.href === "/tests" ? 0.9 : 0.8),
+  });
+
+  const pairedTests = TEST_ROUTES.filter(
+    (route) => route.href !== "/touch-screen-test",
+  ).flatMap((route) => [
+    pairedEntry(
+      route.href,
+      "en",
+      route.href === "/tests" ? 0.9 : 0.8,
+      "monthly",
+      route.lastModified,
     ),
-    ...GUIDE_ROUTES.map((route) =>
-      toSitemapEntry(route, route.href === "/guides" ? 0.8 : 0.7),
+    pairedEntry(
+      route.href,
+      "zh",
+      route.href === "/tests" ? 0.9 : 0.8,
+      "monthly",
+      route.lastModified,
     ),
+  ]);
+
+  return [
+    pairedEntry("/", "en", 1, "weekly"),
+    pairedEntry("/", "zh", 1, "weekly"),
+    ...pairedTests,
+    englishOnlyEntry(
+      TEST_ROUTES.find((route) => route.href === "/touch-screen-test")!,
+      0.8,
+    ),
+    pairedEntry("/guides", "en", 0.8, "monthly"),
+    pairedEntry("/guides", "zh", 0.8, "monthly"),
+    ...GUIDE_ROUTES.filter((route) => route.href !== "/guides").map((route) => ({
+      url: absoluteUrl(route.href),
+      lastModified: new Date(
+        `${route.lastModified ?? SITE_LAST_MODIFIED}T00:00:00.000Z`,
+      ),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+      alternates: { languages: { "en-US": absoluteUrl(route.href), "x-default": absoluteUrl(route.href) } },
+    })),
   ];
 }

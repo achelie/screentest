@@ -6,6 +6,9 @@ export const SITE_LANGUAGE = "en";
 export const SITE_LOCALE = "en_US";
 export const SITE_LAST_MODIFIED = "2026-08-09";
 
+import type { Locale } from "@/lib/i18n";
+import { getScreenTests } from "@/lib/tests";
+
 export type SiteRoute = {
   readonly href: `/${string}`;
   readonly label: string;
@@ -27,6 +30,24 @@ export const TEST_ROUTES = [
   { href: "/tests/motion", label: "Motion and Ghosting Test" },
   { href: "/tests/color", label: "Monitor Color Test" },
 ] as const satisfies readonly SiteRoute[];
+
+export function getTestRoutes(locale: Locale): readonly SiteRoute[] {
+  const prefix = locale === "zh" ? "/zh" : "";
+  const allTestsLabel = locale === "zh" ? "全部屏幕测试" : "All screen tests";
+  const englishOnlyRoutes =
+    locale === "en"
+      ? [{ href: "/touch-screen-test" as const, label: "Touch Screen Test" }]
+      : [];
+
+  return [
+    { href: `${prefix}/tests` as `/${string}`, label: allTestsLabel },
+    ...englishOnlyRoutes,
+    ...getScreenTests(locale).map((test) => ({
+      href: `${prefix}/tests/${test.slug}` as `/${string}`,
+      label: test.name,
+    })),
+  ];
+}
 
 export const GUIDE_ROUTES = [
   { href: "/guides", label: "Screen testing guides" },
