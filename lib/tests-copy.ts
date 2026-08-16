@@ -23,7 +23,6 @@ const en = {
       { signal: "The moving target leaves a dark or bright trail", meaning: "The panel may show ghosting or overdrive overshoot." },
     ],
     limitation: "This is a visual browser check, not a colorimeter or laboratory measurement.",
-    guideLabel: "Browse the screen testing guides",
   },
   "dead-pixel": {
     name: "Dead Pixel Test",
@@ -43,7 +42,6 @@ const en = {
       { signal: "The mark appears in a screenshot on another display", meaning: "The problem is in the rendered image or software, not this panel." },
     ],
     limitation: "A browser can reveal suspicious pixels, but it cannot confirm warranty eligibility or safely repair panel hardware.",
-    guideLabel: "Read how to check dead pixels",
   },
   "backlight-bleed": {
     name: "Backlight Bleed Test",
@@ -63,7 +61,6 @@ const en = {
       { signal: "A phone photo looks worse than your eyes see", meaning: "Camera exposure can exaggerate glow. Judge the panel with your eyes first." },
     ],
     limitation: "This test helps you compare visible patches. Panel type, viewing angle, room light, and camera exposure can change the result.",
-    guideLabel: "Read the backlight bleed guide",
   },
   grayscale: {
     name: "Grayscale and Uniformity Test",
@@ -83,7 +80,6 @@ const en = {
       { signal: "Only very dark gray looks uneven", meaning: "Near-black behavior varies by panel type and can improve after warm-up." },
     ],
     limitation: "Uniformity varies with viewing angle and panel technology. Compare what you see with your real use, not a camera alone.",
-    guideLabel: "Read the screen uniformity guide",
   },
   gradient: {
     name: "Gradient Banding Test",
@@ -103,7 +99,6 @@ const en = {
       { signal: "The bands change after a display-mode change", meaning: "Bit depth, color range, or processing settings may be contributing." },
     ],
     limitation: "Browser color management, operating-system settings, bit depth, and panel processing can all affect a gradient.",
-    guideLabel: "Browse the screen testing guides",
   },
   motion: {
     name: "Motion and Ghosting Test",
@@ -123,7 +118,6 @@ const en = {
       { signal: "Movement jumps or pauses", meaning: "Browser load, frame pacing, or refresh-rate configuration may be involved." },
     ],
     limitation: "This browser test helps you see motion behavior. It is not a laboratory response-time measurement.",
-    guideLabel: "Read the motion blur guide",
   },
   color: {
     name: "Monitor Color Test",
@@ -143,7 +137,6 @@ const en = {
       { signal: "Two displays show different colors", meaning: "Different presets and calibration can cause this even when both panels work." },
     ],
     limitation: "Solid colors reveal visual differences, but they do not calibrate a display or measure color accuracy.",
-    guideLabel: "Browse the screen testing guides",
   },
 } as const satisfies LocalizedTestCopy;
 
@@ -163,7 +156,11 @@ const zh = {
       { signal: "移动目标留下暗色或亮色轨迹", meaning: "面板可能出现拖影或过驱过冲。" },
     ],
     limitation: "这是浏览器目视检查，不是色度计或实验室测量。",
-    guideLabel: "浏览英文屏幕测试指南",
+    faq: [
+      { question: "完整检查需要多长时间？", answer: "通常约 2 分钟。发现可疑位置后，再打开对应单项测试复查。" },
+      { question: "结果会上传吗？", answer: "不会。你的选择和结果只保留在当前浏览器标签页。" },
+      { question: "这能代替维修检测吗？", answer: "不能。它用于快速目视筛查和记录现象，不会读取面板硬件。" },
+    ],
   },
   "dead-pixel": {
     name: "坏点测试",
@@ -179,7 +176,11 @@ const zh = {
       { signal: "截图放到另一块屏幕上仍能看到这个痕迹", meaning: "问题来自图像或软件，不是当前面板。" },
     ],
     limitation: "浏览器能暴露可疑像素，但无法判断保修资格，也不能安全修复面板硬件。",
-    guideLabel: "阅读英文坏点检查指南",
+    faq: [
+      { question: "坏点和卡住的子像素有什么区别？", answer: "坏点通常一直是黑色；卡住的子像素常固定为红、绿、蓝或白色。" },
+      { question: "屏幕上的黑点一定是坏点吗？", answer: "不一定。先清洁屏幕，并确认痕迹不会随页面滚动或截图移动。" },
+      { question: "网页能修复坏点吗？", answer: "不能保证，也不建议按压面板。测试只能帮助你确认位置和表现。" },
+    ],
   },
   "backlight-bleed": {
     name: "漏光测试",
@@ -195,7 +196,11 @@ const zh = {
       { signal: "手机照片比肉眼看到的严重", meaning: "相机曝光会夸大亮光。先相信现场肉眼观察。" },
     ],
     limitation: "这项测试帮助你比较可见亮斑。面板类型、视角、环境光和相机曝光都会影响结果。",
-    guideLabel: "阅读英文漏光检查指南",
+    faq: [
+      { question: "漏光和 IPS Glow 怎么区分？", answer: "漏光通常固定在边缘；IPS Glow 会随视角和距离明显变化。" },
+      { question: "需要把亮度开到 100% 吗？", answer: "不用。先用日常亮度判断，再用更高亮度做补充对比。" },
+      { question: "为什么手机拍得比肉眼严重？", answer: "相机会自动提高暗部曝光，因此照片常夸大黑屏上的亮斑。" },
+    ],
   },
   grayscale: {
     name: "灰阶与均匀性测试",
@@ -211,7 +216,11 @@ const zh = {
       { signal: "只有很暗的灰阶看起来不均匀", meaning: "近黑表现因面板类型而异，预热后可能改善。" },
     ],
     limitation: "均匀性会随视角和面板技术变化。用真实使用场景判断，不要只看相机照片。",
-    guideLabel: "阅读英文屏幕均匀性指南",
+    faq: [
+      { question: "什么是脏屏效应？", answer: "浅灰或运动画面上出现固定云斑或竖条，看起来像屏幕没有擦干净。" },
+      { question: "OLED 低灰阶不均匀正常吗？", answer: "轻微差异并不少见。先预热，并按真实暗场使用场景判断影响。" },
+      { question: "视角会影响结果吗？", answer: "会。请正对屏幕，并在比较不同区域时保持头部位置不变。" },
+    ],
   },
   gradient: {
     name: "渐变色带测试",
@@ -227,7 +236,11 @@ const zh = {
       { signal: "切换显示模式后色带发生变化", meaning: "位深、色彩范围或图像处理设置可能参与其中。" },
     ],
     limitation: "浏览器色彩管理、操作系统设置、位深和面板处理都会影响渐变。",
-    guideLabel: "浏览英文屏幕测试指南",
+    faq: [
+      { question: "渐变色带一定是面板故障吗？", answer: "不一定。图片压缩、位深、色彩范围、显卡和浏览器处理都可能造成色带。" },
+      { question: "为什么只有某个颜色通道有色带？", answer: "可能与该通道的设置、色彩配置或面板响应有关。" },
+      { question: "怎么减少色带？", answer: "检查完整/有限范围、位深、HDR、显示模式和应用内色彩设置。" },
+    ],
   },
   motion: {
     name: "动态与拖影测试",
@@ -243,7 +256,11 @@ const zh = {
       { signal: "运动出现跳动或停顿", meaning: "可能与浏览器负载、帧时间或刷新率配置有关。" },
     ],
     limitation: "这项浏览器测试帮助你观察动态表现，但不是实验室响应时间测量。",
-    guideLabel: "阅读英文动态模糊指南",
+    faq: [
+      { question: "拖影和过驱过冲怎么区分？", answer: "拖影多为暗色尾巴；过冲通常是亮色、反色或彩色光晕。" },
+      { question: "浏览器能测响应时间吗？", answer: "不能给出可靠毫秒数，但能提供重复运动图案用于比较设置。" },
+      { question: "为什么运动会跳动？", answer: "浏览器负载、掉帧、刷新率或省电设置都可能影响运动连续性。" },
+    ],
   },
   color: {
     name: "显示器色彩测试",
@@ -259,7 +276,11 @@ const zh = {
       { signal: "两块屏幕显示不同颜色", meaning: "不同预设和校准会造成差异，即使两块面板都正常工作。" },
     ],
     limitation: "纯色可以暴露视觉差异，但不能校准显示器或测量色彩准确度。",
-    guideLabel: "浏览英文屏幕测试指南",
+    faq: [
+      { question: "纯色测试能校准显示器吗？", answer: "不能。它只能暴露坏点、偏色和均匀性差异。" },
+      { question: "两块屏幕颜色不同，哪块是对的？", answer: "仅凭肉眼无法确认。预设、亮度、色域和环境光都可能不同。" },
+      { question: "为什么青色、品红和黄色很重要？", answer: "它们组合多个子像素，有助于发现单通道异常和混色问题。" },
+    ],
   },
 } as const satisfies LocalizedTestCopy;
 
@@ -296,7 +317,11 @@ const de = {
       },
     ],
     limitation: "Dies ist eine Sichtprüfung im Browser, keine Messung mit Kolorimeter oder Laborgerät.",
-    guideLabel: "Englische Ratgeber für Bildschirmtests ansehen",
+    faq: [
+      { question: "Wie lange dauert der komplette Check?", answer: "Meist etwa zwei Minuten. Verdächtige Stellen prüfst du danach mit dem passenden Einzeltest." },
+      { question: "Werden Ergebnisse hochgeladen?", answer: "Nein. Antworten und Zusammenfassung bleiben nur im aktuellen Browser-Tab." },
+      { question: "Ersetzt der Test eine Reparaturdiagnose?", answer: "Nein. Er hilft bei der Sichtprüfung und Dokumentation, liest aber keine Panel-Hardware aus." },
+    ],
   },
   "dead-pixel": {
     name: "Pixelfehler-Test",
@@ -327,7 +352,11 @@ const de = {
     ],
     limitation:
       "Ein Browser kann verdächtige Pixel sichtbar machen, aber weder Garantieansprüche bestätigen noch Panel-Hardware sicher reparieren.",
-    guideLabel: "Englischen Ratgeber zu Pixelfehlern lesen",
+    faq: [
+      { question: "Was unterscheidet einen toten von einem festhängenden Pixel?", answer: "Ein toter Pixel bleibt meist schwarz; ein festhängender Subpixel oft rot, grün, blau oder weiß." },
+      { question: "Ist jeder schwarze Punkt ein Pixelfehler?", answer: "Nein. Reinige zuerst das Display und prüfe, ob die Stelle mit Inhalt oder Screenshot wandert." },
+      { question: "Kann eine Webseite Pixelfehler reparieren?", answer: "Nein. Der Test bestätigt nur Position und Verhalten; drücke nicht auf das Panel." },
+    ],
   },
   "backlight-bleed": {
     name: "Test auf Backlight Bleeding",
@@ -358,7 +387,11 @@ const de = {
     ],
     limitation:
       "Der Test hilft beim Vergleichen sichtbarer Stellen. Paneltyp, Blickwinkel, Raumlicht und Kameraeinstellungen beeinflussen das Ergebnis.",
-    guideLabel: "Englischen Ratgeber zu Backlight Bleeding lesen",
+    faq: [
+      { question: "Wie unterscheide ich Backlight Bleeding und IPS Glow?", answer: "Bleeding bleibt meist am Rand, IPS Glow verändert sich deutlich mit Blickwinkel und Abstand." },
+      { question: "Muss die Helligkeit auf 100 % stehen?", answer: "Nein. Beurteile zuerst bei deiner normalen Helligkeit und nutze hohe Helligkeit nur zum Vergleich." },
+      { question: "Warum wirkt es auf dem Foto schlimmer?", answer: "Die Kamera hellt dunkle Szenen automatisch auf und übertreibt dadurch helle Stellen." },
+    ],
   },
   grayscale: {
     name: "Test für Graustufen und Gleichmäßigkeit",
@@ -389,7 +422,11 @@ const de = {
     ],
     limitation:
       "Gleichmäßigkeit hängt von Blickwinkel und Paneltechnik ab. Vergleiche das Ergebnis mit deiner echten Nutzung, nicht nur mit einem Foto.",
-    guideLabel: "Englischen Ratgeber zur Bildschirmgleichmäßigkeit lesen",
+    faq: [
+      { question: "Was ist der Dirty-Screen-Effekt?", answer: "Feste Wolken oder Streifen auf hellgrauen und bewegten Flächen lassen das Panel schmutzig wirken." },
+      { question: "Ist ungleichmäßiges Dunkelgrau bei OLED normal?", answer: "Leichte Unterschiede sind nicht selten. Wärme das Panel auf und bewerte die Auswirkung in echten dunklen Szenen." },
+      { question: "Beeinflusst der Blickwinkel das Ergebnis?", answer: "Ja. Sitze mittig und halte die Kopfposition beim Vergleich konstant." },
+    ],
   },
   gradient: {
     name: "Test auf Banding in Farbverläufen",
@@ -420,7 +457,11 @@ const de = {
     ],
     limitation:
       "Farbmanagement im Browser, Betriebssystemeinstellungen, Farbtiefe und Panelverarbeitung können einen Verlauf beeinflussen.",
-    guideLabel: "Englische Ratgeber für Bildschirmtests ansehen",
+    faq: [
+      { question: "Ist Banding immer ein Paneldefekt?", answer: "Nein. Kompression, Bittiefe, Farbbereich, GPU und Browser können ebenfalls harte Stufen erzeugen." },
+      { question: "Warum tritt Banding nur in einem Farbkanal auf?", answer: "Einstellungen, Farbprofile oder das Verhalten dieses Panelkanals können die Ursache sein." },
+      { question: "Wie kann ich Banding verringern?", answer: "Prüfe Farbbereich, Bittiefe, HDR, Monitorprofil und die Farbeinstellungen der Anwendung." },
+    ],
   },
   motion: {
     name: "Test für Bewegung und Schlieren",
@@ -451,7 +492,11 @@ const de = {
     ],
     limitation:
       "Dieser Browser-Test hilft dir, Bewegungsverhalten zu sehen. Er ist keine Labormessung der Reaktionszeit.",
-    guideLabel: "Englischen Ratgeber zu Bewegungsunschärfe lesen",
+    faq: [
+      { question: "Wie unterscheide ich Ghosting und Overdrive-Overshoot?", answer: "Ghosting ist meist eine dunkle Spur; Overshoot wirkt hell, invertiert oder farbig." },
+      { question: "Misst der Browser die Reaktionszeit in Millisekunden?", answer: "Nein. Das Muster eignet sich zum Vergleichen von Einstellungen, nicht als Labormessung." },
+      { question: "Warum springt die Bewegung?", answer: "Browserlast, ausgelassene Frames, Bildwiederholrate oder Energiesparen können den Ablauf stören." },
+    ],
   },
   color: {
     name: "Monitor-Farbtest",
@@ -482,7 +527,11 @@ const de = {
     ],
     limitation:
       "Vollfarben machen Unterschiede sichtbar, kalibrieren aber kein Display und messen keine Farbgenauigkeit.",
-    guideLabel: "Englische Ratgeber für Bildschirmtests ansehen",
+    faq: [
+      { question: "Kalibriert ein Vollfarbtest den Monitor?", answer: "Nein. Er macht Pixelfehler, Farbstiche und Gleichmäßigkeitsunterschiede sichtbar." },
+      { question: "Zwei Displays zeigen andere Farben. Welches stimmt?", answer: "Das lässt sich per Auge nicht sicher sagen. Preset, Helligkeit, Farbraum und Raumlicht unterscheiden sich." },
+      { question: "Wozu dienen Cyan, Magenta und Gelb?", answer: "Sie kombinieren mehrere Subpixel und zeigen dadurch Kanal- und Mischfehler deutlicher." },
+    ],
   },
 } as const satisfies LocalizedTestCopy;
 

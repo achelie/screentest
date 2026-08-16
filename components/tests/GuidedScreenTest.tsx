@@ -11,6 +11,7 @@ import {
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { FullscreenTest } from "./FullscreenTest";
+import { testStartEventName } from "@/lib/test-events";
 import { MovingTarget } from "./MovingTarget";
 import styles from "./ScreenTests.module.css";
 import { usePrefersReducedMotion } from "./usePrefersReducedMotion";
@@ -157,8 +158,9 @@ export function GuidedScreenTest({ messages }: { messages: Pick<TestMessages, "f
         name={messages.guided.name}
         onNext={currentIndex < GUIDED_STEP_IDS.length - 1 ? goNext : undefined}
         onPrevious={currentIndex > 0 ? goPrevious : undefined}
-        status={messages.guided.status.replace("{name}", step.name).replace("{current}", String(currentIndex + 1)).replace("{total}", String(GUIDED_STEP_IDS.length))}
-        surfaceLabel={step.surface}
+      status={messages.guided.status.replace("{name}", step.name).replace("{current}", String(currentIndex + 1)).replace("{total}", String(GUIDED_STEP_IDS.length))}
+      surfaceLabel={step.surface}
+      startEventName={testStartEventName("guided")}
         controls={
           <>
             <div className={styles.guidedPrompt}>

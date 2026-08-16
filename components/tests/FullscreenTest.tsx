@@ -18,10 +18,10 @@ import {
 } from "react";
 
 import styles from "./ScreenTests.module.css";
-import type { FullscreenMessages } from "@/lib/test-messages";
+import { getTestMessages, type FullscreenMessages } from "@/lib/test-messages";
 
 type FullscreenTestProps = {
-  messages: FullscreenMessages;
+  messages?: FullscreenMessages;
   name: string;
   surfaceLabel: string;
   status: string;
@@ -31,6 +31,14 @@ type FullscreenTestProps = {
   onNext?: () => void;
   canHideControls?: boolean;
   advanceOnSurfaceClick?: boolean;
+  startEventName?: string;
+  toolbarLayout?: "overlay" | "docked";
+  keepControlsVisible?: boolean;
+  shortcutHint?: string;
+  additionalAriaKeyShortcuts?: string;
+  additionalShortcutHelp?: string;
+  hostClassName?: string;
+  surfaceRole?: "group" | "img";
 };
 
 const CONTROLS_IDLE_DELAY_MS = 1000;
@@ -43,7 +51,7 @@ function isInteractiveTarget(target: EventTarget | null) {
 }
 
 export function FullscreenTest({
-  messages,
+  messages = getTestMessages("en").fullscreen,
   name,
   surfaceLabel,
   status,
@@ -53,6 +61,14 @@ export function FullscreenTest({
   onNext,
   canHideControls = true,
   advanceOnSurfaceClick = false,
+  startEventName,
+  toolbarLayout = "overlay",
+  keepControlsVisible = false,
+  shortcutHint,
+  additionalAriaKeyShortcuts,
+  additionalShortcutHelp,
+  hostClassName,
+  surfaceRole = "img",
 }: FullscreenTestProps) {
   const hostRef = useRef<HTMLDivElement>(null);
   const toolbarRef = useRef<HTMLDivElement>(null);
@@ -85,7 +101,7 @@ export function FullscreenTest({
   const scheduleControlsHide = useCallback(() => {
     clearControlsTimer();
 
-    if (!isFullscreen || !canHideControls) {
+    if (!isFullscreen || !canHideControls || keepControlsVisible) {
       return;
     }
 
@@ -93,7 +109,13 @@ export function FullscreenTest({
       hideControls,
       CONTROLS_IDLE_DELAY_MS,
     );
-  }, [canHideControls, clearControlsTimer, hideControls, isFullscreen]);
+  }, [
+    canHideControls,
+    clearControlsTimer,
+    hideControls,
+    isFullscreen,
+    keepControlsVisible,
+  ]);
 
   useEffect(() => {
     setFullscreenSupported(
@@ -132,6 +154,12 @@ export function FullscreenTest({
   }, [clearControlsTimer]);
 
   useEffect(() => {
+    if (keepControlsVisible) {
+      clearControlsTimer();
+      setControlsHidden(false);
+      return;
+    }
+
     if (!isFullscreen) {
       clearControlsTimer();
       return;
@@ -139,7 +167,12 @@ export function FullscreenTest({
 
     scheduleControlsHide();
     return clearControlsTimer;
-  }, [clearControlsTimer, isFullscreen, scheduleControlsHide]);
+  }, [
+    clearControlsTimer,
+    isFullscreen,
+    keepControlsVisible,
+    scheduleControlsHide,
+  ]);
 
   const toggleFullscreen = useCallback(async () => {
     const host = hostRef.current;
@@ -172,6 +205,14 @@ export function FullscreenTest({
   }, [messages.refused, messages.unavailableHere]);
 
   useEffect(() => {
+    if (!startEventName) return;
+
+    const handleStartRequest = () => void toggleFullscreen();
+    window.addEventListener(startEventName, handleStartRequest);
+    return () => window.removeEventListener(startEventName, handleStartRequest);
+  }, [startEventName, toggleFullscreen]);
+
+  useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (
         event.defaultPrevented ||
@@ -185,7 +226,7 @@ export function FullscreenTest({
 
       const key = event.key.toLowerCase();
 
-      if (key === "h" && canHideControls) {
+      if (key === "h" && canHideControls && !keepControlsVisible) {
         event.preventDefault();
         if (controlsHidden) {
           setControlsHidden(false);
@@ -219,6 +260,7 @@ export function FullscreenTest({
     canHideControls,
     controlsHidden,
     hideControls,
+    keepControlsVisible,
     onNext,
     onPrevious,
     scheduleControlsHide,
@@ -258,9 +300,10 @@ export function FullscreenTest({
     <>
       <div
         aria-describedby={noticeId}
-        aria-keyshortcuts="F H ArrowLeft ArrowRight"
-        className={styles.fullscreenHost}
+        aria-keyshortcuts={`F H ArrowLeft ArrowRight${additionalAriaKeyShortcuts ? ` ${additionalAriaKeyShortcuts}` : ""}`}
+        className={`${styles.fullscreenHost}${hostClassName ? ` ${hostClassName}` : ""}`}
         data-controls-hidden={controlsHidden}
+        data-toolbar-layout={toolbarLayout}
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
         ref={hostRef}
@@ -270,7 +313,7 @@ export function FullscreenTest({
           aria-label={surfaceLabel}
           className={styles.testSurface}
           onClick={handleSurfaceClick}
-          role="img"
+          role={surfaceRole}
         >
           {children}
         </div>
@@ -290,7 +333,9 @@ export function FullscreenTest({
                 {status}
               </p>
             </div>
-            <span className={styles.toolbarStatus}>{messages.shortcutSummary}</span>
+            <span className={styles.toolbarStatus}>
+              {shortcutHint ?? messages.shortcutSummary}
+            </span>
           </div>
 
           <div className={styles.toolbarBody}>
@@ -318,7 +363,7 @@ export function FullscreenTest({
                   <ChevronRight aria-hidden="true" size={18} strokeWidth={1.8} />
                 </button>
               ) : null}
-              {canHideControls ? (
+              {canHideControls && !keepControlsVisible ? (
                 <button
                   className={styles.toolButton}
                   onClick={hideControls}
@@ -351,6 +396,7 @@ export function FullscreenTest({
         {advanceOnSurfaceClick
           ? ` ${messages.clickHelp}`
           : null}
+        {additionalShortcutHelp ? ` ${additionalShortcutHelp}` : null}
       </p>
 
       {fullscreenSupported === false && !error ? (

@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 
 import {
   absoluteUrl,
-  GUIDE_ROUTES,
+  BLOG_ROUTES,
   SITE_LAST_MODIFIED,
   TEST_ROUTES,
   type SiteRoute,
@@ -48,9 +48,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   });
 
-  const localizedTests = TEST_ROUTES.filter(
-    (route) => route.href !== "/touch-screen-test",
-  ).flatMap((route) =>
+  const localizedTests = TEST_ROUTES.flatMap((route) =>
     LOCALES.map((locale) =>
       pairedEntry(
         route.href,
@@ -65,19 +63,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     ...LOCALES.map((locale) => pairedEntry("/", locale, 1, "weekly")),
     ...localizedTests,
-    englishOnlyEntry(
-      TEST_ROUTES.find((route) => route.href === "/touch-screen-test")!,
-      0.8,
+    ...BLOG_ROUTES.map((route) =>
+      englishOnlyEntry(route, route.href === "/blog" ? 0.8 : 0.7),
     ),
-    ...LOCALES.map((locale) => pairedEntry("/guides", locale, 0.8, "monthly")),
-    ...GUIDE_ROUTES.filter((route) => route.href !== "/guides").map((route) => ({
-      url: absoluteUrl(route.href),
-      lastModified: new Date(
-        `${routeLastModified(route) ?? SITE_LAST_MODIFIED}T00:00:00.000Z`,
-      ),
-      changeFrequency: "monthly" as const,
-      priority: 0.7,
-      alternates: { languages: { "en-US": absoluteUrl(route.href), "x-default": absoluteUrl(route.href) } },
-    })),
   ];
 }

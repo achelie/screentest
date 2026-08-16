@@ -393,34 +393,6 @@
   grid-row: 1;
 }
 
-.fullscreenExitHint {
-  display: none;
-}
-
-.bench:fullscreen .fullscreenExitHint {
-  position: absolute;
-  z-index: 2;
-  top: max(0.75rem, env(safe-area-inset-top));
-  right: max(0.75rem, env(safe-area-inset-right));
-  display: inline-flex;
-  min-height: 2.75rem;
-  align-items: center;
-  gap: 0.45rem;
-  padding: 0.55rem 0.7rem;
-  border: 1px solid rgb(245 241 232 / 72%);
-  border-radius: 5px;
-  color: #f5f1e8;
-  background:
-    repeating-linear-gradient(105deg, transparent 0 9px, rgb(255 255 255 / 4%) 9px 10px),
-    rgb(25 28 24 / 88%);
-  box-shadow: 3px 3px 0 color-mix(in srgb, var(--accent) 78%, #171916);
-  font-size: 0.8rem;
-  font-weight: 800;
-  line-height: 1.2;
-  pointer-events: none;
-  user-select: none;
-}
-
 .controlStack {
   display: grid;
   grid-column: 2;

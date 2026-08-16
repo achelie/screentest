@@ -8,6 +8,7 @@ import {
   useRef,
 } from "react";
 import type { PointerEvent as ReactPointerEvent } from "react";
+import type { Locale } from "@/lib/i18n";
 
 import {
   cellIndexAt,
@@ -41,6 +42,7 @@ type TouchGridCanvasProps = Readonly<{
   active: boolean;
   frozen: boolean;
   fullscreenExitEnabled: boolean;
+  locale?: Locale;
   sessionKey: number;
   onGeometryInvalidated: () => void;
   onFullscreenExitRequest: () => void;
@@ -53,6 +55,12 @@ const FULLSCREEN_EXIT_HOLD_MS = 900;
 const FULLSCREEN_EXIT_ZONE_WIDTH = 200;
 const FULLSCREEN_EXIT_ZONE_HEIGHT = 88;
 const FULLSCREEN_EXIT_MOVE_TOLERANCE = 12;
+
+const TOUCH_GRID_UI = {
+  en: { title: "ScreenTestHub Touch Screen Test", date: "Test date", coverage: "Coverage", missed: "Missed cells", region: "Largest missed region", peak: "Peak touches", frozen: "Touchscreen coverage result. Input is frozen.", active: "Interactive touchscreen coverage grid", disabled: "Touchscreen coverage grid. Input is disabled." },
+  zh: { title: "ScreenTestHub 触摸屏测试", date: "测试时间", coverage: "覆盖率", missed: "未覆盖网格", region: "最大连续空白区域", peak: "峰值触点", frozen: "触摸屏覆盖结果，输入已冻结。", active: "可交互触摸屏覆盖网格", disabled: "触摸屏覆盖网格，输入已停用。" },
+  de: { title: "ScreenTestHub Touchscreen-Test", date: "Testdatum", coverage: "Abdeckung", missed: "Ausgelassene Felder", region: "Größter leerer Bereich", peak: "Maximale Kontakte", frozen: "Touchscreen-Ergebnis. Eingabe ist eingefroren.", active: "Interaktives Touchscreen-Raster", disabled: "Touchscreen-Raster. Eingabe ist deaktiviert." },
+} as const;
 
 function currentDevicePixelRatio(): number {
   const ratio = window.devicePixelRatio;
@@ -97,6 +105,7 @@ export const TouchGridCanvas = forwardRef<
     active,
     frozen,
     fullscreenExitEnabled,
+    locale = "en",
     sessionKey,
     onGeometryInvalidated,
     onFullscreenExitRequest,
@@ -105,6 +114,7 @@ export const TouchGridCanvas = forwardRef<
   forwardedRef,
 ) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const exportCopy = TOUCH_GRID_UI[locale];
   const cssSizeRef = useRef({ width: 0, height: 0 });
   const paintedRef = useRef(new Set<number>());
   const pointersRef = useRef(new Map<number, GridPoint>());
@@ -442,10 +452,10 @@ export const TouchGridCanvas = forwardRef<
       context.fillRect(0, 0, exportCanvas.width, 150);
       context.fillStyle = "#fffaf4";
       context.font = "700 38px system-ui, sans-serif";
-      context.fillText("ScreenTestHub Touch Screen Test", 70, 72);
+      context.fillText(exportCopy.title, 70, 72);
       context.font = "20px ui-monospace, monospace";
       context.fillStyle = "#c9ccc5";
-      context.fillText(`Test date: ${new Date().toLocaleString()}`, 70, 112);
+      context.fillText(`${exportCopy.date}: ${new Date().toLocaleString(locale === "zh" ? "zh-CN" : locale === "de" ? "de-DE" : "en-US")}`, 70, 112);
 
       for (let index = 0; index < GRID.columns * GRID.rows; index += 1) {
         const column = index % GRID.columns;
@@ -472,14 +482,14 @@ export const TouchGridCanvas = forwardRef<
 
       context.fillStyle = "#171916";
       context.font = "700 25px system-ui, sans-serif";
-      context.fillText(`Coverage: ${summary.coveragePercent}%`, 70, 888);
-      context.fillText(`Missed cells: ${summary.missedCells}`, 400, 888);
+      context.fillText(`${exportCopy.coverage}: ${summary.coveragePercent}%`, 70, 888);
+      context.fillText(`${exportCopy.missed}: ${summary.missedCells}`, 400, 888);
       context.fillText(
-        `Largest missed region: ${summary.largestMissedRegion}`,
+        `${exportCopy.region}: ${summary.largestMissedRegion}`,
         700,
         888,
       );
-      context.fillText(`Peak touches: ${summary.peakTouches}`, 70, 946);
+      context.fillText(`${exportCopy.peak}: ${summary.peakTouches}`, 70, 946);
 
       if (typeof exportCanvas.toBlob !== "function") return null;
 
@@ -491,7 +501,7 @@ export const TouchGridCanvas = forwardRef<
         }
       });
     },
-    [],
+    [exportCopy],
   );
 
   useImperativeHandle(
@@ -642,10 +652,10 @@ export const TouchGridCanvas = forwardRef<
   );
 
   const canvasLabel = frozen
-    ? "Touchscreen coverage result. Input is frozen."
+    ? exportCopy.frozen
     : active
-      ? "Interactive touchscreen coverage grid"
-      : "Touchscreen coverage grid. Input is disabled.";
+      ? exportCopy.active
+      : exportCopy.disabled;
 
   return (
     <canvas

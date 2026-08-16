@@ -1,6 +1,7 @@
 "use client";
 
 import { FullscreenTest } from "./FullscreenTest";
+import { testStartEventName } from "@/lib/test-events";
 import styles from "./ScreenTests.module.css";
 import type { TestMessages } from "@/lib/test-messages";
 
@@ -11,6 +12,7 @@ export function BacklightBleedTest({ messages }: { messages: Pick<TestMessages, 
       name={messages.backlight.name}
       status={messages.backlight.status}
       surfaceLabel={messages.backlight.surface}
+      startEventName={testStartEventName("backlight-bleed")}
       controls={
         <div className={styles.guidedPrompt}>
           <strong>{messages.backlight.title}</strong>

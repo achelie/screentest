@@ -21,7 +21,6 @@ type SiteNavigationProps = {
 
 export function SiteNavigation({ tools, locale, messages }: SiteNavigationProps) {
   const pathname = usePathname();
-  const guidesPath = localizePath("/guides", locale);
   const guidedPath = localizePath("/tests/guided", locale);
   const navigationRef = useRef<HTMLElement>(null);
   const desktopToolsButtonRef = useRef<HTMLButtonElement>(null);
@@ -138,11 +137,11 @@ export function SiteNavigation({ tools, locale, messages }: SiteNavigationProps)
           ) : null}
         </div>
         <Link
-          aria-current={pathname === guidesPath ? "page" : undefined}
-          data-active={pathname.startsWith(guidesPath)}
-          href={guidesPath}
+          aria-current={pathname === "/blog" ? "page" : undefined}
+          data-active={pathname.startsWith("/blog")}
+          href="/blog"
         >
-          {messages.guides}
+          {messages.blog}
         </Link>
         <LanguageSwitcher locale={locale} messages={messages} />
         <Link className="nav-start" href={guidedPath}>
@@ -188,13 +187,13 @@ export function SiteNavigation({ tools, locale, messages }: SiteNavigationProps)
             </div>
           ) : null}
           <Link
-            aria-current={pathname === guidesPath ? "page" : undefined}
+            aria-current={pathname === "/blog" ? "page" : undefined}
             className="mobile-nav-row"
-            data-active={pathname.startsWith(guidesPath)}
-            href={guidesPath}
+            data-active={pathname.startsWith("/blog")}
+            href="/blog"
             onClick={closeAllMenus}
           >
-            {messages.guides}
+            {messages.blog}
           </Link>
           <LanguageSwitcher locale={locale} messages={messages} mobile />
           <Link

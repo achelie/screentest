@@ -16,7 +16,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
           <Link href={localizePath("/tests", locale)}>{copy.allTests}</Link>
           <Link href={localizePath("/tests/dead-pixel", locale)}>{copy.deadPixels}</Link>
           <Link href={localizePath("/tests/motion", locale)}>{copy.motion}</Link>
-          <Link href={localizePath("/guides", locale)}>{copy.guides}</Link>
+          <Link href="/blog">{copy.blog}</Link>
           <Link href="/sitemap.xml">{copy.sitemap}</Link>
         </nav>
         <div className="footer-meta">

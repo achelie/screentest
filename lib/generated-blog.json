@@ -1,0 +1,399 @@
+[
+  {
+    "slug": "1080p-vs-1440p-vs-4k",
+    "title": "1080p vs 1440p vs 4K: Which Monitor Resolution Should You Choose?",
+    "description": "Compare 1080p vs 1440p vs 4K for gaming, work, screen size, sharpness, and GPU load. Find the resolution that fits your desk and budget.",
+    "author": "ScreenTestHub Team",
+    "category": "Monitor buying",
+    "published": "2026-08-15",
+    "updated": "2026-08-15",
+    "cover": "/blog/1080p-vs-1440p-vs-4k.webp",
+    "coverAlt": "Two desktop monitors on a blue-lit gaming desk",
+    "ctaTitle": "Check what your current screen is actually reporting.",
+    "ctaDescription": "See the browser-reported screen size, estimated output pixels, device pixel ratio, aspect ratio, and viewport before you compare monitors.",
+    "ctaLabel": "Check screen resolution",
+    "ctaHref": "/screen-resolution-checker",
+    "readingMinutes": 7,
+    "toc": [
+      {
+        "id": "the-short-answer",
+        "label": "The short answer"
+      },
+      {
+        "id": "how-many-pixels-are-you-actually-buying",
+        "label": "How many pixels are you actually buying?"
+      },
+      {
+        "id": "screen-size-changes-the-result",
+        "label": "Screen size changes the result"
+      },
+      {
+        "id": "when-1080p-is-still-the-right-choice",
+        "label": "When 1080p is still the right choice"
+      },
+      {
+        "id": "why-1440p-is-the-easy-gaming-pick",
+        "label": "Why 1440p is the easy gaming pick"
+      },
+      {
+        "id": "when-4k-earns-its-cost",
+        "label": "When 4K earns its cost"
+      },
+      {
+        "id": "match-resolution-with-refresh-rate-and-ports",
+        "label": "Match resolution with refresh rate and ports"
+      },
+      {
+        "id": "a-buying-checklist-that-takes-five-minutes",
+        "label": "A buying checklist that takes five minutes"
+      },
+      {
+        "id": "faq",
+        "label": "FAQ"
+      }
+    ],
+    "faq": [
+      {
+        "question": "Is 1440p noticeably better than 1080p?",
+        "answer": "Yes, especially at 27 inches and at a normal desk distance. Text, game edges, and distant detail look cleaner, while the GPU load remains well below 4K."
+      },
+      {
+        "question": "Is 4K worth it over 1440p at 27 inches?",
+        "answer": "It can be for text, coding, photos, and close viewing. For fast gaming, many people prefer the higher frame rate and lower hardware cost of 1440p."
+      },
+      {
+        "question": "Does 1080p look bad on a 27-inch monitor?",
+        "answer": "It looks softer and more pixelated than 1440p at the same size. It can still work when you sit farther away or prioritize a very high refresh rate."
+      },
+      {
+        "question": "Is 32-inch 1440p sharp enough?",
+        "answer": "It is usable, but its pixel density is close to 24-inch 1080p. Choose it for a larger image and comfortable viewing distance, not for a major sharpness upgrade."
+      },
+      {
+        "question": "Should I buy 4K and run games at 1440p?",
+        "answer": "Only if you also value 4K for desktop work or video. Non-native 1440p scaling on a 4K panel can look softer than native 1440p, while supported game upscalers may produce a better result."
+      },
+      {
+        "question": "Which resolution is best for a laptop monitor setup?",
+        "answer": "Choose based on the external screen size, dock bandwidth, and laptop GPU. Confirm the dock can deliver the target refresh rate at full resolution before ordering the monitor."
+      }
+    ],
+    "html": "<p>Picking between 1080p vs 1440p vs 4K sounds like a spec question. It is really a desk and workload question. Resolution has to fit the monitor size, viewing distance, games or apps, and the frame rate your computer can hold.</p>\n<p>A 24-inch 1080p screen can be a sharp, fast gaming setup. A 27-inch 1440p display is the easy all-rounder. A 32-inch 4K monitor gives text and detailed images more polish, but it asks much more from the GPU.</p>\n<h2 id=\"the-short-answer\">The short answer</h2>\n<p>Choose 24-inch 1080p for a low-cost or high-refresh setup, 27-inch 1440p for the best gaming balance, and 32-inch 4K for the sharpest desktop and detailed visual work.</p>\n<p>Those pairings are starting points, not laws. A 27-inch 4K monitor looks crisp at a close desk, while a 32-inch 1440p display can work when you sit farther back. Comparing resolution without physical size hides half the story.</p>\n<p>If you are unsure what your current setup uses, open the <a href=\"/screen-resolution-checker\">screen resolution checker</a> at 100% browser zoom. It shows the screen size reported in CSS pixels, device pixel ratio, and estimated output pixels so you know what you are comparing.</p>\n<h2 id=\"how-many-pixels-are-you-actually-buying\">How many pixels are you actually buying?</h2>\n<p>1440p draws about 78% more pixels than 1080p, while 4K draws four times as many as 1080p and 2.25 times as many as 1440p.</p>\n<ul>\n<li><strong>1080p:</strong> 1920 x 1080, or 2.07 million pixels. It is common at 22 to 24 inches.</li>\n<li><strong>1440p:</strong> 2560 x 1440, or 3.69 million pixels. Its usual home is a 27-inch panel.</li>\n<li><strong>4K:</strong> 3840 x 2160, or 8.29 million pixels. It is common at 27 to 32 inches.</li>\n</ul>\n<p>More pixels can make text, thin lines, and distant game detail look cleaner. They also give the GPU more work every frame. That trade is why a fast 1440p monitor can feel better than a 4K monitor running a demanding game at an uneven frame rate.</p>\n<h2 id=\"screen-size-changes-the-result\">Screen size changes the result</h2>\n<p>Look at pixel density, not only the resolution label. A 24-inch 1080p and a 32-inch 1440p screen are both roughly 92 pixels per inch, so their fine detail looks surprisingly similar at the same distance.</p>\n<p>The familiar 27-inch 1440p pairing reaches about 109 PPI. A 32-inch 4K screen is around 138 PPI, and 27-inch 4K climbs to about 163 PPI. Higher density smooths text and diagonal edges, but the difference becomes harder to see as you move farther away.</p>\n<p>A <a href=\"https://www.reddit.com/r/Monitors/comments/s23mkg/hub_4k_vs_1440p_vs_1080p_what_monitor_resolution/\">32-inch 1440p comparison</a> lands on that same math. Stretching 1440p across 32 inches brings its density close to a 24-inch 1080p screen. You gain physical size, not the crispness of 4K.</p>\n<h2 id=\"when-1080p-is-still-the-right-choice\">When 1080p is still the right choice</h2>\n<p>1080p makes sense when competitive frame rate, a smaller screen, or a tight total budget matters more than extra desktop detail.</p>\n<p>At 24 inches, 1080p still looks reasonable from a normal desk distance. It also leaves more GPU headroom for high refresh rates, steadier frame times, and higher game settings. That can be a better use of money than buying a higher-resolution panel and then cutting settings until every new game runs smoothly.</p>\n<p>1080p becomes less comfortable on larger desktop monitors because individual pixels and text edges are easier to see. On a 27-inch or 32-inch screen, it makes the most sense for farther seating, console use, or a deliberately performance-first setup.</p>\n<h2 id=\"why-1440p-is-the-easy-gaming-pick\">Why 1440p is the easy gaming pick</h2>\n<p>At 27 inches, 1440p gives you a clear jump from 1080p without taking on the full GPU cost of 4K.</p>\n<p>It gives games and desktop text noticeably more definition, yet it remains practical at high refresh rates.</p>\n<p>A <a href=\"https://www.reddit.com/r/Monitors/comments/1r7zh2n/1440p_vs_4k_at_27_is_the_upgrade_actually_worth_it/\">27-inch 1440p versus 4K discussion</a> started with a simple worry: would 4K look better enough to justify lower performance? The top reply chose 1440p at high settings and more than 100 fps over 4K near 60 fps at reduced settings. Other replies cared more about the sharper 4K desktop at close range. That is the real choice: motion and settings versus fine detail.</p>\n<p>After setup, use the <a href=\"/tests/motion\">motion test</a> to check whether the panel stays clear at the refresh rate you bought. Resolution does not fix slow response, overshoot, or visible trailing.</p>\n<h2 id=\"when-4k-earns-its-cost\">When 4K earns its cost</h2>\n<p>4K earns its cost on a 32-inch main monitor, a close 27-inch text display, or a setup where fine image detail matters more than maximum frame rate.</p>\n<p>The improvement is easiest to spot in small text, interface icons, code, timelines, and fine scenery. It is less dramatic in fast motion from across the room. Many desktop setups also use 125% or 150% scaling, which keeps controls readable while preserving the cleaner edges.</p>\n<p>That scaling is not wasted resolution. It makes interface elements physically larger while drawing them with more source pixels. The concern in a <a href=\"https://www.reddit.com/r/Monitors/comments/1oc2alg/1440p_27_or_4k_32_scaling_for_productivitylight/\">27-inch 1440p versus 32-inch 4K productivity comparison</a> is more practical: 4K is sharper, but comfortable UI size still depends on scaling and distance. Check older software in particular, since tiny or blurry controls can spoil an otherwise excellent screen.</p>\n<p>For gaming, check performance in your actual library. Upscaling can make 4K more practical in supported games, but it does not turn every GPU and every title into the same experience. Compare the frame rate you can hold, not the maximum number printed on a benchmark chart.</p>\n<h2 id=\"match-resolution-with-refresh-rate-and-ports\">Match resolution with refresh rate and ports</h2>\n<p>A stable 1440p 165 Hz setup can feel better than 4K 144 Hz when the latter spends most of its time below your preferred frame rate.</p>\n<p>Check the monitor input, cable, GPU output, and supported refresh rate at the target resolution. A port that handles 1440p at high refresh may offer fewer options at 4K. Laptop docks can add another limit. Read the exact model specifications instead of assuming every DisplayPort or HDMI socket behaves alike.</p>\n<p>If motion breaks into horizontal seams, use the <a href=\"/screen-tearing-test\">screen tearing test</a> and then reproduce the problem in the game itself. If a new monitor looks fine in motion but oddly tinted, the <a href=\"/monitor-color-calibration\">monitor color calibration tool</a> provides a sensible SDR setup order.</p>\n<h2 id=\"a-buying-checklist-that-takes-five-minutes\">A buying checklist that takes five minutes</h2>\n<p>Measure the viewing distance, choose the screen size, check your games or apps, then pick the resolution and refresh rate.</p>\n<ol>\n<li>Measure how far your eyes sit from the screen and how much width the desk can hold.</li>\n<li>Decide whether high frame rate, text sharpness, or workspace size matters most.</li>\n<li>Check current-game performance at the target resolution using trusted benchmarks for your exact GPU.</li>\n<li>Confirm the monitor, GPU, cable, and dock support the full resolution and refresh combination.</li>\n<li>Check the store's dead-pixel and return policy before buying.</li>\n</ol>\n<p>For a mixed-use desk, 27-inch 1440p is the safest default. Choose 24-inch 1080p when speed and price lead the decision. Choose 32-inch 4K when sharp text and detail will pay you back every day.</p>\n<h2 id=\"faq\">FAQ</h2>\n<p>Match 1080p with smaller or performance-first setups, 1440p with balanced 27-inch use, and 4K with larger or detail-first desktops.</p>\n<h3 id=\"is-1440p-noticeably-better-than-1080p\">Is 1440p noticeably better than 1080p?</h3>\n<p>Yes, especially at 27 inches and at a normal desk distance. Text, game edges, and distant detail look cleaner, while the GPU load remains well below 4K.</p>\n<h3 id=\"is-4k-worth-it-over-1440p-at-27-inches\">Is 4K worth it over 1440p at 27 inches?</h3>\n<p>It can be for text, coding, photos, and close viewing. For fast gaming, many people prefer the higher frame rate and lower hardware cost of 1440p.</p>\n<h3 id=\"does-1080p-look-bad-on-a-27-inch-monitor\">Does 1080p look bad on a 27-inch monitor?</h3>\n<p>It looks softer and more pixelated than 1440p at the same size. It can still work when you sit farther away or prioritize a very high refresh rate.</p>\n<h3 id=\"is-32-inch-1440p-sharp-enough\">Is 32-inch 1440p sharp enough?</h3>\n<p>It is usable, but its pixel density is close to 24-inch 1080p. Choose it for a larger image and comfortable viewing distance, not for a major sharpness upgrade.</p>\n<h3 id=\"should-i-buy-4k-and-run-games-at-1440p\">Should I buy 4K and run games at 1440p?</h3>\n<p>Only if you also value 4K for desktop work or video. Non-native 1440p scaling on a 4K panel can look softer than native 1440p, while supported game upscalers may produce a better result.</p>\n<h3 id=\"which-resolution-is-best-for-a-laptop-monitor-setup\">Which resolution is best for a laptop monitor setup?</h3>\n<p>Choose based on the external screen size, dock bandwidth, and laptop GPU. Confirm the dock can deliver the target refresh rate at full resolution before ordering the monitor.</p>\n"
+  },
+  {
+    "slug": "oled-monitor-burn-in",
+    "title": "OLED Monitor Burn-In: How to Check It and Lower the Risk",
+    "description": "Worried about OLED monitor burn in? Learn how to check gray screens, tell temporary retention from a persistent mark, and reduce static desktop wear.",
+    "author": "ScreenTestHub Team",
+    "category": "Display care",
+    "published": "2026-08-14",
+    "updated": "2026-08-14",
+    "cover": "/blog/oled-monitor-burn-in.webp",
+    "coverAlt": "Dark desktop workspace with a wide monitor showing static editing software",
+    "ctaTitle": "Check the mark on gray and solid colors.",
+    "ctaDescription": "Cycle low gray, red, green, blue, and moving patterns to see whether the same outline stays fixed on the panel.",
+    "ctaLabel": "Open OLED burn-in test",
+    "ctaHref": "/oled-burn-in-test",
+    "readingMinutes": 7,
+    "toc": [
+      {
+        "id": "is-the-mark-burn-in-or-temporary-image-retention",
+        "label": "Is the mark burn-in or temporary image retention?"
+      },
+      {
+        "id": "run-a-five-minute-check-in-this-order",
+        "label": "Run a five-minute check in this order"
+      },
+      {
+        "id": "treat-the-taskbar-as-a-usage-clue-not-a-verdict",
+        "label": "Treat the taskbar as a usage clue, not a verdict"
+      },
+      {
+        "id": "oled-can-handle-office-work-but-the-workload-matters",
+        "label": "OLED can handle office work, but the workload matters"
+      },
+      {
+        "id": "let-automatic-panel-care-do-its-job",
+        "label": "Let automatic panel care do its job"
+      },
+      {
+        "id": "check-a-used-oled-before-the-return-window-closes",
+        "label": "Check a used OLED before the return window closes"
+      },
+      {
+        "id": "use-a-routine-you-can-live-with",
+        "label": "Use a routine you can live with"
+      },
+      {
+        "id": "faq",
+        "label": "FAQ"
+      }
+    ],
+    "faq": [
+      {
+        "question": "What does OLED monitor burn-in look like?",
+        "answer": "It often looks like a faint taskbar, logo, HUD, window edge, or text block that stays fixed while the content changes. Gray and muted colors usually reveal it before bright video does."
+      },
+      {
+        "question": "How long does OLED burn-in take?",
+        "answer": "There is no single hour count. Static content, brightness, panel design, heat, protection settings, and daily use all affect wear. Judge the panel by a repeatable visual check rather than a timer alone."
+      },
+      {
+        "question": "Should I hide the Windows taskbar on an OLED monitor?",
+        "answer": "Auto-hiding it reduces one common static element and is worth trying for an OLED used all day as a desktop monitor. If it disrupts your work, use a short display sleep timer and avoid leaving the desktop idle instead."
+      },
+      {
+        "question": "Is a gray shadow always burn-in?",
+        "answer": "No. It may be temporary retention, low-gray banding, dirty-screen effect, or uneven brightness. Let the automatic care cycle finish and repeat the same multi-color check before drawing a conclusion."
+      },
+      {
+        "question": "Should I run Pixel Refresh whenever I see an afterimage?",
+        "answer": "Let the automatic maintenance run first. Use a manual refresh only when the mark remains and the support instructions for your exact model recommend it."
+      },
+      {
+        "question": "Can I use an OLED monitor for Excel and programming?",
+        "answer": "Yes. Keep brightness comfortable, allow the screen to sleep during breaks, and avoid parking the same bright layout on screen when you are not using it. Mixed work and entertainment also changes which pixels carry the load."
+      },
+      {
+        "question": "What should I photograph for a warranty claim?",
+        "answer": "Photograph the same mark on 10% gray, 50% gray, red, green, and blue with the room light and camera exposure held steady. Include the model, serial number, purchase date, usage history, and a normal-content photo showing why the issue matters."
+      }
+    ],
+    "html": "<p>OLED monitor burn in usually shows up as a faint shape that stays in the same screen position when the content changes. A taskbar edge, game HUD, browser toolbar, or channel logo may be easiest to see on gray before it becomes obvious in normal use.</p>\n<p>Do not judge it from one photo or one color. Dust, near-black banding, temporary image retention, and a stuck pixel can all look suspicious at first. A short, repeatable check tells you much more than staring at a white page and wondering whether the corner looks different.</p>\n<p>Open the <a href=\"/oled-burn-in-test\">OLED burn-in test</a>, keep the display at your normal brightness, and work through the checks below. Five minutes is plenty for a first pass.</p>\n<h2 id=\"is-the-mark-burn-in-or-temporary-image-retention\">Is the mark burn-in or temporary image retention?</h2>\n<p>If the mark fades after ordinary moving content or the display's automatic care cycle, treat it as temporary retention. A persistent outline that returns in the same place across several colors deserves closer attention.</p>\n<p>A <a href=\"https://www.reddit.com/r/OLED_Gaming/comments/1ip33h1/c4_42_burn_in_report_2000_hours_95_static/\">42-inch LG C4 used for nearly 2,000 hours of mostly static desktop work</a> makes the distinction easy to see. The before image showed the browser layout and taskbar area, but the visible retention cleared after the TV completed its normal pixel-cleaning routine. A daily afterimage can look awful on gray and still disappear after standby.</p>\n<p>Give the screen a normal break, let its scheduled maintenance finish, then repeat the same pattern. If the outline is gone, record that and move on. If it remains visible during normal content, take photos under the same room light and camera exposure so later comparisons are useful.</p>\n<h2 id=\"run-a-five-minute-check-in-this-order\">Run a five-minute check in this order</h2>\n<p>Start with 10% gray, then check 50% gray, red, green, blue, and a moving pattern. This order finds subtle fixed shapes without blasting the panel at maximum brightness.</p>\n<p>On low gray, look for familiar geometry: a Windows taskbar, a vertical browser edge, a scoreboard, or a row of app icons. Switch to the primary colors and see whether the same geometry remains fixed. A single dark or bright dot is a different problem, so check it with the <a href=\"/tests/dead-pixel\">dead pixel test</a>.</p>\n<p>Use Moving Color Bars last. A panel-fixed shadow stays put while the bars cross it. A trail that follows the bars points more toward motion response or the browser animation. If the only issue is broad low-gray banding or blotches, compare the panel with the <a href=\"/tests/grayscale\">screen uniformity test</a> from your usual seating position.</p>\n<h2 id=\"treat-the-taskbar-as-a-usage-clue-not-a-verdict\">Treat the taskbar as a usage clue, not a verdict</h2>\n<p>A fixed taskbar raises the wear risk because the same pixels draw the same bright edges for hours, but its presence alone does not tell you how quickly a panel will change. Brightness, daily hours, content mix, panel generation, and protection settings all matter.</p>\n<p>In <a href=\"https://www.reddit.com/r/OLED_Gaming/comments/1iz4fc9/task_bar_burn_in/\">a used AW3423DWF with a taskbar-shaped mark</a>, gray Chrome pages revealed a horizontal boundary and a greenish patch near the Start icon. The monitor showed about 1,850 hours. That number was less useful than the familiar shape sitting exactly where Windows had drawn it.</p>\n<p>Auto-hide the taskbar if it does not annoy you. Let the display turn off after a few idle minutes. A changing wallpaper helps less than simply removing long, bright, static edges. None of this requires turning the desktop into a black cave.</p>\n<h2 id=\"oled-can-handle-office-work-but-the-workload-matters\">OLED can handle office work, but the workload matters</h2>\n<p>For Excel, coding, and browser work, use a comfortable brightness and let the screen sleep when you step away. Ten hours of mixed use is not the same workload as ten hours with one bright spreadsheet parked in the same grid.</p>\n<p>The <a href=\"https://www.reddit.com/r/OLED_Gaming/comments/1d3b4iw/anyone_use_their_oled_for_work_and_productivity/\">long-running OLED productivity discussion</a> refuses to produce one tidy hour limit. One C2 had nearly daily use without a hidden taskbar and no burn-in after roughly two years. A later follow-up described about ten hours a day split between office work and gaming, again with no visible issue at the time. These accounts are useful context, but they do not set a lifespan for another panel.</p>\n<p>The sensible middle ground is boring: lower brightness for long white documents, avoid leaving unused windows open all afternoon, and keep the normal panel-care features enabled. You bought the monitor to use it. You do not need to babysit every pixel, but a static desktop should not run all night for no reason.</p>\n<h2 id=\"let-automatic-panel-care-do-its-job\">Let automatic panel care do its job</h2>\n<p>Allow the monitor to enter standby after use so its normal compensation cycle can run. Do not cut power at the wall immediately after every session.</p>\n<p>Manufacturers use different names for similar maintenance. LG lists <a href=\"https://www.lg.com/us/support/help-library/lg-oled-tv-run-pixel-cleaning-to-remove-screen-burn-ins-spots-lines-dots-CT10000018-20154768393287\">Pixel Cleaning paths by webOS version</a>, Samsung documents <a href=\"https://www.samsung.com/in/support/displays/panel-care-functions-on-samsung-oled-monitors/\">Screen Optimization and Pixel Refresh</a>, and Sony explains its <a href=\"https://www.sony.com/electronics/support/articles/00173479\">automatic and manual panel refresh behavior</a>. Follow the instructions for the exact model in front of you.</p>\n<p>Run a manual deep refresh only when the manufacturer recommends it for a remaining afterimage. Repeating it after every gaming session is unnecessary. The automatic short cycle is meant to happen during normal ownership, and it needs standby time to finish.</p>\n<h2 id=\"check-a-used-oled-before-the-return-window-closes\">Check a used OLED before the return window closes</h2>\n<p>Test a used OLED immediately on low gray and solid colors, then photograph any fixed outline before changing settings. A bargain price does not compensate for a taskbar you notice every time a gray webpage opens.</p>\n<p>Ask for the receipt, power-on hours if the model exposes them, and the written burn-in terms before paying. Confirm that any remaining warranty transfers to the new owner instead of trusting a marketplace description. If a suspicious shape survives normal panel care, contact the seller or manufacturer while the return window is still open.</p>\n<h2 id=\"use-a-routine-you-can-live-with\">Use a routine you can live with</h2>\n<p>The practical routine is short: normal brightness, a five-minute idle timeout, automatic panel care left on, and one brief low-gray check every few months. Change those habits only if your workload leaves the same bright interface on screen for most of the day.</p>\n<p>Do not run test patterns every evening. Low-gray screens make tiny differences easy to notice, which is useful for diagnosis and miserable as a hobby. Check when you see a symptom, after a major change in use, or before a return or warranty deadline.</p>\n<h2 id=\"faq\">FAQ</h2>\n<p>Short answer: check a suspected mark on low gray and several solid colors, let the display complete its normal care cycle, then compare the same location again.</p>\n<h3 id=\"what-does-oled-monitor-burn-in-look-like\">What does OLED monitor burn-in look like?</h3>\n<p>It often looks like a faint taskbar, logo, HUD, window edge, or text block that stays fixed while the content changes. Gray and muted colors usually reveal it before bright video does.</p>\n<h3 id=\"how-long-does-oled-burn-in-take\">How long does OLED burn-in take?</h3>\n<p>There is no single hour count. Static content, brightness, panel design, heat, protection settings, and daily use all affect wear. Judge the panel by a repeatable visual check rather than a timer alone.</p>\n<h3 id=\"should-i-hide-the-windows-taskbar-on-an-oled-monitor\">Should I hide the Windows taskbar on an OLED monitor?</h3>\n<p>Auto-hiding it reduces one common static element and is worth trying for an OLED used all day as a desktop monitor. If it disrupts your work, use a short display sleep timer and avoid leaving the desktop idle instead.</p>\n<h3 id=\"is-a-gray-shadow-always-burn-in\">Is a gray shadow always burn-in?</h3>\n<p>No. It may be temporary retention, low-gray banding, dirty-screen effect, or uneven brightness. Let the automatic care cycle finish and repeat the same multi-color check before drawing a conclusion.</p>\n<h3 id=\"should-i-run-pixel-refresh-whenever-i-see-an-afterimage\">Should I run Pixel Refresh whenever I see an afterimage?</h3>\n<p>Let the automatic maintenance run first. Use a manual refresh only when the mark remains and the support instructions for your exact model recommend it.</p>\n<h3 id=\"can-i-use-an-oled-monitor-for-excel-and-programming\">Can I use an OLED monitor for Excel and programming?</h3>\n<p>Yes. Keep brightness comfortable, allow the screen to sleep during breaks, and avoid parking the same bright layout on screen when you are not using it. Mixed work and entertainment also changes which pixels carry the load.</p>\n<h3 id=\"what-should-i-photograph-for-a-warranty-claim\">What should I photograph for a warranty claim?</h3>\n<p>Photograph the same mark on 10% gray, 50% gray, red, green, and blue with the room light and camera exposure held steady. Include the model, serial number, purchase date, usage history, and a normal-content photo showing why the issue matters.</p>\n"
+  },
+  {
+    "slug": "monitor-calibration-without-colorimeter",
+    "title": "Monitor Calibration Without a Colorimeter: What You Can Fix by Eye",
+    "description": "Try monitor calibration without a colorimeter using black and white levels, neutral gray, gamma, and color checks in a practical order.",
+    "author": "ScreenTestHub Team",
+    "category": "Calibration & color",
+    "published": "2026-08-13",
+    "updated": "2026-08-13",
+    "cover": "/blog/monitor-calibration-without-colorimeter.webp",
+    "coverAlt": "Photography workspace with dual monitors used for visual color calibration",
+    "ctaTitle": "Put a clean calibration pattern on screen.",
+    "ctaDescription": "Check black and white levels, neutral gray, gamma, and color separation in one fullscreen tool.",
+    "ctaLabel": "Open monitor calibration tool",
+    "ctaHref": "/monitor-color-calibration",
+    "readingMinutes": 7,
+    "toc": [
+      {
+        "id": "set-a-useful-target-before-touching-the-controls",
+        "label": "Set a useful target before touching the controls"
+      },
+      {
+        "id": "lock-down-the-room-and-display-first",
+        "label": "Lock down the room and display first"
+      },
+      {
+        "id": "set-black-and-white-levels-before-color",
+        "label": "Set black and white levels before color"
+      },
+      {
+        "id": "remove-a-whole-screen-color-cast",
+        "label": "Remove a whole-screen color cast"
+      },
+      {
+        "id": "check-gamma-from-a-normal-viewing-distance",
+        "label": "Check gamma from a normal viewing distance"
+      },
+      {
+        "id": "do-not-borrow-another-monitors-icc-profile",
+        "label": "Do not borrow another monitor's ICC profile"
+      },
+      {
+        "id": "save-the-result-and-know-when-to-stop",
+        "label": "Save the result and know when to stop"
+      },
+      {
+        "id": "faq",
+        "label": "FAQ"
+      }
+    ],
+    "faq": [
+      {
+        "question": "Can I calibrate a monitor without a colorimeter?",
+        "answer": "Yes. Use visual patterns to set black and white levels, remove a broad color cast, choose a sensible gamma preset, and rein in excessive saturation."
+      },
+      {
+        "question": "Is the Windows display calibration tool accurate?",
+        "answer": "It is useful for correcting gamma and an obvious color cast, especially when a laptop has no OSD controls. Run it under your normal room light and keep the display settings fixed while comparing the result."
+      },
+      {
+        "question": "Should I use an ICC profile from a monitor review?",
+        "answer": "Usually no. Unit-to-unit variation means another sample's correction may not fit yours. Copy OSD settings only as a reversible starting point, and remove them if neutral gray gets worse."
+      },
+      {
+        "question": "Why does 6500K look yellow?",
+        "answer": "Your previous preset may have been much cooler. Give your eyes time to adapt in neutral room light before changing it back. If the cast remains obvious across every gray patch, make small RGB gain corrections."
+      },
+      {
+        "question": "Can I match two monitors by eye?",
+        "answer": "Start by matching brightness and neutral gray from your normal seating position. Different panel types and viewing angles may still make the screens look slightly different, so compare the same image at the same size on both."
+      },
+      {
+        "question": "When is a colorimeter worth buying?",
+        "answer": "Use one when you edit paid photo or video work, prepare files for print, match multiple displays, or need a reliable ICC profile. For casual use, borrowing or renting one can be enough."
+      },
+      {
+        "question": "Should HDR be on while I calibrate SDR?",
+        "answer": "No. Turn HDR off while setting an SDR baseline. HDR uses different tone mapping and should be checked in the system's HDR workflow with compatible content."
+      }
+    ],
+    "html": "<p>Monitor calibration without a colorimeter can fix obvious clipping, a strong color cast, poor gamma, and an overly bright picture.</p>\n<p>The trick is to adjust one thing at a time. Set the room and picture mode first, then work through black and white levels, neutral gray, gamma, and color separation. This avoids the usual loop of fixing one test pattern and quietly breaking another.</p>\n<p>Start with the <a href=\"/monitor-color-calibration\">monitor calibration tool</a> open on the display you want to adjust. The four patterns below follow the same order as the article, so you can work through them without guessing what to change next.</p>\n<h2 id=\"set-a-useful-target-before-touching-the-controls\">Set a useful target before touching the controls</h2>\n<p>For everyday SDR use, aim for visible shadow and highlight detail, gray that looks neutral, comfortable brightness, and smooth midtones. That gives every later adjustment a clear purpose.</p>\n<p>The practical takeaway from <a href=\"https://www.reddit.com/r/photography/comments/md0kf/how_do_i_calibrate_my_monitor_without_a/\">years of photography calibration experience</a> is a useful middle ground. A careful visual setup can move a bad-looking display into a sensible range, while borrowing or renting a colorimeter makes sense when the same work must hold up on another display or in print.</p>\n<p>So define the job before you begin. A blue-looking laptop needs a cleaner, more comfortable baseline. A print workflow needs repeatable measurements. Those are different jobs and should not share the same finish line.</p>\n<h2 id=\"lock-down-the-room-and-display-first\">Lock down the room and display first</h2>\n<p>Use the monitor in its normal room, at native resolution, after 20 to 30 minutes of warm-up. Turn off HDR, Night Light, automatic brightness, dynamic contrast, and any ambient color feature before touching RGB controls.</p>\n<p>Those features keep moving the target. A gray patch adjusted under warm evening light may look blue the next morning. Automatic brightness can change midway through the test. HDR also uses a different signal and tone-mapping path, so handle it separately with the <a href=\"/hdr-test\">HDR test</a> instead of mixing it into an SDR setup.</p>\n<p>Choose the monitor's sRGB or Standard preset. Set the operating system zoom to its normal value and sit where you normally work. Do not put a phone beside the screen as a color reference. Its white point, brightness, panel, and color management are different too.</p>\n<h2 id=\"set-black-and-white-levels-before-color\">Set black and white levels before color</h2>\n<p>Adjust brightness until the near-black steps are barely separate, then reduce contrast if the brightest steps merge. Do this before white balance because clipped tones hide information that RGB gain cannot restore.</p>\n<p>Open <strong>Black &#x26; White Levels</strong> in the calibration tool. In the dark row, 0% should stay black while 1% through 5% gradually emerge. In the light row, 95% through 99% should remain distinguishable from white. You are looking for separation, not a dramatic picture.</p>\n<p>Monitor labels are inconsistent. Brightness often controls the backlight on an LCD, while contrast affects the upper signal range, but some displays behave differently. Make small changes and watch the pattern. If raising brightness turns the whole black background gray, back off. If lowering contrast restores a missing 98% patch, keep that improvement.</p>\n<p>For another pass at subtle banding after the levels are set, use the <a href=\"/tests/gradient\">gradient test</a>. A smooth ramp should not break into hard bands because of an aggressive picture mode.</p>\n<h2 id=\"remove-a-whole-screen-color-cast\">Remove a whole-screen color cast</h2>\n<p>Use neutral gray to correct a cast that appears across the entire screen. Start from 6500K, sRGB, or Standard, then make tiny RGB gain changes. Do not use global RGB controls to chase one tinted corner.</p>\n<p>Switch to <strong>Neutral Grayscale</strong> and look at the repeated 10%, 25%, 50%, 75%, and 90% patches. Let your eyes settle for a moment. If every patch looks blue, lower blue gain one step or raise red slightly. If only dark gray is green while white looks neutral, the error is not a simple whole-screen gain problem.</p>\n<p>The <a href=\"https://www.reddit.com/r/linuxquestions/comments/16msm9v/manual_display_calibration_program_that_doesnt/\">blue-tinted laptop with no monitor OSD</a> is a useful example. With no physical RGB controls, the sensible goal is to remove the obvious cast through the operating system and make neutral content look comfortable again.</p>\n<p>If one side of the panel looks warmer than the other, check the <a href=\"/tests/grayscale\">grayscale test</a> from your normal seating position. Local uniformity cannot be repaired with one red, green, or blue slider. A global correction simply moves the good area off target too.</p>\n<h2 id=\"check-gamma-from-a-normal-viewing-distance\">Check gamma from a normal viewing distance</h2>\n<p>Use the Gamma 2.2 pattern as a rough midtone check. Move back until the black-and-white checker visually blends, then compare it with the solid gray. A close match means the middle of the tone curve is reasonably placed.</p>\n<p>Do not press your face against the pixels. Distance matters because your eye needs to average the checker. Keep browser zoom, viewing distance, and room light unchanged while comparing gamma presets.</p>\n<p>If the solid block looks much darker than the blended checker, try the monitor's next gamma option and compare again. Use preset choices such as 2.0, 2.2, or 2.4 before reaching for a software curve. For ordinary SDR desktop use, 2.2 is the sensible starting point. A dark video grading room may use a different target, but copying that setup into a sunny office will not make it professional. It will make it hard to see.</p>\n<h2 id=\"do-not-borrow-another-monitors-icc-profile\">Do not borrow another monitor's ICC profile</h2>\n<p>A review site's ICC profile is a poor shortcut for your unit. Two monitors with the same model number can need different corrections, and a mismatched profile can make the picture worse.</p>\n<p>A model number is not a fingerprint. Comparing <a href=\"https://www.reddit.com/r/Monitors/comments/vp1jax/monitor_calibration_via_icc_profile_without/\">ICC settings from several samples of one monitor</a> reveals very different RGB corrections. A green cast can also sit mainly in darker gray, so copying three RGB numbers may fix white while leaving the rest of the grayscale wrong.</p>\n<p>You can try a reviewer's OSD preset as a reversible starting point, but judge it as a starting point. Do not call the display calibrated because the file name matches the box. An ICC profile describes one display in one state. If you change brightness, preset, or RGB gain later, that description may no longer fit.</p>\n<h2 id=\"save-the-result-and-know-when-to-stop\">Save the result and know when to stop</h2>\n<p>Save one SDR preset once black and white detail, neutral gray, and gamma look sensible. Stop when further changes make one pattern better but another worse.</p>\n<p>Finish with <strong>Color Separation</strong>. The RGB and CMY steps should stay distinct near their saturated ends, and natural reference colors should not look fluorescent. Avoid using the saturation control to make every sample louder. More color is not the same as more accurate color.</p>\n<p>Write down the preset name, brightness, contrast, gamma, and RGB values. Recheck them after a week, not every hour. Your eyes adapt, and endless A/B switching can turn a decent picture into a personal science fair.</p>\n<p>Buy, borrow, or rent a colorimeter when two displays must match, printed work comes back wrong, shadow and highlight neutrality matter, or you need an ICC profile you can trust. Until then, a repeatable visual baseline is honest and useful.</p>\n<h2 id=\"faq\">FAQ</h2>\n<p>Short answer: start with a stable SDR preset, set black and white levels, neutralize the grayscale, check gamma, and save the result as one repeatable preset.</p>\n<h3 id=\"can-i-calibrate-a-monitor-without-a-colorimeter\">Can I calibrate a monitor without a colorimeter?</h3>\n<p>Yes. Use visual patterns to set black and white levels, remove a broad color cast, choose a sensible gamma preset, and rein in excessive saturation.</p>\n<h3 id=\"is-the-windows-display-calibration-tool-accurate\">Is the Windows display calibration tool accurate?</h3>\n<p>It is useful for correcting gamma and an obvious color cast, especially when a laptop has no OSD controls. Run it under your normal room light and keep the display settings fixed while comparing the result.</p>\n<h3 id=\"should-i-use-an-icc-profile-from-a-monitor-review\">Should I use an ICC profile from a monitor review?</h3>\n<p>Usually no. Unit-to-unit variation means another sample's correction may not fit yours. Copy OSD settings only as a reversible starting point, and remove them if neutral gray gets worse.</p>\n<h3 id=\"why-does-6500k-look-yellow\">Why does 6500K look yellow?</h3>\n<p>Your previous preset may have been much cooler. Give your eyes time to adapt in neutral room light before changing it back. If the cast remains obvious across every gray patch, make small RGB gain corrections.</p>\n<h3 id=\"can-i-match-two-monitors-by-eye\">Can I match two monitors by eye?</h3>\n<p>Start by matching brightness and neutral gray from your normal seating position. Different panel types and viewing angles may still make the screens look slightly different, so compare the same image at the same size on both.</p>\n<h3 id=\"when-is-a-colorimeter-worth-buying\">When is a colorimeter worth buying?</h3>\n<p>Use one when you edit paid photo or video work, prepare files for print, match multiple displays, or need a reliable ICC profile. For casual use, borrowing or renting one can be enough.</p>\n<h3 id=\"should-hdr-be-on-while-i-calibrate-sdr\">Should HDR be on while I calibrate SDR?</h3>\n<p>No. Turn HDR off while setting an SDR baseline. HDR uses different tone mapping and should be checked in the system's HDR workflow with compatible content.</p>\n"
+  },
+  {
+    "slug": "screen-tearing-with-vsync-on",
+    "title": "Screen Tearing With VSync On? Check These Settings in Order",
+    "description": "Still seeing screen tearing with VSync on? Check refresh rate, driver conflicts, VRR limits, window mode, and frame generation in the right order.",
+    "author": "ScreenTestHub Team",
+    "category": "Gaming & motion",
+    "published": "2026-08-13",
+    "updated": "2026-08-13",
+    "cover": "/blog/screen-tearing-with-vsync-on-monitor-desk.webp",
+    "coverAlt": "Orange ultrawide monitor with a keyboard and headphones on a dark desk",
+    "ctaTitle": "Check whether the line is really tearing.",
+    "ctaDescription": "Run the moving stripe test in fullscreen, then compare one sync setting at a time.",
+    "ctaLabel": "Open screen tearing test",
+    "ctaHref": "/screen-tearing-test",
+    "readingMinutes": 6,
+    "toc": [
+      {
+        "id": "confirm-windows-is-using-the-refresh-rate-you-selected",
+        "label": "Confirm Windows is using the refresh rate you selected"
+      },
+      {
+        "id": "let-either-the-game-or-driver-control-vsync",
+        "label": "Let either the game or driver control VSync"
+      },
+      {
+        "id": "keep-g-sync-or-freesync-inside-its-working-range",
+        "label": "Keep G-Sync or FreeSync inside its working range"
+      },
+      {
+        "id": "compare-exclusive-fullscreen-with-borderless-mode",
+        "label": "Compare exclusive fullscreen with borderless mode"
+      },
+      {
+        "id": "treat-frame-generation-as-a-separate-timing-system",
+        "label": "Treat frame generation as a separate timing system"
+      },
+      {
+        "id": "rule-out-stutter-and-ghosting-before-changing-more-settings",
+        "label": "Rule out stutter and ghosting before changing more settings"
+      },
+      {
+        "id": "a-clean-test-order-that-does-not-waste-an-evening",
+        "label": "A clean test order that does not waste an evening"
+      },
+      {
+        "id": "faq",
+        "label": "FAQ"
+      }
+    ],
+    "faq": [
+      {
+        "question": "Why do I still get screen tearing with VSync on?",
+        "answer": "VSync may be enabled in a menu that does not control the active presentation path. Conflicting driver settings, an incorrect Windows refresh rate, a VRR boundary, window mode, or frame generation can all change the result."
+      },
+      {
+        "question": "Should VSync be on in the game or GPU control panel?",
+        "answer": "Test one authority at a time. Start with in-game VSync and an application-controlled driver setting, then try driver VSync with the game option off if the first setup fails. Restart the game between tests."
+      },
+      {
+        "question": "Can screen tearing happen below the monitor refresh rate?",
+        "answer": "Yes. If synchronization is disabled or bypassed, a frame can arrive during scanout even when average FPS is below the refresh rate. A matching FPS number is not the same thing as synchronized presentation."
+      },
+      {
+        "question": "Why does borderless mode fix tearing?",
+        "answer": "Borderless mode can use a different presentation or composition path. The result depends on Windows, the game, the driver, and whether the game is eligible for modern flip-model behavior."
+      },
+      {
+        "question": "Does G-Sync or FreeSync replace VSync?",
+        "answer": "Not always. VRR adjusts the display inside its supported range. VSync can still control tearing at the range boundary, but the exact behavior depends on the game and driver."
+      },
+      {
+        "question": "Can an online test prove that VSync or VRR is working?",
+        "answer": "No. A browser can show repeatable motion and help you identify a horizontal seam, but its compositor usually synchronizes page animation. Verify the final setup in the game or application where tearing occurs."
+      }
+    ],
+    "html": "<p>Screen tearing with VSync on usually means VSync is applied in the wrong place, or another setting is bypassing it. Check the Windows refresh rate, driver override, VRR range, window mode, and frame generation before changing hardware.</p>\n<p>Before changing anything, make sure the fault is a horizontal split. A whole-screen pause is stutter. A trail behind an object is ghosting. If you are unsure, run the <a href=\"/screen-tearing-test\">screen tearing test</a> and watch the fast vertical stripes in fullscreen. A browser cannot certify G-Sync or FreeSync, but it gives you a consistent pattern for comparison.</p>\n<h2 id=\"confirm-windows-is-using-the-refresh-rate-you-selected\">Confirm Windows is using the refresh rate you selected</h2>\n<p>Windows must actually output the refresh rate you expect, so check that first. Open Advanced display, select the monitor where the game runs, and confirm both the chosen refresh rate and resolution. Then check the GPU control panel.</p>\n<p>This setting is easy to miss. In one <a href=\"https://www.reddit.com/r/buildapc/comments/uhhfem/running_games_in_fullscreen_has_weird/\">r/buildapc discussion</a>, a user saw jitter and tearing in fullscreen on a 4K 144 Hz setup. The first reply asked whether NVIDIA Control Panel was actually set to 144 Hz. The user confirmed that it was, so the check did not solve that case, but it ruled out the mismatch quickly.</p>\n<p>Do not assume a frame counter proves this setting is correct. A game can render 144 frames per second while the display output is still set to 60 Hz.</p>\n<h2 id=\"let-either-the-game-or-driver-control-vsync\">Let either the game or driver control VSync</h2>\n<p>Use one VSync switch at a time. First leave the driver application-controlled and enable VSync in the game. If that tears, reverse the two settings and restart the game.</p>\n<p>Neither location always wins. In an <a href=\"https://www.reddit.com/r/techsupport/comments/1lucnp4/screen_tearing_with_v_sync_enabled/\">r/techsupport thread</a>, the poster still saw tearing after enabling VSync and was comparing the game switch with the NVIDIA Control Panel override. That is the useful part of the report: test the two paths separately instead of assuming both switches do the same job.</p>\n<p>Write down each combination. If you toggle both menus repeatedly and cannot remember what changed, the test has stopped telling you anything.</p>\n<h2 id=\"keep-g-sync-or-freesync-inside-its-working-range\">Keep G-Sync or FreeSync inside its working range</h2>\n<p>VRR can stop covering frame delivery at or above its upper refresh limit. While testing, cap the frame rate a few frames below that limit to leave some headroom. Do not copy one universal number from a forum because displays, games, and limiters differ.</p>\n<p>One <a href=\"https://www.reddit.com/r/techsupport/comments/19bzlw4/annoying_screen_tearing_even_with_gsync_and_vsync/\">r/techsupport post</a> described tearing with G-Sync, VSync, and a 141 FPS cap on a 144 Hz monitor. A reply asked whether the display's working G-Sync range was narrower than the number on the box. That does not prove the range caused the problem, but it is a better question than endlessly lowering the cap.</p>\n<p>Check VRR in the monitor menu and GPU driver. For a borderless game, windowed VRR support also depends on Windows and how that game presents frames. Then watch the game's frame-time graph if it has one. Large spikes can look like a sync failure even when delivery is simply uneven.</p>\n<h2 id=\"compare-exclusive-fullscreen-with-borderless-mode\">Compare exclusive fullscreen with borderless mode</h2>\n<p>If tearing changes between fullscreen and borderless, the presentation path is part of the problem. Test both modes at the same resolution and refresh rate instead of treating the window mode as a performance preference.</p>\n<p>Borderless mode can use a different Windows presentation path from exclusive fullscreen, so the same frames may be synchronized differently. Modern games and Windows versions do not all behave the same way. An <a href=\"https://www.reddit.com/r/Eldenring/comments/t0pebu/terrible_screen_tearing_and_frame_rate_on_pc_fix/\">Elden Ring player</a> reported that borderless fixed severe tearing at a locked 60 FPS. Treat that as a useful comparison, not proof that borderless always fixes tearing.</p>\n<p>If only one mode fails, keep that result. It is more useful than another hour of random driver changes.</p>\n<h2 id=\"treat-frame-generation-as-a-separate-timing-system\">Treat frame generation as a separate timing system</h2>\n<p>Frame generation may expose tearing or change frame pacing in a setup that looked clean without it. Turn it off, leave every other setting alone, and compare.</p>\n<p>The type of frame generation matters. In a <a href=\"https://www.reddit.com/r/cyberpunkgame/comments/16t4w6b/frame_generation_tearing_here_is_the_fix/\">Cyberpunk 2077 discussion</a>, the poster said the usual VSync and FPS-cap advice had not solved tearing with the game's frame generation. A <a href=\"https://www.reddit.com/r/losslessscaling/comments/1gns6fn/lossless_scaling_is_constantly_tearing_even_with/\">Lossless Scaling thread</a> describes a similar symptom with an external frame-generation tool. Those are different pipelines, so a cap may act on a different stage in each one.</p>\n<p>Use the game's recommended setup, then verify it in that game. Advice written for normal rendering may target the wrong frame rate once generated frames are added.</p>\n<h2 id=\"rule-out-stutter-and-ghosting-before-changing-more-settings\">Rule out stutter and ghosting before changing more settings</h2>\n<p>Tearing is a horizontal offset. A full-scene hitch is stutter, while a smeared edge points to ghosting. Make that distinction before installing a new driver or buying a cable.</p>\n<p>Run the <a href=\"/tests/motion\">monitor ghosting test</a> if moving objects leave a dark trail or bright halo. Use the <a href=\"/tests/guided\">guided monitor test</a> if the symptom also appears in gradients, solid colors, or static scenes. When the whole image freezes for a fraction of a second, inspect frame time, shader compilation, storage activity, and background tasks rather than chasing VSync.</p>\n<p>Browsers normally synchronize their own compositor, so a clean web test cannot prove a game uses the same timing path. The test helps you recognize the shape of the fault. Repeat the comparison in the game where you noticed it.</p>\n<h2 id=\"a-clean-test-order-that-does-not-waste-an-evening\">A clean test order that does not waste an evening</h2>\n<p>Change one variable per run and keep the order fixed. This is slower than flipping five switches at once, but it produces an answer.</p>\n<ol>\n<li>Confirm the correct monitor, native resolution, and Windows refresh rate.</li>\n<li>Turn frame generation off.</li>\n<li>Test in-game VSync with the driver set to application controlled.</li>\n<li>Test driver VSync with in-game VSync off.</li>\n<li>If using VRR, verify its monitor and driver settings, then apply a sensible cap below the upper boundary.</li>\n<li>Compare fullscreen and borderless at identical display settings.</li>\n<li>Restore frame generation and test again only after the normal path is stable.</li>\n</ol>\n<p>Record the mode, cap, and result in a note. The boring method wins here because it shows which layer caused the change.</p>\n<h2 id=\"faq\">FAQ</h2>\n<p>Short answer: VSync can still tear when the wrong layer controls it, VRR reaches its upper limit, or frame generation changes delivery timing.</p>\n<h3 id=\"why-do-i-still-get-screen-tearing-with-vsync-on\">Why do I still get screen tearing with VSync on?</h3>\n<p>VSync may be enabled in a menu that does not control the active presentation path. Conflicting driver settings, an incorrect Windows refresh rate, a VRR boundary, window mode, or frame generation can all change the result.</p>\n<h3 id=\"should-vsync-be-on-in-the-game-or-gpu-control-panel\">Should VSync be on in the game or GPU control panel?</h3>\n<p>Test one authority at a time. Start with in-game VSync and an application-controlled driver setting, then try driver VSync with the game option off if the first setup fails. Restart the game between tests.</p>\n<h3 id=\"can-screen-tearing-happen-below-the-monitor-refresh-rate\">Can screen tearing happen below the monitor refresh rate?</h3>\n<p>Yes. If synchronization is disabled or bypassed, a frame can arrive during scanout even when average FPS is below the refresh rate. A matching FPS number is not the same thing as synchronized presentation.</p>\n<h3 id=\"why-does-borderless-mode-fix-tearing\">Why does borderless mode fix tearing?</h3>\n<p>Borderless mode can use a different presentation or composition path. The result depends on Windows, the game, the driver, and whether the game is eligible for modern flip-model behavior.</p>\n<h3 id=\"does-g-sync-or-freesync-replace-vsync\">Does G-Sync or FreeSync replace VSync?</h3>\n<p>Not always. VRR adjusts the display inside its supported range. VSync can still control tearing at the range boundary, but the exact behavior depends on the game and driver.</p>\n<h3 id=\"can-an-online-test-prove-that-vsync-or-vrr-is-working\">Can an online test prove that VSync or VRR is working?</h3>\n<p>No. A browser can show repeatable motion and help you identify a horizontal seam, but its compositor usually synchronizes page animation. Verify the final setup in the game or application where tearing occurs.</p>\n"
+  },
+  {
+    "slug": "touch-screen-not-working-after-screen-replacement",
+    "title": "Touch Screen Not Working After Screen Replacement? Try These Checks First",
+    "description": "New screen lights up but touch does not work? Check for dead zones, ghost touch, a loose connector, a bad replacement part, or unfinished calibration.",
+    "author": "ScreenTestHub Team",
+    "category": "Repair & diagnostics",
+    "published": "2026-08-12",
+    "updated": "2026-08-12",
+    "cover": "/blog/touch-screen-replacement-repair-bench.webp",
+    "coverAlt": "Opened smartphone beside a replacement display and repair tools on a dark workbench",
+    "ctaTitle": "Map the exact area that is failing.",
+    "ctaDescription": "Use the free grid twice and compare whether the same strip, corner, or cluster stays blank.",
+    "ctaLabel": "Open touch screen test",
+    "ctaHref": "/touch-screen-test",
+    "readingMinutes": 7,
+    "toc": [
+      {
+        "id": "identify-the-failure-before-trying-to-fix-it",
+        "label": "Identify the failure before trying to fix it"
+      },
+      {
+        "id": "run-the-safe-checks-without-opening-the-phone",
+        "label": "Run the safe checks without opening the phone"
+      },
+      {
+        "id": "map-the-dead-area-with-the-touch-screen-test",
+        "label": "Map the dead area with the touch screen test"
+      },
+      {
+        "id": "what-real-repair-discussions-have-in-common",
+        "label": "What real repair discussions have in common"
+      },
+      {
+        "id": "decide-whether-a-hardware-inspection-is-justified",
+        "label": "Decide whether a hardware inspection is justified"
+      },
+      {
+        "id": "check-whether-the-repair-needs-software-calibration",
+        "label": "Check whether the repair needs software calibration"
+      },
+      {
+        "id": "know-when-to-return-to-the-repair-shop",
+        "label": "Know when to return to the repair shop"
+      },
+      {
+        "id": "faq",
+        "label": "FAQ"
+      }
+    ],
+    "faq": [
+      {
+        "question": "Will reseating the screen connector fix touch?",
+        "answer": "It can fix a connector that is crooked or not fully seated. It will not repair a torn flex cable, damaged socket, incompatible screen, or failed digitizer. Use the shop warranty if someone else performed the repair."
+      },
+      {
+        "question": "Does a replacement screen need touch calibration?",
+        "answer": "Some models need post-repair configuration, but many do not. Finish the manufacturer’s required process after confirming the screen is correctly connected. Calibration cannot compensate for damaged hardware."
+      },
+      {
+        "question": "Can a cheap replacement screen cause ghost touch?",
+        "answer": "Yes, a defective or poorly matched screen can cause ghost touch, but price alone does not prove it. Test the phone clean, unplugged, and without the case or protector before returning the part."
+      },
+      {
+        "question": "Why does only part of the new touchscreen work?",
+        "answer": "A fixed dead strip can come from a failed digitizer channel, flex damage, connector damage, or uneven frame pressure. Map the area twice; a failure that stays in the same physical spot is useful evidence."
+      },
+      {
+        "question": "Why does touch work with the old screen but not the new one?",
+        "answer": "The comparison makes the replacement assembly or its compatibility the leading suspect, assuming both screens were connected correctly under the same conditions. It does not rule out a fragile socket that moved during the swap."
+      },
+      {
+        "question": "When should I stop troubleshooting?",
+        "answer": "Stop if the display lifts, the battery looks swollen, the phone overheats, ghost input threatens to lock the device, or the repair is covered by a shop warranty. Power the phone off and arrange service."
+      }
+    ],
+    "html": "<p>If touch stopped as soon as the screen was replaced, the new part or the repair itself is the first thing to check. An app can freeze, of course, but bad timing this precise is rarely a useful coincidence.</p>\n<p>Do the no-risk checks first. If a shop fitted the screen, do not reopen it before asking about the repair warranty.</p>\n<h2 id=\"identify-the-failure-before-trying-to-fix-it\">Identify the failure before trying to fix it</h2>\n<p>First, find out whether touch is completely dead, missing in one fixed area, or creating taps by itself. Those are different faults and should not be lumped together as “the touchscreen is broken.”</p>\n<ul>\n<li><strong>No touch anywhere:</strong> the image works, but the digitizer is not sending usable input. A loose connection, incompatible screen, or failed replacement part is plausible.</li>\n<li><strong>One strip, corner, or half does not respond:</strong> the fault may follow a digitizer channel, a damaged flex cable, or pressure on the new assembly.</li>\n<li><strong>Ghost touch:</strong> the phone taps and swipes without a finger. Check the protector, case, charger, screen seating, and replacement part.</li>\n<li><strong>Touch cuts in and out:</strong> note whether it changes while charging, after the phone warms up, or when the case is fitted.</li>\n<li><strong>Only one app fails:</strong> test system menus and the keyboard before blaming the repair.</li>\n</ul>\n<p>A fixed dead strip matters more than a missed tap that happened once. Record it with another phone if it repeats.</p>\n<h2 id=\"run-the-safe-checks-without-opening-the-phone\">Run the safe checks without opening the phone</h2>\n<p>Restart the phone, remove anything pressing on the screen, and test it unplugged before considering another teardown. These checks will not repair a torn cable, but they quickly rule out several easy causes.</p>\n<p>Force restart the exact phone model. Remove the case and, if it is safe, the newly fitted protector. Clean the glass and test with dry hands. A replacement display can sit slightly higher, so an old case may press on its edge.</p>\n<p>Look along the frame rather than pushing on it. If the display is lifting, the gap is uneven, or the phone is unusually hot, switch it off. A swollen battery and a badly seated display are both reasons to stop, not invitations to squeeze harder.</p>\n<p>Disconnect the charger and accessories. Ghost touch that appears only on one charger calls for a trusted cable and adapter comparison. Stop using any charging equipment that is damaged or hot.</p>\n<p>Install current system updates if the phone remains usable. Skip the factory reset. Erasing the phone will not reseat a connector and can destroy useful evidence.</p>\n<h2 id=\"map-the-dead-area-with-the-touch-screen-test\">Map the dead area with the touch screen test</h2>\n<p>Use the <a href=\"/touch-screen-test\">touch screen test</a> twice and check whether the same cells fail on both passes. A repeatable map is much more useful than a percentage on its own.</p>\n<p>Enter fullscreen and drag one finger slowly through every row, edge, and corner. Repeat in the opposite direction. Do not race through it; fast swipes can skip browser events even when the panel is fine.</p>\n<p><img src=\"/blog/touch-screen-test-tool.png\" alt=\"ScreenTestHub touch grid ready to record missed areas and broken swipe paths\"></p>\n<p>Read the result like this:</p>\n<ol>\n<li>The same blank band on both passes suggests a fixed touch fault.</li>\n<li>Different isolated gaps usually call for a slower retest.</li>\n<li>Lines that break at one physical spot are worth photographing.</li>\n<li>Marks that appear while the phone is untouched support a ghost-touch report.</li>\n</ol>\n<p>The test sees browser input; it cannot inspect the connector. If touch works but the image has dots, stains, or odd colors, use the <a href=\"/tests/dead-pixel\">dead pixel test</a>, <a href=\"/tests/backlight-bleed\">backlight bleed test</a>, or <a href=\"/tests/color\">color screen test</a> instead.</p>\n<h2 id=\"what-real-repair-discussions-have-in-common\">What real repair discussions have in common</h2>\n<p>Public Reddit repair threads show four distinct patterns: half-screen ghost touch, no touch, a new screen failing while the old one responds, and touch that fails only under certain conditions. These are examples, not diagnoses.</p>\n<p>In one <a href=\"https://www.reddit.com/r/essential/comments/bij10s/touch_not_working_after_screen_replacement/\">Essential Phone discussion</a>, the lower half worked while the upper half produced heavy ghost touches. Another owner reported <a href=\"https://www.reddit.com/r/essential/comments/g1x6r3/no_touch_response_after_screen_replacementany/\">a normal picture but no touch</a> and compared the original screen. Repair-community replies also raised an incompletely seated ribbon cable, while a separate owner described <a href=\"https://www.reddit.com/r/mobilerepair/comments/1ibzf9n/replaced_screen_sometimes_doesnt_respond_to_touch/\">touch failing only in certain situations</a>.</p>\n<p>A fixed half-screen fault points toward the digitizer path or pressure. Total loss puts the connection and compatibility higher on the list. If the original screen accepts touch but the replacement does not, compare the new assembly. For intermittent failure, note heat, charging, case pressure, and movement. A clear pattern beats swapping parts at random.</p>\n<h2 id=\"decide-whether-a-hardware-inspection-is-justified\">Decide whether a hardware inspection is justified</h2>\n<p>Open the phone only if you performed the repair, have the exact service manual, and are comfortable working near a lithium-ion battery. Otherwise, take it back with your test results.</p>\n<p>If you are qualified, power the phone off and follow the manual’s battery-disconnection order. Check that the display connector sits squarely. Look for debris, bent contacts, a torn flex, or socket damage. Never force a connector.</p>\n<p>Confirm the bracket and screw positions. A pinched flex or wrong screw can create another fault. Do not handle display connectors with the battery live unless the official procedure requires it.</p>\n<p>The part may also be wrong or defective. Check the model, regional version, connector, and revision. “Compatible with” does not mean “tested in this phone,” and price alone proves nothing.</p>\n<p>If a known-compatible second screen produces the same fault, stop buying displays. The socket, board-level touch circuit, bent frame, or earlier impact may be involved.</p>\n<h2 id=\"check-whether-the-repair-needs-software-calibration\">Check whether the repair needs software calibration</h2>\n<p>Complete the manufacturer’s post-repair process when the model requires it, but do not expect calibration to fix a loose cable or dead digitizer. Software setup comes after a sound physical installation.</p>\n<p>Supported Apple devices may show <strong>Finish Repair</strong> under <strong>Settings > General > About > Parts &#x26; Service History</strong>. Repair Assistant can install calibration data for eligible parts and models. Android procedures vary. Some Pixel phones include <strong>Touch diagnostics</strong> in Display &#x26; touch settings.</p>\n<p>Use current instructions for the exact model. Avoid apps that claim to calibrate away physical damage; they cannot rebuild a broken digitizer channel.</p>\n<h2 id=\"know-when-to-return-to-the-repair-shop\">Know when to return to the repair shop</h2>\n<p>Return the phone promptly if touch failed immediately after a paid repair, the screen is lifting, ghost touch enters passcodes, or the same dead area survives the safe checks. Do not wait until the warranty window closes.</p>\n<p>Bring the receipt, a video, the touch-grid photo, and a list of checks already tried. Say whether touch worked on the original screen. Mention liquid damage, a bent frame, or a hard impact too.</p>\n<p>Ask the installer to check the connector and replacement assembly before proposing board repair. If the shop fitted the screen, reopening the phone yourself can make responsibility harder to sort out.</p>\n<h2 id=\"faq\">FAQ</h2>\n<h3 id=\"will-reseating-the-screen-connector-fix-touch\">Will reseating the screen connector fix touch?</h3>\n<p>It can fix a connector that is crooked or not fully seated. It will not repair a torn flex cable, damaged socket, incompatible screen, or failed digitizer. Use the shop warranty if someone else performed the repair.</p>\n<h3 id=\"does-a-replacement-screen-need-touch-calibration\">Does a replacement screen need touch calibration?</h3>\n<p>Some models need post-repair configuration, but many do not. Finish the manufacturer’s required process after confirming the screen is correctly connected. Calibration cannot compensate for damaged hardware.</p>\n<h3 id=\"can-a-cheap-replacement-screen-cause-ghost-touch\">Can a cheap replacement screen cause ghost touch?</h3>\n<p>Yes, a defective or poorly matched screen can cause ghost touch, but price alone does not prove it. Test the phone clean, unplugged, and without the case or protector before returning the part.</p>\n<h3 id=\"why-does-only-part-of-the-new-touchscreen-work\">Why does only part of the new touchscreen work?</h3>\n<p>A fixed dead strip can come from a failed digitizer channel, flex damage, connector damage, or uneven frame pressure. Map the area twice; a failure that stays in the same physical spot is useful evidence.</p>\n<h3 id=\"why-does-touch-work-with-the-old-screen-but-not-the-new-one\">Why does touch work with the old screen but not the new one?</h3>\n<p>The comparison makes the replacement assembly or its compatibility the leading suspect, assuming both screens were connected correctly under the same conditions. It does not rule out a fragile socket that moved during the swap.</p>\n<h3 id=\"when-should-i-stop-troubleshooting\">When should I stop troubleshooting?</h3>\n<p>Stop if the display lifts, the battery looks swollen, the phone overheats, ghost input threatens to lock the device, or the repair is covered by a shop warranty. Power the phone off and arrange service.</p>\n"
+  }
+]

@@ -11,6 +11,7 @@ import Link from "@/components/site/no-prefetch-link";
 import styles from "@/components/touch/TouchScreenTest.module.css";
 import { TouchScreenTest } from "@/components/touch/TouchScreenTest";
 import { absoluteUrl, SITE_NAME } from "@/lib/site";
+import { pairedAlternates } from "@/lib/localized-metadata";
 
 export const dynamic = "force-static";
 
@@ -23,7 +24,7 @@ const description =
 export const metadata: Metadata = {
   title: { absolute: pageTitle },
   description,
-  alternates: { canonical: canonicalUrl },
+  alternates: pairedAlternates("en", "/touch-screen-test"),
   openGraph: {
     title: openGraphTitle,
     description,

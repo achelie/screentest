@@ -4,6 +4,7 @@ import { Pause, Play } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 
 import { FullscreenTest } from "./FullscreenTest";
+import { testStartEventName } from "@/lib/test-events";
 import { MovingTarget } from "./MovingTarget";
 import styles from "./ScreenTests.module.css";
 import { usePrefersReducedMotion } from "./usePrefersReducedMotion";
@@ -51,6 +52,7 @@ export function MotionTest({ messages }: { messages: Pick<TestMessages, "fullscr
         onPrevious={slower}
         status={messages.motion.status.replace("{state}", running ? messages.motion.running : messages.motion.paused).replace("{speed}", String(speed))}
         surfaceLabel={messages.motion.surface.replace("{speed}", String(speed))}
+        startEventName={testStartEventName("motion")}
         controls={
           <>
             <button

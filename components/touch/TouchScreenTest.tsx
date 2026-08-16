@@ -3,11 +3,12 @@
 import {
   Download,
   Maximize2,
-  Minimize2,
   Play,
   RotateCcw,
   SquareCheckBig,
 } from "lucide-react";
+import type { Locale } from "@/lib/i18n";
+import { testStartEventName } from "@/lib/test-events";
 import {
   useCallback,
   useEffect,
@@ -44,20 +45,27 @@ const EMPTY_SUMMARY: TouchGridSummary = {
 const LIVE_SUMMARY_DELAY_MS = 600;
 const DOWNLOAD_URL_REVOKE_DELAY_MS = 1_000;
 
-function resultInterpretation(summary: TouchGridSummary): string {
+const TOUCH_UI = {
+  en: { noPath: "No touch path was recorded. Test again before judging the screen.", all: "Every grid cell received input in this pass.", connected: "A connected area of {count} cells stayed blank. Repeat the pass slowly to see whether it fails in the same place.", isolated: "The remaining blank cells are isolated. Repeat the edges and corners before treating them as a dead zone.", live: "Coverage {coverage} percent. {live} live touches. Peak {peak}.", unavailable: "Fullscreen is not available. The test still works here.", refused: "Fullscreen was refused. The test still works here.", cleared: "Grid cleared. Start another pass from the corners.", passed: "Screen test passed. Every grid cell responded in this pass.", noData: "No touch data recorded. Run the test again and drag across the grid.", closeFailed: "Fullscreen could not close. Use Exit fullscreen to view your result.", alertPassed: "Screen test passed. Every part of the screen responded, and no touch dead zone was found in this pass.", resized: "The test area changed size. Restart so every cell uses the same grid.", prepareFailed: "The image could not be prepared. Please try the download again.", downloadFailed: "The image could not be downloaded. Please try again.", touchDetected: "Touch input detected", mouseAvailable: "Mouse preview available on this device", mouseResult: "Desktop pointer preview", touchResult: "Touch input result", start: "Start Touch Test", restartNote: "Starting again clears the current map.", checker: "Touchscreen checker", coverage: "Coverage", liveTouches: "Live touches", peakTouches: "Peak touches", reset: "Reset", fullscreen: "Enter fullscreen", finish: "Finish", paintedMissed: "Painted and missed cells", paintedValue: "{painted} painted, {missed} missed", again: "Test Again", download: "Download Result" },
+  zh: { noPath: "没有记录到触摸轨迹，请重新测试后再判断屏幕。", all: "本次测试中，每个网格都收到了输入。", connected: "有一片连续的 {count} 格保持空白。请慢速重复一次，确认是否仍在同一位置失效。", isolated: "剩余空白格彼此分散。先重测边缘和四角，再把它当作触控死区。", live: "覆盖率 {coverage}%。当前 {live} 个触点，峰值 {peak}。", unavailable: "这里无法使用全屏，测试仍可在当前区域运行。", refused: "浏览器拒绝了全屏，测试仍可在当前区域运行。", cleared: "网格已清空，请从四角开始再测一次。", passed: "测试通过：本次每个网格都响应了。", noData: "没有记录到触摸数据，请重新运行并划过网格。", closeFailed: "无法退出全屏，请使用“退出全屏”查看结果。", alertPassed: "测试通过：本次屏幕所有区域都已响应，没有发现触控死区。", resized: "测试区域尺寸发生变化。请重新开始，确保每格使用同一套网格。", prepareFailed: "无法生成结果图片，请重试下载。", downloadFailed: "无法下载图片，请重试。", touchDetected: "已检测到触摸输入", mouseAvailable: "当前设备可用鼠标预览", mouseResult: "桌面指针预览结果", touchResult: "触摸输入结果", start: "开始触摸测试", restartNote: "重新开始会清空当前网格。", checker: "触摸屏检测区域", coverage: "覆盖率", liveTouches: "当前触点", peakTouches: "峰值触点", reset: "重置", fullscreen: "进入全屏", finish: "完成", paintedMissed: "已覆盖与未覆盖网格", paintedValue: "已覆盖 {painted} 格，漏掉 {missed} 格", again: "再次测试", download: "下载结果" },
+  de: { noPath: "Kein Touch-Pfad wurde aufgezeichnet. Teste erneut, bevor du das Display bewertest.", all: "Jedes Rasterfeld hat in diesem Durchgang eine Eingabe erhalten.", connected: "Ein zusammenhängender Bereich von {count} Feldern blieb leer. Wiederhole den Durchgang langsam an derselben Stelle.", isolated: "Die übrigen leeren Felder liegen vereinzelt. Wiederhole Ränder und Ecken, bevor du von einer toten Zone ausgehst.", live: "Abdeckung {coverage} Prozent. {live} aktive Kontakte. Spitze {peak}.", unavailable: "Vollbild ist hier nicht verfügbar. Der Test funktioniert weiterhin in diesem Bereich.", refused: "Der Browser hat Vollbild abgelehnt. Der Test funktioniert weiterhin hier.", cleared: "Raster geleert. Starte einen neuen Durchgang in den Ecken.", passed: "Test bestanden. Jedes Rasterfeld hat in diesem Durchgang reagiert.", noData: "Keine Touch-Daten aufgezeichnet. Starte erneut und ziehe durch das Raster.", closeFailed: "Vollbild konnte nicht beendet werden. Nutze Vollbild beenden, um das Ergebnis zu sehen.", alertPassed: "Test bestanden. Alle Bildschirmbereiche reagierten; in diesem Durchgang wurde keine tote Touch-Zone gefunden.", resized: "Der Testbereich hat seine Größe geändert. Starte neu, damit alle Felder dasselbe Raster verwenden.", prepareFailed: "Das Ergebnisbild konnte nicht vorbereitet werden. Versuche den Download erneut.", downloadFailed: "Das Bild konnte nicht heruntergeladen werden. Versuche es erneut.", touchDetected: "Touch-Eingabe erkannt", mouseAvailable: "Mausvorschau auf diesem Gerät verfügbar", mouseResult: "Desktop-Zeigervorschau", touchResult: "Touch-Ergebnis", start: "Touch-Test starten", restartNote: "Ein Neustart löscht die aktuelle Karte.", checker: "Touchscreen-Prüffläche", coverage: "Abdeckung", liveTouches: "Aktive Kontakte", peakTouches: "Maximale Kontakte", reset: "Zurücksetzen", fullscreen: "Vollbild starten", finish: "Beenden", paintedMissed: "Markierte und ausgelassene Felder", paintedValue: "{painted} markiert, {missed} ausgelassen", again: "Erneut testen", download: "Ergebnis herunterladen" },
+} as const;
+
+function resultInterpretation(summary: TouchGridSummary, locale: Locale): string {
+  const copy = TOUCH_UI[locale];
   if (summary.paintedCells === 0) {
-    return "No touch path was recorded. Test again before judging the screen.";
+    return copy.noPath;
   }
 
   if (summary.largestMissedRegion === 0) {
-    return "Every grid cell received input in this pass.";
+    return copy.all;
   }
 
   if (summary.largestMissedRegion >= 4) {
-    return `A connected area of ${summary.largestMissedRegion} cells stayed blank. Repeat the pass slowly to see whether it fails in the same place.`;
+    return copy.connected.replace("{count}", String(summary.largestMissedRegion));
   }
 
-  return "The remaining blank cells are isolated. Repeat the edges and corners before treating them as a dead zone.";
+  return copy.isolated;
 }
 
 function localDateStamp(date: Date): string {
@@ -67,7 +75,8 @@ function localDateStamp(date: Date): string {
   return `${year}-${month}-${day}`;
 }
 
-export function TouchScreenTest() {
+export function TouchScreenTest({ locale = "en" }: { locale?: Locale } = {}) {
+  const copy = TOUCH_UI[locale];
   const hostRef = useRef<HTMLDivElement>(null);
   const startButtonRef = useRef<HTMLButtonElement>(null);
   const resetButtonRef = useRef<HTMLButtonElement>(null);
@@ -199,9 +208,10 @@ export function TouchScreenTest() {
     const throttle = createLeadingTrailingThrottle<TouchGridSummary, number>(
       (latest) => {
         if (liveRegionRef.current) {
-          liveRegionRef.current.textContent =
-            `Coverage ${latest.coveragePercent} percent. ` +
-            `${latest.liveTouches} live touches. Peak ${latest.peakTouches}.`;
+          liveRegionRef.current.textContent = copy.live
+            .replace("{coverage}", String(latest.coveragePercent))
+            .replace("{live}", String(latest.liveTouches))
+            .replace("{peak}", String(latest.peakTouches));
         }
       },
       {
@@ -272,7 +282,7 @@ export function TouchScreenTest() {
     const host = hostRef.current;
     if (!host || !document.fullscreenEnabled || !host.requestFullscreen) {
       if (operationToken === fullscreenOperationRef.current) {
-        setNotice("Fullscreen is not available. The test still works here.");
+        setNotice(copy.unavailable);
       }
       return;
     }
@@ -289,14 +299,21 @@ export function TouchScreenTest() {
         operationToken === fullscreenOperationRef.current &&
         document.fullscreenElement !== host
       ) {
-        setNotice("Fullscreen was refused. The test still works here.");
+        setNotice(copy.refused);
       }
     }
   }, [exitFullscreenIfStale, prepareSession]);
 
+  useEffect(() => {
+    const startEvent = testStartEventName("touch-screen-test");
+    const handleStartRequest = () => void startTest();
+    window.addEventListener(startEvent, handleStartRequest);
+    return () => window.removeEventListener(startEvent, handleStartRequest);
+  }, [startTest]);
+
   const resetTest = useCallback(() => {
     prepareSession(false);
-    setNotice("Grid cleared. Start another pass from the corners.");
+    setNotice(copy.cleared);
   }, [prepareSession]);
 
   const finishTest = useCallback(async (completedEveryCell = false) => {
@@ -312,9 +329,9 @@ export function TouchScreenTest() {
     setPhase("result");
     setNotice(
       completedEveryCell
-        ? "Screen test passed. Every grid cell responded in this pass."
+        ? copy.passed
         : finalSummary.paintedCells === 0
-        ? "No touch data recorded. Run the test again and drag across the grid."
+        ? copy.noData
         : null,
     );
 
@@ -328,7 +345,7 @@ export function TouchScreenTest() {
         operationToken === fullscreenOperationRef.current &&
         finalSummary.paintedCells > 0
       ) {
-        setNotice("Fullscreen could not close. Use Exit fullscreen to view your result.");
+        setNotice(copy.closeFailed);
       }
     }
   }, [summary]);
@@ -345,7 +362,7 @@ export function TouchScreenTest() {
 
     autoCompletionHandledRef.current = true;
     window.alert(
-      "Screen test passed. Every part of the screen responded, and no touch dead zone was found in this pass.",
+      copy.alertPassed,
     );
     void finishTest(true);
   }, [finishTest, phase, summary.paintedCells, summary.totalCells]);
@@ -356,13 +373,13 @@ export function TouchScreenTest() {
     phaseRef.current = "paused";
     liveSummaryThrottleRef.current?.cancel();
     setPhase("paused");
-    setNotice("The test area changed size. Restart so every cell uses the same grid.");
+    setNotice(copy.resized);
   }, []);
 
   const toggleFullscreen = useCallback(async () => {
     const host = hostRef.current;
     if (!host || !document.fullscreenEnabled || !host.requestFullscreen) {
-      setNotice("Fullscreen is not available. The test still works here.");
+      setNotice(copy.unavailable);
       return;
     }
 
@@ -383,7 +400,7 @@ export function TouchScreenTest() {
       }
     } catch {
       if (operationToken === fullscreenOperationRef.current) {
-        setNotice("Fullscreen was refused. The test still works here.");
+        setNotice(copy.refused);
       }
     }
   }, [exitFullscreenIfStale]);
@@ -396,7 +413,7 @@ export function TouchScreenTest() {
     try {
       const blob = await canvasRef.current?.exportResult(summary);
       if (!blob) {
-        setDownloadError("The image could not be prepared. Please try the download again.");
+        setDownloadError(copy.prepareFailed);
         return;
       }
 
@@ -412,7 +429,7 @@ export function TouchScreenTest() {
         objectUrl = null;
       }
     } catch {
-      setDownloadError("The image could not be downloaded. Please try again.");
+      setDownloadError(copy.downloadFailed);
     } finally {
       anchor?.remove();
       if (objectUrl) URL.revokeObjectURL(objectUrl);
@@ -423,13 +440,13 @@ export function TouchScreenTest() {
     touchCapable === null
       ? null
       : touchCapable
-        ? "Touch input detected"
-        : "Mouse preview available on this device";
+        ? copy.touchDetected
+        : copy.mouseAvailable;
 
   const resultTitle =
     summary.inputMode === "mouse"
-      ? "Desktop pointer preview"
-      : "Touch input result";
+      ? copy.mouseResult
+      : copy.touchResult;
 
   return (
     <section className={styles.controller}>
@@ -441,49 +458,53 @@ export function TouchScreenTest() {
           type="button"
         >
           <Play aria-hidden="true" size={18} strokeWidth={1.8} />
-          Start Touch Test
+          {copy.start}
         </button>
         <div className={styles.startNotes}>
           {capabilityNote ? <span>{capabilityNote}</span> : null}
           {phase === "active" ? (
-            <span>Starting again clears the current map.</span>
+            <span>{copy.restartNote}</span>
           ) : null}
         </div>
       </div>
 
       <div
-        aria-label="Touchscreen checker"
+        aria-label={copy.checker}
         className={styles.bench}
         ref={hostRef}
         role="region"
         tabIndex={-1}
       >
-        <div className={styles.metricRail}>
-          <div className={styles.metricCell}>
-            <span>Coverage</span>
-            <strong>{summary.coveragePercent}%</strong>
+        {!isFullscreen ? (
+          <div className={styles.metricRail}>
+            <div className={styles.metricCell}>
+              <span>{copy.coverage}</span>
+              <strong>{summary.coveragePercent}%</strong>
+            </div>
+            <div className={styles.metricCell}>
+              <span>{copy.liveTouches}</span>
+              <strong>{summary.liveTouches}</strong>
+            </div>
+            <div className={styles.metricCell}>
+              <span>{copy.peakTouches}</span>
+              <strong>{summary.peakTouches}</strong>
+            </div>
           </div>
-          <div className={styles.metricCell}>
-            <span>Live touches</span>
-            <strong>{summary.liveTouches}</strong>
-          </div>
-          <div className={styles.metricCell}>
-            <span>Peak touches</span>
-            <strong>{summary.peakTouches}</strong>
-          </div>
-          <p
-            aria-atomic="true"
-            aria-live="polite"
-            className={styles.srOnly}
-            ref={liveRegionRef}
-          />
-        </div>
+        ) : null}
+
+        <p
+          aria-atomic="true"
+          aria-live="polite"
+          className={styles.srOnly}
+          ref={liveRegionRef}
+        />
 
         <div className={styles.canvasFrame}>
           <TouchGridCanvas
             active={phase === "active"}
             frozen={phase === "paused" || phase === "result"}
             fullscreenExitEnabled={isFullscreen}
+            locale={locale}
             onGeometryInvalidated={pauseForResize}
             onFullscreenExitRequest={() => void toggleFullscreen()}
             onSummary={handleSummary}
@@ -492,43 +513,36 @@ export function TouchScreenTest() {
           />
         </div>
 
-        <div aria-hidden="true" className={styles.fullscreenExitHint}>
-          <Minimize2 size={18} strokeWidth={1.8} />
-          Hold here to exit
-        </div>
-
-        <div className={styles.controlStack}>
-          <button
-            className={styles.quietButton}
-            onClick={resetTest}
-            ref={resetButtonRef}
-            type="button"
-          >
-            <RotateCcw aria-hidden="true" size={18} strokeWidth={1.8} />
-            Reset
-          </button>
-          <button
-            className={styles.quietButton}
-            onClick={() => void toggleFullscreen()}
-            type="button"
-          >
-            {isFullscreen ? (
-              <Minimize2 aria-hidden="true" size={18} strokeWidth={1.8} />
-            ) : (
+        {!isFullscreen ? (
+          <div className={styles.controlStack}>
+            <button
+              className={styles.quietButton}
+              onClick={resetTest}
+              ref={resetButtonRef}
+              type="button"
+            >
+              <RotateCcw aria-hidden="true" size={18} strokeWidth={1.8} />
+              {copy.reset}
+            </button>
+            <button
+              className={styles.quietButton}
+              onClick={() => void toggleFullscreen()}
+              type="button"
+            >
               <Maximize2 aria-hidden="true" size={18} strokeWidth={1.8} />
-            )}
-            {isFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
-          </button>
-          <button
-            className={styles.quietButton}
-            disabled={phase === "idle" || phase === "result"}
-            onClick={() => void finishTest(false)}
-            type="button"
-          >
-            <SquareCheckBig aria-hidden="true" size={18} strokeWidth={1.8} />
-            Finish
-          </button>
-        </div>
+              {copy.fullscreen}
+            </button>
+            <button
+              className={styles.quietButton}
+              disabled={phase === "idle" || phase === "result"}
+              onClick={() => void finishTest(false)}
+              type="button"
+            >
+              <SquareCheckBig aria-hidden="true" size={18} strokeWidth={1.8} />
+              {copy.finish}
+            </button>
+          </div>
+        ) : null}
       </div>
 
       {notice ? (
@@ -544,21 +558,21 @@ export function TouchScreenTest() {
           </h2>
           <dl className={styles.resultMetrics}>
             <div>
-              <dt>Coverage</dt>
+              <dt>{copy.coverage}</dt>
               <dd>{summary.coveragePercent}%</dd>
             </div>
             <div>
-              <dt>Painted and missed cells</dt>
+              <dt>{copy.paintedMissed}</dt>
               <dd>
-                {summary.paintedCells} painted, {summary.missedCells} missed
+                {copy.paintedValue.replace("{painted}", String(summary.paintedCells)).replace("{missed}", String(summary.missedCells))}
               </dd>
             </div>
             <div>
-              <dt>Peak touches</dt>
+              <dt>{copy.peakTouches}</dt>
               <dd>{summary.peakTouches}</dd>
             </div>
           </dl>
-          <p className={styles.interpretation}>{resultInterpretation(summary)}</p>
+          <p className={styles.interpretation}>{resultInterpretation(summary, locale)}</p>
           <div className={styles.resultActions}>
             <button
               className={styles.secondaryButton}
@@ -566,7 +580,7 @@ export function TouchScreenTest() {
               type="button"
             >
               <RotateCcw aria-hidden="true" size={18} strokeWidth={1.8} />
-              Test Again
+              {copy.again}
             </button>
             <button
               className={styles.primaryButton}
@@ -575,7 +589,7 @@ export function TouchScreenTest() {
               type="button"
             >
               <Download aria-hidden="true" size={18} strokeWidth={1.8} />
-              Download Result
+              {copy.download}
             </button>
           </div>
           {downloadError ? (

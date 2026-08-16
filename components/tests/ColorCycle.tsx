@@ -4,6 +4,7 @@ import { Pause, Play } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 
 import { FullscreenTest } from "./FullscreenTest";
+import { testStartEventName } from "@/lib/test-events";
 import styles from "./ScreenTests.module.css";
 import type { TestMessages } from "@/lib/test-messages";
 
@@ -79,6 +80,7 @@ export function ColorCycle({ mode = "color", messages }: ColorCycleProps) {
       onPrevious={showPrevious}
       status={`${colorName}. ${automatic ? messages.colorCycle.cycling.replace("{seconds}", String(intervalMs / 1000)) : messages.colorCycle.manual}`}
       surfaceLabel={messages.colorCycle.surface.replace("{color}", colorName.toLowerCase())}
+      startEventName={testStartEventName(mode === "dead-pixel" ? "dead-pixel" : "color")}
       controls={
         <>
           <div aria-label={messages.colorCycle.testColor} className={styles.toolGroup} role="group">

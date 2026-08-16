@@ -12,7 +12,7 @@ import {
   type Locale,
 } from "@/lib/i18n";
 import { pairedAlternates } from "@/lib/localized-metadata";
-import { getAllGuides } from "@/lib/guides";
+import { getAllBlogPosts } from "@/lib/blog";
 
 const symptomIcons = [CircleDot, Moon, Grid2X2, Contrast, Gauge, Palette] as const;
 
@@ -35,7 +35,7 @@ export function createHomeMetadata(locale: Locale): Metadata {
 export async function HomePageContent({ locale }: { locale: Locale }) {
   const dictionary = getDictionary(locale);
   const { home, common } = dictionary;
-  const guides = await getAllGuides();
+  const posts = await getAllBlogPosts();
   const homeUrl = absoluteLocalizedUrl(locale);
   const guidedUrl = absoluteLocalizedUrl(locale, "/tests/guided");
   const jsonLd = [
@@ -138,20 +138,20 @@ export async function HomePageContent({ locale }: { locale: Locale }) {
 
         <hr className="section-rule" />
 
-        <section aria-labelledby="guides-heading">
-          <div className="editorial-heading"><h2 id="guides-heading">{home.guidesTitle}</h2><p>{home.guidesIntro}</p></div>
+        <section aria-labelledby="blog-heading">
+          <div className="editorial-heading"><h2 id="blog-heading">{home.blogTitle}</h2><p>{home.blogIntro}</p></div>
           <div className="guide-stack">
-            {guides.map((guide) => (
-              <Link className="guide-row" href={`/guides/${guide.slug}`} key={guide.slug}>
+            {posts.map((post) => (
+              <Link className="guide-row" href={`/blog/${post.slug}`} key={post.slug}>
                 <ArrowRight aria-hidden="true" size={17} strokeWidth={1.7} />
-                <h3 lang="en">{guide.title}</h3>
-                <span>{guide.readingMinutes} {common.minutesShort}{locale !== "en" ? ` / ${common.englishContent}` : ""}</span>
+                <h3 lang="en">{post.title}</h3>
+                <span>{post.readingMinutes} {common.minutesShort}{locale !== "en" ? ` / ${common.englishContent}` : ""}</span>
               </Link>
             ))}
           </div>
           <div className="button-row">
-            <Link className="button-secondary" href={localizePath("/guides", locale)}>
-              {home.allGuides} <ArrowRight size={17} />
+            <Link className="button-secondary" href="/blog">
+              {home.allBlog} <ArrowRight size={17} />
             </Link>
           </div>
         </section>

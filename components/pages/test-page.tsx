@@ -59,6 +59,16 @@ function createStructuredData(locale: Locale, test: TestDefinition) {
           { "@type": "ListItem", position: 3, name: test.name, item: canonicalUrl },
         ],
       },
+      ...(test.faq?.length ? [{
+        "@type": "FAQPage",
+        "@id": `${canonicalUrl}#faq`,
+        inLanguage: localeConfig[locale].htmlLang,
+        mainEntity: test.faq.map((item) => ({
+          "@type": "Question",
+          name: item.question,
+          acceptedAnswer: { "@type": "Answer", text: item.answer },
+        })),
+      }] : []),
     ],
   };
 }
@@ -102,10 +112,15 @@ export function TestPageContent({ locale, slug }: { locale: Locale; slug: string
           <h2 className={styles.sectionTitle} id="look-title">{dictionary.testPage.lookFor}</h2>
           <dl className={styles.observationList}>{test.observations.map((item) => <div className={styles.observationRow} key={item.signal}><dt>{item.signal}</dt><dd>{item.meaning}</dd></div>)}</dl>
           <p className={styles.limitation}>{test.limitation}</p>
-          <Link className={styles.guideLink} href={test.guideHref}>
-            {test.guideLabel}{locale !== "en" ? ` (${dictionary.common.englishContent})` : ""}<ArrowRight aria-hidden="true" size={18} strokeWidth={1.8} />
-          </Link>
         </section>
+        {test.faq?.length ? (
+          <section aria-labelledby="faq-title" className={styles.contentSection}>
+            <h2 className={styles.sectionTitle} id="faq-title">{dictionary.testPage.faq}</h2>
+            <div className={styles.testFaqList}>{test.faq.map((item) => (
+              <details key={item.question}><summary>{item.question}</summary><p>{item.answer}</p></details>
+            ))}</div>
+          </section>
+        ) : null}
         <section aria-labelledby="related-title" className={styles.contentSection}>
           <h2 className={styles.sectionTitle} id="related-title">{dictionary.testPage.keepChecking}</h2>
           <div className={styles.relatedList}>{relatedTests.map((related) => (

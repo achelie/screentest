@@ -71,3 +71,11 @@ export function pairedAlternates(locale: Locale, path: string) {
     languages: localizedAlternates(path),
   };
 }
+
+export function englishOnlyAlternates(path: string) {
+  const url = absoluteLocalizedUrl("en", path);
+  return {
+    canonical: url,
+    languages: { "en-US": url, "x-default": url },
+  };
+}

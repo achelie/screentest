@@ -3,6 +3,7 @@
 import { useCallback, useState } from "react";
 
 import { FullscreenTest } from "./FullscreenTest";
+import { testStartEventName } from "@/lib/test-events";
 import styles from "./ScreenTests.module.css";
 import type { TestMessages } from "@/lib/test-messages";
 
@@ -31,6 +32,7 @@ export function GrayTest({ messages }: { messages: Pick<TestMessages, "fullscree
       onPrevious={showPrevious}
       status={messages.gray.status.replace("{level}", String(level))}
       surfaceLabel={messages.gray.surface.replace("{level}", String(level))}
+      startEventName={testStartEventName("grayscale")}
       controls={
         <div aria-label={messages.gray.levelLabel} className={styles.toolGroup} role="group">
           {GRAY_LEVELS.map((grayLevel, index) => (

@@ -3,6 +3,7 @@
 import { useCallback, useState } from "react";
 
 import { FullscreenTest } from "./FullscreenTest";
+import { testStartEventName } from "@/lib/test-events";
 import styles from "./ScreenTests.module.css";
 import type { TestMessages } from "@/lib/test-messages";
 
@@ -41,6 +42,7 @@ export function GradientTest({ messages }: { messages: Pick<TestMessages, "fulls
       onPrevious={showPrevious}
       status={messages.gradient.status.replace("{channel}", channelName).replace("{orientation}", orientationName)}
       surfaceLabel={messages.gradient.surface.replace("{channel}", channelName).replace("{orientation}", orientationName)}
+      startEventName={testStartEventName("gradient")}
       controls={
         <>
           <div aria-label={messages.gradient.channelLabel} className={styles.toolGroup} role="group">

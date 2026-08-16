@@ -1,6 +1,6 @@
 "use client";
 
-import type { ChangeEvent } from "react";
+import { type ChangeEvent, useState } from "react";
 import { usePathname } from "next/navigation";
 
 import {
@@ -20,19 +20,12 @@ type LanguageSwitcherProps = {
 function languagePath(pathname: string, target: Locale) {
   const englishPath = pathname.replace(/^\/(?:zh|de)(?=\/|$)/, "") || "/";
 
-  if (target !== "en" && englishPath === "/touch-screen-test") {
-    return localizePath("/tests", target);
-  }
-
-  if (target !== "en" && /^\/guides\/[^/]+/.test(englishPath)) {
-    return localizePath("/guides", target);
-  }
-
   return localizePath(englishPath, target);
 }
 
 export function LanguageSwitcher({ locale, messages, mobile = false }: LanguageSwitcherProps) {
   const pathname = usePathname();
+  const [notice, setNotice] = useState("");
 
   const handleSwitch = (event: ChangeEvent<HTMLSelectElement>) => {
     const target = event.target.value as Locale;
@@ -40,6 +33,13 @@ export function LanguageSwitcher({ locale, messages, mobile = false }: LanguageS
 
     const secure = window.location.protocol === "https:" ? "; Secure" : "";
     document.cookie = `screen_test_locale=${target}; Max-Age=31536000; Path=/; SameSite=Lax${secure}`;
+
+    if (target !== "en" && /^\/blog(?:\/|$)/.test(pathname)) {
+      setNotice(messages.blogLanguageNotice);
+      event.target.value = "en";
+      return;
+    }
+
     const targetPath = languagePath(pathname, target);
     window.location.assign(`${targetPath}${window.location.search}${window.location.hash}`);
   };
@@ -56,6 +56,7 @@ export function LanguageSwitcher({ locale, messages, mobile = false }: LanguageS
           ))}
         </select>
       </span>
+      {notice ? <span aria-live="polite" className="language-switcher-notice">{notice}</span> : null}
     </label>
   );
 }
