@@ -6,7 +6,7 @@ import Link from "@/components/site/no-prefetch-link";
 import styles from "@/components/tests/ScreenTests.module.css";
 import { TestExperience } from "@/components/tests/TestExperience";
 import { TestIcon } from "@/components/tests/TestIcon";
-import { absoluteLocalizedUrl, getDictionary, localizePath, type Locale } from "@/lib/i18n";
+import { absoluteLocalizedUrl, getDictionary, localeConfig, localizePath, type Locale } from "@/lib/i18n";
 import { pairedAlternates } from "@/lib/localized-metadata";
 import { SITE_NAME } from "@/lib/site";
 import { getTestBySlug, type TestDefinition } from "@/lib/tests";
@@ -25,7 +25,7 @@ export function createTestMetadata(locale: Locale, slug: string): Metadata {
       description: test.description,
       type: "website",
       url: canonicalUrl,
-      locale: locale === "zh" ? "zh_CN" : "en_US",
+      locale: localeConfig[locale].ogLocale,
     },
   };
 }
@@ -41,7 +41,7 @@ function createStructuredData(locale: Locale, test: TestDefinition) {
         "@type": "WebApplication",
         "@id": `${canonicalUrl}#application`,
         name: test.name,
-        inLanguage: locale === "zh" ? "zh-CN" : "en-US",
+        inLanguage: localeConfig[locale].htmlLang,
         description: test.description,
         url: canonicalUrl,
         applicationCategory: copy.applicationCategory,
@@ -103,7 +103,7 @@ export function TestPageContent({ locale, slug }: { locale: Locale; slug: string
           <dl className={styles.observationList}>{test.observations.map((item) => <div className={styles.observationRow} key={item.signal}><dt>{item.signal}</dt><dd>{item.meaning}</dd></div>)}</dl>
           <p className={styles.limitation}>{test.limitation}</p>
           <Link className={styles.guideLink} href={test.guideHref}>
-            {test.guideLabel}{locale === "zh" ? ` (${dictionary.common.englishContent})` : ""}<ArrowRight aria-hidden="true" size={18} strokeWidth={1.8} />
+            {test.guideLabel}{locale !== "en" ? ` (${dictionary.common.englishContent})` : ""}<ArrowRight aria-hidden="true" size={18} strokeWidth={1.8} />
           </Link>
         </section>
         <section aria-labelledby="related-title" className={styles.contentSection}>

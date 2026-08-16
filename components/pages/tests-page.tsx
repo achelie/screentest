@@ -4,7 +4,7 @@ import { ArrowRight, Monitor, Timer } from "lucide-react";
 import Link from "@/components/site/no-prefetch-link";
 import { TestIcon } from "@/components/tests/TestIcon";
 import styles from "@/components/tests/ScreenTests.module.css";
-import { absoluteLocalizedUrl, getDictionary, localizePath, type Locale } from "@/lib/i18n";
+import { absoluteLocalizedUrl, getDictionary, localeConfig, localizePath, type Locale } from "@/lib/i18n";
 import { pairedAlternates } from "@/lib/localized-metadata";
 import { SITE_NAME } from "@/lib/site";
 import { getScreenTests } from "@/lib/tests";
@@ -23,7 +23,7 @@ export function createTestsMetadata(locale: Locale): Metadata {
       description: copy.ogDescription,
       type: "website",
       url,
-      locale: locale === "zh" ? "zh_CN" : "en_US",
+      locale: localeConfig[locale].ogLocale,
     },
   };
 }
@@ -42,7 +42,7 @@ export function TestsPageContent({ locale }: { locale: Locale }) {
         "@type": "CollectionPage",
         "@id": `${canonicalUrl}#page`,
         name: copy.collectionName,
-        inLanguage: locale === "zh" ? "zh-CN" : "en-US",
+        inLanguage: localeConfig[locale].htmlLang,
         description: copy.metadataDescription,
         url: canonicalUrl,
         isPartOf: { "@type": "WebSite", name: SITE_NAME, url: absoluteLocalizedUrl(locale) },

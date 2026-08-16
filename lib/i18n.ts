@@ -1,8 +1,10 @@
 import { SITE_URL } from "@/lib/site";
 
-export const LOCALES = ["en", "zh"] as const;
+export const LOCALES = ["en", "zh", "de"] as const;
+export const LOCALIZED_LOCALES = ["zh", "de"] as const;
 
 export type Locale = (typeof LOCALES)[number];
+export type LocalizedLocale = (typeof LOCALIZED_LOCALES)[number];
 
 export const localeConfig = {
   en: {
@@ -19,6 +21,13 @@ export const localeConfig = {
     label: "中文",
     languageName: "简体中文",
   },
+  de: {
+    htmlLang: "de-DE",
+    ogLocale: "de_DE",
+    pathPrefix: "/de",
+    label: "DE",
+    languageName: "Deutsch",
+  },
 } as const satisfies Record<
   Locale,
   {
@@ -34,15 +43,20 @@ export function isLocale(value: string): value is Locale {
   return LOCALES.includes(value as Locale);
 }
 
+export function isLocalizedLocale(value: string): value is LocalizedLocale {
+  return LOCALIZED_LOCALES.includes(value as LocalizedLocale);
+}
+
 export function localizePath(path: string, locale: Locale) {
   const normalized = path.startsWith("/") ? path : `/${path}`;
+  const englishPath = normalized.replace(/^\/(?:zh|de)(?=\/|$)/, "") || "/";
 
   if (locale === "en") {
-    return normalized.replace(/^\/zh(?=\/|$)/, "") || "/";
+    return englishPath;
   }
 
-  const englishPath = normalized.replace(/^\/zh(?=\/|$)/, "") || "/";
-  return englishPath === "/" ? "/zh" : `/zh${englishPath}`;
+  const prefix = localeConfig[locale].pathPrefix;
+  return englishPath === "/" ? prefix : `${prefix}${englishPath}`;
 }
 
 export function absoluteLocalizedUrl(locale: Locale, path: string = "/") {
@@ -53,6 +67,7 @@ export function localizedAlternates(path: string) {
   return {
     "en-US": absoluteLocalizedUrl("en", path),
     "zh-CN": absoluteLocalizedUrl("zh", path),
+    "de-DE": absoluteLocalizedUrl("de", path),
     "x-default": absoluteLocalizedUrl("en", path),
   };
 }
@@ -425,9 +440,222 @@ const ZH_DICTIONARY = {
   },
 } as const satisfies Dictionary;
 
+const DE_DICTIONARY = {
+  common: {
+    skipToContent: "Zum Inhalt springen",
+    home: "Startseite",
+    breadcrumb: "Brotkrümelnavigation",
+    screenTests: "Bildschirmtests",
+    browserTest: "Browser-Test",
+    noDownload: "Kein Download",
+    minutesShort: "Min.",
+    englishContent: "Englischer Inhalt",
+    nav: {
+      mainLabel: "Hauptnavigation",
+      tools: "Tests",
+      guides: "Ratgeber",
+      startCheck: "Test starten",
+      allTests: "Alle Bildschirmtests anzeigen",
+      toolsMenuLabel: "Werkzeuge für Bildschirmtests",
+      open: "Navigation öffnen",
+      close: "Navigation schließen",
+      language: "Sprache auswählen",
+      switchToEnglish: "Auf Englisch wechseln",
+      switchToChinese: "Auf vereinfachtes Chinesisch wechseln",
+    },
+    footer: {
+      label: "Navigation im Seitenfuß",
+      copy: "Kostenlose Bildschirmtests direkt im Browser. Kein Konto, kein Upload.",
+      allTests: "Alle Tests",
+      deadPixels: "Pixelfehler",
+      motion: "Bewegung",
+      guides: "Ratgeber",
+      sitemap: "Sitemap",
+      metaPrefix: "Für Browser gebaut, nicht für Werkstätten. Ergebnisse bleiben auf diesem Gerät.",
+    },
+    logoHome: "ScreenTestHub Startseite",
+  },
+  rootMetadata: {
+    title: "ScreenTestHub: Kostenlose Online-Bildschirmtests",
+    titleTemplate: "%s | ScreenTestHub",
+    description:
+      "Prüfe Monitor oder Smartphone im Browser auf Pixelfehler, Backlight Bleeding, Banding, Farbstiche und Bewegungsunschärfe.",
+    ogTitle: "ScreenTestHub: Bildschirm testen. Ergebnis selbst sehen.",
+    ogDescription:
+      "Sieben gezielte Browser-Tests für Pixelfehler, Backlight Bleeding, Farben, Farbverläufe, Gleichmäßigkeit und Bewegung.",
+    ogImageAlt: "Testmuster von ScreenTestHub",
+    twitterTitle: "ScreenTestHub: Kostenlose Online-Bildschirmtests",
+    twitterDescription: "Finde typische Bildschirmprobleme mit gezielten Browser-Tests.",
+  },
+  home: {
+    metadataTitle: "Kostenlose Bildschirmtests für Monitore und Smartphones",
+    metadataDescription:
+      "Sieben kostenlose Tests für Pixelfehler, Backlight Bleeding, Gleichmäßigkeit, Farbverläufe, Farben und Bewegung. Privat und ohne Download.",
+    eyebrow: "Testbank im Browser",
+    title: "Teste deinen Bildschirm. Finde Fehler schnell.",
+    lede:
+      "Prüfe Pixelfehler, Backlight Bleeding, Banding, Farbstiche und Schlieren in etwa zwei Minuten. Ohne Download, Konto oder rätselhafte Punktzahl.",
+    start: "Bildschirm prüfen",
+    choose: "Einzeltest wählen",
+    symptomTitle: "Was sieht falsch aus?",
+    symptomIntro:
+      "Wähle das Symptom, das am besten passt. Jeder Test isoliert genau ein Problem, damit du nicht minutenlang auf ein beliebiges Regenbogenvideo starrst.",
+    symptoms: [
+      {
+        title: "Ein heller Punkt verschwindet nicht",
+        detail: "Prüfe Schwarz, Weiß, Rot, Grün und Blau.",
+        href: "/tests/dead-pixel",
+      },
+      {
+        title: "Dunkle Ecken leuchten im abgedunkelten Raum",
+        detail: "Trenne festes Backlight Bleeding vom normalen Blickwinkel-Glow.",
+        href: "/tests/backlight-bleed",
+      },
+      {
+        title: "Grau wirkt wolkig oder fleckig",
+        detail: "Suche in sechs Helligkeitsstufen nach ungleichmäßigen Bereichen.",
+        href: "/tests/grayscale",
+      },
+      {
+        title: "Weiche Verläufe werden zu Streifen",
+        detail: "Achte auf sichtbare Stufen in neutralen und farbigen Verläufen.",
+        href: "/tests/gradient",
+      },
+      {
+        title: "Bewegter Text zieht eine Spur",
+        detail: "Ändere das Tempo und vergleiche die Schlieren mit eigenen Augen.",
+        href: "/tests/motion",
+      },
+      {
+        title: "Farben wirken neben einem anderen Display falsch",
+        detail: "Wechsle direkt zwischen Vollfarben, ohne Bildkompression.",
+        href: "/tests/color",
+      },
+    ],
+    guidedTitle: "Mach den kompletten Check in einem ruhigen Durchgang.",
+    guidedIntro:
+      "Sechs Ansichten, einfache Tastenkürzel und eine kurze Zusammenfassung. Deine Antworten bleiben in diesem Tab.",
+    guidedCta: "Geführten Test starten",
+    methodEyebrow: "Ein brauchbarer Hinweis, keine Diagnose",
+    methodTitle: "Prüfe diese drei Dinge, bevor du nervös wirst.",
+    methodIntro:
+      "Ein Browser-Test liefert gute Hinweise, kann aber nicht in das Panel sehen. Schließe zuerst die häufigsten Fehlalarme aus.",
+    steps: [
+      {
+        label: "ERST REINIGEN",
+        title: "Bildschirm abwischen",
+        detail: "Staub und kleine Flecken spielen erstaunlich überzeugend Pixelfehler.",
+      },
+      {
+        label: "MUSTER ISOLIEREN",
+        title: "Vollbild verwenden",
+        detail: "Vollbild entfernt Tabs, Hintergrundbild und anderes visuelles Rauschen.",
+      },
+      {
+        label: "STELLE BESTÄTIGEN",
+        title: "Eingang oder Blickwinkel wechseln",
+        detail: "Bleibt die Stelle unverändert, dokumentiere sie vor Ablauf der Rückgabefrist.",
+      },
+    ],
+    guidesTitle: "Verstehe, was das Testbild zeigt.",
+    guidesIntro:
+      "Kurze Ratgeber für den schwierigen Teil: Ist das ein echter Defekt oder eine normale Eigenart des Displays? Die Artikel sind derzeit auf Englisch.",
+    allGuides: "Alle Ratgeber ansehen",
+    faqTitle: "Klare Antworten.",
+    faqIntro: "Das Werkzeug ist absichtlich einfach. Hier steht, was es kann und was nicht.",
+    faqs: [
+      {
+        question: "Kann eine Website wirklich einen Pixelfehler finden?",
+        answer:
+          "Sie kann einen auffälligen Pixel leichter sichtbar machen, indem sie das Panel mit sauberen Vollfarben füllt. Die Beurteilung bleibt bei dir. Staub, Kratzer und festhängende Subpixel können ähnlich aussehen, also reinige den Bildschirm zuerst.",
+      },
+      {
+        question: "Reparieren diese Tests meinen Bildschirm?",
+        answer:
+          "Nein. Sie helfen dir, ein Problem zu erkennen und zu dokumentieren. Drücke oder reibe nicht auf dem Panel. Bei einem neuen Gerät solltest du zuerst die Rückgabefrist prüfen.",
+      },
+      {
+        question: "Werden Screenshots oder Testergebnisse hochgeladen?",
+        answer:
+          "Nein. Die Testmuster entstehen direkt im Browser und Antworten aus dem geführten Test bleiben auf der aktuellen Seite. Es gibt kein Konto, keine Datenbank und keinen Upload.",
+      },
+      {
+        question: "Muss die Helligkeit auf 100 Prozent stehen?",
+        answer:
+          "Meistens nicht. Starte mit deiner üblichen Helligkeit. Prüfe Backlight Bleeding zusätzlich in einem dunklen Raum bei mittlerer Helligkeit, damit ein unrealistisches Maximum das Ergebnis nicht übertreibt.",
+      },
+    ],
+    websiteDescription: "Kostenlose Browser-Tests für Monitore, Laptops, Tablets und Smartphones.",
+    appDescription:
+      "Ein geführter visueller Check für typische Pixel-, Beleuchtungs-, Farb-, Verlaufs- und Bewegungsprobleme.",
+  },
+  testsIndex: {
+    metadataTitle: "Kostenlose Online-Bildschirmtests | ScreenTestHub",
+    metadataDescription:
+      "Kostenlose Browser-Tests für Pixelfehler, Backlight Bleeding, Graustufen, Gleichmäßigkeit, Banding, Farben und Bewegung.",
+    ogDescription:
+      "Wähle einen gezielten Bildschirmtest oder führe den kompletten Check in etwa zwei Minuten durch.",
+    collectionName: "Online-Bildschirmtests",
+    libraryName: "Testbibliothek von ScreenTestHub",
+    breadcrumb: "Bildschirmtests",
+    count: "Sieben Browser-Tests",
+    title: "Bildschirmtests, die Fehler sichtbar machen.",
+    lead:
+      "Wähle den Test passend zum Symptom. Wenn der Bildschirm einfach nur verdächtig wirkt, starte den kompletten Check.",
+    libraryLabel: "Bibliothek der Bildschirmtests",
+    runAll: "Alle Prüfungen starten",
+  },
+  testPage: {
+    before: "Vor dem Start",
+    lookFor: "Darauf solltest du achten",
+    keepChecking: "Weiter prüfen",
+    toolSuffix: " - Werkzeug",
+    applicationCategory: "Dienstprogramm",
+    operatingSystem: "Jedes Gerät mit modernem Browser",
+    browserRequirements: "Ein moderner Browser mit JavaScript. Vollbild ist optional.",
+  },
+  guidesIndex: {
+    metadataTitle: "Ratgeber für Bildschirmtests",
+    metadataDescription:
+      "Praktische Anleitungen für Pixelfehler, Backlight Bleeding, Bildschirmgleichmäßigkeit und Bewegungsunschärfe. Die Artikel sind auf Englisch.",
+    ogDescription:
+      "Klare Schritte für typische Bildschirmprobleme. Kein Laborkittel nötig. Die Artikel sind auf Englisch.",
+    collectionDescription:
+      "Praktische Ratgeber für typische Bildschirm- und Monitorprobleme zu Hause. Artikel auf Englisch.",
+    eyebrow: "Ratgeber für Bildschirmtests",
+    title: "Prüfe das Panel. Bewahre die Ruhe.",
+    lead:
+      "Vier kurze Ratgeber zu Punkten, Leuchten, Streifen und Schlieren, die einen neuen Bildschirm verdächtig wirken lassen. Die Artikel sind auf Englisch.",
+    totalTime: "Alle vier zusammen dauern etwa 10 Minuten.",
+    listLabel: "Alle Ratgeber für Bildschirmtests",
+    updated: "Aktualisiert",
+  },
+  states: {
+    notFoundCode: "FEHLER / 404",
+    notFoundTitle: "Dieser Pixel liegt außerhalb des Panels.",
+    notFoundBody: "Die Seite wurde verschoben, gelöscht oder hat nie existiert.",
+    openTests: "Alle Tests öffnen",
+    backHome: "Zur Startseite",
+    errorCode: "TEST UNTERBROCHEN",
+    errorTitle: "Die Seite hat ein schlechtes Signal erwischt.",
+    errorBody: "Deine Testergebnisse wurden weder hochgeladen noch gespeichert.",
+    tryAgain: "Seite erneut laden",
+    loading: "Bildschirmtest wird geladen",
+  },
+  sampler: {
+    label: "Interaktive Farbvorschau",
+    panelSample: "Panelmuster",
+    live: "Live",
+    previewColors: "Vorschaufarben",
+    showSample: "{color}es Muster anzeigen",
+    colors: ["Schwarz", "Weiß", "Rot", "Grün", "Blau", "Grau"],
+  },
+} as const satisfies Dictionary;
+
 const DICTIONARIES = {
   en: EN_DICTIONARY,
   zh: ZH_DICTIONARY,
+  de: DE_DICTIONARY,
 } as const satisfies Record<Locale, Dictionary>;
 
 export function getDictionary(locale: Locale): Dictionary {

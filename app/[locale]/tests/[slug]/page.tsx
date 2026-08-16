@@ -1,8 +1,18 @@
 import type { Metadata } from "next";
 import { createTestMetadata, TestPageContent } from "@/components/pages/test-page";
+import { isLocalizedLocale, LOCALIZED_LOCALES } from "@/lib/i18n";
 import { TEST_SLUGS } from "@/lib/tests";
 export const dynamicParams = false;
 type Props = { params: Promise<{ locale: string; slug: string }> };
-export function generateStaticParams() { return TEST_SLUGS.map((slug) => ({ locale: "zh", slug })); }
-export async function generateMetadata({ params }: Props): Promise<Metadata> { return createTestMetadata("zh", (await params).slug); }
-export default async function ChineseTestPage({ params }: Props) { return <TestPageContent locale="zh" slug={(await params).slug} />; }
+export function generateStaticParams() {
+  return LOCALIZED_LOCALES.flatMap((locale) => TEST_SLUGS.map((slug) => ({ locale, slug })));
+}
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale, slug } = await params;
+  return isLocalizedLocale(locale) ? createTestMetadata(locale, slug) : {};
+}
+export default async function LocalizedTestPage({ params }: Props) {
+  const { locale, slug } = await params;
+  if (!isLocalizedLocale(locale)) return null;
+  return <TestPageContent locale={locale} slug={slug} />;
+}

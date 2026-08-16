@@ -32,8 +32,12 @@ export const TEST_ROUTES = [
 ] as const satisfies readonly SiteRoute[];
 
 export function getTestRoutes(locale: Locale): readonly SiteRoute[] {
-  const prefix = locale === "zh" ? "/zh" : "";
-  const allTestsLabel = locale === "zh" ? "全部屏幕测试" : "All screen tests";
+  const prefix = locale === "en" ? "" : `/${locale}`;
+  const allTestsLabel = {
+    en: "All screen tests",
+    zh: "全部屏幕测试",
+    de: "Alle Bildschirmtests",
+  }[locale];
   const englishOnlyRoutes =
     locale === "en"
       ? [{ href: "/touch-screen-test" as const, label: "Touch Screen Test" }]

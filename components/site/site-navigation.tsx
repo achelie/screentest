@@ -6,7 +6,7 @@ import { useCallback, useEffect, useId, useRef, useState } from "react";
 
 import Link from "@/components/site/no-prefetch-link";
 import { LanguageSwitcher } from "@/components/site/language-switcher";
-import type { Locale, NavigationMessages } from "@/lib/i18n";
+import { localizePath, type Locale, type NavigationMessages } from "@/lib/i18n";
 
 type ToolRoute = {
   readonly href: `/${string}`;
@@ -21,6 +21,8 @@ type SiteNavigationProps = {
 
 export function SiteNavigation({ tools, locale, messages }: SiteNavigationProps) {
   const pathname = usePathname();
+  const guidesPath = localizePath("/guides", locale);
+  const guidedPath = localizePath("/tests/guided", locale);
   const navigationRef = useRef<HTMLElement>(null);
   const desktopToolsButtonRef = useRef<HTMLButtonElement>(null);
   const mobileMenuButtonRef = useRef<HTMLButtonElement>(null);
@@ -136,14 +138,14 @@ export function SiteNavigation({ tools, locale, messages }: SiteNavigationProps)
           ) : null}
         </div>
         <Link
-          aria-current={pathname === (locale === "zh" ? "/zh/guides" : "/guides") ? "page" : undefined}
-          data-active={pathname.startsWith(locale === "zh" ? "/zh/guides" : "/guides")}
-          href={locale === "zh" ? "/zh/guides" : "/guides"}
+          aria-current={pathname === guidesPath ? "page" : undefined}
+          data-active={pathname.startsWith(guidesPath)}
+          href={guidesPath}
         >
           {messages.guides}
         </Link>
         <LanguageSwitcher locale={locale} messages={messages} />
-        <Link className="nav-start" href={locale === "zh" ? "/zh/tests/guided" : "/tests/guided"}>
+        <Link className="nav-start" href={guidedPath}>
           {messages.startCheck}
         </Link>
       </div>
@@ -186,10 +188,10 @@ export function SiteNavigation({ tools, locale, messages }: SiteNavigationProps)
             </div>
           ) : null}
           <Link
-            aria-current={pathname === (locale === "zh" ? "/zh/guides" : "/guides") ? "page" : undefined}
+            aria-current={pathname === guidesPath ? "page" : undefined}
             className="mobile-nav-row"
-            data-active={pathname.startsWith(locale === "zh" ? "/zh/guides" : "/guides")}
-            href={locale === "zh" ? "/zh/guides" : "/guides"}
+            data-active={pathname.startsWith(guidesPath)}
+            href={guidesPath}
             onClick={closeAllMenus}
           >
             {messages.guides}
@@ -197,7 +199,7 @@ export function SiteNavigation({ tools, locale, messages }: SiteNavigationProps)
           <LanguageSwitcher locale={locale} messages={messages} mobile />
           <Link
             className="mobile-nav-row mobile-nav-start"
-            href={locale === "zh" ? "/zh/tests/guided" : "/tests/guided"}
+            href={guidedPath}
             onClick={closeAllMenus}
           >
             {messages.startCheck}

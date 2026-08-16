@@ -5,6 +5,7 @@ import {
   getDictionary,
   localeConfig,
   localizedAlternates,
+  LOCALES,
   type Locale,
 } from "@/lib/i18n";
 import { siteConfig, SITE_URL } from "@/lib/site";
@@ -12,7 +13,9 @@ import { siteConfig, SITE_URL } from "@/lib/site";
 export function createRootMetadata(locale: Locale): Metadata {
   const copy = getDictionary(locale).rootMetadata;
   const homeUrl = absoluteLocalizedUrl(locale);
-  const otherLocale = locale === "en" ? "zh_CN" : "en_US";
+  const alternateLocales = LOCALES.filter((candidate) => candidate !== locale).map(
+    (candidate) => localeConfig[candidate].ogLocale,
+  );
 
   return {
     metadataBase: new URL(SITE_URL),
@@ -24,7 +27,10 @@ export function createRootMetadata(locale: Locale): Metadata {
       languages: localizedAlternates("/"),
     },
     icons: { icon: "/icon.svg" },
-    manifest: locale === "zh" ? "/zh/manifest.webmanifest" : "/manifest.webmanifest",
+    manifest:
+      locale === "en"
+        ? "/manifest.webmanifest"
+        : `${localeConfig[locale].pathPrefix}/manifest.webmanifest`,
     openGraph: {
       type: "website",
       url: homeUrl,
@@ -32,7 +38,7 @@ export function createRootMetadata(locale: Locale): Metadata {
       title: copy.ogTitle,
       description: copy.ogDescription,
       locale: localeConfig[locale].ogLocale,
-      alternateLocale: [otherLocale],
+      alternateLocale: alternateLocales,
       images: [{ url: "/opengraph-image.png", width: 1536, height: 1024, alt: copy.ogImageAlt }],
     },
     twitter: {

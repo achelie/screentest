@@ -2,14 +2,20 @@
 
 import { useEffect } from "react";
 import { ArrowRight } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 import Link from "@/components/site/no-prefetch-link";
-import type { Locale } from "@/lib/i18n";
+import { isLocalizedLocale, localizePath, type Locale } from "@/lib/i18n";
 import { STATE_MESSAGES } from "@/lib/state-messages";
 
 function localePath(path: string, locale: Locale) {
-  if (locale === "en") return path;
-  return path === "/" ? "/zh" : `/zh${path}`;
+  return localizePath(path, locale);
+}
+
+function useRouteLocale(): Locale {
+  const pathname = usePathname();
+  const segment = pathname.split("/")[1];
+  return isLocalizedLocale(segment) ? segment : "en";
 }
 
 export function LocalizedNotFound({ locale }: { locale: Locale }) {
@@ -71,4 +77,22 @@ export function LocalizedLoading({ locale }: { locale: Locale }) {
       </div>
     </div>
   );
+}
+
+export function RouteLocalizedNotFound() {
+  const locale = useRouteLocale();
+  return <LocalizedNotFound locale={locale} />;
+}
+
+export function RouteLocalizedError(props: {
+  error: Error & { digest?: string };
+  reset: () => void;
+}) {
+  const locale = useRouteLocale();
+  return <LocalizedError {...props} locale={locale} />;
+}
+
+export function RouteLocalizedLoading() {
+  const locale = useRouteLocale();
+  return <LocalizedLoading locale={locale} />;
 }

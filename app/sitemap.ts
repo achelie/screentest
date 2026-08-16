@@ -7,7 +7,12 @@ import {
   TEST_ROUTES,
   type SiteRoute,
 } from "@/lib/site";
-import { absoluteLocalizedUrl, localizedAlternates } from "@/lib/i18n";
+import {
+  absoluteLocalizedUrl,
+  localizedAlternates,
+  LOCALES,
+  type Locale,
+} from "@/lib/i18n";
 
 function routeLastModified(route: SiteRoute) {
   return "lastModified" in route ? route.lastModified : undefined;
@@ -16,7 +21,7 @@ function routeLastModified(route: SiteRoute) {
 export default function sitemap(): MetadataRoute.Sitemap {
   const pairedEntry = (
     path: string,
-    locale: "en" | "zh",
+    locale: Locale,
     priority: number,
     changeFrequency: "weekly" | "monthly",
     modified = SITE_LAST_MODIFIED,
@@ -43,35 +48,28 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   });
 
-  const pairedTests = TEST_ROUTES.filter(
+  const localizedTests = TEST_ROUTES.filter(
     (route) => route.href !== "/touch-screen-test",
-  ).flatMap((route) => [
-    pairedEntry(
-      route.href,
-      "en",
-      route.href === "/tests" ? 0.9 : 0.8,
-      "monthly",
-      routeLastModified(route),
+  ).flatMap((route) =>
+    LOCALES.map((locale) =>
+      pairedEntry(
+        route.href,
+        locale,
+        route.href === "/tests" ? 0.9 : 0.8,
+        "monthly",
+        routeLastModified(route),
+      ),
     ),
-    pairedEntry(
-      route.href,
-      "zh",
-      route.href === "/tests" ? 0.9 : 0.8,
-      "monthly",
-      routeLastModified(route),
-    ),
-  ]);
+  );
 
   return [
-    pairedEntry("/", "en", 1, "weekly"),
-    pairedEntry("/", "zh", 1, "weekly"),
-    ...pairedTests,
+    ...LOCALES.map((locale) => pairedEntry("/", locale, 1, "weekly")),
+    ...localizedTests,
     englishOnlyEntry(
       TEST_ROUTES.find((route) => route.href === "/touch-screen-test")!,
       0.8,
     ),
-    pairedEntry("/guides", "en", 0.8, "monthly"),
-    pairedEntry("/guides", "zh", 0.8, "monthly"),
+    ...LOCALES.map((locale) => pairedEntry("/guides", locale, 0.8, "monthly")),
     ...GUIDE_ROUTES.filter((route) => route.href !== "/guides").map((route) => ({
       url: absoluteUrl(route.href),
       lastModified: new Date(

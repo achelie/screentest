@@ -25,4 +25,16 @@ export const STATE_MESSAGES = {
     tryAgain: "重新加载此页面",
     loading: "正在加载屏幕测试",
   },
+  de: {
+    notFoundCode: "FEHLER / 404",
+    notFoundTitle: "Dieser Pixel liegt außerhalb des Panels.",
+    notFoundBody: "Die Seite wurde verschoben, gelöscht oder hat nie existiert.",
+    openTests: "Alle Tests öffnen",
+    backHome: "Zur Startseite",
+    errorCode: "TEST UNTERBROCHEN",
+    errorTitle: "Die Seite hat ein schlechtes Signal erwischt.",
+    errorBody: "Deine Testergebnisse wurden weder hochgeladen noch gespeichert.",
+    tryAgain: "Seite erneut laden",
+    loading: "Bildschirmtest wird geladen",
+  },
 } as const satisfies Record<Locale, Record<string, string>>;

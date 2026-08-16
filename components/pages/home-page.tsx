@@ -7,6 +7,7 @@ import Link from "@/components/site/no-prefetch-link";
 import {
   absoluteLocalizedUrl,
   getDictionary,
+  localeConfig,
   localizePath,
   type Locale,
 } from "@/lib/i18n";
@@ -25,7 +26,7 @@ export function createHomeMetadata(locale: Locale): Metadata {
       title: copy.metadataTitle,
       description: copy.metadataDescription,
       url: absoluteLocalizedUrl(locale),
-      locale: locale === "zh" ? "zh_CN" : "en_US",
+      locale: localeConfig[locale].ogLocale,
       type: "website",
     },
   };
@@ -42,7 +43,7 @@ export async function HomePageContent({ locale }: { locale: Locale }) {
       "@context": "https://schema.org",
       "@type": "WebSite",
       name: "ScreenTestHub",
-      inLanguage: locale === "zh" ? "zh-CN" : "en-US",
+      inLanguage: localeConfig[locale].htmlLang,
       url: homeUrl,
       description: home.websiteDescription,
     },
@@ -50,9 +51,9 @@ export async function HomePageContent({ locale }: { locale: Locale }) {
       "@context": "https://schema.org",
       "@type": "WebApplication",
       name: "ScreenTestHub",
-      inLanguage: locale === "zh" ? "zh-CN" : "en-US",
+      inLanguage: localeConfig[locale].htmlLang,
       applicationCategory: "UtilitiesApplication",
-      operatingSystem: locale === "zh" ? "支持现代浏览器的设备" : "Any device with a modern browser",
+      operatingSystem: dictionary.testPage.operatingSystem,
       url: guidedUrl,
       offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
       description: home.appDescription,
@@ -60,7 +61,7 @@ export async function HomePageContent({ locale }: { locale: Locale }) {
     {
       "@context": "https://schema.org",
       "@type": "FAQPage",
-      inLanguage: locale === "zh" ? "zh-CN" : "en-US",
+      inLanguage: localeConfig[locale].htmlLang,
       mainEntity: home.faqs.map((item) => ({
         "@type": "Question",
         name: item.question,
@@ -144,7 +145,7 @@ export async function HomePageContent({ locale }: { locale: Locale }) {
               <Link className="guide-row" href={`/guides/${guide.slug}`} key={guide.slug}>
                 <ArrowRight aria-hidden="true" size={17} strokeWidth={1.7} />
                 <h3 lang="en">{guide.title}</h3>
-                <span>{guide.readingMinutes} {common.minutesShort}{locale === "zh" ? ` / ${common.englishContent}` : ""}</span>
+                <span>{guide.readingMinutes} {common.minutesShort}{locale !== "en" ? ` / ${common.englishContent}` : ""}</span>
               </Link>
             ))}
           </div>

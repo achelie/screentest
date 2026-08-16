@@ -3,7 +3,7 @@ import { ArrowUpRight, Clock3 } from "lucide-react";
 
 import Link from "@/components/site/no-prefetch-link";
 import { getAllGuides } from "@/lib/guides";
-import { absoluteLocalizedUrl, getDictionary, type Locale } from "@/lib/i18n";
+import { absoluteLocalizedUrl, getDictionary, localeConfig, type Locale } from "@/lib/i18n";
 import { pairedAlternates } from "@/lib/localized-metadata";
 
 export function createGuidesMetadata(locale: Locale): Metadata {
@@ -18,13 +18,13 @@ export function createGuidesMetadata(locale: Locale): Metadata {
       description: copy.ogDescription,
       type: "website",
       url,
-      locale: locale === "zh" ? "zh_CN" : "en_US",
+      locale: localeConfig[locale].ogLocale,
     },
   };
 }
 
 function formatDate(value: string, locale: Locale) {
-  return new Intl.DateTimeFormat(locale === "zh" ? "zh-CN" : "en-US", {
+  return new Intl.DateTimeFormat(localeConfig[locale].htmlLang, {
     month: locale === "zh" ? "numeric" : "short",
     day: "numeric",
     year: "numeric",
@@ -41,7 +41,7 @@ export async function GuidesPageContent({ locale }: { locale: Locale }) {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
     name: copy.metadataTitle,
-    inLanguage: locale === "zh" ? "zh-CN" : "en-US",
+    inLanguage: localeConfig[locale].htmlLang,
     description: copy.collectionDescription,
     url: canonicalUrl,
     hasPart: guides.map((guide) => ({
@@ -72,7 +72,7 @@ export async function GuidesPageContent({ locale }: { locale: Locale }) {
                   <span lang="en"><span className="block text-2xl font-semibold tracking-[-0.025em] sm:text-3xl">{guide.title}</span><span className="mt-3 block max-w-[46rem] leading-7 text-[var(--muted)]">{guide.description}</span></span>
                   <span className="flex items-center gap-5 text-sm text-[var(--muted)] sm:justify-end">
                     <span className="inline-flex items-center gap-2 whitespace-nowrap"><Clock3 aria-hidden="true" size={16} strokeWidth={1.7} />{guide.readingMinutes} {dictionary.common.minutesShort}</span>
-                    {locale === "zh" ? <span className="english-content-note">{dictionary.common.englishContent}</span> : null}
+                    {locale !== "en" ? <span className="english-content-note">{dictionary.common.englishContent}</span> : null}
                     <span className="sr-only">{copy.updated} {formatDate(guide.updated, locale)}</span>
                     <ArrowUpRight aria-hidden="true" className="text-[var(--accent)] transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-1 group-hover:translate-x-1" size={22} strokeWidth={1.7} />
                   </span>

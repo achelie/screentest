@@ -1,2 +1,2 @@
-import { LocalizedLoading } from "@/components/site/localized-states";
-export default function Loading() { return <LocalizedLoading locale="zh" />; }
+import { RouteLocalizedLoading } from "@/components/site/localized-states";
+export default function Loading() { return <RouteLocalizedLoading />; }

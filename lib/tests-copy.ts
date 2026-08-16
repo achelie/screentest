@@ -263,4 +263,227 @@ const zh = {
   },
 } as const satisfies LocalizedTestCopy;
 
-export const TEST_COPY = { en, zh } as const satisfies Record<Locale, LocalizedTestCopy>;
+const de = {
+  guided: {
+    name: "Geführter Bildschirmtest",
+    shortName: "Geführter Test",
+    seoTitle: "Geführter Bildschirmtest: Monitor online prüfen",
+    description:
+      "Prüfe deinen Bildschirm kostenlos im Browser auf Pixelfehler, Backlight Bleeding, Graustufen, Gleichmäßigkeit, Banding, Farben und Bewegung.",
+    intro: "Sechs schnelle Prüfungen. Markiere Auffälligkeiten und erhalte eine klare Zusammenfassung.",
+    duration: "Etwa 2 Minuten",
+    preparation: [
+      "Reinige zuerst das Panel. Ein Krümel sieht überzeugend nach Pixelfehler aus.",
+      "Nutze die Helligkeit, die du im Alltag verwendest.",
+      "Öffne Vollbild, sobald du die Ränder genau prüfen möchtest.",
+    ],
+    observations: [
+      {
+        signal: "Ein Punkt bleibt bei mehreren Farben unverändert",
+        meaning: "Es könnte ein Pixelfehler oder ein festhängender Subpixel sein.",
+      },
+      {
+        signal: "Graue Flächen wirken wolkig oder verfärbt",
+        meaning: "Das Panel könnte ein Problem mit der Gleichmäßigkeit haben.",
+      },
+      {
+        signal: "Ein weicher Farbton zerfällt in sichtbare Streifen",
+        meaning: "Möglicherweise siehst du Banding in einem Farbverlauf.",
+      },
+      {
+        signal: "Das bewegte Ziel zieht eine dunkle oder helle Spur",
+        meaning: "Das Panel könnte Schlieren oder Überschwingen durch Overdrive zeigen.",
+      },
+    ],
+    limitation: "Dies ist eine Sichtprüfung im Browser, keine Messung mit Kolorimeter oder Laborgerät.",
+    guideLabel: "Englische Ratgeber für Bildschirmtests ansehen",
+  },
+  "dead-pixel": {
+    name: "Pixelfehler-Test",
+    shortName: "Pixelfehler",
+    seoTitle: "Pixelfehler-Test: Bildschirm online prüfen",
+    description:
+      "Finde tote Pixel und festhängende Subpixel mit Vollbildern in Weiß, Schwarz, Rot, Grün und Blau. Keine App nötig.",
+    intro: "Fülle den Bildschirm mit Vollfarben und suche nach einem Punkt, der sich nicht verändert.",
+    duration: "1-2 Minuten",
+    preparation: [
+      "Entferne Staub und Fingerabdrücke, bevor du beginnst.",
+      "Prüfe zuerst aus normalem Abstand und dann noch einmal aus der Nähe.",
+      "Sieh dir jede Farbe an, denn ein festhängender Subpixel kann auf einem Hintergrund unauffällig bleiben.",
+    ],
+    observations: [
+      {
+        signal: "Ein Pixel bleibt bei jeder Farbe schwarz",
+        meaning: "Wahrscheinlich leuchtet dieser tote Pixel nicht mehr.",
+      },
+      {
+        signal: "Ein Pixel bleibt rot, grün, blau oder weiß",
+        meaning: "Wahrscheinlicher ist ein festhängender Subpixel als ein vollständig toter Pixel.",
+      },
+      {
+        signal: "Die Stelle ist im Screenshot auf einem anderen Display sichtbar",
+        meaning: "Dann liegt das Problem im Bild oder in der Software, nicht in diesem Panel.",
+      },
+    ],
+    limitation:
+      "Ein Browser kann verdächtige Pixel sichtbar machen, aber weder Garantieansprüche bestätigen noch Panel-Hardware sicher reparieren.",
+    guideLabel: "Englischen Ratgeber zu Pixelfehlern lesen",
+  },
+  "backlight-bleed": {
+    name: "Test auf Backlight Bleeding",
+    shortName: "Backlight Bleeding",
+    seoTitle: "Backlight-Bleeding-Test: Schwarzes Vollbild",
+    description:
+      "Öffne in einem dunklen Raum ein schwarzes Vollbild und prüfe Monitor oder Laptop auf helle Ränder, wolkige Ecken und ungleichmäßige Beleuchtung.",
+    intro: "Zeige in einem dunklen Raum ein schwarzes Bild und prüfe die Ränder auf helle Stellen.",
+    duration: "Etwa 1 Minute",
+    preparation: [
+      "Dunkle den Raum ab, aber behalte deine übliche Bildschirmhelligkeit bei.",
+      "Sieh aus deiner normalen Sitzposition gerade auf das Panel.",
+      "Blende die Steuerung aus, damit ihr Licht das Ergebnis nicht verfälscht.",
+    ],
+    observations: [
+      {
+        signal: "Eine helle Stelle bleibt an einem Rand oder in einer Ecke",
+        meaning: "Das kann Backlight Bleeding sein, besonders wenn die Stelle beim Bewegen des Kopfes fest bleibt.",
+      },
+      {
+        signal: "Das Leuchten verändert sich mit deinem Blickwinkel",
+        meaning: "Dann handelt es sich eher um Blickwinkel-Glow als um festes Backlight Bleeding.",
+      },
+      {
+        signal: "Ein Handyfoto wirkt schlimmer als der Eindruck mit eigenen Augen",
+        meaning: "Die Kameraautomatik kann das Leuchten übertreiben. Beurteile zuerst, was du direkt siehst.",
+      },
+    ],
+    limitation:
+      "Der Test hilft beim Vergleichen sichtbarer Stellen. Paneltyp, Blickwinkel, Raumlicht und Kameraeinstellungen beeinflussen das Ergebnis.",
+    guideLabel: "Englischen Ratgeber zu Backlight Bleeding lesen",
+  },
+  grayscale: {
+    name: "Test für Graustufen und Gleichmäßigkeit",
+    shortName: "Graustufen",
+    seoTitle: "Bildschirm-Gleichmäßigkeit testen: Graustufen im Vollbild",
+    description:
+      "Prüfe die Bildschirmgleichmäßigkeit mit Graustufen von 5%, 10%, 25%, 50%, 75% und 100%, direkt im Browser erzeugt.",
+    intro: "Wechsle durch mehrere Graustufen und achte auf Wolken, Farbstiche oder Dirty Screen Effect.",
+    duration: "1-2 Minuten",
+    preparation: [
+      "Lass das Display kurz warm werden, wenn du es gerade eingeschaltet hast.",
+      "Nutze deine normale Helligkeit und sitze direkt vor dem Panel.",
+      "Prüfe bei jeder Graustufe die Mitte, Ränder und Ecken.",
+    ],
+    observations: [
+      {
+        signal: "Graue Flächen zeigen dunklere wolkige Stellen",
+        meaning: "Das kann auf Helligkeitsunterschiede oder Dirty Screen Effect hindeuten.",
+      },
+      {
+        signal: "Ein Bereich wirkt rosa, grün oder blau",
+        meaning: "Das Panel könnte eine ungleichmäßige Farbtönung haben.",
+      },
+      {
+        signal: "Nur sehr dunkles Grau wirkt ungleichmäßig",
+        meaning: "Das Verhalten nahe Schwarz hängt vom Paneltyp ab und kann sich nach dem Aufwärmen verbessern.",
+      },
+    ],
+    limitation:
+      "Gleichmäßigkeit hängt von Blickwinkel und Paneltechnik ab. Vergleiche das Ergebnis mit deiner echten Nutzung, nicht nur mit einem Foto.",
+    guideLabel: "Englischen Ratgeber zur Bildschirmgleichmäßigkeit lesen",
+  },
+  gradient: {
+    name: "Test auf Banding in Farbverläufen",
+    shortName: "Banding",
+    seoTitle: "Farbverlauf-Test: Monitor auf Banding prüfen",
+    description:
+      "Zeige weiche neutrale, rote, grüne und blaue Farbverläufe, um sichtbare Streifen, harte Stufen und Farbsprünge zu finden.",
+    intro: "Prüfe weiche Farbverläufe auf plötzliche Streifen, Blöcke oder Farbsprünge.",
+    duration: "Etwa 1 Minute",
+    preparation: [
+      "Schalte ungewöhnliche Kontrast- oder Farbverbesserungen nach Möglichkeit aus.",
+      "Prüfe horizontale und vertikale Verläufe.",
+      "Beginne neutral und vergleiche danach Rot, Grün und Blau.",
+    ],
+    observations: [
+      {
+        signal: "Ein weicher Verlauf zerfällt in harte Streifen",
+        meaning: "Dann entsteht irgendwo in der Anzeige- oder Renderkette sichtbares Banding.",
+      },
+      {
+        signal: "Banding erscheint nur in einem Farbkanal",
+        meaning: "Eine Farbeinstellung oder das Verhalten dieses Kanals im Panel könnte beteiligt sein.",
+      },
+      {
+        signal: "Die Streifen ändern sich nach einem Wechsel des Bildmodus",
+        meaning: "Farbtiefe, Farbbereich oder Bildverarbeitung könnten das Ergebnis beeinflussen.",
+      },
+    ],
+    limitation:
+      "Farbmanagement im Browser, Betriebssystemeinstellungen, Farbtiefe und Panelverarbeitung können einen Verlauf beeinflussen.",
+    guideLabel: "Englische Ratgeber für Bildschirmtests ansehen",
+  },
+  motion: {
+    name: "Test für Bewegung und Schlieren",
+    shortName: "Bewegung",
+    seoTitle: "Monitor-Bewegungstest: Schlieren und Unschärfe prüfen",
+    description:
+      "Beobachte ein bewegtes Ziel bei mehreren Geschwindigkeiten und prüfe den Monitor auf Schlieren, dunkles Verschmieren, helle Spuren und unruhige Bewegung.",
+    intro: "Folge einem bewegten Ziel und achte auf Spuren, Verschmieren oder ungleichmäßige Bewegung.",
+    duration: "Etwa 1 Minute",
+    preparation: [
+      "Nutze deine übliche Bildwiederholrate und Overdrive-Einstellung.",
+      "Beginne mit 240 px/s und erhöhe danach die Geschwindigkeit.",
+      "Folge dem Ziel mit den Augen, statt auf den Bildschirmrand zu schauen.",
+    ],
+    observations: [
+      {
+        signal: "Eine dunkle Spur folgt dem Ziel",
+        meaning: "Langsame Pixelübergänge können sichtbares Verschmieren verursachen.",
+      },
+      {
+        signal: "Ein heller oder invertierter Saum folgt dem Ziel",
+        meaning: "Der Overdrive des Displays könnte über das Ziel hinausschießen.",
+      },
+      {
+        signal: "Die Bewegung springt oder stockt",
+        meaning: "Browserlast, Frame-Pacing oder die konfigurierte Bildwiederholrate könnten beteiligt sein.",
+      },
+    ],
+    limitation:
+      "Dieser Browser-Test hilft dir, Bewegungsverhalten zu sehen. Er ist keine Labormessung der Reaktionszeit.",
+    guideLabel: "Englischen Ratgeber zu Bewegungsunschärfe lesen",
+  },
+  color: {
+    name: "Monitor-Farbtest",
+    shortName: "Farben",
+    seoTitle: "Monitor-Farbtest: RGB und CMY im Vollbild",
+    description:
+      "Zeige Rot, Grün, Blau, Cyan, Magenta, Gelb, Schwarz und Weiß im Vollbild, um Pixel, Farbstiche und Farbgleichmäßigkeit zu prüfen.",
+    intro: "Zeige Primär- und Sekundärfarben im Vollbild, ohne Bildkompression.",
+    duration: "1-2 Minuten",
+    preparation: [
+      "Schalte Blaulichtfilter oder Nachtmodus aus, wenn du neutral vergleichen möchtest.",
+      "Wechsle zuerst manuell. Der automatische Durchlauf ist optional.",
+      "Vergleiche Bereiche desselben Displays. Zwei unkalibrierte Geräte sind kein exakter Maßstab.",
+    ],
+    observations: [
+      {
+        signal: "Ein Punkt bleibt in der falschen Farbe",
+        meaning: "Ein Subpixel könnte festhängen oder nicht mehr reagieren.",
+      },
+      {
+        signal: "Eine Vollfarbe wirkt fleckig oder verfärbt",
+        meaning: "Das Panel könnte Unterschiede bei Farbe oder Helligkeit zeigen.",
+      },
+      {
+        signal: "Zwei Displays zeigen unterschiedliche Farben",
+        meaning: "Verschiedene Presets und Kalibrierungen können das verursachen, auch wenn beide Panels funktionieren.",
+      },
+    ],
+    limitation:
+      "Vollfarben machen Unterschiede sichtbar, kalibrieren aber kein Display und messen keine Farbgenauigkeit.",
+    guideLabel: "Englische Ratgeber für Bildschirmtests ansehen",
+  },
+} as const satisfies LocalizedTestCopy;
+
+export const TEST_COPY = { en, zh, de } as const satisfies Record<Locale, LocalizedTestCopy>;

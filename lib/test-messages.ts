@@ -229,9 +229,135 @@ const ZH_TEST_MESSAGES = {
   },
 } as const satisfies TestMessages;
 
+const DE_TEST_MESSAGES = {
+  fullscreen: {
+    controlsLabel: "Steuerung für {name}",
+    shortcutSummary: "F Vollbild, H Steuerung ausblenden",
+    previous: "Zurück",
+    previousLabel: "Vorheriges Muster anzeigen",
+    next: "Weiter",
+    nextLabel: "Nächstes Muster anzeigen",
+    hideControls: "Steuerung ausblenden",
+    exitFullscreen: "Vollbild beenden",
+    enterFullscreen: "Vollbild öffnen",
+    unavailable:
+      "Vollbild ist in diesem Browser nicht verfügbar. Der Test funktioniert weiterhin im Bereich oben.",
+    unavailableHere:
+      "Vollbild ist hier nicht verfügbar. Der Test funktioniert weiterhin auf dieser Seite.",
+    refused:
+      "Der Browser hat Vollbild abgelehnt. Versuche die Schaltfläche erneut oder nutze den Vollbildbefehl des Browsers.",
+    keyboardHelp:
+      "Drücke F für Vollbild und H, um die Steuerung auszublenden. Mit den Pfeiltasten wechselst du verfügbare Muster. Eine Zeigerbewegung blendet die Steuerung wieder ein.",
+    clickHelp: "Klicke auf die Vollbild-Testfläche, um das nächste Muster anzuzeigen.",
+  },
+  colorCycle: {
+    deadPixelName: "Pixelfehler-Test",
+    colorName: "Monitor-Farbtest",
+    testColor: "Testfarbe",
+    manual: "Manueller Modus.",
+    cycling: "Wechsel alle {seconds} Sekunden.",
+    surface: "Vollbild-Testmuster in {color}",
+    pause: "Wechsel pausieren",
+    auto: "Automatisch wechseln",
+    interval: "Wechselintervall",
+    oneSecond: "1 Sekunde",
+    onePointFiveSeconds: "1,5 Sekunden",
+    twoPointFiveSeconds: "2,5 Sekunden",
+    colors: ["Weiß", "Schwarz", "Rot", "Grün", "Blau", "Cyan", "Magenta", "Gelb"],
+  },
+  backlight: {
+    name: "Test auf Backlight Bleeding",
+    status: "Schwarzes Muster. Blende die Steuerung für eine saubere Randprüfung aus.",
+    surface: "Vollbild in reinem Schwarz zum Prüfen von Backlight Bleeding",
+    title: "Sieh gerade auf das Panel",
+    detail: "Deine normale Helligkeit ist aussagekräftiger als erzwungene 100 Prozent.",
+  },
+  gray: {
+    name: "Test für Graustufen und Gleichmäßigkeit",
+    status: "{level}% Grau. Achte auf Farbstiche, wolkige Stellen und dunklere Ränder.",
+    surface: "Vollbildmuster mit {level}% Grau zur Prüfung der Gleichmäßigkeit",
+    levelLabel: "Graustufe",
+  },
+  gradient: {
+    name: "Test auf Banding in Farbverläufen",
+    status: "{channel}, {orientation}. Achte auf harte Streifen oder plötzliche Farbsprünge.",
+    surface: "Vollbildverlauf ab Schwarz: {channel}, {orientation}",
+    channelLabel: "Farbkanal",
+    directionLabel: "Verlaufsrichtung",
+    channels: ["Neutral", "Rot", "Grün", "Blau"],
+    horizontal: "Horizontal",
+    vertical: "Vertikal",
+  },
+  motion: {
+    name: "Test für Bewegung und Schlieren",
+    running: "Läuft",
+    paused: "Pausiert",
+    status: "{state} mit {speed} px/s.",
+    surface: "Bewegtes kontrastreiches Ziel mit {speed} Pixeln pro Sekunde",
+    pause: "Ziel pausieren",
+    start: "Ziel starten",
+    speedLabel: "Zielgeschwindigkeit",
+    reduced:
+      "Dein Gerät verlangt reduzierte Bewegung, deshalb ist das Ziel pausiert. Starte es erst, wenn du für das bewegte Testmuster bereit bist.",
+  },
+  guided: {
+    name: "Geführter Bildschirmtest",
+    steps: [
+      {
+        name: "Weiß",
+        prompt: "Achte auf dunkle Punkte, Staub, matte Stellen und verfärbte Ränder.",
+        surface: "Vollbild-Prüfmuster in reinem Weiß",
+      },
+      {
+        name: "Schwarz",
+        prompt: "Achte in einem dunklen Raum auf helle Ränder und wolkige Ecken.",
+        surface: "Vollbild-Prüfmuster in reinem Schwarz",
+      },
+      {
+        name: "RGB",
+        prompt: "Prüfe, ob ein fester Punkt die Farbe seines Bereichs nicht annimmt.",
+        surface: "Vollbild-Prüfmuster in Rot, Grün und Blau",
+      },
+      {
+        name: "Grau",
+        prompt: "Suche nach wolkigen Stellen, Farbstichen und ungleichmäßiger Helligkeit.",
+        surface: "Vollbildmuster mit 50% Grau zur Prüfung der Gleichmäßigkeit",
+      },
+      {
+        name: "Verlauf",
+        prompt: "Ein weicher Verlauf sollte nicht in harte Streifen oder Blöcke zerfallen.",
+        surface: "Neutrales Vollbildmuster zum Prüfen von Banding",
+      },
+      {
+        name: "Bewegung",
+        prompt: "Folge dem Ziel und achte auf dunkle Schlieren oder helle Säume.",
+        surface: "Bewegtes kontrastreiches Ziel mit 480 Pixeln pro Sekunde",
+      },
+    ],
+    status: "{name}, {current} von {total}.",
+    recordLabel: "Ergebnis dieser Prüfung festhalten",
+    looksNormal: "Sieht normal aus",
+    noticed: "Etwas aufgefallen",
+    skip: "Überspringen",
+    skipped: "Übersprungen",
+    notChecked: "Nicht geprüft",
+    pause: "Ziel pausieren",
+    start: "Ziel starten",
+    summaryNone: "Nichts Auffälliges gefunden.",
+    summaryOne: "Eine Prüfung solltest du genauer ansehen.",
+    summaryMany: "{count} Prüfungen solltest du genauer ansehen.",
+    summaryBody:
+      "Diese Zusammenfassung bleibt in diesem Tab. Sie ist eine Sichtprüfung, keine Hardwarediagnose. Prüfe verdächtige Stellen noch einmal mit dem passenden Einzeltest.",
+    runAgain: "Erneut testen",
+    reduced:
+      "Dein Gerät verlangt reduzierte Bewegung, deshalb ist das Ziel pausiert. Starte es erst, wenn du für das bewegte Muster bereit bist.",
+  },
+} as const satisfies TestMessages;
+
 const TEST_MESSAGES = {
   en: EN_TEST_MESSAGES,
   zh: ZH_TEST_MESSAGES,
+  de: DE_TEST_MESSAGES,
 } as const satisfies Record<Locale, TestMessages>;
 
 export function getTestMessages(locale: Locale): TestMessages {

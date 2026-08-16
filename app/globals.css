@@ -160,36 +160,37 @@ a {
   min-height: 2.75rem;
   align-items: center;
   margin-inline: 0.1rem;
+  padding: 0.28rem;
   border-left: 1px solid var(--line);
   border-right: 1px solid var(--line);
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.03em;
 }
 
-.language-options {
+.language-select-shell {
   display: inline-flex;
   align-items: center;
 }
 
-.site-nav .language-switcher a {
-  display: inline-flex;
-  min-width: 2.45rem;
-  min-height: 2.75rem;
-  align-items: center;
-  justify-content: center;
-  padding: 0.45rem 0.38rem;
-}
-
-.site-nav .language-switcher a[data-active="true"] {
-  color: var(--accent-deep);
+.site-nav .language-switcher select {
+  width: 8.6rem;
+  min-height: 2.18rem;
+  padding: 0.35rem 0.5rem;
+  border: 0;
+  border-bottom: 2px solid var(--accent);
+  border-radius: 0;
+  color: var(--ink);
   background: color-mix(in srgb, var(--paper-strong) 72%, transparent);
-  box-shadow: inset 0 -2px 0 var(--accent);
+  font: 700 0.76rem/1 var(--font-mono);
+  cursor: pointer;
 }
 
-.language-divider {
-  color: var(--line-strong);
-  user-select: none;
+.site-nav .language-switcher select:hover {
+  color: var(--accent-deep);
+  background: var(--paper-strong);
+}
+
+.site-nav .language-switcher select:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 .language-switcher-label {
@@ -1078,16 +1079,16 @@ a {
     min-height: 3.25rem;
     justify-content: space-between;
     margin: 0;
-    padding-left: 0.75rem;
+    padding: 0.38rem 0.75rem;
     border-right: 0;
     border-left: 0;
     border-top: 1px solid var(--line);
     border-bottom: 1px solid var(--line);
   }
 
-  .site-nav .language-switcher-mobile a {
-    min-width: 3.25rem;
-    min-height: 3rem;
+  .site-nav .language-switcher-mobile select {
+    width: 10.5rem;
+    min-height: 2.75rem;
   }
 
   .hero-grid,
