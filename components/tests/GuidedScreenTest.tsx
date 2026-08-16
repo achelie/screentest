@@ -14,63 +14,14 @@ import { FullscreenTest } from "./FullscreenTest";
 import { MovingTarget } from "./MovingTarget";
 import styles from "./ScreenTests.module.css";
 import { usePrefersReducedMotion } from "./usePrefersReducedMotion";
+import type { TestMessages } from "@/lib/test-messages";
 
 type GuidedStepId = "white" | "black" | "rgb" | "gray" | "gradient" | "motion";
 type GuidedAnswer = "normal" | "issue" | "skipped";
 
-type GuidedStep = {
-  readonly id: GuidedStepId;
-  readonly name: string;
-  readonly prompt: string;
-  readonly surfaceLabel: string;
-};
+const GUIDED_STEP_IDS: readonly GuidedStepId[] = ["white", "black", "rgb", "gray", "gradient", "motion"];
 
-const GUIDED_STEPS: readonly GuidedStep[] = [
-  {
-    id: "white",
-    name: "White",
-    prompt: "Look for dark dots, dust, dim patches, and tinted edges.",
-    surfaceLabel: "Full-screen pure white inspection pattern",
-  },
-  {
-    id: "black",
-    name: "Black",
-    prompt: "In a dim room, look for bright edges and cloudy corners.",
-    surfaceLabel: "Full-screen pure black inspection pattern",
-  },
-  {
-    id: "rgb",
-    name: "RGB",
-    prompt: "Check whether any fixed dot refuses to match its color area.",
-    surfaceLabel: "Full-screen red, green, and blue inspection pattern",
-  },
-  {
-    id: "gray",
-    name: "Gray",
-    prompt: "Scan for cloudy patches, tint, and uneven brightness.",
-    surfaceLabel: "Full-screen 50% gray uniformity pattern",
-  },
-  {
-    id: "gradient",
-    name: "Gradient",
-    prompt: "A smooth ramp should not break into hard stripes or blocks.",
-    surfaceLabel: "Full-screen neutral gradient banding pattern",
-  },
-  {
-    id: "motion",
-    name: "Motion",
-    prompt: "Follow the target and watch for dark smears or bright halos.",
-    surfaceLabel: "Moving high-contrast target at 480 pixels per second",
-  },
-];
-
-const ANSWER_LABELS: Record<GuidedAnswer, string> = {
-  normal: "Looks normal",
-  issue: "Noticed something",
-  skipped: "Skipped",
-};
-
-export function GuidedScreenTest() {
+export function GuidedScreenTest({ messages }: { messages: Pick<TestMessages, "fullscreen" | "guided"> }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState<Partial<Record<GuidedStepId, GuidedAnswer>>>(
     {},
@@ -81,8 +32,9 @@ export function GuidedScreenTest() {
   const summaryTitleRef = useRef<HTMLHeadingElement>(null);
   const testRegionRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
-  const step = GUIDED_STEPS[currentIndex];
-  const currentAnswer = answers[step.id];
+  const stepId = GUIDED_STEP_IDS[currentIndex];
+  const step = messages.guided.steps[currentIndex];
+  const currentAnswer = answers[stepId];
 
   const issueCount = useMemo(
     () => Object.values(answers).filter((answer) => answer === "issue").length,
@@ -90,10 +42,10 @@ export function GuidedScreenTest() {
   );
 
   useEffect(() => {
-    if (step.id !== "motion" || prefersReducedMotion) {
+    if (stepId !== "motion" || prefersReducedMotion) {
       setMotionRunning(false);
     }
-  }, [prefersReducedMotion, step.id]);
+  }, [prefersReducedMotion, stepId]);
 
   useEffect(() => {
     const pauseWhenHidden = () => {
@@ -137,14 +89,14 @@ export function GuidedScreenTest() {
 
   const goNext = useCallback(() => {
     setMotionRunning(false);
-    setCurrentIndex((current) => Math.min(GUIDED_STEPS.length - 1, current + 1));
+    setCurrentIndex((current) => Math.min(GUIDED_STEP_IDS.length - 1, current + 1));
   }, []);
 
   const recordAnswer = (answer: GuidedAnswer) => {
-    setAnswers((current) => ({ ...current, [step.id]: answer }));
+    setAnswers((current) => ({ ...current, [stepId]: answer }));
     setMotionRunning(false);
 
-    if (currentIndex === GUIDED_STEPS.length - 1) {
+    if (currentIndex === GUIDED_STEP_IDS.length - 1) {
       setShowSummary(true);
     } else {
       setCurrentIndex((current) => current + 1);
@@ -164,21 +116,27 @@ export function GuidedScreenTest() {
       <section aria-labelledby="guided-result-title" className={styles.guidedSummary}>
         <h2 id="guided-result-title" ref={summaryTitleRef} tabIndex={-1}>
           {issueCount === 0
-            ? "Nothing obvious showed up."
-            : `${issueCount} ${issueCount === 1 ? "check needs" : "checks need"} a closer look.`}
+            ? messages.guided.summaryNone
+            : issueCount === 1
+              ? messages.guided.summaryOne
+              : messages.guided.summaryMany.replace("{count}", String(issueCount))}
         </h2>
         <p>
-          This summary stays in this tab. It is a visual check, not a hardware
-          diagnosis, so confirm anything suspicious with the focused test.
+          {messages.guided.summaryBody}
         </p>
 
         <div className={styles.summaryList}>
-          {GUIDED_STEPS.map((item) => {
-            const answer = answers[item.id];
+          {GUIDED_STEP_IDS.map((itemId, index) => {
+            const answer = answers[itemId];
+            const item = messages.guided.steps[index];
             return (
-              <div className={styles.summaryRow} key={item.id}>
+              <div className={styles.summaryRow} key={itemId}>
                 <strong>{item.name}</strong>
-                <span>{answer ? ANSWER_LABELS[answer] : "Not checked"}</span>
+                <span>{answer ? {
+                  normal: messages.guided.looksNormal,
+                  issue: messages.guided.noticed,
+                  skipped: messages.guided.skipped,
+                }[answer] : messages.guided.notChecked}</span>
               </div>
             );
           })}
@@ -186,7 +144,7 @@ export function GuidedScreenTest() {
 
         <button className={styles.summaryAction} onClick={runAgain} type="button">
           <RotateCcw aria-hidden="true" size={18} strokeWidth={1.8} />
-          Run again
+          {messages.guided.runAgain}
         </button>
       </section>
     );
@@ -195,11 +153,12 @@ export function GuidedScreenTest() {
   return (
     <div ref={testRegionRef} tabIndex={-1}>
       <FullscreenTest
-        name="Guided screen test"
-        onNext={currentIndex < GUIDED_STEPS.length - 1 ? goNext : undefined}
+        messages={messages.fullscreen}
+        name={messages.guided.name}
+        onNext={currentIndex < GUIDED_STEP_IDS.length - 1 ? goNext : undefined}
         onPrevious={currentIndex > 0 ? goPrevious : undefined}
-        status={`${step.name}, ${currentIndex + 1} of ${GUIDED_STEPS.length}.`}
-        surfaceLabel={step.surfaceLabel}
+        status={messages.guided.status.replace("{name}", step.name).replace("{current}", String(currentIndex + 1)).replace("{total}", String(GUIDED_STEP_IDS.length))}
+        surfaceLabel={step.surface}
         controls={
           <>
             <div className={styles.guidedPrompt}>
@@ -207,7 +166,7 @@ export function GuidedScreenTest() {
               <span>{step.prompt}</span>
             </div>
 
-            {step.id === "motion" ? (
+            {stepId === "motion" ? (
               <button
                 aria-pressed={motionRunning}
                 className={styles.toolButton}
@@ -220,11 +179,11 @@ export function GuidedScreenTest() {
                 ) : (
                   <Play aria-hidden="true" size={17} strokeWidth={1.8} />
                 )}
-                {motionRunning ? "Pause target" : "Start target"}
+                {motionRunning ? messages.guided.pause : messages.guided.start}
               </button>
             ) : null}
 
-            <div aria-label="Record this check" className={styles.guidedAnswers}>
+            <div aria-label={messages.guided.recordLabel} className={styles.guidedAnswers}>
               <button
                 aria-pressed={currentAnswer === "normal"}
                 className={styles.answerButton}
@@ -233,7 +192,7 @@ export function GuidedScreenTest() {
                 type="button"
               >
                 <Check aria-hidden="true" size={17} strokeWidth={1.8} />
-                Looks normal
+                {messages.guided.looksNormal}
               </button>
               <button
                 aria-pressed={currentAnswer === "issue"}
@@ -244,7 +203,7 @@ export function GuidedScreenTest() {
                 type="button"
               >
                 <TriangleAlert aria-hidden="true" size={17} strokeWidth={1.8} />
-                Noticed something
+                {messages.guided.noticed}
               </button>
               <button
                 aria-pressed={currentAnswer === "skipped"}
@@ -254,43 +213,42 @@ export function GuidedScreenTest() {
                 type="button"
               >
                 <SkipForward aria-hidden="true" size={17} strokeWidth={1.8} />
-                Skip
+                {messages.guided.skip}
               </button>
             </div>
           </>
         }
       >
-        {step.id === "white" ? (
+        {stepId === "white" ? (
           <div className={styles.solidPattern} style={{ backgroundColor: "#ffffff" }} />
         ) : null}
-        {step.id === "black" ? (
+        {stepId === "black" ? (
           <div className={styles.solidPattern} style={{ backgroundColor: "#000000" }} />
         ) : null}
-        {step.id === "rgb" ? (
+        {stepId === "rgb" ? (
           <div className={styles.rgbPattern}>
             <span />
             <span />
             <span />
           </div>
         ) : null}
-        {step.id === "gray" ? (
+        {stepId === "gray" ? (
           <div className={styles.solidPattern} style={{ backgroundColor: "#808080" }} />
         ) : null}
-        {step.id === "gradient" ? (
+        {stepId === "gradient" ? (
           <div
             className={styles.gradientPattern}
             style={{ backgroundImage: "linear-gradient(to right, #000000, #ffffff)" }}
           />
         ) : null}
-        {step.id === "motion" ? (
+        {stepId === "motion" ? (
           <MovingTarget running={motionRunning} speed={480} />
         ) : null}
       </FullscreenTest>
 
-      {step.id === "motion" && prefersReducedMotion ? (
+      {stepId === "motion" && prefersReducedMotion ? (
         <p className={styles.inlineNotice}>
-          Motion is paused because your device requests reduced motion. Start it
-          only when you are ready for the moving pattern.
+          {messages.guided.reduced}
         </p>
       ) : null}
     </div>

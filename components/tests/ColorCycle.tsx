@@ -5,9 +5,11 @@ import { useCallback, useEffect, useState } from "react";
 
 import { FullscreenTest } from "./FullscreenTest";
 import styles from "./ScreenTests.module.css";
+import type { TestMessages } from "@/lib/test-messages";
 
 type ColorCycleProps = {
   mode?: "dead-pixel" | "color";
+  messages: Pick<TestMessages, "fullscreen" | "colorCycle">;
 };
 
 const DEAD_PIXEL_COLORS = [
@@ -25,7 +27,7 @@ const COLOR_TEST_COLORS = [
   { name: "Yellow", value: "#ffff00" },
 ] as const;
 
-export function ColorCycle({ mode = "color" }: ColorCycleProps) {
+export function ColorCycle({ mode = "color", messages }: ColorCycleProps) {
   const colors = mode === "dead-pixel" ? DEAD_PIXEL_COLORS : COLOR_TEST_COLORS;
   const [activeIndex, setActiveIndex] = useState(0);
   const [automatic, setAutomatic] = useState(false);
@@ -65,18 +67,21 @@ export function ColorCycle({ mode = "color" }: ColorCycleProps) {
     setActiveIndex(index);
   };
 
-  const name = mode === "dead-pixel" ? "Dead pixel test" : "Monitor color test";
+  const name = mode === "dead-pixel" ? messages.colorCycle.deadPixelName : messages.colorCycle.colorName;
+  const colorName = messages.colorCycle.colors[activeIndex];
 
   return (
     <FullscreenTest
+      advanceOnSurfaceClick
+      messages={messages.fullscreen}
       name={name}
       onNext={showNext}
       onPrevious={showPrevious}
-      status={`${activeColor.name}. ${automatic ? `Cycling every ${intervalMs / 1000}s.` : "Manual mode."}`}
-      surfaceLabel={`Full-screen ${activeColor.name.toLowerCase()} test pattern`}
+      status={`${colorName}. ${automatic ? messages.colorCycle.cycling.replace("{seconds}", String(intervalMs / 1000)) : messages.colorCycle.manual}`}
+      surfaceLabel={messages.colorCycle.surface.replace("{color}", colorName.toLowerCase())}
       controls={
         <>
-          <div aria-label="Test color" className={styles.toolGroup} role="group">
+          <div aria-label={messages.colorCycle.testColor} className={styles.toolGroup} role="group">
             {colors.map((color, index) => (
               <button
                 aria-pressed={index === activeIndex}
@@ -86,7 +91,7 @@ export function ColorCycle({ mode = "color" }: ColorCycleProps) {
                 onClick={() => chooseColor(index)}
                 type="button"
               >
-                {color.name}
+                {messages.colorCycle.colors[index]}
               </button>
             ))}
           </div>
@@ -103,18 +108,18 @@ export function ColorCycle({ mode = "color" }: ColorCycleProps) {
               ) : (
                 <Play aria-hidden="true" size={17} strokeWidth={1.8} />
               )}
-              {automatic ? "Pause cycle" : "Auto cycle"}
+              {automatic ? messages.colorCycle.pause : messages.colorCycle.auto}
             </button>
             <label className={styles.selectWrap}>
-              Cycle interval
+              {messages.colorCycle.interval}
               <select
                 className={styles.selectControl}
                 onChange={(event) => setIntervalMs(Number(event.target.value))}
                 value={intervalMs}
               >
-                <option value={1000}>1 second</option>
-                <option value={1500}>1.5 seconds</option>
-                <option value={2500}>2.5 seconds</option>
+                <option value={1000}>{messages.colorCycle.oneSecond}</option>
+                <option value={1500}>{messages.colorCycle.onePointFiveSeconds}</option>
+                <option value={2500}>{messages.colorCycle.twoPointFiveSeconds}</option>
               </select>
             </label>
           </div>

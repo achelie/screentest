@@ -6,6 +6,9 @@ initOpenNextCloudflareForDev();
 const nextConfig: NextConfig = {
   poweredByHeader: false,
   reactStrictMode: true,
+  experimental: {
+    globalNotFound: true,
+  },
   async headers() {
     return [
       {

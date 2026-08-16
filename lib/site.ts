@@ -6,13 +6,22 @@ export const SITE_LANGUAGE = "en";
 export const SITE_LOCALE = "en_US";
 export const SITE_LAST_MODIFIED = "2026-08-09";
 
+import type { Locale } from "@/lib/i18n";
+import { getScreenTests } from "@/lib/tests";
+
 export type SiteRoute = {
   readonly href: `/${string}`;
   readonly label: string;
+  readonly lastModified?: string;
 };
 
 export const TEST_ROUTES = [
   { href: "/tests", label: "All screen tests" },
+  {
+    href: "/touch-screen-test",
+    label: "Touch Screen Test",
+    lastModified: "2026-08-12",
+  },
   { href: "/tests/guided", label: "Guided Screen Test" },
   { href: "/tests/dead-pixel", label: "Dead Pixel Test" },
   { href: "/tests/backlight-bleed", label: "Backlight Bleed Test" },
@@ -21,6 +30,28 @@ export const TEST_ROUTES = [
   { href: "/tests/motion", label: "Motion and Ghosting Test" },
   { href: "/tests/color", label: "Monitor Color Test" },
 ] as const satisfies readonly SiteRoute[];
+
+export function getTestRoutes(locale: Locale): readonly SiteRoute[] {
+  const prefix = locale === "en" ? "" : `/${locale}`;
+  const allTestsLabel = {
+    en: "All screen tests",
+    zh: "全部屏幕测试",
+    de: "Alle Bildschirmtests",
+  }[locale];
+  const englishOnlyRoutes =
+    locale === "en"
+      ? [{ href: "/touch-screen-test" as const, label: "Touch Screen Test" }]
+      : [];
+
+  return [
+    { href: `${prefix}/tests` as `/${string}`, label: allTestsLabel },
+    ...englishOnlyRoutes,
+    ...getScreenTests(locale).map((test) => ({
+      href: `${prefix}/tests/${test.slug}` as `/${string}`,
+      label: test.name,
+    })),
+  ];
+}
 
 export const GUIDE_ROUTES = [
   { href: "/guides", label: "Screen testing guides" },

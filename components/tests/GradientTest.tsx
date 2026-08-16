@@ -4,6 +4,7 @@ import { useCallback, useState } from "react";
 
 import { FullscreenTest } from "./FullscreenTest";
 import styles from "./ScreenTests.module.css";
+import type { TestMessages } from "@/lib/test-messages";
 
 const CHANNELS = [
   { name: "Neutral", end: "#ffffff" },
@@ -14,10 +15,12 @@ const CHANNELS = [
 
 type Orientation = "horizontal" | "vertical";
 
-export function GradientTest() {
+export function GradientTest({ messages }: { messages: Pick<TestMessages, "fullscreen" | "gradient"> }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [orientation, setOrientation] = useState<Orientation>("horizontal");
   const channel = CHANNELS[activeIndex];
+  const channelName = messages.gradient.channels[activeIndex];
+  const orientationName = orientation === "horizontal" ? messages.gradient.horizontal : messages.gradient.vertical;
   const direction = orientation === "horizontal" ? "to right" : "to bottom";
 
   const showPrevious = useCallback(() => {
@@ -32,14 +35,15 @@ export function GradientTest() {
 
   return (
     <FullscreenTest
-      name="Gradient banding test"
+      messages={messages.fullscreen}
+      name={messages.gradient.name}
       onNext={showNext}
       onPrevious={showPrevious}
-      status={`${channel.name}, ${orientation}. Look for hard bands or sudden color jumps.`}
-      surfaceLabel={`Full-screen ${orientation} ${channel.name.toLowerCase()} gradient from black`}
+      status={messages.gradient.status.replace("{channel}", channelName).replace("{orientation}", orientationName)}
+      surfaceLabel={messages.gradient.surface.replace("{channel}", channelName).replace("{orientation}", orientationName)}
       controls={
         <>
-          <div aria-label="Gradient channel" className={styles.toolGroup} role="group">
+          <div aria-label={messages.gradient.channelLabel} className={styles.toolGroup} role="group">
             {CHANNELS.map((item, index) => (
               <button
                 aria-pressed={index === activeIndex}
@@ -49,12 +53,12 @@ export function GradientTest() {
                 onClick={() => setActiveIndex(index)}
                 type="button"
               >
-                {item.name}
+                {messages.gradient.channels[index]}
               </button>
             ))}
           </div>
           <div
-            aria-label="Gradient direction"
+            aria-label={messages.gradient.directionLabel}
             className={styles.toolGroup}
             role="group"
           >
@@ -67,7 +71,7 @@ export function GradientTest() {
                 onClick={() => setOrientation(option)}
                 type="button"
               >
-                {option === "horizontal" ? "Horizontal" : "Vertical"}
+                {option === "horizontal" ? messages.gradient.horizontal : messages.gradient.vertical}
               </button>
             ))}
           </div>

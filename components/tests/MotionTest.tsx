@@ -7,10 +7,11 @@ import { FullscreenTest } from "./FullscreenTest";
 import { MovingTarget } from "./MovingTarget";
 import styles from "./ScreenTests.module.css";
 import { usePrefersReducedMotion } from "./usePrefersReducedMotion";
+import type { TestMessages } from "@/lib/test-messages";
 
 const SPEEDS = [240, 480, 960] as const;
 
-export function MotionTest() {
+export function MotionTest({ messages }: { messages: Pick<TestMessages, "fullscreen" | "motion"> }) {
   const [speedIndex, setSpeedIndex] = useState(1);
   const [running, setRunning] = useState(false);
   const prefersReducedMotion = usePrefersReducedMotion();
@@ -44,11 +45,12 @@ export function MotionTest() {
   return (
     <>
       <FullscreenTest
-        name="Motion and ghosting test"
+        messages={messages.fullscreen}
+        name={messages.motion.name}
         onNext={faster}
         onPrevious={slower}
-        status={`${running ? "Running" : "Paused"} at ${speed} px/s.`}
-        surfaceLabel={`Moving high-contrast target at ${speed} pixels per second`}
+        status={messages.motion.status.replace("{state}", running ? messages.motion.running : messages.motion.paused).replace("{speed}", String(speed))}
+        surfaceLabel={messages.motion.surface.replace("{speed}", String(speed))}
         controls={
           <>
             <button
@@ -63,9 +65,9 @@ export function MotionTest() {
               ) : (
                 <Play aria-hidden="true" size={17} strokeWidth={1.8} />
               )}
-              {running ? "Pause target" : "Start target"}
+              {running ? messages.motion.pause : messages.motion.start}
             </button>
-            <div aria-label="Target speed" className={styles.toolGroup} role="group">
+            <div aria-label={messages.motion.speedLabel} className={styles.toolGroup} role="group">
               {SPEEDS.map((option, index) => (
                 <button
                   aria-pressed={index === speedIndex}
@@ -87,8 +89,7 @@ export function MotionTest() {
 
       {prefersReducedMotion ? (
         <p className={styles.inlineNotice}>
-          Motion is paused because your device requests reduced motion. Start it
-          only when you are ready for a moving test pattern.
+          {messages.motion.reduced}
         </p>
       ) : null}
     </>
