@@ -6,6 +6,7 @@ export type FullscreenTestId =
   | "hdr-test"
   | "screen-tearing-test"
   | "monitor-color-calibration"
+  | "black-level-test"
   | "oled-burn-in-test"
   | "screen-resolution-checker";
 

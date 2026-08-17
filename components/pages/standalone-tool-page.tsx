@@ -3,6 +3,7 @@ import { ArrowRight, Monitor, Timer, Zap } from "lucide-react";
 
 import { JsonLd } from "@/components/seo/json-ld";
 import Link from "@/components/site/no-prefetch-link";
+import { BlackLevelTest } from "@/components/tests/BlackLevelTest";
 import { HdrTest } from "@/components/tests/HdrTest";
 import { MonitorColorCalibration } from "@/components/tests/MonitorColorCalibration";
 import { OledBurnInTest } from "@/components/tests/OledBurnInTest";
@@ -61,6 +62,8 @@ function ToolExperience({ locale, slug }: { locale: Locale; slug: StandaloneTool
       return <ScreenTearingTest locale={locale} />;
     case "monitor-color-calibration":
       return <MonitorColorCalibration locale={locale} />;
+    case "black-level-test":
+      return <BlackLevelTest locale={locale} />;
     case "oled-burn-in-test":
       return <OledBurnInTest locale={locale} />;
     case "screen-resolution-checker":

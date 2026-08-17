@@ -755,6 +755,100 @@
   }
 }
 
+.blackLevelPattern {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: rgb(0 0 0);
+}
+
+.blackLevelPure {
+  background: rgb(0 0 0);
+}
+
+.blackLevelNear,
+.blackLevelDepth {
+  display: grid;
+  gap: clamp(0.55rem, 1.8vw, 1.15rem);
+  padding: clamp(0.75rem, 3vw, 2rem);
+  background: rgb(0 0 0);
+}
+
+.blackLevelNear {
+  grid-template-rows: minmax(0, 1fr) clamp(2.5rem, 10dvh, 4.75rem);
+}
+
+.blackLevelNearGrid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: clamp(0.35rem, 1vw, 0.75rem);
+  min-height: 0;
+  background: rgb(0 0 0);
+}
+
+.blackLevelNearGrid span,
+.blackLevelRamp {
+  display: block;
+  min-width: 0;
+}
+
+.blackLevelRamp {
+  background-color: rgb(0 0 0);
+  background-repeat: no-repeat;
+}
+
+.blackLevelDepth {
+  grid-template-rows: minmax(7rem, 1fr) clamp(2.5rem, 9dvh, 4.5rem) clamp(4rem, 15dvh, 7rem);
+}
+
+.blackLevelDepthPatches,
+.blackLevelCompare {
+  display: grid;
+  gap: clamp(0.4rem, 1.2vw, 0.85rem);
+  min-height: 0;
+  background: rgb(0 0 0);
+}
+
+.blackLevelDepthPatches {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.blackLevelDepthPatches span,
+.blackLevelCompare span {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  background: rgb(0 0 0);
+}
+
+.blackLevelDepthPatches i {
+  position: absolute;
+  inset: 22%;
+  display: block;
+}
+
+.blackLevelStripes {
+  min-height: 0;
+  background-color: rgb(0 0 0);
+  background-repeat: repeat;
+}
+
+.blackLevelCompare {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.blackLevelCompare span {
+  display: grid;
+  place-items: center;
+}
+
+.blackLevelCompare i {
+  display: block;
+  width: clamp(2.75rem, 9vw, 5rem);
+  aspect-ratio: 1;
+}
+
 .calibrationLevelPattern,
 .calibrationGrayPattern,
 .calibrationGammaPattern,
@@ -1784,6 +1878,20 @@
   .calibrationLevelPattern {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr;
+  }
+
+  .blackLevelNear,
+  .blackLevelDepth {
+    padding: 0.6rem;
+  }
+
+  .blackLevelDepth {
+    grid-template-rows: minmax(10rem, 1fr) 3rem 4.5rem;
+  }
+
+  .blackLevelDepthPatches {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(2, minmax(0, 1fr));
   }
 
   .calibrationLevelField {

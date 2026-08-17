@@ -1,10 +1,10 @@
 export const SITE_NAME = "ScreenTestHub";
 export const SITE_URL = "https://www.screentesthub.com";
 export const SITE_DESCRIPTION =
-  "Free browser screen tests for resolution, dead pixels, OLED burn-in, backlight bleed, HDR, screen tearing, color calibration, grayscale, gradients, color, and motion.";
+  "Free browser screen tests for resolution, dead pixels, black levels, OLED burn-in, backlight bleed, HDR, screen tearing, color calibration, grayscale, gradients, color, and motion.";
 export const SITE_LANGUAGE = "en";
 export const SITE_LOCALE = "en_US";
-export const SITE_LAST_MODIFIED = "2026-08-15";
+export const SITE_LAST_MODIFIED = "2026-08-17";
 
 import { localizePath, type Locale } from "@/lib/i18n";
 import { getScreenTests } from "@/lib/tests";
@@ -36,6 +36,11 @@ export const TEST_ROUTES = [
     href: "/monitor-color-calibration",
     label: "Monitor Color Calibration",
     lastModified: "2026-08-13",
+  },
+  {
+    href: "/black-level-test",
+    label: "Black Level Test",
+    lastModified: "2026-08-17",
   },
   {
     href: "/oled-burn-in-test",
@@ -84,7 +89,21 @@ export const TEST_ROUTES = [
   },
 ] as const satisfies readonly SiteRoute[];
 
-const STANDALONE_TOOL_ROUTES = TEST_ROUTES.slice(1, 7);
+const STANDALONE_TOOL_HREFS = [
+  "/touch-screen-test",
+  "/hdr-test",
+  "/screen-tearing-test",
+  "/monitor-color-calibration",
+  "/black-level-test",
+  "/oled-burn-in-test",
+  "/screen-resolution-checker",
+] as const;
+
+const STANDALONE_TOOL_ROUTES = STANDALONE_TOOL_HREFS.map((href) => {
+  const route = TEST_ROUTES.find((candidate) => candidate.href === href);
+  if (!route) throw new Error(`Missing standalone tool route: ${href}`);
+  return route;
+});
 
 const STANDALONE_TOOL_LABELS: Record<Locale, Record<string, string>> = {
   en: Object.fromEntries(
@@ -95,6 +114,7 @@ const STANDALONE_TOOL_LABELS: Record<Locale, Record<string, string>> = {
     "/hdr-test": "HDR 在线测试",
     "/screen-tearing-test": "屏幕撕裂测试",
     "/monitor-color-calibration": "显示器色彩校准",
+    "/black-level-test": "黑位测试",
     "/oled-burn-in-test": "OLED 烧屏测试",
     "/screen-resolution-checker": "屏幕分辨率检测",
   },
@@ -103,6 +123,7 @@ const STANDALONE_TOOL_LABELS: Record<Locale, Record<string, string>> = {
     "/hdr-test": "HDR-Test online",
     "/screen-tearing-test": "Screen-Tearing-Test",
     "/monitor-color-calibration": "Monitorkalibrierung",
+    "/black-level-test": "Schwarzpegel-Test",
     "/oled-burn-in-test": "OLED-Einbrenntest",
     "/screen-resolution-checker": "Bildschirmauflösung prüfen",
   },
