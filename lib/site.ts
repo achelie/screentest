@@ -4,7 +4,7 @@ export const SITE_DESCRIPTION =
   "Free browser screen tests for resolution, dead pixels, OLED burn-in, backlight bleed, HDR, screen tearing, color calibration, grayscale, gradients, color, and motion.";
 export const SITE_LANGUAGE = "en";
 export const SITE_LOCALE = "en_US";
-export const SITE_LAST_MODIFIED = "2026-08-25";
+export const SITE_LAST_MODIFIED = "2026-08-26";
 
 export type SiteRoute = {
   readonly href: `/${string}`;
@@ -82,7 +82,12 @@ export const TEST_ROUTES = [
 ] as const satisfies readonly SiteRoute[];
 
 export const BLOG_ROUTES = [
-  { href: "/blog", label: "Screen troubleshooting blog", lastModified: "2026-08-25" },
+  { href: "/blog", label: "Screen troubleshooting blog", lastModified: "2026-08-26" },
+  {
+    href: "/blog/touch-screen-not-working",
+    label: "Touch Screen Not Working",
+    lastModified: "2026-08-26",
+  },
   {
     href: "/blog/samsung-touch-screen-test-code",
     label: "Samsung Touch Screen Test Code",
