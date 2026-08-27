@@ -1,5 +1,94 @@
 [
   {
+    "slug": "what-causes-ghost-touch",
+    "title": "What Causes Ghost Touch? Why Your Phone Taps by Itself",
+    "description": "What causes ghost touch? Learn how chargers, moisture, screen pressure, damage, battery swelling, and software can make a phone tap by itself.",
+    "author": "ScreenTestHub Team",
+    "category": "Touch troubleshooting",
+    "published": "2026-08-27",
+    "updated": "2026-08-27",
+    "cover": "/blog/what-causes-ghost-touch.webp",
+    "coverAlt": "Hands holding a smartphone with a badly cracked touchscreen",
+    "ctaTitle": "See where the phantom taps land.",
+    "ctaDescription": "Leave the screen untouched, then use the full-screen grid to compare ghost touch while unplugged, without the case, and after a restart.",
+    "ctaLabel": "Open touch screen test",
+    "ctaHref": "/touch-screen-test",
+    "readingMinutes": 7,
+    "toc": [
+      {
+        "id": "what-ghost-touch-actually-looks-like",
+        "label": "What ghost touch actually looks like"
+      },
+      {
+        "id": "a-charger-can-trigger-false-touches",
+        "label": "A charger can trigger false touches"
+      },
+      {
+        "id": "water-and-grime-can-confuse-the-glass",
+        "label": "Water and grime can confuse the glass"
+      },
+      {
+        "id": "a-case-or-protector-can-press-the-wrong-spot",
+        "label": "A case or protector can press the wrong spot"
+      },
+      {
+        "id": "a-loose-or-damaged-display-can-keep-tapping",
+        "label": "A loose or damaged display can keep tapping"
+      },
+      {
+        "id": "a-lifting-screen-needs-a-safety-check",
+        "label": "A lifting screen needs a safety check"
+      },
+      {
+        "id": "software-can-imitate-ghost-touch",
+        "label": "Software can imitate ghost touch"
+      },
+      {
+        "id": "find-the-cause-with-a-five-minute-comparison",
+        "label": "Find the cause with a five-minute comparison"
+      },
+      {
+        "id": "when-repair-is-the-sensible-answer",
+        "label": "When repair is the sensible answer"
+      },
+      {
+        "id": "faq",
+        "label": "FAQ"
+      }
+    ],
+    "faq": [
+      {
+        "question": "What causes ghost touch most often?",
+        "answer": "Common causes include moisture on the glass, a charger or cable that changes the electrical conditions, pressure from a case or protector, and a damaged touch layer. The condition that starts and stops the taps matters more than guessing from the phone model."
+      },
+      {
+        "question": "Can ghost touch go away on its own?",
+        "answer": "It can disappear after moisture dries, a charger is unplugged, or a software state clears. Recurring taps in the same area usually return until the accessory or hardware cause is fixed."
+      },
+      {
+        "question": "Does ghost touch mean the screen is broken?",
+        "answer": "Not always. Test clean, dry, unplugged, and without the case first. If the behavior remains across several apps after a restart, display damage becomes more likely."
+      },
+      {
+        "question": "Can a screen protector cause ghost touch?",
+        "answer": "Yes, especially when it is cracked, lifting, wet underneath, or pressed by the case. Compare without the case before removing a protector that cannot be reused."
+      },
+      {
+        "question": "Why does my phone ghost touch while charging?",
+        "answer": "The charging setup can add electrical noise or expose a fault that is quiet on battery power. Compare another trusted cable, adapter, outlet, and charging speed one at a time."
+      },
+      {
+        "question": "Can a software update fix ghost touch?",
+        "answer": "It can fix an input-driver or interface bug. An update will not repair a cracked digitizer, bent frame, loose display, or swollen battery."
+      },
+      {
+        "question": "How do I prove ghost touch before repair?",
+        "answer": "Run the touch grid with the phone lying untouched and film it from another device. Repeat unplugged and without the case, then record which condition changes the result."
+      }
+    ],
+    "html": "<p>What causes ghost touch? The phone's touch controller is receiving a signal that looks like a finger even though you did not touch the glass. A wet screen, charger interference, pressure from a case, or a failing display can all produce that signal. Software can imitate the symptom too.</p>\n<p>Find the cause by changing one condition at a time. Leave the phone untouched for 30 seconds, then repeat unplugged and without the case. Do not jump straight to a factory reset.</p>\n<h2 id=\"what-ghost-touch-actually-looks-like\">What ghost touch actually looks like</h2>\n<p>Ghost touch means the phone opens, types, scrolls, or draws without your finger on the screen.</p>\n<p>It may type several letters, open an app, or move the notification panel. One accidental tap while you hold the phone does not count. A button that ignores you is missed input or a dead zone.</p>\n<p>Open the <a href=\"/touch-screen-test\">touch screen test</a>, place the phone on a table, and keep your hands away for 30 seconds. Marks that appear show that unwanted input reached the browser. Repeat after a restart.</p>\n<p>Do not confuse phone ghost touch with a moving blur behind objects on a monitor. That display effect is covered by the <a href=\"/tests/motion\">monitor ghosting test</a> and has nothing to do with taps.</p>\n<h2 id=\"a-charger-can-trigger-false-touches\">A charger can trigger false touches</h2>\n<p>If ghost touch starts only when the phone is plugged in, compare the charger, cable, outlet, and charging speed before blaming the screen.</p>\n<p>Touchscreens measure tiny electrical changes. Noise from the charging setup can upset that measurement. The useful clue is a phone that behaves on battery, jumps while connected, and settles when unplugged.</p>\n<p>An <a href=\"https://www.reddit.com/r/SonyXperia/comments/18gr9m0/phone_automatically_clicking_stuff_while_charging/\">Xperia owner saw random keyboard taps only while charging</a>. Some charging methods triggered the fault while slower or wired charging did not. That supports a controlled comparison, not a claim that every fast charger is bad.</p>\n<p>Test a known-good cable and adapter in another outlet. Stop using equipment that is damaged, loose, or unusually hot. Apple also advises people with intermittent touch to <a href=\"https://support.apple.com/en-us/102567\">disconnect USB accessories and compare another outlet, cable, or charger</a>.</p>\n<p>If every trusted charging setup produces the same taps, the port, display, or phone needs inspection.</p>\n<h2 id=\"water-and-grime-can-confuse-the-glass\">Water and grime can confuse the glass</h2>\n<p>Dry the screen and your hands completely because water, sweat, and conductive dirt can create extra contact paths across a capacitive screen.</p>\n<p>Rain drops can split swipes or move them. Lotion, grease, and cleaner residue are less obvious. Power the phone off, remove the case, and wipe the glass with a clean microfiber cloth. Do not pour liquid into a crack.</p>\n<p>Surface moisture should stop causing trouble when everything is dry. After submersion, camera fog, display lines, or charging warnings call for an inspection. Turn the phone off. Heat and rice do not remove liquid inside it.</p>\n<h2 id=\"a-case-or-protector-can-press-the-wrong-spot\">A case or protector can press the wrong spot</h2>\n<p>Remove the case first, then inspect the protector if false touches cluster near an edge or corner.</p>\n<p>Some cases squeeze the display lip. A lifted protector can trap moisture, dirt, or air. Most protectors cause no trouble, but both accessories are easy to compare before paying for repair.</p>\n<p>One <a href=\"https://www.reddit.com/r/GalaxyS20FE/comments/n4132k/has_anyone_had_the_touch_screen_issues_caused_by/\">Galaxy S20 FE report</a> described scrolling and unlock trouble with a rigid outer case. Pulling the plastic away from the edge or removing it changed the symptom. That test is more useful than the owner's guess about static electricity.</p>\n<p>Run the phone bare on a table for two minutes. If the taps stop, refit the case without pressing the display and test again. Remove the protector only as a second comparison because it may not be reusable.</p>\n<h2 id=\"a-loose-or-damaged-display-can-keep-tapping\">A loose or damaged display can keep tapping</h2>\n<p>Ghost touch that survives cleaning, accessory checks, and a restart often comes from the display assembly, its touch layer, or its connection.</p>\n<p>A crack is an obvious clue, but the phone may look normal. A drop can damage touch without turning the screen black, while a bent frame can let the display flex. Repeated taps may gather in one strip, then become an unresponsive patch.</p>\n<p>In an <a href=\"https://www.reddit.com/r/techsupport/comments/sohevw/ghost_touch_on_an_android_phone/\">Android troubleshooting thread</a>, removing the protector and resetting the phone did not hold. The owner later noticed a slight bend and movement at the display edge; ghost touch appeared when the screen shifted.</p>\n<p>Do not press, twist, or flex the phone to reproduce this. Record the untouched screen with another camera and book a repair. If the trouble started after a display replacement, use the <a href=\"/blog/touch-screen-not-working-after-screen-replacement\">post-replacement checklist</a> and return within the repair warranty.</p>\n<h2 id=\"a-lifting-screen-needs-a-safety-check\">A lifting screen needs a safety check</h2>\n<p>Stop testing if the display or back panel is lifting because pressure inside the phone may come from a damaged or swollen battery.</p>\n<p>Failed adhesive or a bent frame can also open a gap. Treat screen lift as a safety issue when it comes with unusual heat, rapid battery drain, a chemical smell, or a soft gap that will not stay closed.</p>\n<p>Do not push the panel back, puncture it, charge the phone, or open it yourself. Power it off and contact the manufacturer or a qualified battery service. Apple's safety guidance says to <a href=\"https://support.apple.com/en-us/guide/iphone/iph301fc905/ios\">stop using an iPhone when the phone or battery may be damaged</a>.</p>\n<h2 id=\"software-can-imitate-ghost-touch\">Software can imitate ghost touch</h2>\n<p>Suspect software when the behavior started with an update, stays inside one app, or disappears after a restart without returning in the untouched test.</p>\n<p>An app may scroll unexpectedly, a keyboard may repeat keys, and accessibility features can trigger gestures. Those events may never create a mark in a neutral touch test.</p>\n<p>Restart, update the system and affected app, then test elsewhere. Android Safe Mode helps when the problem disappears with downloaded apps disabled. Galaxy owners can use the built-in options in the <a href=\"/blog/samsung-touch-screen-test-code\">Samsung touch test code guide</a>.</p>\n<p>A factory reset belongs near the end of this branch, after a backup. It is wasted effort when ghost touch also appears at startup, in multiple apps, or beside a visibly loose display.</p>\n<h2 id=\"find-the-cause-with-a-five-minute-comparison\">Find the cause with a five-minute comparison</h2>\n<p>Run four short tests in the same screen area and write down exactly which change stops the unwanted taps.</p>\n<ol>\n<li>Restart, open the full-screen grid, place the phone flat, and wait 30 seconds without touching it.</li>\n<li>Repeat on battery power with every cable and accessory disconnected.</li>\n<li>Remove the case, dry the glass and hands, then wait again.</li>\n<li>Test once in another app and once after rotating the phone.</li>\n</ol>\n<p>Taps that vanish only when unplugged point to the charging setup. Taps that vanish without the case point to edge pressure. A fixed strip across rotation and several apps points more strongly to the display or touch layer.</p>\n<p>Screen recording cannot show that your hands were away. Film the device with another camera and keep the screen in frame. The wider <a href=\"/blog/touch-screen-not-working\">touch screen not working guide</a> covers freezes and dead zones if the phone also ignores real touches.</p>\n<h2 id=\"when-repair-is-the-sensible-answer\">When repair is the sensible answer</h2>\n<p>Book repair when ghost touch continues clean, dry, unplugged, and untouched, especially after a drop or beside a fixed dead zone.</p>\n<p>Back up the phone while you can control it. Bring the case, the charging setup that reproduces the issue, and your video. A note such as \"random taps begin on this adapter and stop on battery\" gives the technician something repeatable.</p>\n<p>Go sooner if the phone enters passcodes, places calls, or blocks your account. Turn it off immediately if the screen lifts, the battery swells, the phone overheats, or liquid entered it.</p>\n<h2 id=\"faq\">FAQ</h2>\n<p>These answers cover the questions that usually remain after the comparison tests.</p>\n<h3 id=\"what-causes-ghost-touch-most-often\">What causes ghost touch most often?</h3>\n<p>Common causes include moisture on the glass, a charger or cable that changes the electrical conditions, pressure from a case or protector, and a damaged touch layer. The condition that starts and stops the taps matters more than guessing from the phone model.</p>\n<h3 id=\"can-ghost-touch-go-away-on-its-own\">Can ghost touch go away on its own?</h3>\n<p>It can disappear after moisture dries, a charger is unplugged, or a software state clears. Recurring taps in the same area usually return until the accessory or hardware cause is fixed.</p>\n<h3 id=\"does-ghost-touch-mean-the-screen-is-broken\">Does ghost touch mean the screen is broken?</h3>\n<p>Not always. Test clean, dry, unplugged, and without the case first. If the behavior remains across several apps after a restart, display damage becomes more likely.</p>\n<h3 id=\"can-a-screen-protector-cause-ghost-touch\">Can a screen protector cause ghost touch?</h3>\n<p>Yes, especially when it is cracked, lifting, wet underneath, or pressed by the case. Compare without the case before removing a protector that cannot be reused.</p>\n<h3 id=\"why-does-my-phone-ghost-touch-while-charging\">Why does my phone ghost touch while charging?</h3>\n<p>The charging setup can add electrical noise or expose a fault that is quiet on battery power. Compare another trusted cable, adapter, outlet, and charging speed one at a time.</p>\n<h3 id=\"can-a-software-update-fix-ghost-touch\">Can a software update fix ghost touch?</h3>\n<p>It can fix an input-driver or interface bug. An update will not repair a cracked digitizer, bent frame, loose display, or swollen battery.</p>\n<h3 id=\"how-do-i-prove-ghost-touch-before-repair\">How do I prove ghost touch before repair?</h3>\n<p>Run the touch grid with the phone lying untouched and film it from another device. Repeat unplugged and without the case, then record which condition changes the result.</p>\n"
+  },
+  {
     "slug": "touch-screen-not-working",
     "title": "Touch Screen Not Working? Try These Checks Before Repair",
     "description": "Touch screen not working? Check freezes, dead zones, ghost touch, chargers, moisture, cases, and apps in the right order before booking a repair.",
