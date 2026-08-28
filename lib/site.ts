@@ -4,7 +4,7 @@ export const SITE_DESCRIPTION =
   "Free browser screen tests for resolution, dead pixels, OLED burn-in, backlight bleed, HDR, screen tearing, color calibration, grayscale, gradients, color, and motion.";
 export const SITE_LANGUAGE = "en";
 export const SITE_LOCALE = "en_US";
-export const SITE_LAST_MODIFIED = "2026-08-27";
+export const SITE_LAST_MODIFIED = "2026-08-28";
 
 export type SiteRoute = {
   readonly href: `/${string}`;
@@ -82,7 +82,7 @@ export const TEST_ROUTES = [
 ] as const satisfies readonly SiteRoute[];
 
 export const BLOG_ROUTES = [
-  { href: "/blog", label: "Screen troubleshooting blog", lastModified: "2026-08-27" },
+  { href: "/blog", label: "Screen troubleshooting blog", lastModified: "2026-08-28" },
   {
     href: "/blog/what-causes-ghost-touch",
     label: "What Causes Ghost Touch",
@@ -111,7 +111,7 @@ export const BLOG_ROUTES = [
   {
     href: "/blog/touch-screen-not-working-after-screen-replacement",
     label: "Touch Screen Not Working After Screen Replacement",
-    lastModified: "2026-08-12",
+    lastModified: "2026-08-28",
   },
   {
     href: "/blog/screen-tearing-with-vsync-on",
