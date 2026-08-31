@@ -4,7 +4,7 @@ description: "OLED monitor burn in can look like a taskbar, game HUD, or browser
 author: "ScreenTestHub Team"
 category: "Display care"
 published: "2026-08-14"
-updated: "2026-08-30"
+updated: "2026-08-31"
 cover: "/blog/oled-monitor-burn-in.webp"
 coverAlt: "Wide desktop monitor showing static editing software in a dark workspace"
 ctaTitle: "Check the mark on gray and solid colors."
@@ -44,6 +44,8 @@ A fixed taskbar raises the wear risk because the same pixels draw the same brigh
 In [a used AW3423DWF with a taskbar-shaped mark](https://www.reddit.com/r/OLED_Gaming/comments/1iz4fc9/task_bar_burn_in/), gray Chrome pages revealed a horizontal boundary and a greenish patch near the Start icon. The monitor showed about 1,850 hours. That number was less useful than the familiar shape sitting exactly where Windows had drawn it.
 
 Auto-hide the taskbar if it does not annoy you. Let the display turn off after a few idle minutes. A changing wallpaper helps less than simply removing long, bright, static edges. None of this requires turning the desktop into a black cave.
+
+If the mark is confined to the bottom edge, the [OLED taskbar burn-in guide](/blog/oled-taskbar-burn-in) covers Windows auto-hide, multi-monitor taskbar choices, and a repeatable bottom-edge check.
 
 ## OLED can handle office work, but the workload matters
 
