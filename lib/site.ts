@@ -4,7 +4,7 @@ export const SITE_DESCRIPTION =
   "Free browser screen tests for resolution, dead pixels, OLED burn-in, backlight bleed, HDR, screen tearing, color calibration, grayscale, gradients, color, and motion.";
 export const SITE_LANGUAGE = "en";
 export const SITE_LOCALE = "en_US";
-export const SITE_LAST_MODIFIED = "2026-09-01";
+export const SITE_LAST_MODIFIED = "2026-09-02";
 
 export type SiteRoute = {
   readonly href: `/${string}`;
@@ -82,7 +82,7 @@ export const TEST_ROUTES = [
 ] as const satisfies readonly SiteRoute[];
 
 export const BLOG_ROUTES = [
-  { href: "/blog", label: "Screen troubleshooting blog", lastModified: "2026-09-01" },
+  { href: "/blog", label: "Screen troubleshooting blog", lastModified: "2026-09-02" },
   {
     href: "/blog/what-causes-ghost-touch",
     label: "What Causes Ghost Touch",
@@ -106,7 +106,7 @@ export const BLOG_ROUTES = [
   {
     href: "/blog/oled-monitor-burn-in",
     label: "OLED Monitor Burn-In",
-    lastModified: "2026-09-01",
+    lastModified: "2026-09-02",
   },
   {
     href: "/blog/oled-gaming-monitor-burn-in",
@@ -122,6 +122,11 @@ export const BLOG_ROUTES = [
     href: "/blog/oled-monitor-burn-in-productivity",
     label: "OLED Monitor Burn-In and Productivity",
     lastModified: "2026-09-01",
+  },
+  {
+    href: "/blog/what-is-a-burn-in-test",
+    label: "What Is a Burn-In Test?",
+    lastModified: "2026-09-02",
   },
   {
     href: "/blog/touch-screen-not-working-after-screen-replacement",

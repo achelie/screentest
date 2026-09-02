@@ -4,7 +4,7 @@ description: "OLED monitor burn in can look like a taskbar, game HUD, or browser
 author: "ScreenTestHub Team"
 category: "Display care"
 published: "2026-08-14"
-updated: "2026-09-01"
+updated: "2026-09-02"
 cover: "/blog/oled-monitor-burn-in.webp"
 coverAlt: "Wide desktop monitor showing static editing software in a dark workspace"
 ctaTitle: "Check the mark on gray and solid colors."
@@ -18,6 +18,8 @@ OLED monitor burn in usually looks like a faint shape that stays in the same scr
 Do not judge it from one photo or one color. Dust, near-black banding, temporary image retention, and a stuck pixel can all look suspicious at first. A short, repeatable check tells you much more than staring at a white page and wondering whether the corner looks different.
 
 Open the [OLED burn-in test](/oled-burn-in-test), keep the display at your normal brightness, and work through the checks below. Five minutes is plenty for a first pass.
+
+If the test patterns themselves are unfamiliar, [What Is a Burn-In Test?](/blog/what-is-a-burn-in-test) explains what gray, solid colors, and moving bars reveal before you interpret a mark.
 
 If most of your screen time goes to one title, the [OLED gaming monitor burn-in guide](/blog/oled-gaming-monitor-burn-in) focuses on fixed HUDs, HDR interface brightness, and gaming-specific false alarms.
 
