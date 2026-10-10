@@ -1,5 +1,11 @@
 import type { Metadata } from "next";
 import {
+  TestGuidanceContent,
+  TestGuidanceNav,
+  TestHomeLink,
+  TestHomeBreadcrumb,
+} from "@/components/tests/TestGuidance";
+import {
   ArrowRight,
   Hand,
   ScanLine,
@@ -82,7 +88,7 @@ const FAQS = [
   {
     question: "How many simultaneous touch points does my screen support?",
     answer:
-      "Place several fingers on the grid and watch Peak touches. The displayed number is what the browser and operating system report during this session, which may be lower than the digitizer's advertised hardware maximum.",
+      "Before filling the grid, place several fingers on it and watch Observed peak inputs. The displayed number is what the browser and operating system report during this session, which may be lower than the digitizer's advertised hardware maximum.",
   },
 ] as const;
 
@@ -139,30 +145,6 @@ const structuredData = {
   ],
 };
 
-const observations = [
-  {
-    signal: "Continuous blank area",
-    meaning: "The same cluster of cells stays untouched after repeated passes.",
-  },
-  {
-    signal: "Broken swipe path",
-    meaning: "A line repeatedly stops or skips in one location.",
-  },
-  {
-    signal: "Unexpected points",
-    meaning: "The tool receives input while your hands are off the screen.",
-  },
-  {
-    signal: "Edge or corner misses",
-    meaning: "Taps near the bezel fail while the center works.",
-  },
-  {
-    signal: "Multi-touch dropout",
-    meaning:
-      "Live touches falls below the number of fingers placed on the screen.",
-  },
-] as const;
-
 const relatedTools = [
   {
     href: "/tests/guided",
@@ -190,47 +172,17 @@ export default function TouchScreenTestPage() {
       <JsonLd data={structuredData} />
 
       <header className={styles.pageHeader}>
+        <TestHomeBreadcrumb locale="en" name="Touch screen test" />
         <h1>Touch Screen Test Online</h1>
         <p>
           Check every part of your phone, tablet, or touchscreen laptop for missed taps and broken touch paths.
         </p>
+        <TestGuidanceNav locale="en" />
       </header>
 
       <TouchScreenTest />
 
-      <section aria-labelledby="touch-how-title" className={styles.contentSection}>
-        <h2 id="touch-how-title">How to use this touch screen test</h2>
-        <p className={styles.sectionIntro}>
-          This phone touch test takes one careful pass, then a second pass if anything looks suspicious.
-        </p>
-        <ul className={styles.instructionList}>
-          <li>Open the test and enter fullscreen when available.</li>
-          <li>
-            Slide one finger across the entire grid, including every edge and corner.
-          </li>
-          <li>
-            Place several fingers on the screen to check simultaneous touch reporting.
-          </li>
-          <li>
-            Finish the test and inspect any continuous blank area or broken path.
-          </li>
-        </ul>
-      </section>
-
-      <section aria-labelledby="touch-signals-title" className={styles.contentSection}>
-        <h2 id="touch-signals-title">What to look for</h2>
-        <dl className={styles.observationList}>
-          {observations.map(({ signal, meaning }) => (
-            <div key={signal}>
-              <dt>{signal}</dt>
-              <dd>{meaning}</dd>
-            </div>
-          ))}
-        </dl>
-        <p className={styles.limitation}>
-          This touchscreen checker observes browser input. It cannot identify the failed physical component or certify hardware.
-        </p>
-      </section>
+      <TestGuidanceContent locale="en" testId="touch-screen-test" />
 
       <section aria-labelledby="touch-faq-title" className={styles.contentSection}>
         <h2 id="touch-faq-title">Touch screen test FAQ</h2>
@@ -259,6 +211,8 @@ export default function TouchScreenTestPage() {
           ))}
         </div>
       </section>
+
+      <TestHomeLink locale="en" />
     </div>
   );
 }

@@ -1,4 +1,9 @@
 import type { Metadata } from "next";
+import {
+  TestGuidanceContent,
+  TestGuidanceNav,
+  TestHomeLink,
+} from "@/components/tests/TestGuidance";
 import Link from "@/components/site/no-prefetch-link";
 import { ArrowRight, Maximize2, Monitor, Ruler } from "lucide-react";
 
@@ -35,34 +40,6 @@ export const metadata: Metadata = {
     siteName: SITE_NAME,
   },
 };
-
-const resultDefinitions = [
-  {
-    signal: "Estimated output pixels",
-    meaning:
-      "The browser-reported screen size multiplied by DPR. This is the most useful quick estimate when display scaling makes a 4K output appear as 1536 × 864 CSS pixels.",
-  },
-  {
-    signal: "Reported screen",
-    meaning:
-      "The full screen dimensions exposed to the browser in CSS pixels. Interface scaling can make this number smaller than the current output resolution.",
-  },
-  {
-    signal: "Layout and visible viewport",
-    meaning:
-      "The layout viewport is the page's working area. The visible viewport can shrink during pinch zoom or when a mobile keyboard occupies part of the screen.",
-  },
-  {
-    signal: "Device Pixel Ratio",
-    meaning:
-      "The number of device pixels used for one CSS pixel. Values such as 1.25, 1.5, 2, and 3 are normal on scaled desktop and high-density mobile displays.",
-  },
-  {
-    signal: "Browser frame cadence",
-    meaning:
-      "An estimate based on animation callback timing in this tab. Use it to spot a browser stuck near 60 fps, then confirm the actual refresh setting in the operating system or monitor menu.",
-  },
-] as const;
 
 const checks = [
   {
@@ -213,6 +190,7 @@ export default function ScreenResolutionCheckerPage() {
             slug="screen-resolution-checker"
           />
         </div>
+        <TestGuidanceNav locale="en" />
       </header>
 
       <section
@@ -224,48 +202,22 @@ export default function ScreenResolutionCheckerPage() {
       </section>
 
       <div className={styles.contentStack}>
-        <section aria-labelledby="resolution-how-title" className={styles.contentSection}>
-          <h2 className={styles.sectionTitle} id="resolution-how-title">
-            How to check your screen resolution
-          </h2>
-          <ul className={styles.preparationList}>
-            <li>Move this browser window completely onto the monitor you want to check.</li>
-            <li>Set browser zoom to 100%, then compare Estimated output pixels with the resolution selected in system display settings.</li>
-            <li>Open the fullscreen check to remove tabs and most browser chrome, then compare the viewport numbers again.</li>
-            <li>If you use two monitors, repeat the check on each one. Their resolution and DPR can be different.</li>
-            <li>Let the frame estimate settle for a second with this tab visible and no heavy work running in another tab.</li>
-          </ul>
-        </section>
-
-        <section aria-labelledby="resolution-numbers-title" className={styles.contentSection}>
-          <h2 className={styles.sectionTitle} id="resolution-numbers-title">
-            What the numbers mean
-          </h2>
-          <dl className={styles.observationList}>
-            {resultDefinitions.map((item) => (
-              <div className={styles.observationRow} key={item.signal}>
-                <dt>{item.signal}</dt>
-                <dd>{item.meaning}</dd>
-              </div>
-            ))}
-          </dl>
-          <p className={styles.limitation}>
-            The browser reports screen dimensions in CSS pixels. DPR describes
-            how those CSS pixels map to device pixels, and browser zoom can
-            change that ratio. Use the estimate as a settings check, then compare
-            it with the resolution shown by your operating system or monitor.
-          </p>
-          <div className={styles.referenceLinks}>
-            <a className={styles.referenceLink} href="https://developer.mozilla.org/en-US/docs/Web/API/Screen/width" rel="noreferrer" target="_blank">
-              Read how browsers report screen width
-              <ArrowRight aria-hidden="true" size={18} strokeWidth={1.8} />
-            </a>
-            <a className={styles.referenceLink} href="https://developer.mozilla.org/en-US/docs/Web/API/Window/devicePixelRatio" rel="noreferrer" target="_blank">
-              Read how device pixel ratio works
-              <ArrowRight aria-hidden="true" size={18} strokeWidth={1.8} />
-            </a>
-          </div>
-        </section>
+        <TestGuidanceContent
+          locale="en"
+          testId="screen-resolution-checker"
+          resultExtras={
+            <div className={styles.referenceLinks}>
+              <a className={styles.referenceLink} href="https://developer.mozilla.org/en-US/docs/Web/API/Screen/width" rel="noreferrer" target="_blank">
+                Read how browsers report screen width
+                <ArrowRight aria-hidden="true" size={18} strokeWidth={1.8} />
+              </a>
+              <a className={styles.referenceLink} href="https://developer.mozilla.org/en-US/docs/Web/API/Window/devicePixelRatio" rel="noreferrer" target="_blank">
+                Read how device pixel ratio works
+                <ArrowRight aria-hidden="true" size={18} strokeWidth={1.8} />
+              </a>
+            </div>
+          }
+        />
 
         <section aria-labelledby="resolution-check-title" className={styles.contentSection}>
           <h2 className={styles.sectionTitle} id="resolution-check-title">
@@ -309,6 +261,8 @@ export default function ScreenResolutionCheckerPage() {
           </div>
         </section>
       </div>
+
+      <TestHomeLink locale="en" />
     </div>
   );
 }

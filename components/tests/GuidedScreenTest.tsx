@@ -8,7 +8,7 @@ import {
   SkipForward,
   TriangleAlert,
 } from "lucide-react";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import { FullscreenTest } from "./FullscreenTest";
 import { testStartEventName } from "@/lib/test-events";
@@ -16,15 +16,11 @@ import { MovingTarget } from "./MovingTarget";
 import styles from "./ScreenTests.module.css";
 import { usePrefersReducedMotion } from "./usePrefersReducedMotion";
 import type { TestMessages } from "@/lib/test-messages";
-
-type GuidedStepId = "white" | "black" | "rgb" | "gray" | "gradient" | "motion";
-type GuidedAnswer = "normal" | "issue" | "skipped";
-
-const GUIDED_STEP_IDS: readonly GuidedStepId[] = ["white", "black", "rgb", "gray", "gradient", "motion"];
+import { getGuidedResult, GUIDED_STEP_IDS, type GuidedAnswer, type GuidedAnswers } from "@/lib/guided-result";
 
 export function GuidedScreenTest({ messages }: { messages: Pick<TestMessages, "fullscreen" | "guided"> }) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [answers, setAnswers] = useState<Partial<Record<GuidedStepId, GuidedAnswer>>>(
+  const [answers, setAnswers] = useState<GuidedAnswers>(
     {},
   );
   const [showSummary, setShowSummary] = useState(false);
@@ -37,10 +33,7 @@ export function GuidedScreenTest({ messages }: { messages: Pick<TestMessages, "f
   const step = messages.guided.steps[currentIndex];
   const currentAnswer = answers[stepId];
 
-  const issueCount = useMemo(
-    () => Object.values(answers).filter((answer) => answer === "issue").length,
-    [answers],
-  );
+  const result = getGuidedResult(answers);
 
   useEffect(() => {
     if (stepId !== "motion" || prefersReducedMotion) {
@@ -116,15 +109,22 @@ export function GuidedScreenTest({ messages }: { messages: Pick<TestMessages, "f
     return (
       <section aria-labelledby="guided-result-title" className={styles.guidedSummary}>
         <h2 id="guided-result-title" ref={summaryTitleRef} tabIndex={-1}>
-          {issueCount === 0
+          {result.status === "normal"
             ? messages.guided.summaryNone
-            : issueCount === 1
-              ? messages.guided.summaryOne
-              : messages.guided.summaryMany.replace("{count}", String(issueCount))}
+            : result.status === "incomplete"
+              ? messages.guided.summaryIncomplete
+              : result.issueCount === 1
+                ? messages.guided.summaryOne
+                : messages.guided.summaryMany.replace("{count}", String(result.issueCount))}
         </h2>
         <p>
           {messages.guided.summaryBody}
         </p>
+        {result.uninspectedCount > 0 ? (
+          <p>
+            {messages.guided.summaryUnchecked.replace("{count}", String(result.uninspectedCount))}
+          </p>
+        ) : null}
 
         <div className={styles.summaryList}>
           {GUIDED_STEP_IDS.map((itemId, index) => {

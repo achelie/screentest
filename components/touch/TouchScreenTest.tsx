@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import type { Locale } from "@/lib/i18n";
 import { testStartEventName } from "@/lib/test-events";
+import { getTouchResult } from "@/lib/touch-result";
 import {
   useCallback,
   useEffect,
@@ -46,22 +47,132 @@ const LIVE_SUMMARY_DELAY_MS = 600;
 const DOWNLOAD_URL_REVOKE_DELAY_MS = 1_000;
 
 const TOUCH_UI = {
-  en: { noPath: "No touch path was recorded. Test again before judging the screen.", all: "Every grid cell received input in this pass.", connected: "A connected area of {count} cells stayed blank. Repeat the pass slowly to see whether it fails in the same place.", isolated: "The remaining blank cells are isolated. Repeat the edges and corners before treating them as a dead zone.", live: "Coverage {coverage} percent. {live} live touches. Peak {peak}.", unavailable: "Fullscreen is not available. The test still works here.", refused: "Fullscreen was refused. The test still works here.", cleared: "Grid cleared. Start another pass from the corners.", passed: "Screen test passed. Every grid cell responded in this pass.", noData: "No touch data recorded. Run the test again and drag across the grid.", closeFailed: "Fullscreen could not close. Use Exit fullscreen to view your result.", alertPassed: "Screen test passed. Every part of the screen responded, and no touch dead zone was found in this pass.", resized: "The test area changed size. Restart so every cell uses the same grid.", prepareFailed: "The image could not be prepared. Please try the download again.", downloadFailed: "The image could not be downloaded. Please try again.", touchDetected: "Touch input detected", mouseAvailable: "Mouse preview available on this device", mouseResult: "Desktop pointer preview", touchResult: "Touch input result", start: "Start Touch Test", restartNote: "Starting again clears the current map.", checker: "Touchscreen checker", coverage: "Coverage", liveTouches: "Live touches", peakTouches: "Peak touches", reset: "Reset", fullscreen: "Enter fullscreen", finish: "Finish", paintedMissed: "Painted and missed cells", paintedValue: "{painted} painted, {missed} missed", again: "Test Again", download: "Download Result" },
-  zh: { noPath: "没有记录到触摸轨迹，请重新测试后再判断屏幕。", all: "本次测试中，每个网格都收到了输入。", connected: "有一片连续的 {count} 格保持空白。请慢速重复一次，确认是否仍在同一位置失效。", isolated: "剩余空白格彼此分散。先重测边缘和四角，再把它当作触控死区。", live: "覆盖率 {coverage}%。当前 {live} 个触点，峰值 {peak}。", unavailable: "这里无法使用全屏，测试仍可在当前区域运行。", refused: "浏览器拒绝了全屏，测试仍可在当前区域运行。", cleared: "网格已清空，请从四角开始再测一次。", passed: "测试通过：本次每个网格都响应了。", noData: "没有记录到触摸数据，请重新运行并划过网格。", closeFailed: "无法退出全屏，请使用“退出全屏”查看结果。", alertPassed: "测试通过：本次屏幕所有区域都已响应，没有发现触控死区。", resized: "测试区域尺寸发生变化。请重新开始，确保每格使用同一套网格。", prepareFailed: "无法生成结果图片，请重试下载。", downloadFailed: "无法下载图片，请重试。", touchDetected: "已检测到触摸输入", mouseAvailable: "当前设备可用鼠标预览", mouseResult: "桌面指针预览结果", touchResult: "触摸输入结果", start: "开始触摸测试", restartNote: "重新开始会清空当前网格。", checker: "触摸屏检测区域", coverage: "覆盖率", liveTouches: "当前触点", peakTouches: "峰值触点", reset: "重置", fullscreen: "进入全屏", finish: "完成", paintedMissed: "已覆盖与未覆盖网格", paintedValue: "已覆盖 {painted} 格，漏掉 {missed} 格", again: "再次测试", download: "下载结果" },
-  de: { noPath: "Kein Touch-Pfad wurde aufgezeichnet. Teste erneut, bevor du das Display bewertest.", all: "Jedes Rasterfeld hat in diesem Durchgang eine Eingabe erhalten.", connected: "Ein zusammenhängender Bereich von {count} Feldern blieb leer. Wiederhole den Durchgang langsam an derselben Stelle.", isolated: "Die übrigen leeren Felder liegen vereinzelt. Wiederhole Ränder und Ecken, bevor du von einer toten Zone ausgehst.", live: "Abdeckung {coverage} Prozent. {live} aktive Kontakte. Spitze {peak}.", unavailable: "Vollbild ist hier nicht verfügbar. Der Test funktioniert weiterhin in diesem Bereich.", refused: "Der Browser hat Vollbild abgelehnt. Der Test funktioniert weiterhin hier.", cleared: "Raster geleert. Starte einen neuen Durchgang in den Ecken.", passed: "Test bestanden. Jedes Rasterfeld hat in diesem Durchgang reagiert.", noData: "Keine Touch-Daten aufgezeichnet. Starte erneut und ziehe durch das Raster.", closeFailed: "Vollbild konnte nicht beendet werden. Nutze Vollbild beenden, um das Ergebnis zu sehen.", alertPassed: "Test bestanden. Alle Bildschirmbereiche reagierten; in diesem Durchgang wurde keine tote Touch-Zone gefunden.", resized: "Der Testbereich hat seine Größe geändert. Starte neu, damit alle Felder dasselbe Raster verwenden.", prepareFailed: "Das Ergebnisbild konnte nicht vorbereitet werden. Versuche den Download erneut.", downloadFailed: "Das Bild konnte nicht heruntergeladen werden. Versuche es erneut.", touchDetected: "Touch-Eingabe erkannt", mouseAvailable: "Mausvorschau auf diesem Gerät verfügbar", mouseResult: "Desktop-Zeigervorschau", touchResult: "Touch-Ergebnis", start: "Touch-Test starten", restartNote: "Ein Neustart löscht die aktuelle Karte.", checker: "Touchscreen-Prüffläche", coverage: "Abdeckung", liveTouches: "Aktive Kontakte", peakTouches: "Maximale Kontakte", reset: "Zurücksetzen", fullscreen: "Vollbild starten", finish: "Beenden", paintedMissed: "Markierte und ausgelassene Felder", paintedValue: "{painted} markiert, {missed} ausgelassen", again: "Erneut testen", download: "Ergebnis herunterladen" },
+  en: {
+    noPath: "No input path was recorded. Test again before judging the screen.",
+    all: "The recorded path covered this pass's whole test grid, including cells between input points.",
+    connected: "A connected area of {count} cells stayed blank. Repeat the pass slowly to see whether the same area stays blank.",
+    isolated: "The remaining blank cells are isolated. Repeat the edges and corners before treating them as a dead zone.",
+    live: "Coverage {coverage} percent. {live} current inputs. Observed peak {peak}.",
+    unavailable: "Fullscreen is not available. The test still works here.",
+    refused: "Fullscreen was refused. The test still works here.",
+    cleared: "Grid cleared. Start another pass from the corners.",
+    covered: "This pass's test area is covered.",
+    noData: "No input path recorded. Run the test again and drag across the grid.",
+    closeFailed: "Fullscreen could not close. Use Exit fullscreen to view your result.",
+    resized: "The test area changed size. Restart so every cell uses the same grid.",
+    prepareFailed: "The image could not be prepared. Please try the download again.",
+    downloadFailed: "The image could not be downloaded. Please try again.",
+    touchDetected: "Browser reports touch support",
+    mouseAvailable: "Mouse preview available on this device",
+    mouseResult: "Mouse path preview",
+    touchResult: "Input path result",
+    mousePreviewNote: "This is a mouse preview. Use a finger on a touch device to check touch input.",
+    mouseGaps: "Blank cells show gaps in the mouse path. Repeat with a finger on a touch device to check touch response.",
+    peakNote: "Peak is the highest simultaneous input count observed in this pass, not the device's maximum. Coverage records the path and is not a hardware pass verdict.",
+    start: "Start Touch Test",
+    restartNote: "Starting again clears the current map.",
+    checker: "Touchscreen checker",
+    coverage: "Coverage",
+    liveTouches: "Current inputs",
+    peakTouches: "Observed peak inputs",
+    reset: "Reset",
+    fullscreen: "Enter fullscreen",
+    finish: "Finish",
+    paintedMissed: "Covered and blank cells",
+    paintedValue: "{painted} covered, {missed} blank",
+    again: "Test Again",
+    download: "Download Result",
+  },
+  zh: {
+    noPath: "没有记录到输入轨迹，请重新测试后再判断屏幕。",
+    all: "本轮记录的路径已覆盖整个测试网格，包括输入点之间划过的格子。",
+    connected: "有一片连续的 {count} 格保持空白。请慢速重复一次，确认同一位置是否仍然空白。",
+    isolated: "剩余空白格彼此分散。先重测边缘和四角，再把它当作触控死区。",
+    live: "覆盖率 {coverage}%。当前 {live} 个输入点，本轮观测峰值 {peak}。",
+    unavailable: "这里无法使用全屏，测试仍可在当前区域运行。",
+    refused: "浏览器拒绝了全屏，测试仍可在当前区域运行。",
+    cleared: "网格已清空，请从四角开始再测一次。",
+    covered: "本次测试区域已覆盖。",
+    noData: "没有记录到输入轨迹，请重新运行并划过网格。",
+    closeFailed: "无法退出全屏，请使用“退出全屏”查看结果。",
+    resized: "测试区域尺寸发生变化。请重新开始，确保每格使用同一套网格。",
+    prepareFailed: "无法生成结果图片，请重试下载。",
+    downloadFailed: "无法下载图片，请重试。",
+    touchDetected: "浏览器报告支持触摸输入",
+    mouseAvailable: "当前设备可用鼠标预览",
+    mouseResult: "鼠标路径预览结果",
+    touchResult: "输入路径覆盖结果",
+    mousePreviewNote: "这是鼠标预览。检查触控输入时，请在触摸设备上用手指测试。",
+    mouseGaps: "空白格只表示鼠标路径还没覆盖到。检查触控响应时，请在触摸设备上用手指重测。",
+    peakNote: "峰值是本轮观测到的最多同时输入点，不是设备触点上限。覆盖率记录划过的路径，不代表触控硬件通过检测。",
+    start: "开始触摸测试",
+    restartNote: "重新开始会清空当前网格。",
+    checker: "触摸屏检测区域",
+    coverage: "覆盖率",
+    liveTouches: "当前输入点",
+    peakTouches: "本轮观测峰值",
+    reset: "重置",
+    fullscreen: "进入全屏",
+    finish: "完成",
+    paintedMissed: "已覆盖与未覆盖网格",
+    paintedValue: "已覆盖 {painted} 格，空白 {missed} 格",
+    again: "再次测试",
+    download: "下载结果",
+  },
+  de: {
+    noPath: "Kein Eingabepfad wurde aufgezeichnet. Teste erneut, bevor du das Display bewertest.",
+    all: "Der aufgezeichnete Pfad deckt das gesamte Testraster dieses Durchgangs ab, auch die Felder zwischen Eingabepunkten.",
+    connected: "Ein zusammenhängender Bereich von {count} Feldern blieb leer. Wiederhole den Durchgang langsam und prüfe, ob derselbe Bereich leer bleibt.",
+    isolated: "Die übrigen leeren Felder liegen vereinzelt. Wiederhole Ränder und Ecken, bevor du von einer toten Zone ausgehst.",
+    live: "Abdeckung {coverage} Prozent. {live} aktive Eingaben. Beobachtete Spitze {peak}.",
+    unavailable: "Vollbild ist hier nicht verfügbar. Der Test funktioniert weiterhin in diesem Bereich.",
+    refused: "Der Browser hat Vollbild abgelehnt. Der Test funktioniert weiterhin hier.",
+    cleared: "Raster geleert. Starte einen neuen Durchgang in den Ecken.",
+    covered: "Der Testbereich dieses Durchgangs ist abgedeckt.",
+    noData: "Kein Eingabepfad aufgezeichnet. Starte erneut und ziehe durch das Raster.",
+    closeFailed: "Vollbild konnte nicht beendet werden. Nutze Vollbild beenden, um das Ergebnis zu sehen.",
+    resized: "Der Testbereich hat seine Größe geändert. Starte neu, damit alle Felder dasselbe Raster verwenden.",
+    prepareFailed: "Das Ergebnisbild konnte nicht vorbereitet werden. Versuche den Download erneut.",
+    downloadFailed: "Das Bild konnte nicht heruntergeladen werden. Versuche es erneut.",
+    touchDetected: "Der Browser meldet Touch-Unterstützung",
+    mouseAvailable: "Mausvorschau auf diesem Gerät verfügbar",
+    mouseResult: "Mauspfad-Vorschau",
+    touchResult: "Ergebnis der Pfadabdeckung",
+    mousePreviewNote: "Dies ist eine Mausvorschau. Prüfe Touch-Eingaben mit einem Finger auf einem Touch-Gerät.",
+    mouseGaps: "Leere Felder zeigen Lücken im Mauspfad. Wiederhole den Test mit einem Finger auf einem Touch-Gerät, um die Touch-Reaktion zu prüfen.",
+    peakNote: "Die Spitze ist die höchste Zahl gleichzeitiger Eingaben in diesem Durchgang, nicht das Gerätelimit. Die Abdeckung zeigt den Pfad und bestätigt keine bestandene Hardwareprüfung.",
+    start: "Touch-Test starten",
+    restartNote: "Ein Neustart löscht die aktuelle Karte.",
+    checker: "Touchscreen-Prüffläche",
+    coverage: "Abdeckung",
+    liveTouches: "Aktive Eingaben",
+    peakTouches: "Beobachtete Spitze",
+    reset: "Zurücksetzen",
+    fullscreen: "Vollbild starten",
+    finish: "Beenden",
+    paintedMissed: "Abgedeckte und leere Felder",
+    paintedValue: "{painted} abgedeckt, {missed} leer",
+    again: "Erneut testen",
+    download: "Ergebnis herunterladen",
+  },
 } as const;
 
 function resultInterpretation(summary: TouchGridSummary, locale: Locale): string {
   const copy = TOUCH_UI[locale];
-  if (summary.paintedCells === 0) {
+  const result = getTouchResult(summary);
+  if (result.coverage === "no-path") {
     return copy.noPath;
   }
 
-  if (summary.largestMissedRegion === 0) {
+  if (result.coverage === "covered") {
     return copy.all;
   }
 
-  if (summary.largestMissedRegion >= 4) {
+  if (result.isMousePreview) {
+    return copy.mouseGaps;
+  }
+
+  if (result.coverage === "connected-gaps") {
     return copy.connected.replace("{count}", String(summary.largestMissedRegion));
   }
 
@@ -316,7 +427,7 @@ export function TouchScreenTest({ locale = "en" }: { locale?: Locale } = {}) {
     setNotice(copy.cleared);
   }, [prepareSession]);
 
-  const finishTest = useCallback(async (completedEveryCell = false) => {
+  const finishTest = useCallback(async (completedArea = false) => {
     const finalSummary = canvasRef.current?.getSummary() ?? summary;
     fullscreenOperationRef.current += 1;
     const operationToken = fullscreenOperationRef.current;
@@ -328,8 +439,8 @@ export function TouchScreenTest({ locale = "en" }: { locale?: Locale } = {}) {
     phaseRef.current = "result";
     setPhase("result");
     setNotice(
-      completedEveryCell
-        ? copy.passed
+      completedArea && getTouchResult(finalSummary).isFullyCovered
+        ? `${copy.covered}${getTouchResult(finalSummary).isMousePreview ? ` ${copy.mousePreviewNote}` : ""}`
         : finalSummary.paintedCells === 0
         ? copy.noData
         : null,
@@ -348,24 +459,23 @@ export function TouchScreenTest({ locale = "en" }: { locale?: Locale } = {}) {
         setNotice(copy.closeFailed);
       }
     }
-  }, [summary]);
+  }, [copy, summary]);
 
   useEffect(() => {
     if (
       phase !== "active" ||
       autoCompletionHandledRef.current ||
-      summary.totalCells <= 0 ||
-      summary.paintedCells < summary.totalCells
+      !getTouchResult(summary).isFullyCovered
     ) {
       return;
     }
 
     autoCompletionHandledRef.current = true;
     window.alert(
-      copy.alertPassed,
+      `${copy.covered}${getTouchResult(summary).isMousePreview ? ` ${copy.mousePreviewNote}` : ""}`,
     );
     void finishTest(true);
-  }, [finishTest, phase, summary.paintedCells, summary.totalCells]);
+  }, [copy, finishTest, phase, summary]);
 
   const pauseForResize = useCallback(() => {
     if (phaseRef.current !== "active") return;
@@ -444,7 +554,7 @@ export function TouchScreenTest({ locale = "en" }: { locale?: Locale } = {}) {
         : copy.mouseAvailable;
 
   const resultTitle =
-    summary.inputMode === "mouse"
+    getTouchResult(summary).isMousePreview
       ? copy.mouseResult
       : copy.touchResult;
 
@@ -573,6 +683,10 @@ export function TouchScreenTest({ locale = "en" }: { locale?: Locale } = {}) {
             </div>
           </dl>
           <p className={styles.interpretation}>{resultInterpretation(summary, locale)}</p>
+          {getTouchResult(summary).isMousePreview ? (
+            <p className={styles.interpretation}>{copy.mousePreviewNote}</p>
+          ) : null}
+          <p className={styles.interpretation}>{copy.peakNote}</p>
           <div className={styles.resultActions}>
             <button
               className={styles.secondaryButton}

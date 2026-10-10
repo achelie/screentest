@@ -1,4 +1,9 @@
 import type { Metadata } from "next";
+import {
+  TestGuidanceContent,
+  TestGuidanceNav,
+  TestHomeLink,
+} from "@/components/tests/TestGuidance";
 import Link from "@/components/site/no-prefetch-link";
 import { ArrowRight, Monitor, Timer, Zap } from "lucide-react";
 
@@ -70,34 +75,6 @@ const faqs = [
     question: "Why do the sRGB and Display P3 color blocks look the same?",
     answer:
       "The display may be limited to sRGB, wide color may be disabled, or the browser and color profile may map both samples into a similar visible result. A visible difference is useful evidence, but no difference is not proof of a narrow-gamut panel.",
-  },
-] as const;
-
-const observations = [
-  {
-    signal: "High dynamic range reported",
-    meaning:
-      "The browser and current output device advertise an HDR-capable environment. This is not a brightness or certification measurement.",
-  },
-  {
-    signal: "The first dark steps merge into black",
-    meaning:
-      "Shadow detail may be crushed by black-level, gamma, limited-range, or local-dimming settings.",
-  },
-  {
-    signal: "The brightest steps look identical",
-    meaning:
-      "Highlight detail may be clipped or compressed by tone mapping and contrast controls.",
-  },
-  {
-    signal: "A glow surrounds the small white window",
-    meaning:
-      "That can reveal local-dimming bloom on LCD and Mini LED panels. The amount changes with zone count and settings.",
-  },
-  {
-    signal: "Wide-gamut colors look more saturated",
-    meaning:
-      "The browser, operating system, profile, and display are preserving at least some color outside the chosen sRGB sample.",
   },
 ] as const;
 
@@ -178,6 +155,7 @@ export default function HdrTestPage() {
         <div className={styles.headerStartAction}>
           <StartFullscreenButton label="Start HDR Test" slug="hdr-test" />
         </div>
+        <TestGuidanceNav locale="en" />
       </header>
 
       <section
@@ -189,42 +167,21 @@ export default function HdrTestPage() {
       </section>
 
       <div className={styles.contentStack}>
-        <section aria-labelledby="hdr-how-title" className={styles.contentSection}>
-          <h2 className={styles.sectionTitle} id="hdr-how-title">How to use this HDR test</h2>
-          <ul className={styles.preparationList}>
-            <li>Enable HDR in the operating system and move this window onto the display you want to check.</li>
-            <li>Enter fullscreen, then use the buttons, arrow keys, or the test surface to switch modes.</li>
-            <li>Run Dynamic range in a dim room at the HDR brightness setting you normally use.</li>
-            <li>Compare the paired gamut colors without changing profiles or display presets during the test.</li>
-          </ul>
-        </section>
-
-        <section aria-labelledby="hdr-look-title" className={styles.contentSection}>
-          <h2 className={styles.sectionTitle} id="hdr-look-title">What to look for</h2>
-          <dl className={styles.observationList}>
-            {observations.map((item) => (
-              <div className={styles.observationRow} key={item.signal}>
-                <dt>{item.signal}</dt>
-                <dd>{item.meaning}</dd>
-              </div>
-            ))}
-          </dl>
-          <p className={styles.limitation}>
-            This HDR screen test cannot measure nits, black level, color accuracy,
-            native panel bit depth, HDR format, or DisplayHDR certification. The
-            dynamic-range and color-gamut signals describe what the browser and
-            current output environment report.
-          </p>
-          <a
-            className={styles.referenceLink}
-            href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/%40media/dynamic-range"
-            rel="noreferrer"
-            target="_blank"
-          >
-            Read how browsers report dynamic range
-            <ArrowRight aria-hidden="true" size={18} strokeWidth={1.8} />
-          </a>
-        </section>
+        <TestGuidanceContent
+          locale="en"
+          testId="hdr-test"
+          resultExtras={
+            <a
+              className={styles.referenceLink}
+              href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/%40media/dynamic-range"
+              rel="noreferrer"
+              target="_blank"
+            >
+              Read how browsers report dynamic range
+              <ArrowRight aria-hidden="true" size={18} strokeWidth={1.8} />
+            </a>
+          }
+        />
 
         <section aria-labelledby="hdr-faq-title" className={styles.contentSection}>
           <h2 className={styles.sectionTitle} id="hdr-faq-title">HDR test FAQ</h2>
@@ -250,6 +207,8 @@ export default function HdrTestPage() {
           </div>
         </section>
       </div>
+
+      <TestHomeLink locale="en" />
     </div>
   );
 }

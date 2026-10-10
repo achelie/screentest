@@ -10,6 +10,7 @@ import { OledBurnInTest } from "@/components/tests/OledBurnInTest";
 import { ScreenResolutionChecker } from "@/components/tests/ScreenResolutionChecker";
 import { ScreenTearingTest } from "@/components/tests/ScreenTearingTest";
 import { StartFullscreenButton } from "@/components/tests/StartFullscreenButton";
+import { TestGuidanceContent, TestGuidanceNav, TestHomeLink } from "@/components/tests/TestGuidance";
 import styles from "@/components/tests/ScreenTests.module.css";
 import { TouchScreenTest } from "@/components/touch/TouchScreenTest";
 import {
@@ -140,6 +141,7 @@ export function StandaloneToolPageContent({
         <div className={styles.headerStartAction}>
           <StartFullscreenButton label={copy.startLabel} slug={slug} />
         </div>
+        <TestGuidanceNav locale={locale} />
       </header>
 
       <section aria-label={copy.toolLabel} className={`${styles.testMount} ${styles.toolTestMount}`} id={`${slug}-tool`}>
@@ -147,17 +149,7 @@ export function StandaloneToolPageContent({
       </section>
 
       <div className={styles.contentStack}>
-        <section aria-labelledby="standalone-how-title" className={styles.contentSection}>
-          <h2 className={styles.sectionTitle} id="standalone-how-title">{copy.howTitle}</h2>
-          <ul className={styles.preparationList}>{copy.preparation.map((item) => <li key={item}>{item}</li>)}</ul>
-        </section>
-        <section aria-labelledby="standalone-look-title" className={styles.contentSection}>
-          <h2 className={styles.sectionTitle} id="standalone-look-title">{copy.lookTitle}</h2>
-          <dl className={styles.observationList}>{copy.observations.map((item) => (
-            <div className={styles.observationRow} key={item.signal}><dt>{item.signal}</dt><dd>{item.meaning}</dd></div>
-          ))}</dl>
-          <p className={styles.limitation}>{copy.limitation}</p>
-        </section>
+        <TestGuidanceContent locale={locale} testId={slug} />
         <section aria-labelledby="standalone-faq-title" className={styles.contentSection}>
           <h2 className={styles.sectionTitle} id="standalone-faq-title">{copy.faqTitle}</h2>
           <div className={styles.testFaqList}>{copy.faqs.map((item) => (
@@ -173,6 +165,7 @@ export function StandaloneToolPageContent({
           ))}</div>
         </section>
       </div>
+      <TestHomeLink locale={locale} />
     </div>
   );
 }

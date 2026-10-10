@@ -1,4 +1,9 @@
 import type { Metadata } from "next";
+import {
+  TestGuidanceContent,
+  TestGuidanceNav,
+  TestHomeLink,
+} from "@/components/tests/TestGuidance";
 import { ArrowRight, Eye, Monitor, SlidersHorizontal } from "lucide-react";
 
 import { JsonLd } from "@/components/seo/json-ld";
@@ -41,34 +46,6 @@ export const metadata: Metadata = {
     description,
   },
 };
-
-const observations = [
-  {
-    signal: "RGB 1 through 10 all disappear into black",
-    meaning:
-      "Shadow detail may be crushed by the black-level setting, gamma, image processing, or a Full versus Limited output-range mismatch. The panel may also have weak near-black separation.",
-  },
-  {
-    signal: "Every step is easy to see and black looks gray",
-    meaning:
-      "The black floor may be raised. Check room reflections, the monitor black-level control, and whether one device expects Limited range while another sends Full range.",
-  },
-  {
-    signal: "The four embedded patches appear but the fine stripes vanish",
-    meaning:
-      "The display can separate larger dark areas but may smooth or clip very fine low-level detail through processing, dimming, or limited precision.",
-  },
-  {
-    signal: "Corners glow only when your head moves",
-    meaning:
-      "That behavior is closer to viewing-angle glow than a global black-level setting. Use the Backlight Bleed Test to inspect the position and movement of the glow.",
-  },
-  {
-    signal: "The result changes when local dimming is enabled",
-    meaning:
-      "Local dimming can deepen large black areas while changing tiny near-black patches. Record both passes instead of treating either one as a measured panel score.",
-  },
-] as const;
 
 const faqs = [
   {
@@ -192,6 +169,7 @@ export default function BlackLevelTestPage() {
             slug="black-level-test"
           />
         </div>
+        <TestGuidanceNav locale="en" />
       </header>
 
       <section
@@ -203,35 +181,7 @@ export default function BlackLevelTestPage() {
       </section>
 
       <div className={styles.contentStack}>
-        <section aria-labelledby="black-level-how-title" className={styles.contentSection}>
-          <h2 className={styles.sectionTitle} id="black-level-how-title">
-            How to run the black level test
-          </h2>
-          <ul className={styles.preparationList}>
-            <li>Use an SDR picture mode, set browser zoom to 100%, and move the window to the display you want to test.</li>
-            <li>Keep the brightness you normally use. Turn off Night Light, automatic color temperature, and dynamic contrast for the first pass.</li>
-            <li>Dim the room, enter fullscreen, hide the controls, and let your eyes adapt to the pure-black screen for about 30 seconds.</li>
-            <li>Switch to Near-black 1-10 and count only the patches you can separate consistently. Then inspect the 0-20 ramp for a smooth start out of black.</li>
-            <li>Finish with Black depth. Look for four center patches, the fine horizontal stripe field, and both comparison squares. If the display has local dimming, repeat once with it enabled.</li>
-          </ul>
-        </section>
-
-        <section aria-labelledby="black-level-look-title" className={styles.contentSection}>
-          <h2 className={styles.sectionTitle} id="black-level-look-title">
-            What the patterns can tell you
-          </h2>
-          <dl className={styles.observationList}>
-            {observations.map((item) => (
-              <div className={styles.observationRow} key={item.signal}>
-                <dt>{item.signal}</dt>
-                <dd>{item.meaning}</dd>
-              </div>
-            ))}
-          </dl>
-          <p className={styles.limitation}>
-            This page outputs fixed SDR RGB values. It cannot measure black luminance, contrast ratio, panel technology, gamma accuracy, or the light that reaches your eyes. Use the result to compare reversible settings, not to assign a score or make a warranty decision.
-          </p>
-        </section>
+        <TestGuidanceContent locale="en" testId="black-level-test" />
 
         <section aria-labelledby="black-level-faq-title" className={styles.contentSection}>
           <h2 className={styles.sectionTitle} id="black-level-faq-title">
@@ -261,6 +211,8 @@ export default function BlackLevelTestPage() {
           </div>
         </section>
       </div>
+
+      <TestHomeLink locale="en" />
     </div>
   );
 }

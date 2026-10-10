@@ -6,6 +6,7 @@ import Link from "@/components/site/no-prefetch-link";
 import styles from "@/components/tests/ScreenTests.module.css";
 import { TestExperience } from "@/components/tests/TestExperience";
 import { TestIcon } from "@/components/tests/TestIcon";
+import { TestGuidanceContent, TestGuidanceNav, TestHomeLink } from "@/components/tests/TestGuidance";
 import { absoluteLocalizedUrl, getDictionary, localeConfig, localizePath, type Locale } from "@/lib/i18n";
 import { pairedAlternates } from "@/lib/localized-metadata";
 import { SITE_NAME } from "@/lib/site";
@@ -97,6 +98,7 @@ export function TestPageContent({ locale, slug }: { locale: Locale; slug: string
           <span className={styles.metaItem}><Monitor aria-hidden="true" size={17} strokeWidth={1.8} />{dictionary.common.noDownload}</span>
         </div>
         <h1 className={`${styles.title} ${styles.testTitle}`}>{test.name}</h1><p className={styles.lead}>{test.intro}</p>
+        <TestGuidanceNav locale={locale} />
       </header>
 
       <section aria-label={`${test.name}${dictionary.testPage.toolSuffix}`} className={styles.testMount}>
@@ -104,15 +106,7 @@ export function TestPageContent({ locale, slug }: { locale: Locale; slug: string
       </section>
 
       <div className={styles.contentStack}>
-        <section aria-labelledby="before-title" className={styles.contentSection}>
-          <h2 className={styles.sectionTitle} id="before-title">{dictionary.testPage.before}</h2>
-          <ul className={styles.preparationList}>{test.preparation.map((item) => <li key={item}>{item}</li>)}</ul>
-        </section>
-        <section aria-labelledby="look-title" className={styles.contentSection}>
-          <h2 className={styles.sectionTitle} id="look-title">{dictionary.testPage.lookFor}</h2>
-          <dl className={styles.observationList}>{test.observations.map((item) => <div className={styles.observationRow} key={item.signal}><dt>{item.signal}</dt><dd>{item.meaning}</dd></div>)}</dl>
-          <p className={styles.limitation}>{test.limitation}</p>
-        </section>
+        <TestGuidanceContent locale={locale} testId={test.slug} />
         {test.faq?.length ? (
           <section aria-labelledby="faq-title" className={styles.contentSection}>
             <h2 className={styles.sectionTitle} id="faq-title">{dictionary.testPage.faq}</h2>
@@ -130,6 +124,7 @@ export function TestPageContent({ locale, slug }: { locale: Locale; slug: string
           ))}</div>
         </section>
       </div>
+      <TestHomeLink locale={locale} />
     </div>
   );
 }

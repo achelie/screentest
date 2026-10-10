@@ -9,6 +9,7 @@ import {
 } from "react";
 import type { PointerEvent as ReactPointerEvent } from "react";
 import type { Locale } from "@/lib/i18n";
+import { getTouchResult } from "@/lib/touch-result";
 
 import {
   cellIndexAt,
@@ -57,9 +58,27 @@ const FULLSCREEN_EXIT_ZONE_HEIGHT = 88;
 const FULLSCREEN_EXIT_MOVE_TOLERANCE = 12;
 
 const TOUCH_GRID_UI = {
-  en: { title: "ScreenTestHub Touch Screen Test", date: "Test date", coverage: "Coverage", missed: "Missed cells", region: "Largest missed region", peak: "Peak touches", frozen: "Touchscreen coverage result. Input is frozen.", active: "Interactive touchscreen coverage grid", disabled: "Touchscreen coverage grid. Input is disabled." },
-  zh: { title: "ScreenTestHub 触摸屏测试", date: "测试时间", coverage: "覆盖率", missed: "未覆盖网格", region: "最大连续空白区域", peak: "峰值触点", frozen: "触摸屏覆盖结果，输入已冻结。", active: "可交互触摸屏覆盖网格", disabled: "触摸屏覆盖网格，输入已停用。" },
-  de: { title: "ScreenTestHub Touchscreen-Test", date: "Testdatum", coverage: "Abdeckung", missed: "Ausgelassene Felder", region: "Größter leerer Bereich", peak: "Maximale Kontakte", frozen: "Touchscreen-Ergebnis. Eingabe ist eingefroren.", active: "Interaktives Touchscreen-Raster", disabled: "Touchscreen-Raster. Eingabe ist deaktiviert." },
+  en: {
+    title: "ScreenTestHub Input Path Coverage", mouseTitle: "ScreenTestHub Mouse Path Preview",
+    date: "Test date", coverage: "Path coverage", missed: "Blank cells", region: "Largest blank region", peak: "Observed peak inputs",
+    note: "Path coverage in this pass, not a hardware verdict. Peak is observed, not the device limit.",
+    mouseNote: "Mouse preview only. Peak is the observed input count, not the device limit.",
+    frozen: "Input path coverage result. Input is frozen.", active: "Interactive input path coverage grid", disabled: "Input path coverage grid. Input is disabled.",
+  },
+  zh: {
+    title: "ScreenTestHub 输入路径覆盖结果", mouseTitle: "ScreenTestHub 鼠标路径预览结果",
+    date: "测试时间", coverage: "本轮路径覆盖率", missed: "未覆盖网格", region: "最大连续空白区域", peak: "本轮观测峰值",
+    note: "本轮路径覆盖不代表硬件通过检测；峰值为观测到的同时输入点，不是设备上限。",
+    mouseNote: "本轮只有鼠标预览，未测试触控输入；峰值为观测输入点，不是设备上限。",
+    frozen: "输入路径覆盖结果，输入已冻结。", active: "可交互输入路径覆盖网格", disabled: "输入路径覆盖网格，输入已停用。",
+  },
+  de: {
+    title: "ScreenTestHub Eingabepfad-Abdeckung", mouseTitle: "ScreenTestHub Mauspfad-Vorschau",
+    date: "Testdatum", coverage: "Pfadabdeckung", missed: "Leere Felder", region: "Größter leerer Bereich", peak: "Beobachtete Kontaktspitze",
+    note: "Pfadabdeckung dieses Durchgangs, kein Hardwareurteil. Die beobachtete Spitze ist nicht das Gerätelimit.",
+    mouseNote: "Nur Mausvorschau. Die beobachtete Zahl gleichzeitiger Eingaben ist nicht das Gerätelimit.",
+    frozen: "Ergebnis der Pfadabdeckung. Eingabe ist eingefroren.", active: "Interaktives Raster zur Pfadabdeckung", disabled: "Raster zur Pfadabdeckung. Eingabe ist deaktiviert.",
+  },
 } as const;
 
 function currentDevicePixelRatio(): number {
@@ -452,7 +471,8 @@ export const TouchGridCanvas = forwardRef<
       context.fillRect(0, 0, exportCanvas.width, 150);
       context.fillStyle = "#fffaf4";
       context.font = "700 38px system-ui, sans-serif";
-      context.fillText(exportCopy.title, 70, 72);
+      const isMousePreview = getTouchResult(summary).isMousePreview;
+      context.fillText(isMousePreview ? exportCopy.mouseTitle : exportCopy.title, 70, 72);
       context.font = "20px ui-monospace, monospace";
       context.fillStyle = "#c9ccc5";
       context.fillText(`${exportCopy.date}: ${new Date().toLocaleString(locale === "zh" ? "zh-CN" : locale === "de" ? "de-DE" : "en-US")}`, 70, 112);
@@ -482,14 +502,16 @@ export const TouchGridCanvas = forwardRef<
 
       context.fillStyle = "#171916";
       context.font = "700 25px system-ui, sans-serif";
-      context.fillText(`${exportCopy.coverage}: ${summary.coveragePercent}%`, 70, 888);
-      context.fillText(`${exportCopy.missed}: ${summary.missedCells}`, 400, 888);
+      context.fillText(`${exportCopy.coverage}: ${summary.coveragePercent}%`, 70, 870);
+      context.fillText(`${exportCopy.missed}: ${summary.missedCells}`, 510, 870);
       context.fillText(
         `${exportCopy.region}: ${summary.largestMissedRegion}`,
-        700,
-        888,
+        780,
+        870,
       );
-      context.fillText(`${exportCopy.peak}: ${summary.peakTouches}`, 70, 946);
+      context.fillText(`${exportCopy.peak}: ${summary.peakTouches}`, 70, 914);
+      context.font = "18px system-ui, sans-serif";
+      context.fillText(isMousePreview ? exportCopy.mouseNote : exportCopy.note, 70, 960);
 
       if (typeof exportCanvas.toBlob !== "function") return null;
 

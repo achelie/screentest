@@ -1,4 +1,9 @@
 import type { Metadata } from "next";
+import {
+  TestGuidanceContent,
+  TestGuidanceNav,
+  TestHomeLink,
+} from "@/components/tests/TestGuidance";
 import Link from "@/components/site/no-prefetch-link";
 import { Activity, ArrowRight, Gauge, Monitor } from "lucide-react";
 
@@ -71,29 +76,6 @@ const faqs = [
     question: "Can a webpage verify VRR or turn VSync off?",
     answer:
       "No. A webpage cannot reliably disable browser compositor synchronization or certify that FreeSync or G-Sync is active. This tool provides repeatable motion for visual comparison, while the final check should use the game, driver overlay, and monitor indicators you actually rely on.",
-  },
-] as const;
-
-const observations = [
-  {
-    signal: "One horizontal section shifts sideways",
-    meaning:
-      "That is the closest visual match to tearing: different parts of the screen appear to show different moments of the movement.",
-  },
-  {
-    signal: "The entire pattern pauses or jumps",
-    meaning:
-      "That points more toward frame drops or stutter than tearing. Watch whether every edge stops at the same time.",
-  },
-  {
-    signal: "Moving edges leave a trail or bright halo",
-    meaning:
-      "That is ghosting or overshoot, not a synchronization seam. Open the Motion Test to inspect pixel response more clearly.",
-  },
-  {
-    signal: "The browser test stays perfectly smooth",
-    meaning:
-      "The browser compositor may be hiding the problem. This result cannot prove that a game, capture device, or other application will be tear-free.",
   },
 ] as const;
 
@@ -179,6 +161,7 @@ export default function ScreenTearingTestPage() {
             slug="screen-tearing-test"
           />
         </div>
+        <TestGuidanceNav locale="en" />
       </header>
 
       <section
@@ -190,54 +173,23 @@ export default function ScreenTearingTestPage() {
       </section>
 
       <div className={styles.contentStack}>
-        <section aria-labelledby="tearing-how-title" className={styles.contentSection}>
-          <h2 className={styles.sectionTitle} id="tearing-how-title">
-            How to use this screen tearing test
-          </h2>
-          <ul className={styles.preparationList}>
-            <li>Enter fullscreen, choose Stripe Tracking, and switch to Fast so sharp vertical edges cross the whole panel.</li>
-            <li>Watch for a horizontal break, then repeat with Block Layers and Checker Scroll to see whether it returns.</li>
-            <li>Test once with your current sync settings and again after changing VSync, FreeSync, G-Sync, or the game frame limit.</li>
-            <li>Keep browser zoom, display refresh rate, and the monitor holding this window unchanged between comparisons.</li>
-          </ul>
-        </section>
-
-        <section aria-labelledby="tearing-look-title" className={styles.contentSection}>
-          <h2 className={styles.sectionTitle} id="tearing-look-title">
-            What to look for
-          </h2>
-          <dl className={styles.observationList}>
-            {observations.map((item) => (
-              <div className={styles.observationRow} key={item.signal}>
-                <dt>{item.signal}</dt>
-                <dd>{item.meaning}</dd>
-              </div>
-            ))}
-          </dl>
-          <p className={styles.limitation}>
-            The frame estimate reports how often this page receives animation callbacks. It is not a monitor refresh-rate measurement and cannot prove that VRR is active. Browsers usually synchronize page composition, so they cannot force VSync off for a certified tearing test. Always recheck the same setting in the game or application where the problem appears.
-          </p>
-          <div className={styles.referenceLinks}>
-            <a
-              className={styles.referenceLink}
-              href="https://developer.mozilla.org/en-US/docs/Web/API/Window/requestAnimationFrame"
-              rel="noreferrer"
-              target="_blank"
-            >
-              How browser animation timing works
-              <ArrowRight aria-hidden="true" size={18} strokeWidth={1.8} />
-            </a>
-            <a
-              className={styles.referenceLink}
-              href="https://screentester.io/screen-tearing-test/"
-              rel="noreferrer"
-              target="_blank"
-            >
-              Review the reference test concept
-              <ArrowRight aria-hidden="true" size={18} strokeWidth={1.8} />
-            </a>
-          </div>
-        </section>
+        <TestGuidanceContent
+          locale="en"
+          testId="screen-tearing-test"
+          resultExtras={
+            <div className={styles.referenceLinks}>
+              <a
+                className={styles.referenceLink}
+                href="https://developer.mozilla.org/en-US/docs/Web/API/Window/requestAnimationFrame"
+                rel="noreferrer"
+                target="_blank"
+              >
+                How browser animation timing works
+                <ArrowRight aria-hidden="true" size={18} strokeWidth={1.8} />
+              </a>
+            </div>
+          }
+        />
 
         <section aria-labelledby="tearing-faq-title" className={styles.contentSection}>
           <h2 className={styles.sectionTitle} id="tearing-faq-title">
@@ -267,6 +219,8 @@ export default function ScreenTearingTestPage() {
           </div>
         </section>
       </div>
+
+      <TestHomeLink locale="en" />
     </div>
   );
 }

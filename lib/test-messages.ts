@@ -115,6 +115,8 @@ const EN_TEST_MESSAGES = {
     pause: "Pause target",
     start: "Start target",
     summaryNone: "Nothing obvious showed up.",
+    summaryIncomplete: "This check is incomplete.",
+    summaryUnchecked: "{count} of the 6 checks were skipped or not checked. They do not count as normal; run them before judging the full screen.",
     summaryOne: "1 check needs a closer look.",
     summaryMany: "{count} checks need a closer look.",
     summaryBody:
@@ -221,6 +223,8 @@ const ZH_TEST_MESSAGES = {
     pause: "暂停目标",
     start: "启动目标",
     summaryNone: "没有发现明显问题。",
+    summaryIncomplete: "本次检查未完成。",
+    summaryUnchecked: "6 项中有 {count} 项已跳过或未检查。这些项目不算正常，请补测后再判断整块屏幕。",
     summaryOne: "有 1 项需要仔细复查。",
     summaryMany: "有 {count} 项需要仔细复查。",
     summaryBody: "结果只保留在当前标签页。这是目视检查，不是硬件诊断。任何可疑现象都应使用对应的单项测试再次确认。",
@@ -344,7 +348,9 @@ const DE_TEST_MESSAGES = {
     pause: "Ziel pausieren",
     start: "Ziel starten",
     summaryNone: "Nichts Auffälliges gefunden.",
-    summaryOne: "Eine Prüfung solltest du genauer ansehen.",
+    summaryIncomplete: "Diese Prüfung ist noch nicht vollständig.",
+    summaryUnchecked: "{count} der 6 Prüfungen wurden übersprungen oder nicht geprüft. Sie zählen nicht als normal. Hole sie nach, bevor du das gesamte Display beurteilst.",
+    summaryOne: "1 Prüfung solltest du genauer ansehen.",
     summaryMany: "{count} Prüfungen solltest du genauer ansehen.",
     summaryBody:
       "Diese Zusammenfassung bleibt in diesem Tab. Sie ist eine Sichtprüfung, keine Hardwarediagnose. Prüfe verdächtige Stellen noch einmal mit dem passenden Einzeltest.",

@@ -1,0 +1,141 @@
+.navigation {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.5rem;
+  margin-top: 1.5rem;
+  padding-block: 0.7rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.9rem;
+}
+
+.navigation a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  color: var(--ink);
+  text-decoration-color: var(--accent);
+  text-underline-offset: 0.3em;
+}
+
+.navigation a:hover,
+.home a:hover {
+  color: var(--accent-deep);
+}
+
+.sections {
+  display: grid;
+  gap: clamp(2.75rem, 6vw, 4.5rem);
+  max-width: 61rem;
+}
+
+.section {
+  min-width: 0;
+  scroll-margin-top: 7rem;
+}
+
+.section h2 {
+  max-width: 34ch;
+  margin: 0 0 1.25rem;
+  color: var(--ink);
+  font-size: clamp(1.55rem, 3vw, 2.15rem);
+  letter-spacing: -0.035em;
+  line-height: 1.15;
+}
+
+.steps,
+.list {
+  display: grid;
+  gap: 0.9rem;
+  max-width: 74ch;
+  margin: 0;
+  padding-left: 1.5rem;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.steps li,
+.list li {
+  padding-left: 0.4rem;
+}
+
+.steps {
+  list-style: decimal;
+}
+
+.list {
+  list-style: disc;
+}
+
+.steps li::marker {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.note {
+  max-width: 74ch;
+  margin: 0 0 1.1rem;
+  color: var(--muted);
+}
+
+.results {
+  display: grid;
+  gap: 1.3rem;
+  max-width: 74ch;
+  margin: 0;
+}
+
+.results dt {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.results dd {
+  margin: 0.3rem 0 0;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.limitation {
+  max-width: 74ch;
+  margin: 1.5rem 0 0;
+  padding-left: 1rem;
+  border-left: 3px solid var(--accent);
+  color: var(--muted);
+}
+
+.home {
+  max-width: 61rem;
+  margin-top: clamp(3rem, 7vw, 5rem);
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line-strong);
+}
+
+.home a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  color: var(--ink);
+  font-weight: 700;
+  text-decoration-color: var(--accent);
+  text-underline-offset: 0.3em;
+}
+
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+  margin-bottom: 1.5rem;
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+@media (max-width: 40rem) {
+  .navigation {
+    gap: 0.1rem 1rem;
+  }
+
+  .home a {
+    max-width: 100%;
+  }
+}

@@ -1,4 +1,9 @@
 import type { Metadata } from "next";
+import {
+  TestGuidanceContent,
+  TestGuidanceNav,
+  TestHomeLink,
+} from "@/components/tests/TestGuidance";
 import Link from "@/components/site/no-prefetch-link";
 import { ArrowRight, Monitor, Palette, SlidersHorizontal } from "lucide-react";
 
@@ -34,34 +39,6 @@ export const metadata: Metadata = {
     siteName: SITE_NAME,
   },
 };
-
-const observations = [
-  {
-    signal: "The 1% patch disappears with 0%",
-    meaning:
-      "Shadow detail is being crushed. Raise the monitor black level or choose a less aggressive contrast preset until 1% is only just visible.",
-  },
-  {
-    signal: "The 99% patch merges into 100%",
-    meaning:
-      "Highlights are clipping. Reduce contrast until the last bright steps separate without making ordinary white look dull.",
-  },
-  {
-    signal: "Every gray patch carries the same color tint",
-    meaning:
-      "The preset or RGB gains may be off. Start from sRGB, Standard, or 6500K, then make small RGB gain changes if the monitor provides them.",
-  },
-  {
-    signal: "Only one part of a gray patch changes color",
-    meaning:
-      "That is more likely panel uniformity than a global white-balance setting. RGB gain cannot repair a local patch without affecting the rest of the screen.",
-  },
-  {
-    signal: "Color steps merge near full saturation",
-    meaning:
-      "A vivid or enhancement mode may be clipping channels. Compare a neutral preset before reducing color globally.",
-  },
-] as const;
 
 const faqs = [
   {
@@ -189,6 +166,7 @@ export default function MonitorColorCalibrationPage() {
             slug="monitor-color-calibration"
           />
         </div>
+        <TestGuidanceNav locale="en" />
       </header>
 
       <section
@@ -200,54 +178,30 @@ export default function MonitorColorCalibrationPage() {
       </section>
 
       <div className={styles.contentStack}>
-        <section aria-labelledby="calibration-how-title" className={styles.contentSection}>
-          <h2 className={styles.sectionTitle} id="calibration-how-title">
-            How to calibrate your monitor by eye
-          </h2>
-          <ul className={styles.preparationList}>
-            <li>Let the display warm up for 20 to 30 minutes and use the room lighting you normally work in.</li>
-            <li>Choose the native resolution, set browser zoom to 100%, and keep the page on the monitor you are adjusting.</li>
-            <li>Turn off HDR, Night Light, automatic color temperature, adaptive brightness, and dynamic contrast for this SDR pass.</li>
-            <li>Start with sRGB, Standard, or a 6500K preset, then adjust black and white levels before touching RGB gain.</li>
-            <li>Check grayscale, gamma, and color separation in that order. Change one monitor setting at a time.</li>
-            <li>Save the result as a separate OSD preset so your HDR or gaming setup is easy to restore.</li>
-          </ul>
-        </section>
-
-        <section aria-labelledby="calibration-look-title" className={styles.contentSection}>
-          <h2 className={styles.sectionTitle} id="calibration-look-title">
-            What to look for
-          </h2>
-          <dl className={styles.observationList}>
-            {observations.map((item) => (
-              <div className={styles.observationRow} key={item.signal}>
-                <dt>{item.signal}</dt>
-                <dd>{item.meaning}</dd>
-              </div>
-            ))}
-          </dl>
-          <p className={styles.limitation}>
-            This page sends fixed SDR values to the browser. It cannot measure the white point, luminance, gamut, tone response, native panel bit depth, or color error that reaches your eyes. D65 and gamma 2.2 are setup targets here, not measured results. Professional calibration needs a meter and profiling software.
-          </p>
-          <div className={styles.referenceLinks}>
-            <a className={styles.referenceLink} href="https://www.w3.org/TR/css-color-4/" rel="noreferrer" target="_blank">
-              Read the W3C sRGB and D65 definitions
-              <ArrowRight aria-hidden="true" size={18} strokeWidth={1.8} />
-            </a>
-            <a className={styles.referenceLink} href="https://support.microsoft.com/en-US/Windows/Hardware/Display-Graphics/change-display-brightness-and-color-in-windows" rel="noreferrer" target="_blank">
-              Open Microsoft display color guidance
-              <ArrowRight aria-hidden="true" size={18} strokeWidth={1.8} />
-            </a>
-            <a className={styles.referenceLink} href="https://support.apple.com/guide/mac-help/calibrate-your-display-mchlp1109/mac" rel="noreferrer" target="_blank">
-              Open Apple Display Calibrator guidance
-              <ArrowRight aria-hidden="true" size={18} strokeWidth={1.8} />
-            </a>
-            <Link className={styles.referenceLink} href="/hdr-test">
-              Calibrate HDR separately
-              <ArrowRight aria-hidden="true" size={18} strokeWidth={1.8} />
-            </Link>
-          </div>
-        </section>
+        <TestGuidanceContent
+          locale="en"
+          testId="monitor-color-calibration"
+          resultExtras={
+            <div className={styles.referenceLinks}>
+              <a className={styles.referenceLink} href="https://www.w3.org/TR/css-color-4/" rel="noreferrer" target="_blank">
+                Read the W3C sRGB and D65 definitions
+                <ArrowRight aria-hidden="true" size={18} strokeWidth={1.8} />
+              </a>
+              <a className={styles.referenceLink} href="https://support.microsoft.com/en-US/Windows/Hardware/Display-Graphics/change-display-brightness-and-color-in-windows" rel="noreferrer" target="_blank">
+                Open Microsoft display color guidance
+                <ArrowRight aria-hidden="true" size={18} strokeWidth={1.8} />
+              </a>
+              <a className={styles.referenceLink} href="https://support.apple.com/guide/mac-help/calibrate-your-display-mchlp1109/mac" rel="noreferrer" target="_blank">
+                Open Apple Display Calibrator guidance
+                <ArrowRight aria-hidden="true" size={18} strokeWidth={1.8} />
+              </a>
+              <Link className={styles.referenceLink} href="/hdr-test">
+                Calibrate HDR separately
+                <ArrowRight aria-hidden="true" size={18} strokeWidth={1.8} />
+              </Link>
+            </div>
+          }
+        />
 
         <section aria-labelledby="calibration-faq-title" className={styles.contentSection}>
           <h2 className={styles.sectionTitle} id="calibration-faq-title">
@@ -277,6 +231,8 @@ export default function MonitorColorCalibrationPage() {
           </div>
         </section>
       </div>
+
+      <TestHomeLink locale="en" />
     </div>
   );
 }

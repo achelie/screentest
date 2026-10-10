@@ -1,4 +1,9 @@
 import type { Metadata } from "next";
+import {
+  TestGuidanceContent,
+  TestGuidanceNav,
+  TestHomeLink,
+} from "@/components/tests/TestGuidance";
 import Link from "@/components/site/no-prefetch-link";
 import { ArrowRight, Eye, Monitor, ShieldCheck } from "lucide-react";
 
@@ -36,34 +41,6 @@ export const metadata: Metadata = {
   },
 };
 
-const observations = [
-  {
-    signal: "A toolbar, logo, HUD, or status bar stays fixed",
-    meaning:
-      "Compare the same location on low gray, red, green, and blue. A fixed outline that remains while the test content changes may be persistent retention or uneven pixel aging.",
-  },
-  {
-    signal: "Bands or blotches appear only on low gray",
-    meaning:
-      "This looks more like near-black uniformity, vertical banding, or a dirty-screen pattern. Check it from your normal seat before treating it as a retained image.",
-  },
-  {
-    signal: "The mark moves with the bars or gradient",
-    meaning:
-      "A trail that follows the moving pattern is more likely browser motion, display response, or overshoot. Compare it with the Monitor Ghosting Test instead.",
-  },
-  {
-    signal: "One tiny point is always dark or bright",
-    meaning:
-      "That is a pixel-level symptom rather than a burned-in shape. Use the Dead Pixel Test to check the point against black, white, red, green, and blue.",
-  },
-  {
-    signal: "The outline fades after ordinary moving content",
-    meaning:
-      "That behavior is more consistent with temporary image retention. Let the display rest and complete its normal automatic panel-care cycle before checking again.",
-  },
-] as const;
-
 const faqs = [
   {
     question: "What is the difference between OLED burn-in and image retention?",
@@ -73,7 +50,7 @@ const faqs = [
   {
     question: "How long should I run this OLED burn-in test?",
     answer:
-      "Two to five minutes is enough for a careful pass through low gray, primary colors, moving bars, and gradients. This tool stops after five continuous minutes and shows black until you choose to resume.",
+      "Two to five minutes is enough for a careful pass through low gray, primary colors, moving bars, and gradients. During continuous playback, this tool stops after five minutes and shows black until you choose to resume. The timer does not protect a paused static pattern; end the test yourself when you pause.",
   },
   {
     question: "Should I set OLED brightness to 100 percent?",
@@ -179,7 +156,7 @@ export default function OledBurnInTestPage() {
           </span>
           <span className={styles.metaItem}>
             <ShieldCheck aria-hidden="true" size={17} strokeWidth={1.8} />
-            Five-minute safety stop
+            Five-minute playback stop
           </span>
           <span className={styles.metaItem}>
             <Monitor aria-hidden="true" size={17} strokeWidth={1.8} />
@@ -195,6 +172,7 @@ export default function OledBurnInTestPage() {
             slug="oled-burn-in-test"
           />
         </div>
+        <TestGuidanceNav locale="en" />
       </header>
 
       <section
@@ -206,42 +184,22 @@ export default function OledBurnInTestPage() {
       </section>
 
       <div className={styles.contentStack}>
-        <section aria-labelledby="burn-in-how-title" className={styles.contentSection}>
-          <h2 className={styles.sectionTitle} id="burn-in-how-title">
-            How to test an OLED for burn-in
-          </h2>
-          <ul className={styles.preparationList}>
-            <li>Clean the screen, use the brightness and picture preset you normally watch, and avoid an unrealistic 100% brightness setup.</li>
-            <li>If you briefly disable logo dimming, pixel shift, or another protection feature for comparison, restore it as soon as the test ends.</li>
-            <li>Start on 10% gray. Check the taskbar, status bar, channel-logo, subtitle, and game-HUD positions before cycling red, green, and blue.</li>
-            <li>Use Moving Color Bars and Gradient Sweep to see whether a suspicious mark stays fixed to the panel while the test content moves.</li>
-            <li>Switch to ordinary moving content or let the display rest, then inspect the same location again to separate temporary retention from a persistent difference.</li>
-          </ul>
-        </section>
-
-        <section aria-labelledby="burn-in-look-title" className={styles.contentSection}>
-          <h2 className={styles.sectionTitle} id="burn-in-look-title">
-            What to look for
-          </h2>
-          <dl className={styles.observationList}>
-            {observations.map((item) => (
-              <div className={styles.observationRow} key={item.signal}>
-                <dt>{item.signal}</dt>
-                <dd>{item.meaning}</dd>
-              </div>
-            ))}
-          </dl>
-          <p>
-            Allow the display to complete its normal automatic maintenance when
-            it powers down. For a remaining afterimage, use the instructions for
-            your exact model: Sony explains its automatic and manual
-            {" "}<a href="https://www.sony.com/electronics/support/articles/00173479" rel="noreferrer" target="_blank">OLED panel care</a>,
-            Samsung documents
-            {" "}<a href="https://www.samsung.com/in/support/displays/panel-care-functions-on-samsung-oled-monitors/" rel="noreferrer" target="_blank">monitor Screen Optimization and Pixel Refresh</a>,
-            and LG lists the
-            {" "}<a href="https://www.lg.com/us/support/help-library/lg-oled-tv-run-pixel-cleaning-to-remove-screen-burn-ins-spots-lines-dots-CT10000018-20154768393287" rel="noreferrer" target="_blank">Pixel Cleaning path by webOS version</a>.
-          </p>
-        </section>
+        <TestGuidanceContent
+          locale="en"
+          testId="oled-burn-in-test"
+          resultExtras={
+            <p>
+              Allow the display to complete its normal automatic maintenance when
+              it powers down. For a remaining afterimage, use the instructions for
+              your exact model: Sony explains its automatic and manual
+              {" "}<a href="https://www.sony.com/electronics/support/articles/00173479" rel="noreferrer" target="_blank">OLED panel care</a>,
+              Samsung documents
+              {" "}<a href="https://www.samsung.com/in/support/displays/panel-care-functions-on-samsung-oled-monitors/" rel="noreferrer" target="_blank">monitor Screen Optimization and Pixel Refresh</a>,
+              and LG lists the
+              {" "}<a href="https://www.lg.com/us/support/help-library/lg-oled-tv-run-pixel-cleaning-to-remove-screen-burn-ins-spots-lines-dots-CT10000018-20154768393287" rel="noreferrer" target="_blank">Pixel Cleaning path by webOS version</a>.
+            </p>
+          }
+        />
 
         <section aria-labelledby="burn-in-faq-title" className={styles.contentSection}>
           <h2 className={styles.sectionTitle} id="burn-in-faq-title">
@@ -271,6 +229,8 @@ export default function OledBurnInTestPage() {
           </div>
         </section>
       </div>
+
+      <TestHomeLink locale="en" />
     </div>
   );
 }
