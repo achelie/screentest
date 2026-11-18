@@ -22,10 +22,11 @@ export function TestGuidanceNav({ locale }: { locale: Locale }) {
   );
 }
 
-export function TestGuidanceContent({ locale, testId, resultExtras }: {
+export function TestGuidanceContent({ locale, testId, resultExtras, resultNote }: {
   locale: Locale;
   testId: TestGuidanceId;
   resultExtras?: ReactNode;
+  resultNote?: string;
 }) {
   const labels = GUIDANCE_LABELS[locale];
   const guidance = getTestGuidance(locale, testId);
@@ -42,6 +43,7 @@ export function TestGuidanceContent({ locale, testId, resultExtras }: {
       </section>
       <section aria-labelledby="test-results-title" className={styles.section} id="test-results">
         <h2 id="test-results-title">{labels.results}</h2>
+        {resultNote ? <p className={styles.note}>{resultNote}</p> : null}
         <dl className={styles.results}>{guidance.results.map(({ signal, meaning }) => (
           <div key={signal}><dt>{signal}</dt><dd>{meaning}</dd></div>
         ))}</dl>

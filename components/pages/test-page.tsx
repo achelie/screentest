@@ -12,11 +12,18 @@ import { pairedAlternates } from "@/lib/localized-metadata";
 import { SITE_NAME } from "@/lib/site";
 import { getTestBySlug, type TestDefinition } from "@/lib/tests";
 
-export function createTestMetadata(locale: Locale, slug: string): Metadata {
+export type TestPageCopy = {
+  readonly seoTitle: string;
+  readonly heading: string;
+  readonly intro: string;
+  readonly resultNote: string;
+};
+
+export function createTestMetadata(locale: Locale, slug: string, seoTitle?: string): Metadata {
   const test = getTestBySlug(slug, locale);
   if (!test) return {};
   const canonicalUrl = absoluteLocalizedUrl(locale, `/tests/${test.slug}`);
-  const title = `${test.seoTitle} | ${SITE_NAME}`;
+  const title = `${seoTitle ?? test.seoTitle} | ${SITE_NAME}`;
   return {
     title: { absolute: title },
     description: test.description,
@@ -74,7 +81,7 @@ function createStructuredData(locale: Locale, test: TestDefinition) {
   };
 }
 
-export function TestPageContent({ locale, slug }: { locale: Locale; slug: string }) {
+export function TestPageContent({ copy, locale, slug }: { copy?: TestPageCopy; locale: Locale; slug: string }) {
   const dictionary = getDictionary(locale);
   const test = getTestBySlug(slug, locale);
   if (!test) notFound();
@@ -97,7 +104,8 @@ export function TestPageContent({ locale, slug }: { locale: Locale; slug: string
           <span className={styles.metaItem}><Timer aria-hidden="true" size={17} strokeWidth={1.8} />{test.duration}</span>
           <span className={styles.metaItem}><Monitor aria-hidden="true" size={17} strokeWidth={1.8} />{dictionary.common.noDownload}</span>
         </div>
-        <h1 className={`${styles.title} ${styles.testTitle}`}>{test.name}</h1><p className={styles.lead}>{test.intro}</p>
+        <h1 className={`${styles.title} ${styles.testTitle}`}>{copy?.heading ?? test.name}</h1>
+        <p className={styles.lead}>{copy?.intro ?? test.intro}</p>
         <TestGuidanceNav locale={locale} />
       </header>
 
@@ -106,7 +114,7 @@ export function TestPageContent({ locale, slug }: { locale: Locale; slug: string
       </section>
 
       <div className={styles.contentStack}>
-        <TestGuidanceContent locale={locale} testId={test.slug} />
+        <TestGuidanceContent locale={locale} resultNote={copy?.resultNote} testId={test.slug} />
         {test.faq?.length ? (
           <section aria-labelledby="faq-title" className={styles.contentSection}>
             <h2 className={styles.sectionTitle} id="faq-title">{dictionary.testPage.faq}</h2>
