@@ -1,0 +1,23 @@
+{
+  "path": "/de/terms-of-service",
+  "kind": "legal",
+  "title": "Nutzungsbedingungen für ScreenTestHub",
+  "description": "Lies, wie du die Bildschirmtests verwendest, Ergebnisse einordnest und Auffälligkeiten für eine Rückgabe oder eine Reparatur dokumentierst.",
+  "template": "page.html",
+  "status": "ready",
+  "noindex": false,
+  "published_at": 0,
+  "tool": "",
+  "body": "",
+  "content": {
+    "locale": "de-DE",
+    "code": "de",
+    "path": "/de/terms-of-service"
+  },
+  "content_files": {
+    "header": "fragments/header-29ea640a165b.html",
+    "footer": "fragments/footer-41bb8e026149.html",
+    "alternates": "pages/de/terms-of-service/alternates.html",
+    "markup": "pages/de/terms-of-service/markup.html"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "path": "/tests",
+  "kind": "page",
+  "title": "Free Online Screen Tests | ScreenTestHub",
+  "description": "Run free browser screen tests for dead pixels, backlight bleed, grayscale uniformity, gradient banding, color, and motion.",
+  "template": "page.html",
+  "status": "ready",
+  "noindex": false,
+  "published_at": 0,
+  "tool": "",
+  "body": "",
+  "content": {
+    "locale": "en",
+    "path": "/tests",
+    "code": "en"
+  },
+  "content_files": {
+    "header": "fragments/header-2d70bc9d420e.html",
+    "footer": "fragments/footer-d219666b13d3.html",
+    "alternates": "pages/tests/alternates.html",
+    "jsonld": "pages/tests/jsonld.html",
+    "markup": "pages/tests/markup.html"
+  }
+}

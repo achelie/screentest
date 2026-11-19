@@ -1,0 +1,25 @@
+{
+  "path": "/zh/tests/grayscale",
+  "kind": "tool",
+  "title": "屏幕均匀性测试：全屏灰阶检查 | ScreenTestHub",
+  "description": "依次显示 5%、10%、25%、50%、75% 和 100% 的全屏灰阶。在常用亮度下比较屏幕中央与四角，观察暗斑、偏色或竖条在哪一级最明显。",
+  "template": "tool.html",
+  "status": "ready",
+  "noindex": false,
+  "published_at": 0,
+  "tool": "grayscale",
+  "body": "",
+  "content": {
+    "locale": "zh-CN",
+    "path": "/zh/tests/grayscale",
+    "code": "zh"
+  },
+  "content_files": {
+    "header": "fragments/header-6c3c2081e681.html",
+    "footer": "fragments/footer-9c392acb67a3.html",
+    "alternates": "pages/zh/tests/grayscale/alternates.html",
+    "jsonld": "pages/zh/tests/grayscale/jsonld.html",
+    "beforeTool": "pages/zh/tests/grayscale/beforeTool.html",
+    "afterTool": "pages/zh/tests/grayscale/afterTool.html"
+  }
+}

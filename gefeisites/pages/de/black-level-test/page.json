@@ -1,0 +1,25 @@
+{
+  "path": "/de/black-level-test",
+  "kind": "tool",
+  "title": "Schwarzpegel-Test: Dunkle Graustufen und Black Crush prüfen",
+  "description": "Prüfe Schwarzpegel, Schattendetails und Black Crush mit reinem Schwarz, RGB-Stufen 1-10 und eingebetteten dunklen Mustern.",
+  "template": "tool.html",
+  "status": "ready",
+  "noindex": false,
+  "published_at": 0,
+  "tool": "black-level-test",
+  "body": "",
+  "content": {
+    "locale": "de-DE",
+    "path": "/de/black-level-test",
+    "code": "de"
+  },
+  "content_files": {
+    "header": "fragments/header-66876f2ec1b5.html",
+    "footer": "fragments/footer-3a0d54656134.html",
+    "alternates": "pages/de/black-level-test/alternates.html",
+    "jsonld": "pages/de/black-level-test/jsonld.html",
+    "beforeTool": "pages/de/black-level-test/beforeTool.html",
+    "afterTool": "pages/de/black-level-test/afterTool.html"
+  }
+}

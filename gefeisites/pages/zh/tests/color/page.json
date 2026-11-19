@@ -1,0 +1,25 @@
+{
+  "path": "/zh/tests/color",
+  "kind": "tool",
+  "title": "显示器色彩测试：全屏 RGB 与 CMY | ScreenTestHub",
+  "description": "把红、绿、蓝、青、品红、黄、黑、白八种纯色逐张铺满屏幕。比较同一种颜色在中央和四角是否一致，也能看出哪些背景最容易显出异常像素。",
+  "template": "tool.html",
+  "status": "ready",
+  "noindex": false,
+  "published_at": 0,
+  "tool": "color",
+  "body": "",
+  "content": {
+    "locale": "zh-CN",
+    "path": "/zh/tests/color",
+    "code": "zh"
+  },
+  "content_files": {
+    "header": "fragments/header-6c3c2081e681.html",
+    "footer": "fragments/footer-9c392acb67a3.html",
+    "alternates": "pages/zh/tests/color/alternates.html",
+    "jsonld": "pages/zh/tests/color/jsonld.html",
+    "beforeTool": "pages/zh/tests/color/beforeTool.html",
+    "afterTool": "pages/zh/tests/color/afterTool.html"
+  }
+}

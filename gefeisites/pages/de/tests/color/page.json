@@ -1,0 +1,25 @@
+{
+  "path": "/de/tests/color",
+  "kind": "tool",
+  "title": "Monitor-Farbtest: RGB und CMY im Vollbild | ScreenTestHub",
+  "description": "Zeige Rot, Grün, Blau, Cyan, Magenta, Gelb, Schwarz und Weiß im Vollbild, um Pixel, Farbstiche und Farbgleichmäßigkeit zu prüfen.",
+  "template": "tool.html",
+  "status": "ready",
+  "noindex": false,
+  "published_at": 0,
+  "tool": "color",
+  "body": "",
+  "content": {
+    "locale": "de-DE",
+    "path": "/de/tests/color",
+    "code": "de"
+  },
+  "content_files": {
+    "header": "fragments/header-66876f2ec1b5.html",
+    "footer": "fragments/footer-3a0d54656134.html",
+    "alternates": "pages/de/tests/color/alternates.html",
+    "jsonld": "pages/de/tests/color/jsonld.html",
+    "beforeTool": "pages/de/tests/color/beforeTool.html",
+    "afterTool": "pages/de/tests/color/afterTool.html"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "path": "/zh/hdr-test",
+  "kind": "tool",
+  "title": "HDR 在线测试：检查显示器动态范围与广色域 | ScreenTestHub",
+  "description": "先查看浏览器报告的 HDR 和广色域支持情况，再比较暗部色阶和高光窗口。切换系统 HDR 设置后重测，观察哪些细节出现了变化。",
+  "template": "tool.html",
+  "status": "ready",
+  "noindex": false,
+  "published_at": 0,
+  "tool": "hdr-test",
+  "body": "",
+  "content": {
+    "locale": "zh-CN",
+    "path": "/zh/hdr-test",
+    "code": "zh"
+  },
+  "content_files": {
+    "header": "fragments/header-6c3c2081e681.html",
+    "footer": "fragments/footer-9c392acb67a3.html",
+    "alternates": "pages/zh/hdr-test/alternates.html",
+    "jsonld": "pages/zh/hdr-test/jsonld.html",
+    "beforeTool": "pages/zh/hdr-test/beforeTool.html",
+    "afterTool": "pages/zh/hdr-test/afterTool.html"
+  }
+}

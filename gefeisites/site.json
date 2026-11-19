@@ -1,0 +1,22 @@
+{
+  "domain": "screentesthub.com",
+  "name": "ScreenTestHub",
+  "locale": "en",
+  "type": "在线屏幕测试工具站",
+  "settings": {
+    "comments": "off",
+    "icon": {
+      "svg": "/_a/icon.9f6f93d62e.svg",
+      "png512": "/_a/icon-512.417ac0e499.png",
+      "png192": "/_a/icon-192.d7d774d78e.png",
+      "apple": "/_a/icon-180.14d2fc6fa8.png",
+      "ico": "/_a/icon-48.544ba40b5c.png"
+    },
+    "share_image": {
+      "url": "/_a/share.09f01a7507.png",
+      "width": 1200,
+      "height": 630
+    },
+    "pvuv_site": "cwhMCpMr"
+  }
+}

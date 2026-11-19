@@ -1,0 +1,25 @@
+{
+  "path": "/de/tests/guided",
+  "kind": "tool",
+  "title": "Geführter Bildschirmtest: Monitor online prüfen",
+  "description": "Prüfe deinen Bildschirm kostenlos im Browser auf Pixelfehler, Backlight Bleeding, Graustufen, Gleichmäßigkeit, Banding, Farben und Bewegung.",
+  "template": "tool.html",
+  "status": "ready",
+  "noindex": false,
+  "published_at": 0,
+  "tool": "guided",
+  "body": "",
+  "content": {
+    "locale": "de-DE",
+    "path": "/de/tests/guided",
+    "code": "de"
+  },
+  "content_files": {
+    "header": "fragments/header-66876f2ec1b5.html",
+    "footer": "fragments/footer-3a0d54656134.html",
+    "alternates": "pages/de/tests/guided/alternates.html",
+    "jsonld": "pages/de/tests/guided/jsonld.html",
+    "beforeTool": "pages/de/tests/guided/beforeTool.html",
+    "afterTool": "pages/de/tests/guided/afterTool.html"
+  }
+}

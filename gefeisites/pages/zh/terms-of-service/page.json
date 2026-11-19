@@ -1,0 +1,23 @@
+{
+  "path": "/zh/terms-of-service",
+  "kind": "legal",
+  "title": "使用条款 | ScreenTestHub",
+  "description": "了解如何运行屏幕与触控测试、解读结果，以及在联系卖家或维修人员之前，如何记录异常出现时的颜色、位置和显示设置。",
+  "template": "page.html",
+  "status": "ready",
+  "noindex": false,
+  "published_at": 0,
+  "tool": "",
+  "body": "",
+  "content": {
+    "locale": "zh-CN",
+    "code": "zh",
+    "path": "/zh/terms-of-service"
+  },
+  "content_files": {
+    "header": "fragments/header-b35ded41af5f.html",
+    "footer": "fragments/footer-3716bacbf716.html",
+    "alternates": "pages/zh/terms-of-service/alternates.html",
+    "markup": "pages/zh/terms-of-service/markup.html"
+  }
+}

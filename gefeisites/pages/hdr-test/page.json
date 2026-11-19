@@ -1,0 +1,25 @@
+{
+  "path": "/hdr-test",
+  "kind": "tool",
+  "title": "HDR Test Online: Check Monitor HDR and Wide Color Gamut",
+  "description": "Run an HDR test online to check the browser's reported dynamic range, inspect shadow and highlight detail, and compare sRGB with wide-gamut colors.",
+  "template": "tool.html",
+  "status": "ready",
+  "noindex": false,
+  "published_at": 0,
+  "tool": "hdr-test",
+  "body": "",
+  "content": {
+    "locale": "en",
+    "path": "/hdr-test",
+    "code": "en"
+  },
+  "content_files": {
+    "header": "fragments/header-2d70bc9d420e.html",
+    "footer": "fragments/footer-d219666b13d3.html",
+    "alternates": "pages/hdr-test/alternates.html",
+    "jsonld": "pages/hdr-test/jsonld.html",
+    "beforeTool": "pages/hdr-test/beforeTool.html",
+    "afterTool": "pages/hdr-test/afterTool.html"
+  }
+}

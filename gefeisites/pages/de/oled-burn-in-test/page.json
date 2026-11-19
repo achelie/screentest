@@ -1,0 +1,25 @@
+{
+  "path": "/de/oled-burn-in-test",
+  "kind": "tool",
+  "title": "OLED-Einbrenntest: Nachbilder und Gleichmäßigkeit prüfen",
+  "description": "Prüfe OLED-Einbrennen, vorübergehende Nachbilder und Gleichmäßigkeit mit Vollfarben, dunklem Grau, bewegten Balken und Verläufen.",
+  "template": "tool.html",
+  "status": "ready",
+  "noindex": false,
+  "published_at": 0,
+  "tool": "oled-burn-in-test",
+  "body": "",
+  "content": {
+    "locale": "de-DE",
+    "path": "/de/oled-burn-in-test",
+    "code": "de"
+  },
+  "content_files": {
+    "header": "fragments/header-66876f2ec1b5.html",
+    "footer": "fragments/footer-3a0d54656134.html",
+    "alternates": "pages/de/oled-burn-in-test/alternates.html",
+    "jsonld": "pages/de/oled-burn-in-test/jsonld.html",
+    "beforeTool": "pages/de/oled-burn-in-test/beforeTool.html",
+    "afterTool": "pages/de/oled-burn-in-test/afterTool.html"
+  }
+}

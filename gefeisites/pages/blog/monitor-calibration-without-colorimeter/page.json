@@ -1,0 +1,24 @@
+{
+  "path": "/blog/monitor-calibration-without-colorimeter",
+  "kind": "post",
+  "title": "Monitor Calibration Without a Colorimeter: A Visual Guide",
+  "description": "Try monitor calibration without a colorimeter using black and white levels, neutral gray, gamma, and color checks in a practical order.",
+  "template": "page.html",
+  "status": "ready",
+  "noindex": false,
+  "published_at": 1786579200000,
+  "tool": "",
+  "body": "",
+  "content": {
+    "locale": "en",
+    "path": "/blog/monitor-calibration-without-colorimeter",
+    "code": "en"
+  },
+  "content_files": {
+    "header": "fragments/header-8cc271794726.html",
+    "footer": "fragments/footer-d219666b13d3.html",
+    "alternates": "pages/blog/monitor-calibration-without-colorimeter/alternates.html",
+    "jsonld": "pages/blog/monitor-calibration-without-colorimeter/jsonld.html",
+    "markup": "pages/blog/monitor-calibration-without-colorimeter/markup.html"
+  }
+}

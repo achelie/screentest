@@ -1,0 +1,25 @@
+{
+  "path": "/zh/tests/gradient",
+  "kind": "tool",
+  "title": "渐变测试：检查显示器色带 | ScreenTestHub",
+  "description": "在全屏里查看灰阶、红、绿、蓝四种渐变，切换水平和垂直方向，看看平滑过渡是否变成一条条色带。调过显示设置后，可以用同一图案复查。",
+  "template": "tool.html",
+  "status": "ready",
+  "noindex": false,
+  "published_at": 0,
+  "tool": "gradient",
+  "body": "",
+  "content": {
+    "locale": "zh-CN",
+    "path": "/zh/tests/gradient",
+    "code": "zh"
+  },
+  "content_files": {
+    "header": "fragments/header-6c3c2081e681.html",
+    "footer": "fragments/footer-9c392acb67a3.html",
+    "alternates": "pages/zh/tests/gradient/alternates.html",
+    "jsonld": "pages/zh/tests/gradient/jsonld.html",
+    "beforeTool": "pages/zh/tests/gradient/beforeTool.html",
+    "afterTool": "pages/zh/tests/gradient/afterTool.html"
+  }
+}

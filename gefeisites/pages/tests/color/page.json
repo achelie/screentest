@@ -1,0 +1,25 @@
+{
+  "path": "/tests/color",
+  "kind": "tool",
+  "title": "Color Test Screen with Fullscreen RGB & CMY",
+  "description": "Run a monitor color test with fullscreen RGB, cyan, magenta, yellow, black, and white screens to inspect pixels, tint, and color uniformity online.",
+  "template": "tool.html",
+  "status": "ready",
+  "noindex": false,
+  "published_at": 0,
+  "tool": "color",
+  "body": "",
+  "content": {
+    "locale": "en",
+    "path": "/tests/color",
+    "code": "en"
+  },
+  "content_files": {
+    "header": "fragments/header-2d70bc9d420e.html",
+    "footer": "fragments/footer-d219666b13d3.html",
+    "alternates": "pages/tests/color/alternates.html",
+    "jsonld": "pages/tests/color/jsonld.html",
+    "beforeTool": "pages/tests/color/beforeTool.html",
+    "afterTool": "pages/tests/color/afterTool.html"
+  }
+}

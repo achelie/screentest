@@ -1,0 +1,25 @@
+{
+  "path": "/de/screen-resolution-checker",
+  "kind": "tool",
+  "title": "Bildschirmauflösung, Pixeldichte und Viewport prüfen",
+  "description": "Sieh gemeldete Bildschirmgröße, Viewport, Geräte-Pixelverhältnis, Seitenverhältnis, Ausrichtung und Farbtiefe live.",
+  "template": "tool.html",
+  "status": "ready",
+  "noindex": false,
+  "published_at": 0,
+  "tool": "screen-resolution-checker",
+  "body": "",
+  "content": {
+    "locale": "de-DE",
+    "path": "/de/screen-resolution-checker",
+    "code": "de"
+  },
+  "content_files": {
+    "header": "fragments/header-66876f2ec1b5.html",
+    "footer": "fragments/footer-3a0d54656134.html",
+    "alternates": "pages/de/screen-resolution-checker/alternates.html",
+    "jsonld": "pages/de/screen-resolution-checker/jsonld.html",
+    "beforeTool": "pages/de/screen-resolution-checker/beforeTool.html",
+    "afterTool": "pages/de/screen-resolution-checker/afterTool.html"
+  }
+}

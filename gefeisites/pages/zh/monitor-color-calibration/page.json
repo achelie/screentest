@@ -1,0 +1,25 @@
+{
+  "path": "/zh/monitor-color-calibration",
+  "kind": "tool",
+  "title": "在线显示器色彩校准：调整黑位、白位、Gamma 与色彩 | ScreenTestHub",
+  "description": "打开黑白色阶、灰阶和 Gamma 2.2 图案，边看边调显示器菜单。每次只改一项，再用同一张图看看暗部细节、白位和颜色分离有没有改善。",
+  "template": "tool.html",
+  "status": "ready",
+  "noindex": false,
+  "published_at": 0,
+  "tool": "monitor-color-calibration",
+  "body": "",
+  "content": {
+    "locale": "zh-CN",
+    "path": "/zh/monitor-color-calibration",
+    "code": "zh"
+  },
+  "content_files": {
+    "header": "fragments/header-6c3c2081e681.html",
+    "footer": "fragments/footer-9c392acb67a3.html",
+    "alternates": "pages/zh/monitor-color-calibration/alternates.html",
+    "jsonld": "pages/zh/monitor-color-calibration/jsonld.html",
+    "beforeTool": "pages/zh/monitor-color-calibration/beforeTool.html",
+    "afterTool": "pages/zh/monitor-color-calibration/afterTool.html"
+  }
+}

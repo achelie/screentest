@@ -1,0 +1,25 @@
+{
+  "path": "/zh/tests/backlight-bleed",
+  "kind": "tool",
+  "title": "漏光测试：全屏纯黑检查 | ScreenTestHub",
+  "description": "在光线较暗的房间打开全屏纯黑图案，用平时的亮度观察屏幕四角和边缘。稍微移动视角再看一次，比较亮斑的位置和强弱有没有变化。",
+  "template": "tool.html",
+  "status": "ready",
+  "noindex": false,
+  "published_at": 0,
+  "tool": "backlight-bleed",
+  "body": "",
+  "content": {
+    "locale": "zh-CN",
+    "path": "/zh/tests/backlight-bleed",
+    "code": "zh"
+  },
+  "content_files": {
+    "header": "fragments/header-6c3c2081e681.html",
+    "footer": "fragments/footer-9c392acb67a3.html",
+    "alternates": "pages/zh/tests/backlight-bleed/alternates.html",
+    "jsonld": "pages/zh/tests/backlight-bleed/jsonld.html",
+    "beforeTool": "pages/zh/tests/backlight-bleed/beforeTool.html",
+    "afterTool": "pages/zh/tests/backlight-bleed/afterTool.html"
+  }
+}

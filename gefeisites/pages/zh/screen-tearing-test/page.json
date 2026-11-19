@@ -1,0 +1,25 @@
+{
+  "path": "/zh/screen-tearing-test",
+  "kind": "tool",
+  "title": "在线屏幕撕裂测试：检查 VSync、FreeSync 与 G-Sync | ScreenTestHub",
+  "description": "播放移动条纹、分层方块或滚动棋盘格，观察画面中间是否出现横向错位。保持同一图案和速度，切换垂直同步或帧率限制后再比较。",
+  "template": "tool.html",
+  "status": "ready",
+  "noindex": false,
+  "published_at": 0,
+  "tool": "screen-tearing-test",
+  "body": "",
+  "content": {
+    "locale": "zh-CN",
+    "path": "/zh/screen-tearing-test",
+    "code": "zh"
+  },
+  "content_files": {
+    "header": "fragments/header-6c3c2081e681.html",
+    "footer": "fragments/footer-9c392acb67a3.html",
+    "alternates": "pages/zh/screen-tearing-test/alternates.html",
+    "jsonld": "pages/zh/screen-tearing-test/jsonld.html",
+    "beforeTool": "pages/zh/screen-tearing-test/beforeTool.html",
+    "afterTool": "pages/zh/screen-tearing-test/afterTool.html"
+  }
+}

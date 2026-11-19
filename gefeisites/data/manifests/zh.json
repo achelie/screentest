@@ -1,0 +1,18 @@
+{
+  "name": "ScreenTestHub",
+  "short_name": "ScreenTestHub",
+  "description": "直接在浏览器中检查坏点、漏光、灰阶、渐变、色彩和动态拖影。",
+  "start_url": "/zh",
+  "display": "standalone",
+  "background_color": "#ece7dc",
+  "theme_color": "#191816",
+  "lang": "zh-CN",
+  "icons": [
+    {
+      "src": "/_a/icon.9f6f93d62e.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

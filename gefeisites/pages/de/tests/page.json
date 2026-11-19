@@ -1,0 +1,24 @@
+{
+  "path": "/de/tests",
+  "kind": "page",
+  "title": "Kostenlose Online-Bildschirmtests | ScreenTestHub",
+  "description": "Kostenlose Browser-Tests für Pixelfehler, Backlight Bleeding, Graustufen, Gleichmäßigkeit, Banding, Farben und Bewegung.",
+  "template": "page.html",
+  "status": "ready",
+  "noindex": false,
+  "published_at": 0,
+  "tool": "",
+  "body": "",
+  "content": {
+    "locale": "de-DE",
+    "path": "/de/tests",
+    "code": "de"
+  },
+  "content_files": {
+    "header": "fragments/header-66876f2ec1b5.html",
+    "footer": "fragments/footer-3a0d54656134.html",
+    "alternates": "pages/de/tests/alternates.html",
+    "jsonld": "pages/de/tests/jsonld.html",
+    "markup": "pages/de/tests/markup.html"
+  }
+}

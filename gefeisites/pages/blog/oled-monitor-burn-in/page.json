@@ -1,0 +1,24 @@
+{
+  "path": "/blog/oled-monitor-burn-in",
+  "kind": "post",
+  "title": "OLED Monitor Burn-In: How to Check It and Lower the Risk",
+  "description": "Worried about OLED monitor burn in? Learn how to check gray screens, tell temporary retention from a persistent mark, and reduce static desktop wear.",
+  "template": "page.html",
+  "status": "ready",
+  "noindex": false,
+  "published_at": 1786665600000,
+  "tool": "",
+  "body": "",
+  "content": {
+    "locale": "en",
+    "path": "/blog/oled-monitor-burn-in",
+    "code": "en"
+  },
+  "content_files": {
+    "header": "fragments/header-8cc271794726.html",
+    "footer": "fragments/footer-d219666b13d3.html",
+    "alternates": "pages/blog/oled-monitor-burn-in/alternates.html",
+    "jsonld": "pages/blog/oled-monitor-burn-in/jsonld.html",
+    "markup": "pages/blog/oled-monitor-burn-in/markup.html"
+  }
+}

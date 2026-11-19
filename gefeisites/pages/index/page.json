@@ -1,0 +1,24 @@
+{
+  "path": "/",
+  "kind": "page",
+  "title": "Free Online Screen Tests for Monitors and Phones",
+  "description": "Run seven focused screen tests for dead pixels, backlight bleed, uniformity, gradients, color, and motion. Free, private, and browser based.",
+  "template": "page.html",
+  "status": "ready",
+  "noindex": false,
+  "published_at": 0,
+  "tool": "",
+  "body": "",
+  "content": {
+    "locale": "en",
+    "path": "/",
+    "code": "en"
+  },
+  "content_files": {
+    "header": "fragments/header-45751613eeb7.html",
+    "footer": "fragments/footer-d219666b13d3.html",
+    "alternates": "pages/index/alternates.html",
+    "jsonld": "pages/index/jsonld.html",
+    "markup": "pages/index/markup.html"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "path": "/de/tests/gradient",
+  "kind": "tool",
+  "title": "Farbverlauf-Test: Monitor auf Banding prüfen | ScreenTestHub",
+  "description": "Zeige weiche neutrale, rote, grüne und blaue Farbverläufe, um sichtbare Streifen, harte Stufen und Farbsprünge zu finden.",
+  "template": "tool.html",
+  "status": "ready",
+  "noindex": false,
+  "published_at": 0,
+  "tool": "gradient",
+  "body": "",
+  "content": {
+    "locale": "de-DE",
+    "path": "/de/tests/gradient",
+    "code": "de"
+  },
+  "content_files": {
+    "header": "fragments/header-66876f2ec1b5.html",
+    "footer": "fragments/footer-3a0d54656134.html",
+    "alternates": "pages/de/tests/gradient/alternates.html",
+    "jsonld": "pages/de/tests/gradient/jsonld.html",
+    "beforeTool": "pages/de/tests/gradient/beforeTool.html",
+    "afterTool": "pages/de/tests/gradient/afterTool.html"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "path": "/de/tests/motion",
+  "kind": "tool",
+  "title": "Monitor-Bewegungstest: Schlieren und Unschärfe prüfen",
+  "description": "Beobachte ein bewegtes Ziel bei mehreren Geschwindigkeiten und prüfe den Monitor auf Schlieren, dunkles Verschmieren, helle Spuren und unruhige Bewegung.",
+  "template": "tool.html",
+  "status": "ready",
+  "noindex": false,
+  "published_at": 0,
+  "tool": "motion",
+  "body": "",
+  "content": {
+    "locale": "de-DE",
+    "path": "/de/tests/motion",
+    "code": "de"
+  },
+  "content_files": {
+    "header": "fragments/header-66876f2ec1b5.html",
+    "footer": "fragments/footer-3a0d54656134.html",
+    "alternates": "pages/de/tests/motion/alternates.html",
+    "jsonld": "pages/de/tests/motion/jsonld.html",
+    "beforeTool": "pages/de/tests/motion/beforeTool.html",
+    "afterTool": "pages/de/tests/motion/afterTool.html"
+  }
+}

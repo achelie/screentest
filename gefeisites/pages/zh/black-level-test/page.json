@@ -1,0 +1,25 @@
+{
+  "path": "/zh/black-level-test",
+  "kind": "tool",
+  "title": "在线黑位测试：检查近黑阶、暗部压黑与纯黑均匀性 | ScreenTestHub",
+  "description": "把显示器调到平时使用的亮度，先看全屏纯黑，再比较 RGB 1 到 10 的近黑色块。记下最先看得清的一级，检查游戏暗处的细节有没有糊成一片。",
+  "template": "tool.html",
+  "status": "ready",
+  "noindex": false,
+  "published_at": 0,
+  "tool": "black-level-test",
+  "body": "",
+  "content": {
+    "locale": "zh-CN",
+    "path": "/zh/black-level-test",
+    "code": "zh"
+  },
+  "content_files": {
+    "header": "fragments/header-6c3c2081e681.html",
+    "footer": "fragments/footer-9c392acb67a3.html",
+    "alternates": "pages/zh/black-level-test/alternates.html",
+    "jsonld": "pages/zh/black-level-test/jsonld.html",
+    "beforeTool": "pages/zh/black-level-test/beforeTool.html",
+    "afterTool": "pages/zh/black-level-test/afterTool.html"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "path": "/blog/1080p-vs-1440p-vs-4k",
+  "kind": "post",
+  "title": "1080p vs 1440p vs 4K: Which Monitor Resolution Fits?",
+  "description": "Compare 1080p vs 1440p vs 4K for gaming, work, screen size, sharpness, and GPU load. Find the resolution that fits your desk and budget.",
+  "template": "page.html",
+  "status": "ready",
+  "noindex": false,
+  "published_at": 1786752000000,
+  "tool": "",
+  "body": "",
+  "content": {
+    "locale": "en",
+    "path": "/blog/1080p-vs-1440p-vs-4k",
+    "code": "en"
+  },
+  "content_files": {
+    "header": "fragments/header-8cc271794726.html",
+    "footer": "fragments/footer-d219666b13d3.html",
+    "alternates": "pages/blog/1080p-vs-1440p-vs-4k/alternates.html",
+    "jsonld": "pages/blog/1080p-vs-1440p-vs-4k/jsonld.html",
+    "markup": "pages/blog/1080p-vs-1440p-vs-4k/markup.html"
+  }
+}

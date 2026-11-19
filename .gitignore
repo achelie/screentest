@@ -4,6 +4,7 @@
 # Next.js and OpenNext output
 /.next
 /.open-next
+/.site-build
 /.wrangler
 /.playwright-cli
 /output

@@ -1,0 +1,24 @@
+{
+  "path": "/blog/screen-tearing-with-vsync-on",
+  "kind": "post",
+  "title": "Screen Tearing With VSync On? Check These Settings in Order",
+  "description": "Still seeing screen tearing with VSync on? Check refresh rate, driver conflicts, VRR limits, window mode, and frame generation in the right order.",
+  "template": "page.html",
+  "status": "ready",
+  "noindex": false,
+  "published_at": 1786579200000,
+  "tool": "",
+  "body": "",
+  "content": {
+    "locale": "en",
+    "path": "/blog/screen-tearing-with-vsync-on",
+    "code": "en"
+  },
+  "content_files": {
+    "header": "fragments/header-8cc271794726.html",
+    "footer": "fragments/footer-d219666b13d3.html",
+    "alternates": "pages/blog/screen-tearing-with-vsync-on/alternates.html",
+    "jsonld": "pages/blog/screen-tearing-with-vsync-on/jsonld.html",
+    "markup": "pages/blog/screen-tearing-with-vsync-on/markup.html"
+  }
+}

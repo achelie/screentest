@@ -1,0 +1,24 @@
+{
+  "path": "/blog/touch-screen-not-working-after-screen-replacement",
+  "kind": "post",
+  "title": "Touch Screen Not Working After Replacement? What to Check",
+  "description": "New screen lights up but touch does not work? Check for dead zones, ghost touch, a loose connector, a bad replacement part, or unfinished calibration.",
+  "template": "page.html",
+  "status": "ready",
+  "noindex": false,
+  "published_at": 1786492800000,
+  "tool": "",
+  "body": "",
+  "content": {
+    "locale": "en",
+    "path": "/blog/touch-screen-not-working-after-screen-replacement",
+    "code": "en"
+  },
+  "content_files": {
+    "header": "fragments/header-8cc271794726.html",
+    "footer": "fragments/footer-d219666b13d3.html",
+    "alternates": "pages/blog/touch-screen-not-working-after-screen-replacement/alternates.html",
+    "jsonld": "pages/blog/touch-screen-not-working-after-screen-replacement/jsonld.html",
+    "markup": "pages/blog/touch-screen-not-working-after-screen-replacement/markup.html"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "path": "/zh/screen-resolution-checker",
+  "kind": "tool",
+  "title": "在线屏幕分辨率检测：查看视口、像素比与宽高比 | ScreenTestHub",
+  "description": "查看浏览器报告的屏幕尺寸、页面可用宽高、设备像素比和色深。缩放窗口、旋转手机或把窗口拖到另一台显示器，比较哪些读数跟着变化。",
+  "template": "tool.html",
+  "status": "ready",
+  "noindex": false,
+  "published_at": 0,
+  "tool": "screen-resolution-checker",
+  "body": "",
+  "content": {
+    "locale": "zh-CN",
+    "path": "/zh/screen-resolution-checker",
+    "code": "zh"
+  },
+  "content_files": {
+    "header": "fragments/header-6c3c2081e681.html",
+    "footer": "fragments/footer-9c392acb67a3.html",
+    "alternates": "pages/zh/screen-resolution-checker/alternates.html",
+    "jsonld": "pages/zh/screen-resolution-checker/jsonld.html",
+    "beforeTool": "pages/zh/screen-resolution-checker/beforeTool.html",
+    "afterTool": "pages/zh/screen-resolution-checker/afterTool.html"
+  }
+}

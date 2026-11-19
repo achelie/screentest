@@ -1,0 +1,25 @@
+{
+  "path": "/zh/tests/motion",
+  "kind": "tool",
+  "title": "显示器动态测试：检查拖影和模糊 | ScreenTestHub",
+  "description": "让移动目标以三档速度横穿屏幕，用眼睛跟随它的边缘，观察暗色拖尾、亮边和运动模糊。改变显示器响应速度后，用相同档位再比较一次。",
+  "template": "tool.html",
+  "status": "ready",
+  "noindex": false,
+  "published_at": 0,
+  "tool": "motion",
+  "body": "",
+  "content": {
+    "locale": "zh-CN",
+    "path": "/zh/tests/motion",
+    "code": "zh"
+  },
+  "content_files": {
+    "header": "fragments/header-6c3c2081e681.html",
+    "footer": "fragments/footer-9c392acb67a3.html",
+    "alternates": "pages/zh/tests/motion/alternates.html",
+    "jsonld": "pages/zh/tests/motion/jsonld.html",
+    "beforeTool": "pages/zh/tests/motion/beforeTool.html",
+    "afterTool": "pages/zh/tests/motion/afterTool.html"
+  }
+}

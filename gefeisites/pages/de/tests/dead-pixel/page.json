@@ -1,0 +1,25 @@
+{
+  "path": "/de/tests/dead-pixel",
+  "kind": "tool",
+  "title": "Pixelfehler-Test: Bildschirm online prüfen | ScreenTestHub",
+  "description": "Finde tote Pixel und festhängende Subpixel mit Vollbildern in Weiß, Schwarz, Rot, Grün und Blau. Keine App nötig.",
+  "template": "tool.html",
+  "status": "ready",
+  "noindex": false,
+  "published_at": 0,
+  "tool": "dead-pixel",
+  "body": "",
+  "content": {
+    "locale": "de-DE",
+    "path": "/de/tests/dead-pixel",
+    "code": "de"
+  },
+  "content_files": {
+    "header": "fragments/header-66876f2ec1b5.html",
+    "footer": "fragments/footer-3a0d54656134.html",
+    "alternates": "pages/de/tests/dead-pixel/alternates.html",
+    "jsonld": "pages/de/tests/dead-pixel/jsonld.html",
+    "beforeTool": "pages/de/tests/dead-pixel/beforeTool.html",
+    "afterTool": "pages/de/tests/dead-pixel/afterTool.html"
+  }
+}

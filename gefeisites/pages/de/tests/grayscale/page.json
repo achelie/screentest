@@ -1,0 +1,25 @@
+{
+  "path": "/de/tests/grayscale",
+  "kind": "tool",
+  "title": "Bildschirm-Gleichmäßigkeit testen: Graustufen im Vollbild",
+  "description": "Prüfe die Bildschirmgleichmäßigkeit mit Graustufen von 5%, 10%, 25%, 50%, 75% und 100%, direkt im Browser erzeugt.",
+  "template": "tool.html",
+  "status": "ready",
+  "noindex": false,
+  "published_at": 0,
+  "tool": "grayscale",
+  "body": "",
+  "content": {
+    "locale": "de-DE",
+    "path": "/de/tests/grayscale",
+    "code": "de"
+  },
+  "content_files": {
+    "header": "fragments/header-66876f2ec1b5.html",
+    "footer": "fragments/footer-3a0d54656134.html",
+    "alternates": "pages/de/tests/grayscale/alternates.html",
+    "jsonld": "pages/de/tests/grayscale/jsonld.html",
+    "beforeTool": "pages/de/tests/grayscale/beforeTool.html",
+    "afterTool": "pages/de/tests/grayscale/afterTool.html"
+  }
+}

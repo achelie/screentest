@@ -1,0 +1,25 @@
+{
+  "path": "/de/hdr-test",
+  "kind": "tool",
+  "title": "HDR-Test online: Dynamikumfang und großen Farbraum prüfen",
+  "description": "Prüfe das gemeldete HDR-Umfeld und untersuche Schatten, Lichter, Local-Dimming-Halos und Farbraumunterschiede.",
+  "template": "tool.html",
+  "status": "ready",
+  "noindex": false,
+  "published_at": 0,
+  "tool": "hdr-test",
+  "body": "",
+  "content": {
+    "locale": "de-DE",
+    "path": "/de/hdr-test",
+    "code": "de"
+  },
+  "content_files": {
+    "header": "fragments/header-66876f2ec1b5.html",
+    "footer": "fragments/footer-3a0d54656134.html",
+    "alternates": "pages/de/hdr-test/alternates.html",
+    "jsonld": "pages/de/hdr-test/jsonld.html",
+    "beforeTool": "pages/de/hdr-test/beforeTool.html",
+    "afterTool": "pages/de/hdr-test/afterTool.html"
+  }
+}

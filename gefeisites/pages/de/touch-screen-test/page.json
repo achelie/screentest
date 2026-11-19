@@ -1,0 +1,25 @@
+{
+  "path": "/de/touch-screen-test",
+  "kind": "tool",
+  "title": "Touchscreen-Test online: tote Zonen und Multitouch prüfen",
+  "description": "Prüfe Touch-Zonen, Ränder und Multitouch auf Smartphone, Tablet oder Touchmonitor direkt im Browser.",
+  "template": "tool.html",
+  "status": "ready",
+  "noindex": false,
+  "published_at": 0,
+  "tool": "touch-screen-test",
+  "body": "",
+  "content": {
+    "locale": "de-DE",
+    "path": "/de/touch-screen-test",
+    "code": "de"
+  },
+  "content_files": {
+    "header": "fragments/header-66876f2ec1b5.html",
+    "footer": "fragments/footer-3a0d54656134.html",
+    "alternates": "pages/de/touch-screen-test/alternates.html",
+    "jsonld": "pages/de/touch-screen-test/jsonld.html",
+    "beforeTool": "pages/de/touch-screen-test/beforeTool.html",
+    "afterTool": "pages/de/touch-screen-test/afterTool.html"
+  }
+}

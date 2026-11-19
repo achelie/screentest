@@ -1,0 +1,46 @@
+[
+  {
+    "from": "/blog/1080p-vs-1440p-vs-4k.webp",
+    "to": "/_a/1080p-vs-1440p-vs-4k.921a90dc1d.webp"
+  },
+  {
+    "from": "/blog/monitor-calibration-without-colorimeter.webp",
+    "to": "/_a/monitor-calibration-without-colorimeter.6a84f07b1b.webp"
+  },
+  {
+    "from": "/blog/oled-monitor-burn-in.webp",
+    "to": "/_a/oled-monitor-burn-in.71b5a98287.webp"
+  },
+  {
+    "from": "/blog/screen-tearing-with-vsync-on-monitor-desk.webp",
+    "to": "/_a/screen-tearing-with-vsync-on-monitor-desk.4f32aaaf7f.webp"
+  },
+  {
+    "from": "/blog/touch-screen-replacement-repair-bench.webp",
+    "to": "/_a/touch-screen-replacement-repair-bench.0ab4cbef47.webp"
+  },
+  {
+    "from": "/blog/touch-screen-test-tool.png",
+    "to": "/_a/touch-screen-test-tool.ac8c6307c8.png"
+  },
+  {
+    "from": "/de/manifest.webmanifest",
+    "to": "https://screentesthub.com/_d/manifests/de"
+  },
+  {
+    "from": "/icon.svg",
+    "to": "/_a/icon.9f6f93d62e.svg"
+  },
+  {
+    "from": "/manifest.webmanifest",
+    "to": "https://screentesthub.com/_d/manifests/en"
+  },
+  {
+    "from": "/opengraph-image.png",
+    "to": "/_a/share.29b7a1c2e8.webp"
+  },
+  {
+    "from": "/zh/manifest.webmanifest",
+    "to": "https://screentesthub.com/_d/manifests/zh"
+  }
+]

@@ -1,0 +1,18 @@
+{
+  "name": "ScreenTestHub",
+  "short_name": "ScreenTestHub",
+  "description": "Prüfe Pixelfehler, Backlight Bleeding, Graustufen, Farbverläufe, Farben und Bewegung direkt im Browser.",
+  "start_url": "/de",
+  "display": "standalone",
+  "background_color": "#ece7dc",
+  "theme_color": "#191816",
+  "lang": "de-DE",
+  "icons": [
+    {
+      "src": "/_a/icon.9f6f93d62e.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "path": "/zh/tests/dead-pixel",
+  "kind": "tool",
+  "title": "坏点测试：在线检查屏幕坏点 | ScreenTestHub",
+  "description": "让白、黑、红、绿、蓝五种背景依次铺满屏幕。盯住可疑的小点，切换颜色后再看它是否仍停在原处，帮助区分坏点、常亮点和屏幕表面的灰尘。",
+  "template": "tool.html",
+  "status": "ready",
+  "noindex": false,
+  "published_at": 0,
+  "tool": "dead-pixel",
+  "body": "",
+  "content": {
+    "locale": "zh-CN",
+    "path": "/zh/tests/dead-pixel",
+    "code": "zh"
+  },
+  "content_files": {
+    "header": "fragments/header-6c3c2081e681.html",
+    "footer": "fragments/footer-9c392acb67a3.html",
+    "alternates": "pages/zh/tests/dead-pixel/alternates.html",
+    "jsonld": "pages/zh/tests/dead-pixel/jsonld.html",
+    "beforeTool": "pages/zh/tests/dead-pixel/beforeTool.html",
+    "afterTool": "pages/zh/tests/dead-pixel/afterTool.html"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "name": "ScreenTestHub",
+  "short_name": "ScreenTestHub",
+  "description": "Free browser screen tests for resolution, dead pixels, black levels, OLED burn-in, backlight bleed, HDR, screen tearing, color calibration, grayscale, gradients, color, and motion.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f1eadb",
+  "theme_color": "#171612",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "/_a/icon.9f6f93d62e.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

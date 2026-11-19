@@ -1,12 +1,14 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "screentesthub",
-  "main": ".open-next/worker.js",
+  "main": "gefeisites/worker.mjs",
   "compatibility_date": "2026-08-08",
   "compatibility_flags": ["nodejs_compat"],
   "assets": {
-    "directory": ".open-next/assets",
-    "binding": "ASSETS"
+    "directory": ".site-build/assets",
+    "binding": "ASSETS",
+    "html_handling": "drop-trailing-slash",
+    "not_found_handling": "none"
   },
   "observability": {
     "enabled": true,

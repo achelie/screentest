@@ -1,0 +1,25 @@
+{
+  "path": "/zh/oled-burn-in-test",
+  "kind": "tool",
+  "title": "OLED 烧屏与残影测试：检查图像残留和均匀性 | ScreenTestHub",
+  "description": "用全屏纯色和低灰阶检查 OLED 屏幕上是否留有台标、任务栏或键盘轮廓。再切到移动色条和渐变，观察痕迹是否总出现在同一个位置。",
+  "template": "tool.html",
+  "status": "ready",
+  "noindex": false,
+  "published_at": 0,
+  "tool": "oled-burn-in-test",
+  "body": "",
+  "content": {
+    "locale": "zh-CN",
+    "path": "/zh/oled-burn-in-test",
+    "code": "zh"
+  },
+  "content_files": {
+    "header": "fragments/header-6c3c2081e681.html",
+    "footer": "fragments/footer-9c392acb67a3.html",
+    "alternates": "pages/zh/oled-burn-in-test/alternates.html",
+    "jsonld": "pages/zh/oled-burn-in-test/jsonld.html",
+    "beforeTool": "pages/zh/oled-burn-in-test/beforeTool.html",
+    "afterTool": "pages/zh/oled-burn-in-test/afterTool.html"
+  }
+}

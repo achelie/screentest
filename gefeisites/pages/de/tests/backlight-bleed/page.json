@@ -1,0 +1,25 @@
+{
+  "path": "/de/tests/backlight-bleed",
+  "kind": "tool",
+  "title": "Backlight-Bleeding-Test: Schwarzes Vollbild | ScreenTestHub",
+  "description": "Öffne in einem dunklen Raum ein schwarzes Vollbild und prüfe Monitor oder Laptop auf helle Ränder, wolkige Ecken und ungleichmäßige Beleuchtung.",
+  "template": "tool.html",
+  "status": "ready",
+  "noindex": false,
+  "published_at": 0,
+  "tool": "backlight-bleed",
+  "body": "",
+  "content": {
+    "locale": "de-DE",
+    "path": "/de/tests/backlight-bleed",
+    "code": "de"
+  },
+  "content_files": {
+    "header": "fragments/header-66876f2ec1b5.html",
+    "footer": "fragments/footer-3a0d54656134.html",
+    "alternates": "pages/de/tests/backlight-bleed/alternates.html",
+    "jsonld": "pages/de/tests/backlight-bleed/jsonld.html",
+    "beforeTool": "pages/de/tests/backlight-bleed/beforeTool.html",
+    "afterTool": "pages/de/tests/backlight-bleed/afterTool.html"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "path": "/zh",
+  "kind": "page",
+  "title": "显示器与手机免费在线屏幕测试",
+  "description": "拿到新显示器或换过手机屏幕？打开全屏纯色找坏点，再用灰阶、渐变和移动目标检查亮度不均、色带和拖影。所有测试都能直接在浏览器里运行。",
+  "template": "page.html",
+  "status": "ready",
+  "noindex": false,
+  "published_at": 0,
+  "tool": "",
+  "body": "",
+  "content": {
+    "locale": "zh-CN",
+    "path": "/zh",
+    "code": "zh"
+  },
+  "content_files": {
+    "header": "fragments/header-b35ded41af5f.html",
+    "footer": "fragments/footer-9c392acb67a3.html",
+    "alternates": "pages/zh/alternates.html",
+    "jsonld": "pages/zh/jsonld.html",
+    "markup": "pages/zh/markup.html"
+  }
+}

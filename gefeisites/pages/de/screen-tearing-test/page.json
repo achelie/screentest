@@ -1,0 +1,25 @@
+{
+  "path": "/de/screen-tearing-test",
+  "kind": "tool",
+  "title": "Screen-Tearing-Test online für VSync, FreeSync und G-Sync",
+  "description": "Vergleiche VSync, variable Bildwiederholrate und Frame-Limits mit bewegten Streifen, Ebenen und einem Schachbrett.",
+  "template": "tool.html",
+  "status": "ready",
+  "noindex": false,
+  "published_at": 0,
+  "tool": "screen-tearing-test",
+  "body": "",
+  "content": {
+    "locale": "de-DE",
+    "path": "/de/screen-tearing-test",
+    "code": "de"
+  },
+  "content_files": {
+    "header": "fragments/header-66876f2ec1b5.html",
+    "footer": "fragments/footer-3a0d54656134.html",
+    "alternates": "pages/de/screen-tearing-test/alternates.html",
+    "jsonld": "pages/de/screen-tearing-test/jsonld.html",
+    "beforeTool": "pages/de/screen-tearing-test/beforeTool.html",
+    "afterTool": "pages/de/screen-tearing-test/afterTool.html"
+  }
+}

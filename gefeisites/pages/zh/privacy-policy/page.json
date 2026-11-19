@@ -1,0 +1,23 @@
+{
+  "path": "/zh/privacy-policy",
+  "kind": "legal",
+  "title": "隐私政策 | ScreenTestHub",
+  "description": "了解屏幕测试如何处理触摸轨迹和引导式检查的答案，下载的报告会保存在哪里，以及网站如何记录语言偏好和访问统计。",
+  "template": "page.html",
+  "status": "ready",
+  "noindex": false,
+  "published_at": 0,
+  "tool": "",
+  "body": "",
+  "content": {
+    "locale": "zh-CN",
+    "code": "zh",
+    "path": "/zh/privacy-policy"
+  },
+  "content_files": {
+    "header": "fragments/header-b35ded41af5f.html",
+    "footer": "fragments/footer-3716bacbf716.html",
+    "alternates": "pages/zh/privacy-policy/alternates.html",
+    "markup": "pages/zh/privacy-policy/markup.html"
+  }
+}

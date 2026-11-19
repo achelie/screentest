@@ -1,0 +1,25 @@
+{
+  "path": "/de/monitor-color-calibration",
+  "kind": "tool",
+  "title": "Monitorkalibrierung: Schwarz, Weiß, Gamma und Farben",
+  "description": "Stelle Schwarz- und Weißpegel, neutrale Graustufen, Gamma 2,2 und Farbtrennung mit Browser-Testbildern ein.",
+  "template": "tool.html",
+  "status": "ready",
+  "noindex": false,
+  "published_at": 0,
+  "tool": "monitor-color-calibration",
+  "body": "",
+  "content": {
+    "locale": "de-DE",
+    "path": "/de/monitor-color-calibration",
+    "code": "de"
+  },
+  "content_files": {
+    "header": "fragments/header-66876f2ec1b5.html",
+    "footer": "fragments/footer-3a0d54656134.html",
+    "alternates": "pages/de/monitor-color-calibration/alternates.html",
+    "jsonld": "pages/de/monitor-color-calibration/jsonld.html",
+    "beforeTool": "pages/de/monitor-color-calibration/beforeTool.html",
+    "afterTool": "pages/de/monitor-color-calibration/afterTool.html"
+  }
+}

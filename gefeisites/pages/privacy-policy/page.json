@@ -1,0 +1,23 @@
+{
+  "path": "/privacy-policy",
+  "kind": "legal",
+  "title": "Privacy Policy | ScreenTestHub",
+  "description": "See how ScreenTestHub handles screen tests, touch input, language preferences and traffic statistics, and which data stays on your device.",
+  "template": "page.html",
+  "status": "ready",
+  "noindex": false,
+  "published_at": 0,
+  "tool": "",
+  "body": "",
+  "content": {
+    "locale": "en",
+    "code": "en",
+    "path": "/privacy-policy"
+  },
+  "content_files": {
+    "header": "fragments/header-45751613eeb7.html",
+    "footer": "fragments/footer-d4745c8aa4ae.html",
+    "alternates": "pages/privacy-policy/alternates.html",
+    "markup": "pages/privacy-policy/markup.html"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "path": "/zh/touch-screen-test",
+  "kind": "tool",
+  "title": "在线触摸屏测试：检查触控死区与多点触控 | ScreenTestHub",
+  "description": "用手指慢慢划过手机或平板上的触控网格，检查边角有没有漏掉，再用多根手指测试同时触控。结束后可查看覆盖比例、遗漏格数和触点峰值。",
+  "template": "tool.html",
+  "status": "ready",
+  "noindex": false,
+  "published_at": 0,
+  "tool": "touch-screen-test",
+  "body": "",
+  "content": {
+    "locale": "zh-CN",
+    "path": "/zh/touch-screen-test",
+    "code": "zh"
+  },
+  "content_files": {
+    "header": "fragments/header-6c3c2081e681.html",
+    "footer": "fragments/footer-9c392acb67a3.html",
+    "alternates": "pages/zh/touch-screen-test/alternates.html",
+    "jsonld": "pages/zh/touch-screen-test/jsonld.html",
+    "beforeTool": "pages/zh/touch-screen-test/beforeTool.html",
+    "afterTool": "pages/zh/touch-screen-test/afterTool.html"
+  }
+}
