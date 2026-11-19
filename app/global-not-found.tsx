@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { PvuvScript } from "@/components/site/site-analytics";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -9,6 +10,10 @@ export const metadata: Metadata = {
 export default function GlobalNotFound() {
   return (
     <html lang="en">
+      <head>
+        <meta name="pvuv:404" content="true" />
+        <PvuvScript />
+      </head>
       <body>
         <main className="site-main" id="main-content">
           <div className="page-shell not-found">

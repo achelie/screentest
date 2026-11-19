@@ -1,4 +1,4 @@
-import { SiteAnalytics } from "@/components/site/site-analytics";
+import { PvuvScript, SiteAnalytics } from "@/components/site/site-analytics";
 import { SiteFooter } from "@/components/site/site-footer";
 import { SiteHeader } from "@/components/site/site-header";
 import { getDictionary, localeConfig, type Locale } from "@/lib/i18n";
@@ -11,6 +11,9 @@ export function SiteRootLayout({
 
   return (
     <html lang={localeConfig[locale].htmlLang}>
+      <head>
+        <PvuvScript />
+      </head>
       <body>
         <a className="skip-link" href="#main-content">
           {dictionary.common.skipToContent}

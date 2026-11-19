@@ -2,6 +2,17 @@ import Script from "next/script";
 
 const AHREFS_ANALYTICS_KEY = "BIpugYY//fqlVBKk5l1Erg";
 
+export function PvuvScript() {
+  return (
+    <script
+      defer
+      src="https://www.pvuv.ai/f.js"
+      data-site="cwhMCpMr"
+      data-api="https://in.pvuv.ai"
+    />
+  );
+}
+
 export function SiteAnalytics() {
   const measurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 

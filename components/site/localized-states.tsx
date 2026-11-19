@@ -22,6 +22,7 @@ export function LocalizedNotFound({ locale }: { locale: Locale }) {
   const copy = STATE_MESSAGES[locale];
   return (
     <div className="page-shell not-found">
+      <meta name="pvuv:404" content="true" />
       <p className="not-found-code">{copy.notFoundCode}</p>
       <h1>{copy.notFoundTitle}</h1>
       <p>{copy.notFoundBody}</p>
